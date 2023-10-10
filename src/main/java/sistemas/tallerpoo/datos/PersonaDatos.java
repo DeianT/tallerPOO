@@ -6,6 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import sistemas.tallerpoo.clasesLogicas.Persona;
 
 /**
@@ -22,7 +24,14 @@ public class PersonaDatos {
     }
     
     public void agregarPersona(Persona p){
+//        for (Persona pe: lista) {
+//            System.out.println(pe.toString());
+//        }
         lista.add(p);
+//        System.out.println("agrager");
+//        for (Persona pe: lista) {
+//            System.out.println(pe.toString());
+//        }
         escribirArchivo();
     }
     
@@ -69,6 +78,12 @@ public class PersonaDatos {
         p.setNombre(persona.getNombre());
         p.setApellido(persona.getApellido());
         p.setDomicilio(persona.getDomicilio());
+        p.setFechaNacimiento(persona.getFechaNacimiento());
+        p.setDomicilio(persona.getDomicilio());
+        p.setTelFijo(persona.getTelFijo());
+        p.setTelCelular(persona.getTelCelular());
+        p.setEstadoCivil(persona.getEstadoCivil());
+        p.setCorreoElect(persona.getCorreoElect());
         
         escribirArchivo();
         System.out.println("editar");
@@ -81,12 +96,17 @@ public class PersonaDatos {
         {
             nuevo = new FileWriter(archivo);
             pw = new PrintWriter(nuevo);
-            for(Persona p: lista){
                 String linea;
+            for(Persona p: lista){
                 linea = p.getDni()+ separador;
                 linea += p.getNombre() + separador;
                 linea += p.getApellido() + separador;
-                linea += p.getDomicilio();
+                linea += p.getFechaNacimiento() + separador;
+                linea += p.getDomicilio() + separador;
+                linea += p.getTelFijo() + separador;
+                linea += p.getTelCelular()+ separador;
+                linea += p.getEstadoCivil() + separador;
+                linea += p.getCorreoElect();
 
                 pw.println(linea);
             }
@@ -123,8 +143,13 @@ public class PersonaDatos {
                 perso.setDni(Integer.parseInt(campos[0]));
                 perso.setNombre(campos[1]);
                 perso.setApellido(campos[2]);
-                perso.setDomicilio(campos[3]);
-               
+//                perso.setFechaNacimiento(new Date(campos[3]));
+                perso.setDomicilio(campos[4]);
+                perso.setTelFijo(Integer.parseInt(campos[5]));
+                perso.setTelCelular(campos[6]);
+                perso.setEstadoCivil(campos[7]);
+                perso.setCorreoElect(campos[8]);
+                
                 lista.add(perso); //Agrega la persona creada a la lista
                 linea = br.readLine();
             }            
