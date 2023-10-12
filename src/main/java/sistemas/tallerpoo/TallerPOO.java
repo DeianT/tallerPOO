@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Date;
 import sistemas.tallerpoo.clasesLogicas.Persona;
 import sistemas.tallerpoo.datos.PersonaDatos;
+import sistemas.tallerpoo.visual.Login;
+import sistemas.tallerpoo.visual.RegistroUsuario;
 
 /**
  *
@@ -25,5 +27,6 @@ public class TallerPOO {
 //        pDatos.imprimirArchivo();
 //        pDatos.editarPersona(p);
         pDatos.imprimirArchivo();
+//        new Login().setVisible(true);
     }
 }
