@@ -12,11 +12,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Medico extends Persona{
-    private int NMatricula;
+    private int nMatricula;
 
-    Medico(int dni, String Nombre, String Apellido, Date fechaNacimiento, String domicilio, int telFijo, String telCelular, String estadoCivil, String correoElect, int NMatricula  ){
+    public Medico(int dni, String Nombre, String Apellido, Date fechaNacimiento, String domicilio, int telFijo, String telCelular, String estadoCivil, String correoElect, int nMatricula){
         super(dni, Nombre, Apellido, fechaNacimiento, domicilio, telFijo, telCelular, estadoCivil, correoElect);
-        this.NMatricula = NMatricula;
+        this.nMatricula = nMatricula;
     }
-    
 }

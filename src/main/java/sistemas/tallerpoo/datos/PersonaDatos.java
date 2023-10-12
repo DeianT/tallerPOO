@@ -6,7 +6,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import sistemas.tallerpoo.clasesLogicas.Persona;
 
@@ -24,14 +23,7 @@ public class PersonaDatos {
     }
     
     public void agregarPersona(Persona p){
-//        for (Persona pe: lista) {
-//            System.out.println(pe.toString());
-//        }
         lista.add(p);
-//        System.out.println("agrager");
-//        for (Persona pe: lista) {
-//            System.out.println(pe.toString());
-//        }
         escribirArchivo();
     }
     
@@ -46,17 +38,6 @@ public class PersonaDatos {
         if (perso != null)
             return perso;
         throw new IOException("La persona con dni = " + id + " no existe");
-
-//        if(perso != null){
-//            return perso;
-//        }
-//        try{
-//            perso.getDni();
-//        }
-//        catch(Exception e){
-//            e.printStackTrace();
-//        }
-//        return perso;
     }
     
     public ArrayList<Persona> obtenerPersonas(){
