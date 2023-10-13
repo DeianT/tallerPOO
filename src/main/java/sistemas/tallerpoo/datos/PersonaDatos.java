@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import sistemas.tallerpoo.clasesLogicas.Persona;
 
 /**
@@ -46,12 +44,10 @@ public class PersonaDatos {
         for(Persona p: lista){
             if (p.getDni() == id){
                 perso = p;
-                break;//Corta el bucle cuando encuentra la persona
+                return perso;//Retorna la persona si la encuentra
             }
         }
-        if (perso != null)
-            return perso;
-        throw new IOException("La persona con dni = " + id + " no existe");
+        throw new IOException("La persona con dni = " + id + " no existe");//Si no la encuentra, arroja una excepción
     }
     
     public ArrayList<Persona> obtenerPersonas(){
