@@ -40,7 +40,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
         txtContraseña = new javax.swing.JPasswordField();
         txtRepContra = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         btnRegistrar.setText("Registrar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {

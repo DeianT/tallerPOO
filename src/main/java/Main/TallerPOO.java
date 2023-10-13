@@ -23,7 +23,7 @@ public class TallerPOO {
         //Prueba del contructor de gestor con jerarquias multiclases
         ArrayList<Rol> a = new ArrayList<Rol>();
         SectorTrabajo b = new SectorTrabajo();
-        Gestor g = new Gestor(1,"thiago","ramon",new Date(5, 12, 2003 - 1900),"casa",123,"+123","soltero","a@a.com",b,a);
+        Gestor g = new Gestor(1,"thiago","ramon","28/08/2003","casa",123,"+123","soltero","a@a.com",b,a);
         System.out.println(g.getTrabajaEn() + " " + g.getRolesSistema());
         
     }

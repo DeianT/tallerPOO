@@ -12,4 +12,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Paciente extends Persona {
     private Persona contacto;
+    
+    public String toCSV()
+    {
+       return this.getDni()+","+this.getNombre()+","+this.getApellido()+","+this.getFechaNacimiento()+","+this.getDomicilio()+","+this.getTelFijo()+","+this.getTelCelular()+","+this.getEstadoCivil()+","+this.getCorreoElect()+","+this.getContacto()+"\n";
+    }
 }

@@ -18,7 +18,7 @@ public class Persona {
     private int dni;
     private String Nombre;
     private String Apellido;
-    private Date fechaNacimiento;
+    private String fechaNacimiento;
     private String domicilio;
     private int telFijo;
     private String telCelular;

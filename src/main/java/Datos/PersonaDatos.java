@@ -125,6 +125,11 @@ public class PersonaDatos {
            }
         }   
     }
+    
+    
+    
+    
+    
     private void leerArchivo () throws IOException {
         BufferedReader br = null;
         Persona perso; 
