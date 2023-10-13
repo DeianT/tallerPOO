@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import sistemas.tallerpoo.clasesLogicas.Persona;
 
 /**
@@ -18,13 +20,25 @@ public class PersonaDatos {
     private final String archivo = "personas.csv";
     private final String separador = ";";
 
-    public PersonaDatos() throws IOException {
-        leerArchivo();
+    public PersonaDatos(){
+        try {
+            leerArchivo();
+        } catch (IOException ex) {
+            
+        }
     }
     
-    public void agregarPersona(Persona p){
-        lista.add(p);
-        escribirArchivo();
+    public boolean agregarPersona(Persona p){
+        try{
+            obtenerPersona(p.getDni());
+            System.out.println("ya exite persona con dni" + p.getDni());
+            return false;
+        }
+        catch(Exception e){
+            lista.add(p);
+            escribirArchivo();
+            return true;
+        }
     }
     
     public Persona obtenerPersona(int id) throws IOException{
@@ -77,7 +91,7 @@ public class PersonaDatos {
         {
             nuevo = new FileWriter(archivo);
             pw = new PrintWriter(nuevo);
-                String linea;
+            String linea;
             for(Persona p: lista){
                 linea = p.getDni()+ separador;
                 linea += p.getNombre() + separador;
@@ -133,7 +147,7 @@ public class PersonaDatos {
                 
                 lista.add(perso); //Agrega la persona creada a la lista
                 linea = br.readLine();
-            }            
+            }
         } catch (Exception e) {
          
         } finally {
