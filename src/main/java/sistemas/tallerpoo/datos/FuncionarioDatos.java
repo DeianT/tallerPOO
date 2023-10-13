@@ -72,6 +72,8 @@ public class FuncionarioDatos {
             f.setTelCelular(funcionario.getTelCelular());
             f.setEstadoCivil(funcionario.getEstadoCivil());
             f.setCorreoElect(funcionario.getCorreoElect());
+            f.setTrabajaEn(funcionario.getTrabajaEn());
+            f.setRolesSistema(funcionario.getRolesSistema());
         
             escribirArchivo();
             return true;
@@ -101,6 +103,7 @@ public class FuncionarioDatos {
                 linea += f.getEstadoCivil() + separador;
                 linea += f.getCorreoElect() + separador;
                 linea += f.getTrabajaEn().getNombre();
+                //guardar rolesSistema
 
                 pw.println(linea);
             }
@@ -136,6 +139,7 @@ public class FuncionarioDatos {
                 f.setEstadoCivil(campos[7]);
                 f.setCorreoElect(campos[8]);
                 f.setTrabajaEn(new SectorTrabajo(campos[9]));
+                //obtener los roles del funcionario y asignarlos
                 
                 lista.add(f);
                 linea = br.readLine();
