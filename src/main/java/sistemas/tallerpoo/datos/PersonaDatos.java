@@ -18,26 +18,31 @@ public class PersonaDatos {
     private final String archivo = "personas.csv";
     private final String separador = ";";
 
-    public PersonaDatos() throws IOException {
-        leerArchivo();
+    public PersonaDatos(){
+        try {
+            leerArchivo();
+        } catch (IOException ex) {}
     }
     
-    public void agregarPersona(Persona p){
-        lista.add(p);
-        escribirArchivo();
+    public boolean agregarPersona(Persona p){
+        try{
+            obtenerPersona(p.getDni());
+            return false;
+        }
+        catch(Exception e){
+            lista.add(p);
+            escribirArchivo();
+            return true;
+        }
     }
     
     public Persona obtenerPersona(int id) throws IOException{
-        Persona perso = null;
         for(Persona p: lista){
             if (p.getDni() == id){
-                perso = p;
-                break;//Corta el bucle cuando encuentra la persona
+                return p;//Retorna la persona si la encuentra
             }
         }
-        if (perso != null)
-            return perso;
-        throw new IOException("La persona con dni = " + id + " no existe");
+        throw new IOException("La persona con dni = " + id + " no existe");//Si no la encuentra, arroja una excepción
     }
     
     public ArrayList<Persona> obtenerPersonas(){
@@ -77,7 +82,7 @@ public class PersonaDatos {
         {
             nuevo = new FileWriter(archivo);
             pw = new PrintWriter(nuevo);
-                String linea;
+            String linea;
             for(Persona p: lista){
                 linea = p.getDni()+ separador;
                 linea += p.getNombre() + separador;
@@ -133,7 +138,7 @@ public class PersonaDatos {
                 
                 lista.add(perso); //Agrega la persona creada a la lista
                 linea = br.readLine();
-            }            
+            }
         } catch (Exception e) {
          
         } finally {

@@ -5,6 +5,7 @@ import java.util.Date;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  *
@@ -13,6 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class Funcionario extends Persona{
     private SectorTrabajo trabajaEn;
     private ArrayList<Rol> rolesSistema;
