@@ -15,4 +15,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class SectorTrabajo {
     private String nombre;
+    
+    @Override
+    public String toString(){
+        return "SectorTrabajo(" + nombre +")";
+    }
 }

@@ -21,15 +21,12 @@ public class PersonaDatos {
     public PersonaDatos(){
         try {
             leerArchivo();
-        } catch (IOException ex) {
-            
-        }
+        } catch (IOException ex) {}
     }
     
     public boolean agregarPersona(Persona p){
         try{
             obtenerPersona(p.getDni());
-            System.out.println("ya exite persona con dni" + p.getDni());
             return false;
         }
         catch(Exception e){
@@ -40,11 +37,9 @@ public class PersonaDatos {
     }
     
     public Persona obtenerPersona(int id) throws IOException{
-        Persona perso = null;
         for(Persona p: lista){
             if (p.getDni() == id){
-                perso = p;
-                return perso;//Retorna la persona si la encuentra
+                return p;//Retorna la persona si la encuentra
             }
         }
         throw new IOException("La persona con dni = " + id + " no existe");//Si no la encuentra, arroja una excepción
