@@ -24,4 +24,10 @@ public class Persona {
     private String telCelular;
     private String estadoCivil;
     private String correoElect;
+    
+    
+    public String toCSV()
+    {
+       return this.getDni()+","+this.getNombre()+","+this.getApellido()+","+this.getFechaNacimiento()+","+this.getDomicilio()+","+this.getTelFijo()+","+this.getTelCelular()+","+this.getEstadoCivil()+","+this.getCorreoElect()+","+"\n";
+    }
 }

@@ -16,8 +16,8 @@ import ClaseLogicas.Persona;
  */
 public class PersonaDatos {
     private ArrayList<Persona> lista = new ArrayList();
-    private final String archivo = "personas.csv";
-    private final String separador = ";";
+    private final String archivo = "Contactos.csv";
+    private final String separador = ",";
 
     public PersonaDatos() throws IOException {
         leerArchivo();
