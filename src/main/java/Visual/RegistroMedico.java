@@ -4,8 +4,8 @@
  */
 package Visual;
 
-import ClaseLogicas.Paciente;
-import Datos.RegistroPacienteDatos;
+import ClaseLogicas.Medico;
+import Datos.MedicoDatos;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -19,22 +19,22 @@ import javax.swing.table.TableRowSorter;
  *
  * @author Thiago
  */
-public class RegistroPaciente extends javax.swing.JFrame {
+public class RegistroMedico extends javax.swing.JFrame {
 
     DefaultTableModel modelo;
-    ArrayList<Paciente> lista;
+    ArrayList<Medico> lista;
     TableRowSorter <DefaultTableModel> sorter ;
    
-    public RegistroPaciente() {
+    public RegistroMedico() {
         initComponents();
         modelo = new DefaultTableModel();
-        lista = new ArrayList<Paciente>();
+        lista = new ArrayList<Medico>();
     }
 
     public void listar()
     {
-        modelo = (DefaultTableModel) jtPacientes.getModel();
-        Object[] ob = new Object[9];
+        modelo = (DefaultTableModel) jtMedicos.getModel();
+        Object[] ob = new Object[10];
         
         for(int i =0; i<lista.size();i++)
         {
@@ -47,19 +47,20 @@ public class RegistroPaciente extends javax.swing.JFrame {
             ob[6]=lista.get(i).getTelCelular();
             ob[7]=lista.get(i).getEstadoCivil();
             ob[8]=lista.get(i).getCorreoElect();
+            ob[9]=lista.get(i).getNMatricula();
             modelo.addRow(ob);
         }
-        jtPacientes.setModel(modelo); 
+        jtMedicos.setModel(modelo); 
         
         
-        jtPacientes.setAutoCreateRowSorter(true);
+        jtMedicos.setAutoCreateRowSorter(true);
         sorter = new TableRowSorter<>(modelo);
-        jtPacientes.setRowSorter(sorter);
+        jtMedicos.setRowSorter(sorter);
     }
     
-    public void listarr(ArrayList<Paciente> lista)
+    public void listarr(ArrayList<Medico> lista)
     {
-        modelo = (DefaultTableModel) jtPacientes.getModel();
+        modelo = (DefaultTableModel) jtMedicos.getModel();
         Object[] ob = new Object[9];
         
         for(int i =0; i<lista.size();i++)
@@ -73,14 +74,15 @@ public class RegistroPaciente extends javax.swing.JFrame {
             ob[6]=lista.get(i).getTelCelular();
             ob[7]=lista.get(i).getEstadoCivil();
             ob[8]=lista.get(i).getCorreoElect();
+            ob[9]=lista.get(i).getNMatricula();
             modelo.addRow(ob);
         }
-        jtPacientes.setModel(modelo);
+        jtMedicos.setModel(modelo);
         
         
-        jtPacientes.setAutoCreateRowSorter(true);
+        jtMedicos.setAutoCreateRowSorter(true);
         sorter = new TableRowSorter<>(modelo);
-        jtPacientes.setRowSorter(sorter);
+        jtMedicos.setRowSorter(sorter);
     }
     
     
@@ -96,19 +98,21 @@ public class RegistroPaciente extends javax.swing.JFrame {
     }
     
     
-    public void mostrarTodo(Paciente p)
+    public void mostrarTodo(Medico m)
     {
-        String dni = Integer.toString(p.getDni());
-        String telefono = Integer.toString(p.getTelFijo());
+        String dni = Integer.toString(m.getDni());
+        String telefono = Integer.toString(m.getTelFijo());
+        String matricula = Integer.toString(m.getNMatricula());
         txtDni.setText(dni);
-        txtNombre.setText(p.getNombre());
-        txtApellido.setText(p.getApellido());
-        txtFechaNacimiento.setText(p.getFechaNacimiento());
-        txtDomicilio.setText(p.getDomicilio());
+        txtNombre.setText(m.getNombre());
+        txtApellido.setText(m.getApellido());
+        txtFechaNacimiento.setText(m.getFechaNacimiento());
+        txtDomicilio.setText(m.getDomicilio());
         txtTelefono.setText(telefono);
-        txtCelular.setText(p.getTelCelular());
-        cbEstadoCivil.setSelectedItem(p.getEstadoCivil());
-        txtCorreo.setText(p.getCorreoElect());
+        txtCelular.setText(m.getTelCelular());
+        cbEstadoCivil.setSelectedItem(m.getEstadoCivil());
+        txtCorreo.setText(m.getCorreoElect());
+        txtMatricula.setText(matricula);
     }
     
     public void limpiarTexto()
@@ -121,7 +125,8 @@ public class RegistroPaciente extends javax.swing.JFrame {
        txtTelefono.setText("");
        txtCelular.setText("");
        cbEstadoCivil.setSelectedIndex(0);
-       txtCorreo.setText("");     
+       txtCorreo.setText("");  
+       txtMatricula.setText("");
     }
     
     
@@ -160,14 +165,14 @@ public class RegistroPaciente extends javax.swing.JFrame {
         txtCorreo = new javax.swing.JTextField();
         btnRegistrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtPacientes = new javax.swing.JTable();
+        jtMedicos = new javax.swing.JTable();
         txtBuscarDni = new javax.swing.JTextField();
         btnEliminar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         txtFechaNacimiento = new javax.swing.JTextField();
-        btnContacto = new javax.swing.JButton();
         btnMostrarTodo = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
+        txtMatricula = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -189,7 +194,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
 
         jLabel9.setText("Correo");
 
-        jLabel10.setText("Contacto");
+        jLabel10.setText("Matricula");
 
         txtDomicilio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -212,15 +217,15 @@ public class RegistroPaciente extends javax.swing.JFrame {
             }
         });
 
-        jtPacientes.setModel(new javax.swing.table.DefaultTableModel(
+        jtMedicos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "DNI", "Nombre", "Apellido", "Fecha de Nacimiento", "Domicilio", "Telefono", "Celular", "EstadoCivil", "Correo"
+                "DNI", "Nombre", "Apellido", "Fecha de Nacimiento", "Domicilio", "Telefono", "Celular", "EstadoCivil", "Correo", "Matricula"
             }
         ));
-        jScrollPane1.setViewportView(jtPacientes);
+        jScrollPane1.setViewportView(jtMedicos);
 
         txtBuscarDni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -247,13 +252,6 @@ public class RegistroPaciente extends javax.swing.JFrame {
             }
         });
 
-        btnContacto.setText("Ingresar Contacto");
-        btnContacto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnContactoActionPerformed(evt);
-            }
-        });
-
         btnMostrarTodo.setText("Mostrar Todo");
         btnMostrarTodo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -261,7 +259,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
             }
         });
 
-        jLabel11.setText("Buscar Paciente");
+        jLabel11.setText("Buscar Medico");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -300,7 +298,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
                     .addComponent(cbEstadoCivil, 0, 140, Short.MAX_VALUE)
                     .addComponent(txtCorreo)
                     .addComponent(txtFechaNacimiento)
-                    .addComponent(btnContacto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtMatricula))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -363,7 +361,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
-                            .addComponent(btnContacto)))
+                            .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -392,12 +390,12 @@ public class RegistroPaciente extends javax.swing.JFrame {
         
         try {
             lista.removeAll(lista);
-            RegistroPacienteDatos p = new RegistroPacienteDatos();
-            p.leerArchivo(lista);
-            p.agregarPaciente(p.capturar(txtDni, txtNombre, txtApellido, txtFechaNacimiento, txtDomicilio, txtTelefono, txtCelular, cbEstadoCivil, txtCorreo));
+            MedicoDatos m = new MedicoDatos();
+            m.leerArchivo(lista);
+            m.agregarMedico(m.capturar(txtDni, txtNombre, txtApellido, txtFechaNacimiento, txtDomicilio, txtTelefono, txtCelular, cbEstadoCivil, txtCorreo, txtMatricula));
             JOptionPane.showMessageDialog(null, "se registro con exito");
         } catch (IOException ex) {
-            Logger.getLogger(RegistroPaciente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RegistroMedico.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.limpiarTexto();
         
@@ -410,23 +408,16 @@ public class RegistroPaciente extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
-    private void btnContactoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContactoActionPerformed
-        // TODO add your handling code here:
-        IngresoContacto con = new IngresoContacto();
-        con.setVisible(true);
-        
-    }//GEN-LAST:event_btnContactoActionPerformed
-
     private void btnMostrarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarTodoActionPerformed
         // TODO add your handling code here:
         lista.removeAll(lista);
           try 
           {
-            RegistroPacienteDatos p = new RegistroPacienteDatos();
-            p.leerArchivo(lista);
+            MedicoDatos m = new MedicoDatos();
+            m.leerArchivo(lista);
           } catch (IOException ex)
             {
-            Logger.getLogger(RegistroPaciente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RegistroMedico.class.getName()).log(Level.SEVERE, null, ex);
             }   
         limpiarTabla();
         listar();  
@@ -441,26 +432,26 @@ public class RegistroPaciente extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             lista.removeAll(lista);
-            RegistroPacienteDatos p = new RegistroPacienteDatos();
-            p.leerArchivo(lista);
+            MedicoDatos m = new MedicoDatos();
+            m.leerArchivo(lista);
         } catch (IOException ex) {
-            Logger.getLogger(RegistroPaciente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RegistroMedico.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
-        Paciente pac;
-        int fila = jtPacientes.getSelectedRow();
-        pac = lista.get(fila);
-        this.mostrarTodo(pac);
+        Medico med;
+        int fila = jtMedicos.getSelectedRow();
+        med = lista.get(fila);
+        this.mostrarTodo(med);
         modelo.removeRow(fila);
         lista.remove(fila);
         
         
         try {
-            RegistroPacienteDatos p = new RegistroPacienteDatos();
-            p.escribirArchivoo(lista);
+            MedicoDatos m = new MedicoDatos();
+            m.escribirArchivoo(lista);
         } catch (IOException ex) {
-            Logger.getLogger(RegistroPaciente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RegistroMedico.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
@@ -473,16 +464,16 @@ public class RegistroPaciente extends javax.swing.JFrame {
         lista.removeAll(lista);
         
         try {
-            RegistroPacienteDatos p = new RegistroPacienteDatos();
-            p.leerArchivo(lista);
+            MedicoDatos m = new MedicoDatos();
+            m.leerArchivo(lista);
         } catch (IOException ex) {
-            Logger.getLogger(RegistroPaciente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RegistroMedico.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
         
         
-        int fila = jtPacientes.getSelectedRow();
+        int fila = jtMedicos.getSelectedRow();
         modelo.removeRow(fila);
         lista.remove(fila);
         limpiarTabla();
@@ -490,10 +481,10 @@ public class RegistroPaciente extends javax.swing.JFrame {
         
         
         try {
-            RegistroPacienteDatos p = new RegistroPacienteDatos();
-            p.escribirArchivoo(lista);
+            MedicoDatos m = new MedicoDatos();
+            m.escribirArchivoo(lista);
         } catch (IOException ex) {
-            Logger.getLogger(RegistroPaciente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RegistroMedico.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
@@ -536,27 +527,28 @@ public class RegistroPaciente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegistroPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegistroPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegistroPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegistroPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegistroPaciente().setVisible(true);
+                new RegistroMedico().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnContacto;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnMostrarTodo;
@@ -574,7 +566,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jtPacientes;
+    private javax.swing.JTable jtMedicos;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtBuscarDni;
     private javax.swing.JTextField txtCelular;
@@ -582,6 +574,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
     private javax.swing.JTextField txtDni;
     private javax.swing.JTextField txtDomicilio;
     private javax.swing.JTextField txtFechaNacimiento;
+    private javax.swing.JTextField txtMatricula;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
