@@ -37,9 +37,9 @@ public class MedicoDatos {
     }
     
     public Medico obtenerMedico(int id) throws IOException{
-        for(Medico fun: lista){
-            if(fun.getDni() == id){
-                return fun;
+        for(Medico med: lista){
+            if(med.getDni() == id){
+                return med;
             }
         }
         throw new IOException("No existe Medico con dni = " + id);

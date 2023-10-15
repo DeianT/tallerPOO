@@ -3,11 +3,19 @@ package sistemas.tallerpoo;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import sistemas.tallerpoo.clasesLogicas.Admision;
+import sistemas.tallerpoo.clasesLogicas.Box;
 import sistemas.tallerpoo.clasesLogicas.Funcionario;
+import sistemas.tallerpoo.clasesLogicas.ListaBox;
 import sistemas.tallerpoo.clasesLogicas.Medico;
+import sistemas.tallerpoo.clasesLogicas.Paciente;
 import sistemas.tallerpoo.clasesLogicas.Persona;
 import sistemas.tallerpoo.clasesLogicas.Rol;
 import sistemas.tallerpoo.clasesLogicas.SectorTrabajo;
+import sistemas.tallerpoo.clasesLogicas.Triage;
+import sistemas.tallerpoo.datos.AdmisionDatos;
 import sistemas.tallerpoo.datos.FuncionarioDatos;
 import sistemas.tallerpoo.datos.MedicoDatos;
 import sistemas.tallerpoo.datos.PersonaDatos;
@@ -25,25 +33,29 @@ public class TallerPOO {
         PersonaDatos pDatos = new PersonaDatos();
         FuncionarioDatos fDatos = new  FuncionarioDatos();
         MedicoDatos mDatos = new MedicoDatos();
-//        Persona p = new Persona(45616133, "Juan", "Gonzales", new Date(5, 12, 2003 - 1900), "domicilio", 42355648, "+54 34500000", "Divorciado", "correo@mail.com");
-//        Persona p2 = new Persona(45616133, "Deian", "Teze", new Date(5, 12, 2003 - 1900), "casa", 42355648, "+54 34500000", "Divorciado", "correo@mail.com");
-//        System.out.println(p);
+        AdmisionDatos adDatos = new AdmisionDatos();
+        ListaBox lB = new ListaBox();
+        
+        Persona p = new Persona(46488897, "n", "a", new Date(), "do", 0, "+54", "s", "c");
+        Paciente pac = new Paciente(123987, "Pablo", "Preze", new Date(), "dmoiclio", 4561231, "+54 325678978", "casaso", "correo", p);
+        Triage tr = new Triage();
+        tr.setId(1);
+        Box b = null;
+        try {
+            b = lB.obtenerBoxDesocupado();
+            b.setOcupado(true);
+        } catch (Exception ex) {
+            System.out.println("no hay boxes disponibles");
+        }
+        Admision a = new Admision(new Date(), new Date(), "herida de cuchillo", pac, tr, b);
+        
+//        adDatos.agregarAdmision(a);
+        //agregarPaciente(pac)
 //        pDatos.agregarPersona(p);
-//        pDatos.agregarPersona(p2);
-//        System.out.println(pDatos.obtenerPersonas());
-//        System.out.println(pDatos.obtenerPersona(456161733));
-//        Persona p = pDatos.obtenerPersona(45616133);
-//        System.out.println(p.getApellido());
-//        pDatos.imprimirArchivo();
-//        pDatos.editarPersona(p);
-//        pDatos.imprimirArchivo();
-//        new Login().setVisible(true);
-//        Persona m = new Medico();
-//        Funcionario f = new Funcionario(123456789, "Pedro", "Pascal", new Date(), "comicionli", 123456, "telefono", "soltero, espero", "correo@correo", new SectorTrabajo(), new ArrayList<Rol>());
-//        fDatos.agregarFuncionario(f);
-        System.out.println(fDatos.obtenerFuncionarios());
-        Medico m = new Medico(123456789, "Pedro", "Pascal", new Date(), "comicionli", 123456, "telefono", "soltero, espero", "correo@correo", 257, new Rol("Admisión"));
-        mDatos.agregarMedico(m);
-        System.out.println(mDatos.obtenerMedicos());
+        //agregarTriage(tr)
+        for(Box box: lB.getBoxes()){
+            System.out.println(box);
+        }
+        System.out.println(adDatos.obtenerAdmisiones());
     }
 }
