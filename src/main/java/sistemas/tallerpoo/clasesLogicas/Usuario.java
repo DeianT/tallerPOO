@@ -12,9 +12,10 @@ import lombok.Setter;
 public class Usuario {
     private String nombreUusuario;
     private String contraseñaUsuario;
-    private String rol;
+    private Rol rol;
+    private Funcionario funcionario;
     
     public String toCSV(){
-        return this.nombreUusuario+","+this.contraseñaUsuario+","+this.rol+"\n";              
+        return this.nombreUusuario+","+this.contraseñaUsuario+","+this.rol.getNombre()+"\n";              
     }
 }

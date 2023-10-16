@@ -74,8 +74,9 @@ public class MedicoDatos {
             m.setTelCelular(medico.getTelCelular());
             m.setEstadoCivil(medico.getEstadoCivil());
             m.setCorreoElect(medico.getCorreoElect());
+            m.setTrabajaEn(medico.getTrabajaEn());
+            m.setRolesSistema(medico.getRolesSistema());
             m.setNMatricula(medico.getNMatricula());
-            m.setRolSistema(medico.getRolSistema());
         
             escribirArchivo();
             return true;
