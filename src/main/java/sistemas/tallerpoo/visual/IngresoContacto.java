@@ -188,7 +188,7 @@ public class IngresoContacto extends javax.swing.JFrame {
     private void btnIngresarContactoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarContactoActionPerformed
         PersonaDatos per = new PersonaDatos();
         per.agregarPersona(this.captar());
-        JOptionPane.showMessageDialog(null, "se ingreso con exito");
+        JOptionPane.showMessageDialog(null, "Se ingresó con exito");
         this.dispose();
     }//GEN-LAST:event_btnIngresarContactoActionPerformed
     
