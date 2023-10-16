@@ -21,6 +21,7 @@ import sistemas.tallerpoo.datos.MedicoDatos;
 import sistemas.tallerpoo.datos.PersonaDatos;
 import sistemas.tallerpoo.visual.Login;
 import sistemas.tallerpoo.visual.Principal;
+import sistemas.tallerpoo.visual.RegistroAdmision;
 import sistemas.tallerpoo.visual.RegistroUsuario;
 
 /**
@@ -53,9 +54,7 @@ public class TallerPOO {
         //agregarPaciente(pac)
 //        pDatos.agregarPersona(p);
         //agregarTriage(tr)
-        for(Box box: lB.getBoxes()){
-            System.out.println(box);
-        }
         System.out.println(adDatos.obtenerAdmisiones());
+        new RegistroAdmision().setVisible(true);
     }
 }

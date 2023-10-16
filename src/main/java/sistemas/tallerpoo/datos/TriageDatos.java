@@ -53,6 +53,7 @@ public class TriageDatos {
             String linea;
             for(Triage t: lista){
                 linea = t.getId() + separador;
+                linea += t.getColor() + separador;
                 linea += t.getRespiracion() + separador;
                 linea += t.getPulso() + separador;
                 linea += t.getEstadoMental() + separador;
@@ -122,7 +123,7 @@ public class TriageDatos {
             }
         }
         catch(Exception e){
-            
+            e.printStackTrace();
         }
         finally{
             if(br != null) {

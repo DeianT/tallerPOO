@@ -6,8 +6,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import sistemas.tallerpoo.clasesLogicas.Admision;
 import sistemas.tallerpoo.clasesLogicas.ListaBox;
+import sistemas.tallerpoo.clasesLogicas.Paciente;
+import sistemas.tallerpoo.clasesLogicas.Persona;
 
 /**
  *
@@ -46,7 +49,10 @@ public class AdmisionDatos {
                 linea += a.getMotivo() + separador;
                 linea += a.getPaciente().getDni() + separador;
                 linea += a.getTriage().getId() + separador;
-                linea += a.getBox().getNumero();
+                if(a.getBox() != null)
+                    linea += a.getBox().getNumero();
+                else
+                    linea += 0;
                 
                 pw.println(linea);
             }
@@ -76,7 +82,8 @@ public class AdmisionDatos {
 //                ad.setHora(fecha);
                 ad.setMotivo(campos[2]);
 //                ad.setPaciente(new PacienteDatos().obtenerPaciente(Integer.parseInt(campos[3])));
-//                ad.setTriage(new TriageDatos().obtenerTriage(Integer.parseInt(campos[4])));
+                ad.setPaciente(new Paciente(123, "asfd", "gasa", new Date(), "", 1561, "645816", "faf", "sdgg", new Persona()));//esto hay que borarlo despues
+                ad.setTriage(new TriageDatos().obtenerTriage(Integer.parseInt(campos[4])));
                 ad.setBox(new ListaBox().obtenerBox(Integer.parseInt(campos[5])));
                 
                 lista.add(ad);
@@ -85,7 +92,7 @@ public class AdmisionDatos {
             
         }
         catch(Exception e){
-            
+            e.printStackTrace();
         }
         finally{
             if(br != null){

@@ -4,15 +4,25 @@
  */
 package sistemas.tallerpoo.visual;
 
+import static java.awt.image.ImageObserver.HEIGHT;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import sistemas.tallerpoo.clasesLogicas.Admision;
+import sistemas.tallerpoo.clasesLogicas.Box;
+import sistemas.tallerpoo.clasesLogicas.ListaBox;
+import sistemas.tallerpoo.clasesLogicas.Paciente;
+import sistemas.tallerpoo.clasesLogicas.Persona;
+import sistemas.tallerpoo.clasesLogicas.Triage;
+import sistemas.tallerpoo.datos.AdmisionDatos;
+
 /**
  *
  * @author Deian
  */
 public class RegistroAdmision extends javax.swing.JFrame {
-
-    /**
-     * Creates new form RegistroAdmision
-     */
+    private static Paciente paciente;
+    private static Triage triage;
+    
     public RegistroAdmision() {
         initComponents();
     }
@@ -30,10 +40,7 @@ public class RegistroAdmision extends javax.swing.JFrame {
         RegistrarPacienteBoton = new javax.swing.JButton();
         motivoCampo = new javax.swing.JTextField();
         motivoEtiqueta = new javax.swing.JLabel();
-        fechaCampo = new javax.swing.JFormattedTextField();
-        fechaEtiqueta = new javax.swing.JLabel();
-        horaEtiqueta = new javax.swing.JLabel();
-        horaCampo = new javax.swing.JFormattedTextField();
+        guardarBoton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,35 +66,36 @@ public class RegistroAdmision extends javax.swing.JFrame {
 
         motivoEtiqueta.setText("Motivo");
 
-        fechaEtiqueta.setText("Fecha");
-
-        horaEtiqueta.setText("Hora");
+        guardarBoton.setText("Guardar");
+        guardarBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardarBotonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(realizarTriageBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(motivoEtiqueta, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fechaEtiqueta, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(horaEtiqueta, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fechaCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(motivoCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(horaCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(34, 34, 34)
+                .addComponent(motivoEtiqueta, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(motivoCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(130, 130, 130))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(RegistrarPacienteBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(115, 115, 115))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(161, 161, 161)
+                        .addComponent(guardarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(133, 133, 133)
+                        .addComponent(realizarTriageBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,26 +104,23 @@ public class RegistroAdmision extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(motivoCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(motivoEtiqueta))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fechaCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fechaEtiqueta))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(horaCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(horaEtiqueta))
-                .addGap(18, 18, 18)
+                .addGap(38, 38, 38)
                 .addComponent(RegistrarPacienteBoton)
-                .addGap(18, 18, 18)
+                .addGap(45, 45, 45)
                 .addComponent(realizarTriageBoton)
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addComponent(guardarBoton)
+                .addGap(27, 27, 27))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void realizarTriageBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_realizarTriageBotonActionPerformed
-        // abrir ventana triage
+        RegistroTriage r = new RegistroTriage();
+        r.setVisible(true);
+//        Triage t = r.getTriage();
+//        System.out.println("triage");
     }//GEN-LAST:event_realizarTriageBotonActionPerformed
 
     private void motivoCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motivoCampoActionPerformed
@@ -125,6 +130,26 @@ public class RegistroAdmision extends javax.swing.JFrame {
     private void RegistrarPacienteBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarPacienteBotonActionPerformed
         //abrir registro paciente
     }//GEN-LAST:event_RegistrarPacienteBotonActionPerformed
+
+    private void guardarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarBotonActionPerformed
+        try{
+            
+            Admision a = new Admision();
+            a.setFecha(new Date());
+            a.setHora(new Date());
+            a.setMotivo(motivoCampo.getText());
+            paciente = new Paciente(123, "asfd", "gasa", new Date(), "", 1561, "645816", "faf", "sdgg", new Persona());
+            a.setPaciente(paciente);
+            a.setTriage(triage);
+            a.setBox(new Box());
+            new AdmisionDatos().agregarAdmision(a);
+            JOptionPane.showMessageDialog(null, "se ingreso con exito");
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e, "Error", HEIGHT);
+        }
+    }//GEN-LAST:event_guardarBotonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -161,12 +186,17 @@ public class RegistroAdmision extends javax.swing.JFrame {
         });
     }
 
+    public static void setPaciente(Paciente paciente) {
+        RegistroAdmision.paciente = paciente;
+    }
+
+    public static void setTriage(Triage triage) {
+        RegistroAdmision.triage = triage;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton RegistrarPacienteBoton;
-    private javax.swing.JFormattedTextField fechaCampo;
-    private javax.swing.JLabel fechaEtiqueta;
-    private javax.swing.JFormattedTextField horaCampo;
-    private javax.swing.JLabel horaEtiqueta;
+    private javax.swing.JButton guardarBoton;
     private javax.swing.JTextField motivoCampo;
     private javax.swing.JLabel motivoEtiqueta;
     private javax.swing.JButton realizarTriageBoton;
