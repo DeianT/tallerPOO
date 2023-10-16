@@ -19,6 +19,7 @@ import sistemas.tallerpoo.datos.AdmisionDatos;
 import sistemas.tallerpoo.datos.FuncionarioDatos;
 import sistemas.tallerpoo.datos.MedicoDatos;
 import sistemas.tallerpoo.datos.PersonaDatos;
+import sistemas.tallerpoo.datos.PacienteDatos;
 import sistemas.tallerpoo.visual.Login;
 import sistemas.tallerpoo.visual.Principal;
 import sistemas.tallerpoo.visual.RegistroAdmision;
@@ -55,6 +56,10 @@ public class TallerPOO {
 //        pDatos.agregarPersona(p);
         //agregarTriage(tr)
         System.out.println(adDatos.obtenerAdmisiones());
-        new RegistroAdmision().setVisible(true);
+//        new RegistroAdmision().setVisible(true);
+        PacienteDatos rpd = new PacienteDatos();
+//        rpd.imprimirArchivo();
+        new Principal().setVisible(true);
+        System.out.println(mDatos.obtenerMedicos());
     }
 }

@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import sistemas.tallerpoo.clasesLogicas.Medico;
 import sistemas.tallerpoo.clasesLogicas.Rol;
 
@@ -53,6 +54,7 @@ public class MedicoDatos {
         try{
             Medico f = obtenerMedico(id);
             lista.remove(f);
+            escribirArchivo();
             return true;
         }
         catch(Exception e){
@@ -103,7 +105,10 @@ public class MedicoDatos {
                 linea += m.getEstadoCivil() + separador;
                 linea += m.getCorreoElect() + separador;
                 linea += m.getNMatricula() + separador;
-                linea += m.getRolSistema().getNombre();
+                if(m.getRolSistema() != null)
+                    linea += m.getRolSistema().getNombre();
+                else
+                    linea += "null";
 
                 pw.println(linea);
             }
@@ -132,7 +137,7 @@ public class MedicoDatos {
                 m.setDni(Integer.parseInt(campos[0]));
                 m.setNombre(campos[1]);
                 m.setApellido(campos[2]);
-//                   perso.setFechaNacimiento(new Date(campos[3]));
+                m.setFechaNacimiento(new Date());
                 m.setDomicilio(campos[4]);
                 m.setTelFijo(Integer.parseInt(campos[5]));
                 m.setTelCelular(campos[6]);
