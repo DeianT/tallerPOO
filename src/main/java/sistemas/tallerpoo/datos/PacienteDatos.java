@@ -54,7 +54,7 @@ public class PacienteDatos {
         catch(Exception e){
             lista.add(p);
             escribirArchivo();
-            return false;
+            return true;
         }
     }
     
