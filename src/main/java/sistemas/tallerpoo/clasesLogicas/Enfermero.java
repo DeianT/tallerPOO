@@ -8,15 +8,13 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Enfermero extends CapacitadoTriage{
-    private int nMatricula;
 
     public Enfermero() {
         super();
-        setEsMedico(true);
+        setEsMedico(false);
     }
 
-    public Enfermero(int dni, String Nombre, String Apellido, Date fechaNacimiento, String domicilio, int telFijo, String telCelular, String estadoCivil, String correoElect, SectorTrabajo trabajaEn, ArrayList<Rol> rolesSistema, int nMatricula){
+    public Enfermero(int dni, String Nombre, String Apellido, Date fechaNacimiento, String domicilio, int telFijo, String telCelular, String estadoCivil, String correoElect, SectorTrabajo trabajaEn, ArrayList<Rol> rolesSistema){
         super(dni, Nombre, Apellido, fechaNacimiento, domicilio, telFijo, telCelular, estadoCivil, correoElect, trabajaEn, rolesSistema, false);
-        this.nMatricula = nMatricula;
     }
 }
