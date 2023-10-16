@@ -15,10 +15,4 @@ public class Estudios {
     private String fechaTitulo;
     private Medico medico;
     private Especialidad especialidad;
-    public Estudios(String universidad, String fechaTitulo, Medico medico, Especialidad especialidad){
-        this.universidad = universidad;
-        this.fechaTitulo = fechaTitulo;
-        this.medico = medico;
-        this.especialidad = especialidad;
-    }   
 }
