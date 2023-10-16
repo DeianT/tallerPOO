@@ -96,7 +96,6 @@ public class PacienteDatos {
         p.setContacto(paciente.getContacto());
         
         escribirArchivo();
-        System.out.println("editar");
     }
     
     private void escribirArchivo () {        
@@ -136,7 +135,7 @@ public class PacienteDatos {
         }   
     }
     
-    public void leerArchivo () throws IOException {
+    private void leerArchivo () throws IOException {
         BufferedReader br = null;
         Paciente perso; 
       

@@ -53,6 +53,7 @@ public class PersonaDatos {
         for(Persona p: lista){
             if (p.getDni() == id){
                 lista.remove(p);
+                escribirArchivo();
                 return true;
             }
         }
@@ -72,7 +73,6 @@ public class PersonaDatos {
         p.setCorreoElect(persona.getCorreoElect());
         
         escribirArchivo();
-        System.out.println("editar");
     }
     
     private void escribirArchivo () {        
