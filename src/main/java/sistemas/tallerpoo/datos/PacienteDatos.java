@@ -82,8 +82,9 @@ public class PacienteDatos {
         return false;
     }
     
-    public void editarPaciente(Paciente paciente) throws IOException{
-        Paciente p = obtenerPaciente(paciente.getDni());
+    public boolean editarPaciente(Paciente paciente) throws IOException{
+        try {
+            Paciente p = obtenerPaciente(paciente.getDni());
         p.setNombre(paciente.getNombre());
         p.setApellido(paciente.getApellido());
         p.setDomicilio(paciente.getDomicilio());
@@ -96,6 +97,12 @@ public class PacienteDatos {
         p.setContacto(paciente.getContacto());
         
         escribirArchivo();
+        return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        
     }
     
     private void escribirArchivo () {        

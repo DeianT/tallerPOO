@@ -117,7 +117,7 @@ public class RegistroAdmision extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void realizarTriageBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_realizarTriageBotonActionPerformed
-        RegistroTriage r = new RegistroTriage();
+        RealizarTriage r = new RealizarTriage();
         r.setVisible(true);
 //        Triage t = r.getTriage();
 //        System.out.println("triage");
@@ -129,6 +129,8 @@ public class RegistroAdmision extends javax.swing.JFrame {
 
     private void RegistrarPacienteBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarPacienteBotonActionPerformed
         //abrir registro paciente
+        RegistroPaciente a = new RegistroPaciente();
+        a.setVisible(true);
     }//GEN-LAST:event_RegistrarPacienteBotonActionPerformed
 
     private void guardarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarBotonActionPerformed

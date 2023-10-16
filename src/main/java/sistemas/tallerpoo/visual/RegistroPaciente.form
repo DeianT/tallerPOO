@@ -24,18 +24,6 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="btnEliminar" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="btnRegistrar" min="-2" pref="142" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnEditar" min="-2" pref="142" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -77,6 +65,20 @@
                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   </Group>
               </Group>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="btnEliminar" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="btnRegistrar" min="-2" pref="72" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnEditar" min="-2" pref="69" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnConfirmarEdicion" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace pref="864" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -148,6 +150,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnRegistrar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnEditar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnConfirmarEdicion" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="btnEliminar" min="-2" max="-2" attributes="0"/>
@@ -373,6 +376,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Buscar Paciente"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnConfirmarEdicion">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Confrimar Edicion"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConfirmarEdicionActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

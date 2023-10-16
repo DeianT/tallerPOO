@@ -428,6 +428,8 @@ public class RealizarTriage extends javax.swing.JFrame {
 
         JOptionPane.showMessageDialog(this, "se ah guardado con exito " + "\n El nivel de atencion es de " + color.toUpperCase());
         new TriageDatos().agregarTriage(t);
+        
+        RegistroAdmision.setTriage(t);
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
