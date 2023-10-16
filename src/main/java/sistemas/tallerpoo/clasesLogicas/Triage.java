@@ -19,7 +19,7 @@ public class Triage {
     private String conciencia;
     private String dificultadRespiratoria;
     private String lesionesGraves;
-    private int edad;
+    private String edad;
     private String fiebre;
     private String vomitos;
     private String dolorAbdominal;

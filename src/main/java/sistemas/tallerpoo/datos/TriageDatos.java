@@ -105,7 +105,7 @@ public class TriageDatos {
                 t.setConciencia(campos[5]);
                 t.setDificultadRespiratoria(campos[6]);
                 t.setLesionesGraves(campos[7]);
-                t.setEdad(Integer.parseInt(campos[8]));
+                t.setEdad(campos[8]);
                 t.setFiebre(campos[9]);
                 t.setVomitos(campos[10]);
                 t.setDolorAbdominal(campos[11]);

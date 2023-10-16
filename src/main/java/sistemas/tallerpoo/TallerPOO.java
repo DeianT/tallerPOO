@@ -20,6 +20,7 @@ import sistemas.tallerpoo.datos.FuncionarioDatos;
 import sistemas.tallerpoo.datos.MedicoDatos;
 import sistemas.tallerpoo.datos.PersonaDatos;
 import sistemas.tallerpoo.datos.PacienteDatos;
+import sistemas.tallerpoo.datos.TriageDatos;
 import sistemas.tallerpoo.visual.Login;
 import sistemas.tallerpoo.visual.Principal;
 import sistemas.tallerpoo.visual.RegistroAdmision;
@@ -61,5 +62,6 @@ public class TallerPOO {
 //        rpd.imprimirArchivo();
         new Principal().setVisible(true);
         System.out.println(mDatos.obtenerMedicos());
+        System.out.println(new TriageDatos().obtenerTriages());
     }
 }

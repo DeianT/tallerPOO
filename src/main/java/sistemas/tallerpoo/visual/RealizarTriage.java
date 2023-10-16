@@ -1,7 +1,9 @@
 package sistemas.tallerpoo.visual;
 
 import javax.swing.JOptionPane;
+import sistemas.tallerpoo.clasesLogicas.NivelTriage;
 import sistemas.tallerpoo.clasesLogicas.Triage;
+import sistemas.tallerpoo.datos.TriageDatos;
 
 /**
  *
@@ -15,25 +17,22 @@ public class RealizarTriage extends javax.swing.JFrame {
     public RealizarTriage() {
         initComponents();
     }
-
     
-    public void capturar(Triage Pac){
-        Pac.setRespiracion(cboRespiracion.getSelectedItem().toString());
-        Pac.setPulso(cboPulso.getSelectedItem().toString());
-        Pac.setEstadoMental(cboEstadoMental.getSelectedItem().toString());
-        Pac.setConciencia(cboConciencia.getSelectedItem().toString());
-        Pac.setDificultadRespiratoria(cboDolorPecho.getSelectedItem().toString());
-        Pac.setLesionesGraves(cboLesionesGraves.getSelectedItem().toString());
-        Pac.setEdad(Integer.parseInt(cboEdad.getSelectedItem().toString()));
-        Pac.setFiebre(cboFiebre.getSelectedItem().toString());
-        Pac.setVomitos(cboVomitos.getSelectedItem().toString());
-        Pac.setDolorAbdominal(cboDolorAbominal.getSelectedItem().toString());
-        Pac.setSignosDeShock(cboSignosShock.getSelectedItem().toString());
-        Pac.setLesionesLeves(cboLesionesLeves.getSelectedItem().toString());
-        Pac.setSangrado(cboSangrado.getSelectedItem().toString());
+    public void capturar(Triage triage){
+        triage.setRespiracion(cboRespiracion.getSelectedItem().toString());
+        triage.setPulso(cboPulso.getSelectedItem().toString());
+        triage.setEstadoMental(cboEstadoMental.getSelectedItem().toString());
+        triage.setConciencia(cboConciencia.getSelectedItem().toString());
+        triage.setDificultadRespiratoria(cboDolorPecho.getSelectedItem().toString());
+        triage.setLesionesGraves(cboLesionesGraves.getSelectedItem().toString());
+        triage.setEdad(cboEdad.getSelectedItem().toString());
+        triage.setFiebre(cboFiebre.getSelectedItem().toString());
+        triage.setVomitos(cboVomitos.getSelectedItem().toString());
+        triage.setDolorAbdominal(cboDolorAbominal.getSelectedItem().toString());
+        triage.setSignosDeShock(cboSignosShock.getSelectedItem().toString());
+        triage.setLesionesLeves(cboLesionesLeves.getSelectedItem().toString());
+        triage.setSangrado(cboSangrado.getSelectedItem().toString());
     }
-    
-    
     
     public int sumar (Triage a ){
         int contador = 0;
@@ -132,15 +131,6 @@ public class RealizarTriage extends javax.swing.JFrame {
         }
         return contador;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -412,13 +402,13 @@ public class RealizarTriage extends javax.swing.JFrame {
     }//GEN-LAST:event_cboConcienciaActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        Triage a = new Triage();
+        Triage t = new Triage();
         int contador = 0;
         String color = "";
 
-        this.capturar(a);
+        this.capturar(t);
 
-        contador = this.sumar(a);
+        contador = this.sumar(t);
 
         if(contador >= 0 && contador <= 4 ){
             color = "Verde";
@@ -432,9 +422,12 @@ public class RealizarTriage extends javax.swing.JFrame {
         else if (contador >= 15){
             color = "Rojo";
         }
+        
+        t.setColor(NivelTriage.valueOf(color));
+        t.setColorModificado(NivelTriage.valueOf(color));
 
         JOptionPane.showMessageDialog(this, "se ah guardado con exito " + "\n El nivel de atencion es de " + color.toUpperCase());
-
+        new TriageDatos().agregarTriage(t);
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
