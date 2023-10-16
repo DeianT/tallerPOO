@@ -53,6 +53,7 @@ public class FuncionarioDatos {
         try{
             Funcionario f = obtenerFuncionario(id);
             lista.remove(f);
+            escribirArchivo();
             return true;
         }
         catch(Exception e){

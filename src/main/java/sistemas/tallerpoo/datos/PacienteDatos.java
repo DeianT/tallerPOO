@@ -7,50 +7,72 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
-import sistemas.tallerpoo.clasesLogicas.Persona;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import sistemas.tallerpoo.clasesLogicas.Paciente;
 
 /**
  *
- * @author Deian
+ * @author Thiago
  */
-public class PersonaDatos {
-    private ArrayList<Persona> lista = new ArrayList();
-    private final String archivo = "personas.csv";
-    private final String separador = ";";
-
-    public PersonaDatos(){
+public class PacienteDatos {
+    private ArrayList<Paciente> lista = new ArrayList();
+    private final String archivo = "Pacientes.csv";
+    private final String separador = ",";
+    
+    public Paciente capturar(JTextField dni, JTextField nombre, JTextField apellido, JTextField fecha, JTextField domicilio, JTextField tel, JTextField celular, JComboBox estado, JTextField correo)
+    {
+        Paciente pac = new Paciente();
+        int DNI = Integer.parseInt(dni.getText()); 
+        int telF = Integer.parseInt(tel.getText());
+        String estadoo = String.valueOf(estado.getSelectedItem());
+        pac.setDni(DNI);
+        pac.setNombre(nombre.getText());
+        pac.setApellido(apellido.getText());
+//        pac.setFechaNacimiento(fecha.getText());
+        pac.setFechaNacimiento(new Date());
+        pac.setDomicilio(domicilio.getText());
+        pac.setTelFijo(telF);
+        pac.setTelCelular(celular.getText());
+        pac.setEstadoCivil(estadoo);
+        pac.setCorreoElect(correo.getText());
+        
+        return pac;
+    }
+    
+    public PacienteDatos(){
         try {
             leerArchivo();
         } catch (IOException ex) {}
     }
     
-    public boolean agregarPersona(Persona p){
+    public boolean agregarPaciente(Paciente p){
         try{
-            obtenerPersona(p.getDni());
+            obtenerPaciente(p.getDni());
             return false;
         }
         catch(Exception e){
             lista.add(p);
             escribirArchivo();
-            return true;
+            return false;
         }
     }
     
-    public Persona obtenerPersona(int id) throws IOException{
-        for(Persona p: lista){
+    public Paciente obtenerPaciente(int id) throws IOException{
+        for(Paciente p: lista){
             if (p.getDni() == id){
                 return p;//Retorna la persona si la encuentra
             }
         }
-        throw new IOException("La persona con dni = " + id + " no existe");//Si no la encuentra, arroja una excepción
+        throw new IOException("El paciente con dni = " + id + " no existe");//Si no la encuentra, arroja una excepción
     }
     
-    public ArrayList<Persona> obtenerPersonas(){
+    public ArrayList<Paciente> obtenerPacientes(){
         return lista;
     }
     
-    public boolean eliminarPersona(int id){
-        for(Persona p: lista){
+    public boolean eliminarPaciente(int id){
+        for(Paciente p: lista){
             if (p.getDni() == id){
                 lista.remove(p);
                 escribirArchivo();
@@ -60,17 +82,18 @@ public class PersonaDatos {
         return false;
     }
     
-    public void editarPersona(Persona persona) throws IOException{
-        Persona p = obtenerPersona(persona.getDni());
-        p.setNombre(persona.getNombre());
-        p.setApellido(persona.getApellido());
-        p.setDomicilio(persona.getDomicilio());
-        p.setFechaNacimiento(persona.getFechaNacimiento());
-        p.setDomicilio(persona.getDomicilio());
-        p.setTelFijo(persona.getTelFijo());
-        p.setTelCelular(persona.getTelCelular());
-        p.setEstadoCivil(persona.getEstadoCivil());
-        p.setCorreoElect(persona.getCorreoElect());
+    public void editarPaciente(Paciente paciente) throws IOException{
+        Paciente p = obtenerPaciente(paciente.getDni());
+        p.setNombre(paciente.getNombre());
+        p.setApellido(paciente.getApellido());
+        p.setDomicilio(paciente.getDomicilio());
+        p.setFechaNacimiento(paciente.getFechaNacimiento());
+        p.setDomicilio(paciente.getDomicilio());
+        p.setTelFijo(paciente.getTelFijo());
+        p.setTelCelular(paciente.getTelCelular());
+        p.setEstadoCivil(paciente.getEstadoCivil());
+        p.setCorreoElect(paciente.getCorreoElect());
+        p.setContacto(paciente.getContacto());
         
         escribirArchivo();
     }
@@ -78,12 +101,11 @@ public class PersonaDatos {
     private void escribirArchivo () {        
         FileWriter nuevo = null;
         PrintWriter pw = null;
-        try
-        {
+        try{
             nuevo = new FileWriter(archivo);
             pw = new PrintWriter(nuevo);
             String linea;
-            for(Persona p: lista){
+            for(Paciente p: lista){
                 linea = p.getDni()+ separador;
                 linea += p.getNombre() + separador;
                 linea += p.getApellido() + separador;
@@ -92,7 +114,8 @@ public class PersonaDatos {
                 linea += p.getTelFijo() + separador;
                 linea += p.getTelCelular()+ separador;
                 linea += p.getEstadoCivil() + separador;
-                linea += p.getCorreoElect();
+                linea += p.getCorreoElect() + separador;
+                //contacto
 
                 pw.println(linea);
             }
@@ -111,9 +134,10 @@ public class PersonaDatos {
            }
         }   
     }
+    
     private void leerArchivo () throws IOException {
         BufferedReader br = null;
-        Persona perso; 
+        Paciente perso; 
       
         try {         
             br = new BufferedReader(new FileReader(archivo));
@@ -123,22 +147,24 @@ public class PersonaDatos {
             while (linea != null) {
                 String [] campos = linea.split(separador);
                 
-                perso = new Persona(); //crea una persona por cada linea del .csv
+                perso = new Paciente(); //crea una persona por cada linea del .csv
                 
                 //Asigna cada valor de la linea a los atributos de la persona
                 perso.setDni(Integer.parseInt(campos[0]));
                 perso.setNombre(campos[1]);
                 perso.setApellido(campos[2]);
-//                perso.setFechaNacimiento(new Date(campos[3]));
+//                perso.setFechaNacimiento(campos[3]);
+                perso.setFechaNacimiento(new Date());
                 perso.setDomicilio(campos[4]);
                 perso.setTelFijo(Integer.parseInt(campos[5]));
                 perso.setTelCelular(campos[6]);
                 perso.setEstadoCivil(campos[7]);
                 perso.setCorreoElect(campos[8]);
+                //contacto
                 
                 lista.add(perso); //Agrega la persona creada a la lista
                 linea = br.readLine();
-            }
+            }            
         } catch (Exception e) {
          
         } finally {
@@ -150,7 +176,7 @@ public class PersonaDatos {
     
     public void imprimirArchivo(){//Imprime el contenido de la lista, se usa para testeo
     System.out.println("cant" + this.lista.size());
-        for (Persona p: lista) {
+        for (Paciente p: lista) {
             System.out.println(p.toString());
         }
     }
