@@ -10,11 +10,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Usuario {
-    private String nombreUusuario;
+    private int dniFuncionario;
+    private String nombreUsuario;
     private String contraseñaUsuario;
-    private String rol;
     
     public String toCSV(){
-        return this.nombreUusuario+","+this.contraseñaUsuario+","+this.rol+"\n";              
+        return dniFuncionario + "," + nombreUsuario + "," + contraseñaUsuario + "\n";              
     }
 }

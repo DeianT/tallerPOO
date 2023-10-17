@@ -113,7 +113,8 @@ public class RegistroUsuario extends javax.swing.JFrame {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:
          UsuariosDatos user = new UsuariosDatos();
-         if(user.Registrar(txtUsuario, txtContraseña, txtRepContra))
+         //acá hay que cambiar el 1 por un parametro que se ingresa
+         if(user.Registrar(1, txtUsuario, txtContraseña, txtRepContra))
          {
           this.dispose(); 
          }

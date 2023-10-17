@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import sistemas.tallerpoo.clasesLogicas.Medico;
 import sistemas.tallerpoo.clasesLogicas.Rol;
+import sistemas.tallerpoo.clasesLogicas.SectorTrabajo;
 
 /**
  *
@@ -67,15 +68,15 @@ public class MedicoDatos {
             Medico m = obtenerMedico(medico.getDni());
             m.setNombre(medico.getNombre());
             m.setApellido(medico.getApellido());
-            m.setDomicilio(medico.getDomicilio());
             m.setFechaNacimiento(medico.getFechaNacimiento());
             m.setDomicilio(medico.getDomicilio());
             m.setTelFijo(medico.getTelFijo());
             m.setTelCelular(medico.getTelCelular());
             m.setEstadoCivil(medico.getEstadoCivil());
             m.setCorreoElect(medico.getCorreoElect());
+            m.setTrabajaEn(medico.getTrabajaEn());
+            m.setRolesSistema(medico.getRolesSistema());
             m.setNMatricula(medico.getNMatricula());
-            m.setRolSistema(medico.getRolSistema());
         
             escribirArchivo();
             return true;
@@ -104,13 +105,15 @@ public class MedicoDatos {
                 linea += m.getTelCelular()+ separador;
                 linea += m.getEstadoCivil() + separador;
                 linea += m.getCorreoElect() + separador;
-                linea += m.getNMatricula() + separador;
-                if(m.getRolSistema() != null)
-                    linea += m.getRolSistema().getNombre();
+                if(m.getTrabajaEn()!= null)
+                    linea += m.getTrabajaEn().getNombre() + separador;
                 else
-                    linea += "null";
+                    linea += "null"  + separador;
+                linea += m.getNMatricula();
 
                 pw.println(linea);
+                
+//                new RolDatos().escribirArchivo()
             }
         }
         catch(Exception e){
@@ -143,8 +146,10 @@ public class MedicoDatos {
                 m.setTelCelular(campos[6]);
                 m.setEstadoCivil(campos[7]);
                 m.setCorreoElect(campos[8]);
-                m.setNMatricula(Integer.parseInt(campos[9]));
-                m.setRolSistema(new Rol(campos[10]));
+                m.setTrabajaEn(new SectorTrabajo(campos[9]));
+                m.setNMatricula(Integer.parseInt(campos[10]));
+                m.setRolesSistema(new ArrayList<>());
+//                m.setRolesSistema(new RolDatos().obtenerRolesFuncionario(m.getDni()));
                 
                 lista.add(m);
                 linea = br.readLine();
