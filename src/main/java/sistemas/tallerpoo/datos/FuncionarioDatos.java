@@ -52,11 +52,12 @@ public class FuncionarioDatos {
         return lista;
     }
     
-    public boolean eliminarFuncionario(int id){
+    public boolean eliminarFuncionario(int dni){
         try{
-            Funcionario f = obtenerFuncionario(id);
+            Funcionario f = obtenerFuncionario(dni);
             lista.remove(f);
             escribirArchivo();
+            new MedicoDatos().eliminarMedico(dni);
             return true;
         }
         catch(Exception e){
@@ -80,6 +81,7 @@ public class FuncionarioDatos {
             f.setRolesSistema(funcionario.getRolesSistema());
         
             escribirArchivo();
+            new MedicoDatos().editarMedico(funcionario);
             return true;
         }
         catch(Exception e){
@@ -106,7 +108,10 @@ public class FuncionarioDatos {
                 linea += f.getTelCelular()+ separador;
                 linea += f.getEstadoCivil() + separador;
                 linea += f.getCorreoElect() + separador;
-                linea += f.getTrabajaEn().getNombre();
+                if (f.getTrabajaEn() != null)
+                    linea += f.getTrabajaEn().getNombre();
+                else
+                    linea += null;
                 //guardar rolesSistema, no acá sino en RolDatos cuando se actualizan los roles/usuarios de alguien
 
                 pw.println(linea);

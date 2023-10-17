@@ -64,7 +64,7 @@ public class TallerPOO {
 //        System.out.println(mDatos.obtenerMedicos());
 //        System.out.println(new TriageDatos().obtenerTriages());
 //        System.out.println(new TriageDatos().obtenerTriage(1).getDniEncargado());
-//        Funcionario f = new Funcionario(1, "juan", "perex", new Date(), "casa", 321564, "+54 sadasd646|", "viudo", "correo", new SectorTrabajo("desposito"), new ArrayList<>());
-//        fDatos.agregarFuncionario(f);
+        Medico f = new Medico(121, "juan", "perex", new Date(), "casa", 321564, "+54 sadasd646|", "viudo", "correo", new SectorTrabajo("desposito"), new ArrayList<>(), 27);
+        mDatos.agregarMedico(f);
     }
 }
