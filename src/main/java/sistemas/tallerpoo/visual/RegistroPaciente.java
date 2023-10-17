@@ -24,6 +24,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
    
     public RegistroPaciente() {
         initComponents();
+        this.setLocationRelativeTo(null);
         modelo = new DefaultTableModel();
         lista = datos.obtenerPacientes();
         listar();

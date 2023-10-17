@@ -16,6 +16,7 @@ public class RealizarTriage extends javax.swing.JFrame {
      */
     public RealizarTriage() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
     
     public void capturar(Triage triage){

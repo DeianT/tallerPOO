@@ -18,6 +18,7 @@ public class EspecialidadesMedico extends javax.swing.JFrame {
    
     public EspecialidadesMedico() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

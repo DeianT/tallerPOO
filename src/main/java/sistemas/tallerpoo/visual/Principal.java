@@ -11,6 +11,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -35,6 +36,10 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        jmRegistroFuncionario = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
+        jmRegistroAdmision = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -114,17 +119,41 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
+        jMenu6.setText("Funcionarios");
+
+        jmRegistroFuncionario.setText("Registro");
+        jmRegistroFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmRegistroFuncionarioActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jmRegistroFuncionario);
+
+        jMenuBar1.add(jMenu6);
+
+        jMenu7.setText("Admision");
+
+        jmRegistroAdmision.setText("Registro");
+        jmRegistroAdmision.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmRegistroAdmisionActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jmRegistroAdmision);
+
+        jMenuBar1.add(jMenu7);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 547, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGap(0, 354, Short.MAX_VALUE)
         );
 
         pack();
@@ -172,6 +201,18 @@ public class Principal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jmSalirActionPerformed
 
+    private void jmRegistroFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRegistroFuncionarioActionPerformed
+        // TODO add your handling code here:
+        RegistroFuncionario fun = new RegistroFuncionario();
+        fun.setVisible(true);
+    }//GEN-LAST:event_jmRegistroFuncionarioActionPerformed
+
+    private void jmRegistroAdmisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRegistroAdmisionActionPerformed
+        // TODO add your handling code here:
+        RegistroAdmision adm = new  RegistroAdmision();
+        adm.setVisible(true);
+    }//GEN-LAST:event_jmRegistroAdmisionActionPerformed
+
     
     
     
@@ -213,6 +254,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
@@ -220,6 +263,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jmCerrarSesion;
     private javax.swing.JMenuItem jmRegistrar;
+    private javax.swing.JMenuItem jmRegistroAdmision;
+    private javax.swing.JMenuItem jmRegistroFuncionario;
     private javax.swing.JMenuItem jmSalir;
     // End of variables declaration//GEN-END:variables
 }
