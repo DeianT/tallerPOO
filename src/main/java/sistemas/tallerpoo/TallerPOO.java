@@ -56,12 +56,15 @@ public class TallerPOO {
         //agregarPaciente(pac)
 //        pDatos.agregarPersona(p);
         //agregarTriage(tr)
-        System.out.println(adDatos.obtenerAdmisiones());
+//        System.out.println(adDatos.obtenerAdmisiones());
 //        new RegistroAdmision().setVisible(true);
         PacienteDatos rpd = new PacienteDatos();
 //        rpd.imprimirArchivo();
         new Principal().setVisible(true);
-        System.out.println(mDatos.obtenerMedicos());
-        System.out.println(new TriageDatos().obtenerTriages());
+//        System.out.println(mDatos.obtenerMedicos());
+//        System.out.println(new TriageDatos().obtenerTriages());
+//        System.out.println(new TriageDatos().obtenerTriage(1).getDniEncargado());
+//        Funcionario f = new Funcionario(1, "juan", "perex", new Date(), "casa", 321564, "+54 sadasd646|", "viudo", "correo", new SectorTrabajo("desposito"), new ArrayList<>());
+//        fDatos.agregarFuncionario(f);
     }
 }

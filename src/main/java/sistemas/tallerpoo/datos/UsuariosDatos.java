@@ -1,12 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package sistemas.tallerpoo.datos;
 
 import sistemas.tallerpoo.clasesLogicas.Usuario;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
@@ -19,8 +16,17 @@ import javax.swing.JTextField;
 public class UsuariosDatos {
     private final String archivo = "usuarios.csv";
     
-    public boolean Registrar(JTextField u, JPasswordField c, JPasswordField cr )
+    public boolean Registrar(int dniFuncionario, JTextField u, JPasswordField c, JPasswordField cr)
     {
+        try{//comprueba que exista un funcionario registrado con ese dni
+            new FuncionarioDatos().obtenerFuncionario(dniFuncionario);
+        }
+        catch(IOException e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            return false;//si no existe, no lo registra y devuelve false
+        }
+        
+        String nombre = u.getText();
         String contra = String.valueOf(c.getPassword());
         String repContra = String.valueOf(cr.getPassword());
         boolean bandera = false;
@@ -30,8 +36,8 @@ public class UsuariosDatos {
            if(contra.equals(repContra))
            {
                 File f = new File(archivo);
-                Usuario user= new Usuario(u.getText(), contra , "");
-                bandera=true;
+                Usuario user = new Usuario(dniFuncionario, nombre, contra);
+                bandera = true;
                 try(FileWriter fw = new FileWriter(f,true))
                 {
                     fw.write(user.toCSV());
@@ -50,23 +56,46 @@ public class UsuariosDatos {
         return bandera;
     }
     
-    
     public boolean controlarExistenciaRegistro(JTextField user)
     {
-        boolean bandera= true;
+        boolean bandera = true;
         Usuario usuario;
         String[] datos;
         try(Scanner sc = new Scanner(new File(archivo)))
         {
             while(sc.hasNextLine())
             {
-                datos=sc.nextLine().split(",");
-                usuario = new Usuario(datos[0],datos[1], "");
-                if(user.getText().equals(usuario.getNombreUusuario()))
+                datos = sc.nextLine().split(",");
+                usuario = new Usuario(Integer.parseInt(datos[0]), datos[1], datos[2]);
+                if(user.getText().equals(usuario.getNombreUsuario()))
                 {
-                    JOptionPane.showMessageDialog(null, "el usuario ingreado ya existe");
-                    bandera=false;
+                    JOptionPane.showMessageDialog(null, "el usuario ingresado ya existe");
+                    bandera = false;
                     break;
+                }
+            }
+  
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        return bandera;
+    }
+    
+    public boolean controlarExistenciaRegistro(int dni)
+    {
+        boolean bandera = true;
+        Usuario usuario;
+        String[] datos;
+        try(Scanner sc = new Scanner(new File(archivo)))
+        {
+            while(sc.hasNextLine())
+            {
+                datos = sc.nextLine().split(",");
+                usuario = new Usuario(Integer.parseInt(datos[0]), datos[1], datos[2]);
+                if(usuario.getDniFuncionario() == dni)
+                {
+                    JOptionPane.showMessageDialog(null, "El funcionario con dni " + dni + "ya tiene un usuario");
+                    return false;
                 }
             }
   
@@ -83,18 +112,19 @@ public class UsuariosDatos {
         boolean bandera = false;
         try(Scanner sc = new Scanner(new File(archivo)))
         {
+            String nombre = u.getText();
             String contra = String.valueOf(c.getPassword());
-           while(sc.hasNextLine())
-           {
-               datos = sc.nextLine().split(",");
-               user = new Usuario(datos[0],datos[1],"");
-               if(user.getNombreUusuario().equals(u.getText()) && user.getContraseñaUsuario().equals(contra) )
-               {
-                   JOptionPane.showMessageDialog(null, "Se ah encontrado el usuario");
-                   bandera = true;
-                   break;
-               }
-           }   
+            while(sc.hasNextLine())
+            {
+                datos = sc.nextLine().split(",");
+                user = new Usuario(Integer.parseInt(datos[0]), datos[1], datos[2]);
+                if(user.getNombreUsuario().equals(nombre) && user.getContraseñaUsuario().equals(contra))
+                {
+                    JOptionPane.showMessageDialog(null, "Se ha encontrado el usuario");
+                    bandera = true;
+                    break;
+                }
+            }   
         }catch(Exception e)
         {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -105,8 +135,4 @@ public class UsuariosDatos {
         }
            return bandera;    
     }
-    
-    
-    
-    
 }

@@ -10,12 +10,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Usuario {
-    private String nombreUusuario;
+    private int dniFuncionario;
+    private String nombreUsuario;
     private String contraseñaUsuario;
-    private Rol rol;//capaz que estos dos tendrian que ser int(idRol y funcionarioDni)
-    private Funcionario funcionario;
     
     public String toCSV(){
-        return this.nombreUusuario+","+this.contraseñaUsuario+","+this.rol.getNombre()+"\n";              
+        return dniFuncionario + "," + nombreUsuario + "," + contraseñaUsuario + "\n";              
     }
 }

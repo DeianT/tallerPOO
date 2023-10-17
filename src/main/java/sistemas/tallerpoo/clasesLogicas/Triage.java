@@ -28,7 +28,6 @@ public class Triage {
     private String sangrado;
     private Date fecha;
     private Date hora;
-    private String encargadoTriage;
     private NivelTriage colorModificado;
     private String motivoModificacion;
     private int dniEncargado;
