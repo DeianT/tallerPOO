@@ -23,6 +23,33 @@ public class RolDatos {
         }catch(Exception e){}
     }
     
+    public boolean agregarRol(Rol rol){
+        lista.add(rol);
+        escribirArchivo();
+        return true;
+    }
+    
+    public ArrayList<Rol> obtenerRolesFuncionario(int dni){
+        ArrayList<Rol> roles = new ArrayList<>();
+        for(Rol r: lista){
+            if(r.getDniFuncionario() == dni){
+                roles.add(r);
+            }
+        }
+        return roles;
+    }
+    
+    public boolean eliminarRol(Rol rol){
+        for(Rol r: obtenerRolesFuncionario(rol.getDniFuncionario())){
+            if(r.getNombre().equals(rol.getNombre())){
+                lista.remove(r);
+                escribirArchivo();
+                return true;
+            }
+        }
+        return false;
+    }
+    
     private void escribirArchivo(){
         FileWriter nuevo = null;
         PrintWriter pw = null;
