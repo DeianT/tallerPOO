@@ -104,7 +104,8 @@ public class FuncionarioDatos {
                 linea += f.getEstadoCivil() + separador;
                 linea += f.getCorreoElect() + separador;
                 linea += f.getTrabajaEn().getNombre();
-                //guardar rolesSistema
+                //guardar rolesSistema, no acá sino en RolDatos cuando se actualizan los roles/usuarios de alguien
+                // o puedo llamar al metodo desde el constructor de funcionario
 
                 pw.println(linea);
             }
@@ -140,6 +141,7 @@ public class FuncionarioDatos {
                 f.setEstadoCivil(campos[7]);
                 f.setCorreoElect(campos[8]);
                 f.setTrabajaEn(new SectorTrabajo(campos[9]));
+                f.setRolesSistema(new ArrayList<>());
                 //obtener los roles del funcionario y asignarlos
                 
                 lista.add(f);

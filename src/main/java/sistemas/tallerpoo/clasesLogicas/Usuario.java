@@ -12,7 +12,7 @@ import lombok.Setter;
 public class Usuario {
     private String nombreUusuario;
     private String contraseñaUsuario;
-    private Rol rol;
+    private Rol rol;//capaz que estos dos tendrian que ser int(idRol y funcionarioDni)
     private Funcionario funcionario;
     
     public String toCSV(){

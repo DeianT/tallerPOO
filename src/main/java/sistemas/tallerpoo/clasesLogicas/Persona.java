@@ -16,8 +16,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Persona {
     private int dni;
-    private String Nombre;
-    private String Apellido;
+    private String nombre;
+    private String apellido;
     private Date fechaNacimiento;
     private String domicilio;
     private int telFijo;
