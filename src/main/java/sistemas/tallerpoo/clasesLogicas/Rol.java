@@ -15,4 +15,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Rol {
     private String nombre;
+    private int dniFuncionario;
 }

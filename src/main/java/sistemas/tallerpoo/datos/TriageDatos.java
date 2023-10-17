@@ -69,9 +69,9 @@ public class TriageDatos {
                 linea += t.getSangrado() + separador;
                 linea += t.getFecha() + separador;
                 linea += t.getHora() + separador;
-                linea += t.getEncargadoTriage() + separador;
                 linea += t.getColorModificado() + separador;
-                linea += t.getMotivoModificacion();
+                linea += t.getMotivoModificacion() + separador;
+                linea += t.getDniEncargado();
 
                 pw.println(linea);
             }
@@ -112,11 +112,11 @@ public class TriageDatos {
                 t.setSignosDeShock(campos[12]);
                 t.setLesionesLeves(campos[13]);
                 t.setSangrado(campos[14]);
-//                t.setFecha(fecha);
-//                t.setHora(hora);
-                t.setEncargadoTriage(campos[17]);
-                t.setColorModificado(NivelTriage.valueOf(campos[18]));
-                t.setMotivoModificacion(campos[19]);
+//                t.setFecha(fecha15);
+//                t.setHora(hora16);
+                t.setColorModificado(NivelTriage.valueOf(campos[17]));
+                t.setMotivoModificacion(campos[18]);
+                t.setDniEncargado(Integer.parseInt(campos[19]));
                 
                 lista.add(t);
                 linea = br.readLine();
