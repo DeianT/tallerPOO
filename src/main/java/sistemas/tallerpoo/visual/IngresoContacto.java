@@ -25,6 +25,7 @@ public class IngresoContacto extends javax.swing.JFrame {
      */
     public IngresoContacto() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
     
     public Persona captar()

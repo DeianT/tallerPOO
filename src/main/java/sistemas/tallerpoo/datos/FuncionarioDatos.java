@@ -6,6 +6,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
 import sistemas.tallerpoo.clasesLogicas.Funcionario;
 import sistemas.tallerpoo.clasesLogicas.SectorTrabajo;
 
@@ -156,4 +159,29 @@ public class FuncionarioDatos {
             }
         }
     }
+    
+    public Funcionario capturar(JTextField dni, JTextField nombre, JTextField apellido, JTextField fecha, JTextField domicilio, JTextField tel, JTextField celular, JComboBox estado, JTextField correo, JTextField sector)
+    {
+        Funcionario pac = new Funcionario();
+        int DNI = Integer.parseInt(dni.getText()); 
+        int telF = Integer.parseInt(tel.getText());
+        SectorTrabajo sec = new SectorTrabajo();
+        sec.setNombre(sector.getText());
+        String estadoo = String.valueOf(estado.getSelectedItem());
+        pac.setDni(DNI);
+        pac.setNombre(nombre.getText());
+        pac.setApellido(apellido.getText());
+        //pac.setFechaNacimiento(fecha.getText().toString());
+        pac.setFechaNacimiento(new Date());
+        pac.setDomicilio(domicilio.getText());
+        pac.setTelFijo(telF);
+        pac.setTelCelular(celular.getText());
+        pac.setEstadoCivil(estadoo);
+        pac.setCorreoElect(correo.getText());
+        pac.setTrabajaEn(sec);
+        
+        return pac;
+    }
+    
+    
 }
