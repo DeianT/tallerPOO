@@ -82,7 +82,7 @@ public class AdmisionDatos {
 //                ad.setHora(fecha);
                 ad.setMotivo(campos[2]);
 //                ad.setPaciente(new PacienteDatos().obtenerPaciente(Integer.parseInt(campos[3])));
-                ad.setPaciente(new Paciente(123, "asfd", "gasa", new Date(), "", 1561, "645816", "faf", "sdgg", new Persona()));//esto hay que borarlo despues
+                ad.setPaciente(new Paciente(123, "asfd", "gasa", new Date(), "", 1561, "645816", "faf", "sdgg", "gss"));//esto hay que borarlo despues
                 ad.setTriage(new TriageDatos().obtenerTriage(Integer.parseInt(campos[4])));
                 ad.setBox(new ListaBox().obtenerBox(Integer.parseInt(campos[5])));
                 
