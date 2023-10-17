@@ -31,5 +31,5 @@ public class Triage {
     private String encargadoTriage;
     private NivelTriage colorModificado;
     private String motivoModificacion;
-//    private Medico/Enfermero realizadoPor;
+    private int dniEncargado;
 }
