@@ -26,6 +26,9 @@ public class UsuariosDatos {
             return false;//si no existe, no lo registra y devuelve false
         }
         
+        if (!controlarExistenciaRegistro(dniFuncionario))
+            return false; //si el funcionario ya tiene un usuario no lo registra y devuelve false
+        
         String nombre = u.getText();
         String contra = String.valueOf(c.getPassword());
         String repContra = String.valueOf(cr.getPassword());
@@ -94,7 +97,7 @@ public class UsuariosDatos {
                 usuario = new Usuario(Integer.parseInt(datos[0]), datos[1], datos[2]);
                 if(usuario.getDniFuncionario() == dni)
                 {
-                    JOptionPane.showMessageDialog(null, "El funcionario con dni " + dni + "ya tiene un usuario");
+                    JOptionPane.showMessageDialog(null, "El funcionario con dni " + dni + " ya tiene un usuario");
                     return false;
                 }
             }

@@ -114,7 +114,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
          UsuariosDatos user = new UsuariosDatos();
          //acá hay que cambiar el 1 por un parametro que se ingresa
-         if(user.Registrar(2, txtUsuario, txtContraseña, txtRepContra))
+         if(user.Registrar(1, txtUsuario, txtContraseña, txtRepContra))
          {
           this.dispose(); 
          }
