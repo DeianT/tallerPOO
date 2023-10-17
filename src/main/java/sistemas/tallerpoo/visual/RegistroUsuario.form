@@ -35,16 +35,18 @@
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="txtUsuario" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtContraseña" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtRepContra" alignment="0" pref="134" max="32767" attributes="0"/>
+                          <Component id="txtDni" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="154" max="32767" attributes="0"/>
+              <EmptySpace pref="113" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -56,6 +58,11 @@
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtDni" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -66,7 +73,7 @@
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtRepContra" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="85" max="32767" attributes="0"/>
+              <EmptySpace pref="20" max="32767" attributes="0"/>
               <Component id="btnRegistrar" min="-2" pref="35" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
           </Group>
@@ -94,7 +101,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Contrase&#xf1;a"/>
+        <Property name="text" type="java.lang.String" value="Repetir contrase&#xf1;a"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtUsuario">
@@ -105,6 +112,13 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtRepContraActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtDni">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel4">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="DNI funcionario"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
