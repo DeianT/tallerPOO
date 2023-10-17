@@ -380,10 +380,12 @@ public class RegistroPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTelefonoActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        if (datos.agregarPaciente(datos.capturar(txtDni, txtNombre, txtApellido, txtFechaNacimiento, txtDomicilio, txtTelefono, txtCelular, cbEstadoCivil, txtCorreo))){
+        Paciente p = datos.capturar(txtDni, txtNombre, txtApellido, txtFechaNacimiento, txtDomicilio, txtTelefono, txtCelular, cbEstadoCivil, txtCorreo);
+        if (datos.agregarPaciente(p)){
             JOptionPane.showMessageDialog(null, "se registro con exito");
             listar();
             this.limpiarTexto();
+            RegistroAdmision.setPaciente(p);
         }
         else{
             JOptionPane.showMessageDialog(null, "Ya existe paciente con ese DNI", "Error", JOptionPane.ERROR_MESSAGE);
@@ -403,13 +405,11 @@ public class RegistroPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMostrarTodoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        
         Paciente pac;
         int fila = jtPacientes.getSelectedRow();
         pac = lista.get(fila);
         this.mostrarTodo(pac);
-        
-        
+        RegistroAdmision.setPaciente(pac);
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -432,19 +432,18 @@ public class RegistroPaciente extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         Paciente p = new Paciente();
-        p=datos.capturar(txtDni, txtNombre, txtApellido, txtDni, txtDomicilio, txtDni, txtCelular, cbEstadoCivil, txtCorreo);
+        p = datos.capturar(txtDni, txtNombre, txtApellido, txtDni, txtDomicilio, txtDni, txtCelular, cbEstadoCivil, txtCorreo);
         try {
             if(datos.editarPaciente(p))
             {
               JOptionPane.showMessageDialog(null, "se edito con exito");
               limpiarTexto();
-              listar();  
+              listar();
+              RegistroAdmision.setPaciente(p);
             }     
         } catch (IOException ex) {
             Logger.getLogger(RegistroPaciente.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-
     }//GEN-LAST:event_btnConfirmarEdicionActionPerformed
 
     private void filtrar()

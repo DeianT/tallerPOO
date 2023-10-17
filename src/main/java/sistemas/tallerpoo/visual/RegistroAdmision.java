@@ -138,7 +138,6 @@ public class RegistroAdmision extends javax.swing.JFrame {
             a.setFecha(new Date());
             a.setHora(new Date());
             a.setMotivo(jtaMotivoCampo.getText());
-            paciente = new Paciente(123, "asfd", "gasa", new Date(), "", 1561, "645816", "faf", "sdgg", new Persona());
             a.setPaciente(paciente);
             a.setTriage(triage);
             a.setBox(new Box());
