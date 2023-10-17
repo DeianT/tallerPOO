@@ -142,6 +142,7 @@ public class FuncionarioDatos {
                 f.setNombre(campos[1]);
                 f.setApellido(campos[2]);
 //                   f.setFechaNacimiento(new Date(campos[3]));
+                f.setFechaNacimiento(new Date());
                 f.setDomicilio(campos[4]);
                 f.setTelFijo(Integer.parseInt(campos[5]));
                 f.setTelCelular(campos[6]);

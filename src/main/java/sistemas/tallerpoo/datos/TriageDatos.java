@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import org.javatuples.Pair;
 import sistemas.tallerpoo.clasesLogicas.NivelTriage;
 import sistemas.tallerpoo.clasesLogicas.Triage;
 
@@ -41,6 +42,16 @@ public class TriageDatos {
     
     public ArrayList<Triage> obtenerTriages(){
         return lista;
+    }
+    
+    public ArrayList<Pair<NivelTriage, NivelTriage>> obtenerTriagesModificados(){
+        ArrayList<Pair<NivelTriage, NivelTriage>> tuplas = new ArrayList<>();
+        for(Triage t: lista){
+            if(t.getColor() != t.getColorModificado()){
+                tuplas.add(new Pair(t.getColor(), t.getColorModificado()));
+            }
+        }
+        return tuplas;
     }
 
     private void escribirArchivo(){
