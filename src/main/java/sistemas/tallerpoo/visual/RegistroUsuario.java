@@ -1,14 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package sistemas.tallerpoo.visual;
 
-import sistemas.tallerpoo.clasesLogicas.Usuario;
 import sistemas.tallerpoo.datos.UsuariosDatos;
-import java.io.File;
-import java.io.FileWriter;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -57,12 +49,6 @@ public class RegistroUsuario extends javax.swing.JFrame {
         jLabel2.setText("Contraseña");
 
         jLabel3.setText("Repetir contraseña");
-
-        txtRepContra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtRepContraActionPerformed(evt);
-            }
-        });
 
         jLabel4.setText("DNI funcionario");
 
@@ -117,18 +103,12 @@ public class RegistroUsuario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtRepContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRepContraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtRepContraActionPerformed
-
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        // TODO add your handling code here:
         UsuariosDatos user = new UsuariosDatos();
         if(user.Registrar(Integer.parseInt(txtDni.getText()), txtUsuario, txtContraseña, txtRepContra))
         {
             this.dispose(); 
         }
-         
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     /**

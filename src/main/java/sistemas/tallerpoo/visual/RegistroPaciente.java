@@ -56,31 +56,6 @@ public class RegistroPaciente extends javax.swing.JFrame {
         sorter = new TableRowSorter<>(modelo);
         jtPacientes.setRowSorter(sorter);
     }
-    
-    public void listarr(ArrayList<Paciente> lista)
-    {
-        modelo = (DefaultTableModel) jtPacientes.getModel();
-        Object[] ob = new Object[9];
-        
-        for(int i =0; i<lista.size();i++)
-        {
-            ob[0]=lista.get(i).getDni();
-            ob[1]=lista.get(i).getNombre();
-            ob[2]=lista.get(i).getApellido();
-            ob[3]=lista.get(i).getFechaNacimiento();
-            ob[4]=lista.get(i).getDomicilio();
-            ob[5]=lista.get(i).getTelFijo();
-            ob[6]=lista.get(i).getTelCelular();
-            ob[7]=lista.get(i).getEstadoCivil();
-            ob[8]=lista.get(i).getCorreoElect();
-            modelo.addRow(ob);
-        }
-        jtPacientes.setModel(modelo);
-        
-        jtPacientes.setAutoCreateRowSorter(true);
-        sorter = new TableRowSorter<>(modelo);
-        jtPacientes.setRowSorter(sorter);
-    }
 
     public void limpiarTabla()
     {
@@ -175,18 +150,6 @@ public class RegistroPaciente extends javax.swing.JFrame {
 
         jLabel10.setText("Contacto");
 
-        txtDomicilio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDomicilioActionPerformed(evt);
-            }
-        });
-
-        txtTelefono.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTelefonoActionPerformed(evt);
-            }
-        });
-
         cbEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Soltero/a", "Casado/a", "Viudo/a", "Divorciado/a" }));
 
         btnRegistrar.setText("Registrar");
@@ -206,11 +169,6 @@ public class RegistroPaciente extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jtPacientes);
 
-        txtBuscarDni.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscarDniActionPerformed(evt);
-            }
-        });
         txtBuscarDni.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarDniKeyReleased(evt);
@@ -371,14 +329,6 @@ public class RegistroPaciente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtDomicilioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDomicilioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDomicilioActionPerformed
-
-    private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTelefonoActionPerformed
-
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         Paciente p = datos.capturar(txtDni, txtNombre, txtApellido, txtFechaNacimiento, txtDomicilio, txtTelefono, txtCelular, cbEstadoCivil, txtCorreo);
         if (datos.agregarPaciente(p)){
@@ -394,7 +344,6 @@ public class RegistroPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnContactoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContactoActionPerformed
-        // TODO add your handling code here:
         IngresoContacto con = new IngresoContacto();
         con.setVisible(true);
         
@@ -424,13 +373,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
         filtrar();
     }//GEN-LAST:event_txtBuscarDniKeyReleased
 
-    private void txtBuscarDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarDniActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscarDniActionPerformed
-
     private void btnConfirmarEdicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarEdicionActionPerformed
-        // TODO add your handling code here:
-        
         Paciente p = new Paciente();
         p = datos.capturar(txtDni, txtNombre, txtApellido, txtDni, txtDomicilio, txtDni, txtCelular, cbEstadoCivil, txtCorreo);
         try {
