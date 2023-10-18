@@ -1,10 +1,12 @@
 package sistemas.tallerpoo.datos;
 
+import com.toedter.calendar.JDateChooser;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JTextField;
@@ -26,10 +28,12 @@ public class PacienteDatos {
         int DNI = Integer.parseInt(dni.getText()); 
         int telF = Integer.parseInt(tel.getText());
         String estadoo = String.valueOf(estado.getSelectedItem());
+        
+        
         pac.setDni(DNI);
         pac.setNombre(nombre.getText());
         pac.setApellido(apellido.getText());
-//        pac.setFechaNacimiento(fecha.getText());
+        //pac.setFechaNacimiento(fecha);
         pac.setFechaNacimiento(new Date());
         pac.setDomicilio(domicilio.getText());
         pac.setTelFijo(telF);

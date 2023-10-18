@@ -2,6 +2,7 @@ package sistemas.tallerpoo.visual;
 
 import sistemas.tallerpoo.datos.PacienteDatos;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
@@ -26,7 +27,6 @@ public class RegistroPaciente extends javax.swing.JFrame {
     ArrayList<Paciente> lista;
     TableRowSorter <DefaultTableModel> sorter;
     PacienteDatos datos = new PacienteDatos();
-    
    
     public RegistroPaciente() {
         initComponents();
@@ -106,7 +106,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
         txtDni.setText(dni);
         txtNombre.setText(p.getNombre());
         txtApellido.setText(p.getApellido());
-        txtFechaNacimiento.setText(p.getFechaNacimiento().toString());
+        //txtFechaNacimiento.setText(p.getFechaNacimiento().toString());
         txtDomicilio.setText(p.getDomicilio());
         txtTelefono.setText(telefono);
         txtCelular.setText(p.getTelCelular());
@@ -120,7 +120,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
        txtDni.setText("");
        txtNombre.setText("");
        txtApellido.setText("");
-       txtFechaNacimiento.setText("");
+       //txtFechaNacimiento.setText("");
        txtDomicilio .setText("");
        txtTelefono.setText("");
        txtCelular.setText("");
@@ -390,7 +390,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTelefonoActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        
+
         Admision a = new Admision();
         if (datos.agregarPaciente(datos.capturar(txtDni, txtNombre, txtApellido, txtFechaNacimiento, txtDomicilio, txtTelefono, txtCelular, cbEstadoCivil, txtCorreo, txtContacto))){
             String motivo = JOptionPane.showInputDialog(null, "Ingrese el motivo");
@@ -445,7 +445,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         Paciente p = new Paciente();
-        p=datos.capturar(txtDni, txtNombre, txtApellido, txtDni, txtDomicilio, txtDni, txtCelular, cbEstadoCivil, txtCorreo, txtContacto);
+        p=datos.capturar(txtDni, txtNombre, txtApellido, txtFechaNacimiento, txtDomicilio, txtDni, txtCelular, cbEstadoCivil, txtCorreo, txtContacto);
         try {
             if(datos.editarPaciente(p))
             {
