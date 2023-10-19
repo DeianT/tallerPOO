@@ -40,7 +40,7 @@ public class TallerPOO {
         ListaBox lB = new ListaBox();
         
         Persona p = new Persona(46488897, "n", "a", new Date(), "do", 0, "+54", "s", "c");
-        Paciente pac = new Paciente(123987, "Pablo", "Preze", new Date(), "dmoiclio", 4561231, "+54 325678978", "casaso", "correo", p);
+        Paciente pac = new Paciente(123987, "Pablo", "Preze", new Date(), "dmoiclio", 4561231, "+54 325678978", "casaso", "correo", "adad");
         Triage tr = new Triage();
         tr.setId(1);
         Box b = null;
@@ -60,7 +60,7 @@ public class TallerPOO {
 //        new RegistroAdmision().setVisible(true);
         PacienteDatos rpd = new PacienteDatos();
 //        rpd.imprimirArchivo();
-        new Principal().setVisible(true);
+        new Login().setVisible(true);
 //        System.out.println(mDatos.obtenerMedicos());
 //        System.out.println(new TriageDatos().obtenerTriages());
 //        System.out.println(new TriageDatos().obtenerTriage(1).getDniEncargado());

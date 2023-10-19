@@ -424,13 +424,21 @@ public class RealizarTriage extends javax.swing.JFrame {
             color = "Rojo";
         }
         
-        t.setColor(NivelTriage.valueOf(color));
-        t.setColorModificado(NivelTriage.valueOf(color));
+        
+        if(cboRespiracion.getSelectedIndex()!=0 && cboPulso.getSelectedIndex()!=0 && cboEstadoMental.getSelectedIndex()!=0 && cboConciencia.getSelectedIndex()!=0 && cboDolorPecho.getSelectedIndex()!=0 && cboLesionesGraves.getSelectedIndex()!=0 && cboEdad.getSelectedIndex()!=0 && cboFiebre.getSelectedIndex()!=0 && cboVomitos.getSelectedIndex()!=0 && cboDolorAbominal.getSelectedIndex()!=0 && cboSignosShock.getSelectedIndex()!=0 && cboLesionesLeves.getSelectedIndex()!=0 && cboSangrado.getSelectedIndex()!=0 )
+        {
+          t.setColor(NivelTriage.valueOf(color));
+          t.setColorModificado(NivelTriage.valueOf(color));
 
         JOptionPane.showMessageDialog(this, "se ah guardado con exito " + "\n El nivel de atencion es de " + color.toUpperCase());
         new TriageDatos().agregarTriage(t);
         
-        RegistroAdmision.setTriage(t);
+        RegistroAdmision.setTriage(t);  
+        }else
+        {
+            JOptionPane.showMessageDialog(null, "Faltan completar casillas");
+        }
+ 
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed

@@ -1,10 +1,12 @@
 package sistemas.tallerpoo.datos;
 
+import com.toedter.calendar.JDateChooser;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JTextField;
@@ -20,22 +22,25 @@ public class PacienteDatos {
     private final String archivo = "Pacientes.csv";
     private final String separador = ",";
     
-    public Paciente capturar(JTextField dni, JTextField nombre, JTextField apellido, JTextField fecha, JTextField domicilio, JTextField tel, JTextField celular, JComboBox estado, JTextField correo)
+    public Paciente capturar(JTextField dni, JTextField nombre, JTextField apellido, JTextField fecha, JTextField domicilio, JTextField tel, JTextField celular, JComboBox estado, JTextField correo, JTextField contacto)
     {
         Paciente pac = new Paciente();
         int DNI = Integer.parseInt(dni.getText()); 
         int telF = Integer.parseInt(tel.getText());
         String estadoo = String.valueOf(estado.getSelectedItem());
+        
+        
         pac.setDni(DNI);
         pac.setNombre(nombre.getText());
         pac.setApellido(apellido.getText());
-//        pac.setFechaNacimiento(fecha.getText());
+        //pac.setFechaNacimiento(fecha);
         pac.setFechaNacimiento(new Date());
         pac.setDomicilio(domicilio.getText());
         pac.setTelFijo(telF);
         pac.setTelCelular(celular.getText());
         pac.setEstadoCivil(estadoo);
         pac.setCorreoElect(correo.getText());
+        pac.setContacto(contacto.getText());
         
         return pac;
     }
@@ -96,6 +101,7 @@ public class PacienteDatos {
         p.setCorreoElect(paciente.getCorreoElect());
         p.setContacto(paciente.getContacto());
         
+        
         escribirArchivo();
         return true;
         } catch (Exception e) {
@@ -122,7 +128,8 @@ public class PacienteDatos {
                 linea += p.getTelCelular()+ separador;
                 linea += p.getEstadoCivil() + separador;
                 linea += p.getCorreoElect() + separador;
-                //contacto
+                linea += p.getContacto();
+                
 
                 pw.println(linea);
             }
@@ -167,7 +174,8 @@ public class PacienteDatos {
                 perso.setTelCelular(campos[6]);
                 perso.setEstadoCivil(campos[7]);
                 perso.setCorreoElect(campos[8]);
-                //contacto
+                perso.setContacto(campos[9]);
+                
                 
                 lista.add(perso); //Agrega la persona creada a la lista
                 linea = br.readLine();
