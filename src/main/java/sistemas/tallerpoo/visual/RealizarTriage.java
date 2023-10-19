@@ -14,9 +14,10 @@ import sistemas.tallerpoo.datos.TriageDatos;
  * @author Thiago
  */
 public class RealizarTriage extends javax.swing.JFrame {
-    DefaultTableModel modelo;
-    ArrayList<Admision> lista;
-    AdmisionDatos datos = new AdmisionDatos();
+    private DefaultTableModel modelo;
+    private ArrayList<Admision> lista;
+    private AdmisionDatos datos = new AdmisionDatos();
+    private Admision admision = null;
 
     /**
      * Creates new form Triage
@@ -456,6 +457,11 @@ public class RealizarTriage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        if(admision == null){
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un paciente", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         Triage t = new Triage();
         int contador = 0;
         String color = "";
@@ -483,7 +489,9 @@ public class RealizarTriage extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "se ha guardado con exito " + "\n El nivel de atencion es de " + color.toUpperCase());
         new TriageDatos().agregarTriage(t);
         
-        RegistroAdmision.setTriage(t);
+        admision.setTriage(t);
+//        datos
+//        RegistroAdmision.setTriage(t);
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -504,8 +512,8 @@ public class RealizarTriage extends javax.swing.JFrame {
 
     private void btnPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacienteActionPerformed
         int fila = jtAdmisiones.getSelectedRow();
-        Admision a = lista.get(fila);
-        System.out.println(a);
+        admision = lista.get(fila);
+        System.out.println(admision);
     }//GEN-LAST:event_btnPacienteActionPerformed
 
     /**
