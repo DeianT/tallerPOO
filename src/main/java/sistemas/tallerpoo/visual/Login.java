@@ -1,16 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package sistemas.tallerpoo.visual;
 
-import sistemas.tallerpoo.clasesLogicas.Usuario;
 import sistemas.tallerpoo.datos.UsuariosDatos;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.util.Scanner;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -109,12 +99,9 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         RegistroUsuario a = new RegistroUsuario();
         a.setVisible(true);
-        
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-        // TODO add your handling code here:
         UsuariosDatos user = new UsuariosDatos();
         Principal prin = new Principal();
         if(user.controlInicioSesion(txtUsuario, txtContraseña))

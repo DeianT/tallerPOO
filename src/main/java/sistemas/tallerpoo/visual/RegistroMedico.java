@@ -1,14 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package sistemas.tallerpoo.visual;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -43,32 +36,6 @@ public class RegistroMedico extends javax.swing.JFrame {
         Object[] ob = new Object[10];
         
         for(int i = 0; i < lista.size(); i++)
-        {
-            ob[0]=lista.get(i).getDni();
-            ob[1]=lista.get(i).getNombre();
-            ob[2]=lista.get(i).getApellido();
-            ob[3]=lista.get(i).getFechaNacimiento();
-            ob[4]=lista.get(i).getDomicilio();
-            ob[5]=lista.get(i).getTelFijo();
-            ob[6]=lista.get(i).getTelCelular();
-            ob[7]=lista.get(i).getEstadoCivil();
-            ob[8]=lista.get(i).getCorreoElect();
-            ob[9]=lista.get(i).getNMatricula();
-            modelo.addRow(ob);
-        }
-        jtMedicos.setModel(modelo);
-        
-        jtMedicos.setAutoCreateRowSorter(true);
-        sorter = new TableRowSorter<>(modelo);
-        jtMedicos.setRowSorter(sorter);
-    }
-    
-    public void listarr(ArrayList<Medico> lista)
-    {
-        modelo = (DefaultTableModel) jtMedicos.getModel();
-        Object[] ob = new Object[9];
-        
-        for(int i =0; i<lista.size();i++)
         {
             ob[0]=lista.get(i).getDni();
             ob[1]=lista.get(i).getNombre();
@@ -207,18 +174,6 @@ public class RegistroMedico extends javax.swing.JFrame {
 
         jLabel10.setText("Matricula");
 
-        txtDomicilio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDomicilioActionPerformed(evt);
-            }
-        });
-
-        txtTelefono.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTelefonoActionPerformed(evt);
-            }
-        });
-
         cbEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Soltero/a", "Casado/a", "Viudo/a", "Divorciado/a" }));
 
         btnRegistrar.setText("Registrar");
@@ -238,11 +193,6 @@ public class RegistroMedico extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jtMedicos);
 
-        txtBuscarDni.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscarDniActionPerformed(evt);
-            }
-        });
         txtBuscarDni.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarDniKeyReleased(evt);
@@ -396,14 +346,6 @@ public class RegistroMedico extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtDomicilioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDomicilioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDomicilioActionPerformed
-
-    private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTelefonoActionPerformed
-
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         if(datos.agregarMedico(captar())){
             JOptionPane.showMessageDialog(null, "se registro con exito");
@@ -420,14 +362,10 @@ public class RegistroMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMostrarTodoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-       
-        
         Medico med;
         int fila = jtMedicos.getSelectedRow();
         med = lista.get(fila);
         this.mostrarTodo(med);
-        
-        
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -438,16 +376,10 @@ public class RegistroMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void txtBuscarDniKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarDniKeyReleased
-        // TODO add your handling code here:
         filtrar();
     }//GEN-LAST:event_txtBuscarDniKeyReleased
 
-    private void txtBuscarDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarDniActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscarDniActionPerformed
-
     private void btnConfirmarEdicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarEdicionActionPerformed
-        // TODO add your handling code here:
         Medico m = new Medico();
         m = this.captar();
         if(datos.editarMedico(m))
@@ -465,7 +397,6 @@ public class RegistroMedico extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }
-    
     
     /**
      * @param args the command line arguments

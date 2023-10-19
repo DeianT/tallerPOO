@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package sistemas.tallerpoo.visual;
 
 import static java.awt.image.ImageObserver.HEIGHT;
@@ -9,9 +5,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import sistemas.tallerpoo.clasesLogicas.Admision;
 import sistemas.tallerpoo.clasesLogicas.Box;
-import sistemas.tallerpoo.clasesLogicas.ListaBox;
 import sistemas.tallerpoo.clasesLogicas.Paciente;
-import sistemas.tallerpoo.clasesLogicas.Persona;
 import sistemas.tallerpoo.clasesLogicas.Triage;
 import sistemas.tallerpoo.datos.AdmisionDatos;
 
@@ -121,8 +115,6 @@ public class RegistroAdmision extends javax.swing.JFrame {
     private void realizarTriageBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_realizarTriageBotonActionPerformed
         RealizarTriage r = new RealizarTriage();
         r.setVisible(true);
-//        Triage t = r.getTriage();
-//        System.out.println("triage");
     }//GEN-LAST:event_realizarTriageBotonActionPerformed
 
     private void RegistrarPacienteBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarPacienteBotonActionPerformed

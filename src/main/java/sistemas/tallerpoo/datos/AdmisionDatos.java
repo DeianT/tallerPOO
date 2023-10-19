@@ -36,6 +36,26 @@ public class AdmisionDatos {
         return lista;
     }
     
+    public ArrayList<Admision> admisionesSinTriage(){
+        ArrayList<Admision> p = new ArrayList<>();
+        for(Admision a: lista){
+            if(a.getTriage() == null){
+                p.add(a);
+            }
+        }
+        return p;
+    }
+    
+    public ArrayList<Admision> admisionesNoAtendidas(){
+        ArrayList<Admision> p = new ArrayList<>();
+        for(Admision a: lista){
+            if(a.getBox() == null){
+                p.add(a);
+            }
+        }
+        return p;
+    }
+    
     private void escribirArchivo(){
         FileWriter nuevo = null;
         PrintWriter pw = null;
@@ -48,7 +68,10 @@ public class AdmisionDatos {
                 linea += a.getHora() + separador;
                 linea += a.getMotivo() + separador;
                 linea += a.getPaciente().getDni() + separador;
-                linea += a.getTriage().getId() + separador;
+                if(a.getTriage() != null)
+                    linea += a.getTriage().getId() + separador;
+                else
+                    linea += 0 + separador;
                 if(a.getBox() != null)
                     linea += a.getBox().getNumero();
                 else
@@ -80,10 +103,16 @@ public class AdmisionDatos {
                 
 //                ad.setFecha(fecha);
 //                ad.setHora(fecha);
+                ad.setFecha(new Date());
+                ad.setHora(new Date());
                 ad.setMotivo(campos[2]);
-//                ad.setPaciente(new PacienteDatos().obtenerPaciente(Integer.parseInt(campos[3])));
-                ad.setPaciente(new Paciente(123, "asfd", "gasa", new Date(), "", 1561, "645816", "faf", "sdgg", "gss"));//esto hay que borarlo despues
-                ad.setTriage(new TriageDatos().obtenerTriage(Integer.parseInt(campos[4])));
+                ad.setPaciente(new PacienteDatos().obtenerPaciente(Integer.parseInt(campos[3])));
+                try{
+                    ad.setTriage(new TriageDatos().obtenerTriage(Integer.parseInt(campos[4])));
+                }
+                catch(IOException e){
+                    ad.setTriage(null);
+                }
                 ad.setBox(new ListaBox().obtenerBox(Integer.parseInt(campos[5])));
                 
                 lista.add(ad);

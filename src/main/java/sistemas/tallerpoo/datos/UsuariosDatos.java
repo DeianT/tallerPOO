@@ -34,7 +34,7 @@ public class UsuariosDatos {
         String repContra = String.valueOf(cr.getPassword());
         boolean bandera = false;
         
-        if(controlarExistenciaRegistro(u))
+        if(controlarExistenciaRegistro(nombre))
         {
            if(contra.equals(repContra))
            {
@@ -44,7 +44,7 @@ public class UsuariosDatos {
                 try(FileWriter fw = new FileWriter(f,true))
                 {
                     fw.write(user.toCSV());
-                    JOptionPane.showMessageDialog(null, "se ah registrado con exito");
+                    JOptionPane.showMessageDialog(null, "se ha registrado con exito");
                 }catch(Exception e)
                 {
                     JOptionPane.showMessageDialog(null, e.getMessage());
@@ -55,11 +55,10 @@ public class UsuariosDatos {
                 JOptionPane.showMessageDialog(null, "Las contraseñas no son iguales");
             }    
         }
-        System.out.println("false");
         return bandera;
     }
     
-    public boolean controlarExistenciaRegistro(JTextField user)
+    public boolean controlarExistenciaRegistro(String user)
     {
         boolean bandera = true;
         Usuario usuario;
@@ -70,7 +69,7 @@ public class UsuariosDatos {
             {
                 datos = sc.nextLine().split(",");
                 usuario = new Usuario(Integer.parseInt(datos[0]), datos[1], datos[2]);
-                if(user.getText().equals(usuario.getNombreUsuario()))
+                if(user.equals(usuario.getNombreUsuario()))
                 {
                     JOptionPane.showMessageDialog(null, "el usuario ingresado ya existe");
                     bandera = false;
@@ -124,18 +123,14 @@ public class UsuariosDatos {
                 if(user.getNombreUsuario().equals(nombre) && user.getContraseñaUsuario().equals(contra))
                 {
                     JOptionPane.showMessageDialog(null, "Se ha encontrado el usuario");
-                    bandera = true;
-                    break;
+                    return true;
                 }
             }   
         }catch(Exception e)
         {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-        if(bandera==false)
-        {
-            JOptionPane.showMessageDialog(null, "usuario o contraseña incorrectas");
-        }
-           return bandera;    
+        JOptionPane.showMessageDialog(null, "usuario o contraseña incorrectas");
+        return bandera;    
     }
 }
