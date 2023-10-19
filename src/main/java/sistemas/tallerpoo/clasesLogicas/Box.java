@@ -11,8 +11,8 @@ import lombok.AllArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Box {
+    private int numero;
     private Date fecha;
     private Date hora;
-    private int numero;
     private boolean ocupado;
 }

@@ -14,4 +14,7 @@ public class Admision {
     private Date fecha;
     private Date hora;
     private String motivo;
+    private Paciente paciente;
+    private Triage triage;
+    private Box box;
 }

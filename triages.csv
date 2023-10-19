@@ -1,0 +1,4 @@
+1;Verde;Normal;Normal;Normal;Conciente y alerta;Presente;No presentes;Adulto;Sin fiebre;Sin vomitos;No presente;No presentes;No presentes;No presente;null;null;null;Verde;null
+2;Amarillo;Dificultad respiratoria moderada;Normal;Confusion grave;Conciente y alerta;Presente;No presentes;Adulto;Sin fiebre;Sin vomitos;Dolor abdominal moderado;No presentes;No presentes;Sangrado intenso;null;null;null;Amarillo;null
+3;Amarillo;Normal;Anormal;Confusion leve;Conciente y alerta;Presente;No presentes;Ni�o o anciano;Sin fiebre;Vomitos moderados;Dolor abdominal severo;No presentes;Presentes;Sangrado intenso;null;null;null;Amarillo;null
+4;Rojo;Dificultad respiratoria grave;Anormal;Confusion grave;Perdida de conciencia;Presente;Presentes;Niño o anciano;Fiebre alta;Vomitos intensos;Dolor abdominal severo;Presentes;Presentes;Sangrado intenso;null;null;null;Rojo;null

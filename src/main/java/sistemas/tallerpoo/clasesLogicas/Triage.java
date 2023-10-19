@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Triage {
+    private int id;
     private NivelTriage color;
     private String respiracion;
     private String pulso;
@@ -30,4 +31,5 @@ public class Triage {
     private String encargadoTriage;
     private NivelTriage colorModificado;
     private String motivoModificacion;
+//    private Medico/Enfermero realizadoPor;
 }
