@@ -343,13 +343,13 @@ public class RegistroPaciente extends javax.swing.JFrame {
         Paciente p = datos.capturar(txtDni, txtNombre, txtApellido, txtFechaNacimiento, txtDomicilio, txtTelefono, txtCelular, cbEstadoCivil, txtCorreo, txtContacto);
         if (datos.agregarPaciente(p)){
             String motivo = JOptionPane.showInputDialog(null, "Ingrese el motivo");
-             a.setFecha(new Date());
-             a.setHora(new Date());
-             a.setMotivo(motivo);
-             a.setBox(new Box());
-             a.setTriage(new Triage());
-             a.setPaciente(p));
-             new AdmisionDatos().agregarAdmision(a);
+            a.setFecha(new Date());
+            a.setHora(new Date());
+            a.setMotivo(motivo);
+            a.setBox(new Box());
+            a.setTriage(new Triage());
+            a.setPaciente(p);
+            new AdmisionDatos().agregarAdmision(a);
             JOptionPane.showMessageDialog(null, "se registro con exito");
             listar();
             this.limpiarTexto();

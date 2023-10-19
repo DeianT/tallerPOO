@@ -53,6 +53,10 @@ public class TriageDatos {
         }
         return tuplas;
     }
+    
+    public int cantidadTriage(){
+        return lista.size();
+    }
 
     private void escribirArchivo(){
         FileWriter nuevo = null;
