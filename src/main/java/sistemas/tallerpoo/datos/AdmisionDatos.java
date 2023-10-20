@@ -11,6 +11,7 @@ import sistemas.tallerpoo.clasesLogicas.Admision;
 import sistemas.tallerpoo.clasesLogicas.ListaBox;
 import sistemas.tallerpoo.clasesLogicas.Paciente;
 import sistemas.tallerpoo.clasesLogicas.Persona;
+import sistemas.tallerpoo.clasesLogicas.Triage;
 
 /**
  *
@@ -28,6 +29,7 @@ public class AdmisionDatos {
     }
     
     public void agregarAdmision(Admision admision){
+        admision.setId(lista.size() + 1);
         lista.add(admision);
         escribirArchivo();
     }
@@ -49,11 +51,20 @@ public class AdmisionDatos {
     public ArrayList<Admision> admisionesNoAtendidas(){
         ArrayList<Admision> p = new ArrayList<>();
         for(Admision a: lista){
-            if(a.getBox() == null){
+            if(a.getTriage() != null && a.getBox() == null){
                 p.add(a);
             }
         }
         return p;
+    }
+    
+    public boolean editarAdmision(Admision admision){
+        if(admision.getId() <= 0 || admision.getId() > lista.size())
+            return false;
+        Admision a = lista.get(admision.getId() - 1);
+        a.setTriage(admision.getTriage());
+        escribirArchivo();
+        return true;
     }
     
     private void escribirArchivo(){
@@ -64,7 +75,8 @@ public class AdmisionDatos {
             pw = new PrintWriter(nuevo);
             String linea;
             for(Admision a: lista){
-                linea = a.getFecha() + separador;
+                linea = a.getId() + separador;
+                linea += a.getFecha() + separador;
                 linea += a.getHora() + separador;
                 linea += a.getMotivo() + separador;
                 linea += a.getPaciente().getDni() + separador;
@@ -101,19 +113,20 @@ public class AdmisionDatos {
                 String[] campos = linea.split(separador);
                 Admision ad = new Admision();
                 
+                ad.setId(Integer.parseInt(campos[0]));
 //                ad.setFecha(fecha);
 //                ad.setHora(fecha);
                 ad.setFecha(new Date());
                 ad.setHora(new Date());
-                ad.setMotivo(campos[2]);
-                ad.setPaciente(new PacienteDatos().obtenerPaciente(Integer.parseInt(campos[3])));
+                ad.setMotivo(campos[3]);
+                ad.setPaciente(new PacienteDatos().obtenerPaciente(Integer.parseInt(campos[4])));
                 try{
-                    ad.setTriage(new TriageDatos().obtenerTriage(Integer.parseInt(campos[4])));
+                    ad.setTriage(new TriageDatos().obtenerTriage(Integer.parseInt(campos[5])));
                 }
                 catch(IOException e){
                     ad.setTriage(null);
                 }
-                ad.setBox(new ListaBox().obtenerBox(Integer.parseInt(campos[5])));
+                ad.setBox(new ListaBox().obtenerBox(Integer.parseInt(campos[6])));
                 
                 lista.add(ad);
                 linea = br.readLine();
