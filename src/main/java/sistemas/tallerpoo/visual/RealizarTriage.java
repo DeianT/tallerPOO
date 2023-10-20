@@ -479,10 +479,6 @@ public class RealizarTriage extends javax.swing.JFrame {
             {
                t.setColor(NivelTriage.valueOf(color));
                t.setColorModificado(NivelTriage.valueOf(color));
-               new TriageDatos().agregarTriage(t);
-               admision.setTriage(t); 
-               //datos
-               //RegistroAdmision.setTriage(t);
             }else
             {             
                // String nuevoColor = JOptionPane.showInputDialog(null,"El color asignado es: "+color+"Ingrese el nuevo color");
