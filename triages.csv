@@ -1,1 +1,9 @@
-1;Naranja;Dificultad respiratoria grave;Anormal;Confusion leve;Perdida de conciencia;Presente;No presentes;Niño o anciano;Fiebre moderada;Sin vomitos;Dolor abdominal moderado;No presentes;No presentes;Sangrado moderado;null;null;Naranja;null;0
+1;Naranja;Dificultad respiratoria grave;Anormal;Confusion leve;Perdida de conciencia;Presente;No presentes;NiÃ±o o anciano;Fiebre moderada;Sin vomitos;Dolor abdominal moderado;No presentes;No presentes;Sangrado moderado;null;null;Naranja;null;0
+2;Verde;Dificultad respiratoria moderada;Normal;Normal;Conciente y alerta;No presente;No presentes;Adulto;Fiebre moderada;Sin vomitos;No presente;No presentes;No presentes;Sangrado moderado;null;null;Verde;null;0
+3;Amarillo;Normal;Anormal;Normal;Perdida de conciencia;Presente;No presentes;Niño o anciano;Sin fiebre;Sin vomitos;Dolor abdominal moderado;No presentes;No presentes;Sangrado intenso;null;null;Amarillo;null;0
+4;Amarillo;Normal;Anormal;Normal;Conciente y alerta;Presente;No presentes;Niño o anciano;Fiebre moderada;Vomitos moderados;Dolor abdominal moderado;No presentes;Presentes;Sangrado moderado;null;null;Amarillo;null;0
+5;Amarillo;Normal;Normal;Normal;Conciente y alerta;Presente;Presentes;Adulto;Sin fiebre;Vomitos moderados;No presente;No presentes;No presentes;Sangrado intenso;null;null;Amarillo;null;0
+6;Verde;Normal;Normal;Confusion leve;Conciente y alerta;No presente;No presentes;Adulto;Sin fiebre;Vomitos moderados;No presente;No presentes;No presentes;No presente;null;null;Verde;null;0
+7;Amarillo;Dificultad respiratoria moderada;Normal;Confusion grave;Conciente y alerta;Presente;No presentes;Niño o anciano;Sin fiebre;Vomitos moderados;Dolor abdominal severo;No presentes;Presentes;Sangrado moderado;null;null;Amarillo;null;0
+8;Amarillo;Normal;Anormal;Normal;Perdida de conciencia;No presente;No presentes;Niño o anciano;Sin fiebre;Vomitos moderados;Dolor abdominal moderado;Presentes;No presentes;No presente;null;null;Amarillo;null;0
+9;Verde;Normal;Normal;Normal;Conciente y alerta;No presente;No presentes;Adulto;Sin fiebre;Sin vomitos;No presente;No presentes;No presentes;No presente;null;null;Verde;null;0

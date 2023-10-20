@@ -1,17 +1,12 @@
 package sistemas.tallerpoo.visual;
 
-import sistemas.tallerpoo.datos.PacienteDatos;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import sistemas.tallerpoo.clasesLogicas.Funcionario;
-import sistemas.tallerpoo.clasesLogicas.Paciente;
 import sistemas.tallerpoo.clasesLogicas.SectorTrabajo;
 import sistemas.tallerpoo.datos.FuncionarioDatos;
 
@@ -61,32 +56,6 @@ public class RegistroFuncionario extends javax.swing.JFrame {
         sorter = new TableRowSorter<>(modelo);
         jtFuncionarios.setRowSorter(sorter);
     }
-    
-    public void listarr(ArrayList<Funcionario> lista)
-    {
-        modelo = (DefaultTableModel) jtFuncionarios.getModel();
-        Object[] ob = new Object[10];
-        
-        for(int i =0; i<lista.size();i++)
-        {
-            ob[0]=lista.get(i).getDni();
-            ob[1]=lista.get(i).getNombre();
-            ob[2]=lista.get(i).getApellido();
-            ob[3]=lista.get(i).getFechaNacimiento();
-            ob[4]=lista.get(i).getDomicilio();
-            ob[5]=lista.get(i).getTelFijo();
-            ob[6]=lista.get(i).getTelCelular();
-            ob[7]=lista.get(i).getEstadoCivil();
-            ob[8]=lista.get(i).getCorreoElect();
-            ob[9]=lista.get(i).getTrabajaEn().getNombre();
-            modelo.addRow(ob);
-        }
-        jtFuncionarios.setModel(modelo);
-        
-        jtFuncionarios.setAutoCreateRowSorter(true);
-        sorter = new TableRowSorter<>(modelo);
-        jtFuncionarios.setRowSorter(sorter);
-    }
 
     public void limpiarTabla()
     {
@@ -127,7 +96,6 @@ public class RegistroFuncionario extends javax.swing.JFrame {
        txtSectorTrabajo.setText("");
     }
     
-    
     Funcionario captar()
     {
         Funcionario m = new Funcionario();
@@ -151,21 +119,6 @@ public class RegistroFuncionario extends javax.swing.JFrame {
         
         return m;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -223,18 +176,6 @@ public class RegistroFuncionario extends javax.swing.JFrame {
 
         jLabel10.setText("Sector de Trabajo");
 
-        txtDomicilio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDomicilioActionPerformed(evt);
-            }
-        });
-
-        txtTelefono.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTelefonoActionPerformed(evt);
-            }
-        });
-
         cbEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Soltero/a", "Casado/a", "Viudo/a", "Divorciado/a" }));
 
         btnRegistrar.setText("Registrar");
@@ -254,11 +195,6 @@ public class RegistroFuncionario extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jtFuncionarios);
 
-        txtBuscarDni.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscarDniActionPerformed(evt);
-            }
-        });
         txtBuscarDni.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarDniKeyReleased(evt);
@@ -412,14 +348,6 @@ public class RegistroFuncionario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtDomicilioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDomicilioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDomicilioActionPerformed
-
-    private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTelefonoActionPerformed
-
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         if (datos.agregarFuncionario(captar())){
             JOptionPane.showMessageDialog(null, "se registro con exito");
@@ -429,7 +357,6 @@ public class RegistroFuncionario extends javax.swing.JFrame {
         else{
             JOptionPane.showMessageDialog(null, "Ya existe paciente con ese DNI", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnMostrarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarTodoActionPerformed
@@ -437,13 +364,10 @@ public class RegistroFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMostrarTodoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        
         Funcionario pac;
         int fila = jtFuncionarios.getSelectedRow();
         pac = lista.get(fila);
         this.mostrarTodo(pac);
-        
-        
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -454,17 +378,10 @@ public class RegistroFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void txtBuscarDniKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarDniKeyReleased
-        // TODO add your handling code here:
         filtrar();
     }//GEN-LAST:event_txtBuscarDniKeyReleased
 
-    private void txtBuscarDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarDniActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscarDniActionPerformed
-
     private void btnConfirmarEdicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarEdicionActionPerformed
-        // TODO add your handling code here:
-        
         Funcionario p = new Funcionario();
         p=datos.capturar(txtDni, txtNombre, txtApellido, txtDni, txtDomicilio, txtDni, txtCelular, cbEstadoCivil, txtCorreo, txtSectorTrabajo);
         if(datos.editarFuncionario(p))
@@ -473,8 +390,6 @@ public class RegistroFuncionario extends javax.swing.JFrame {
             limpiarTexto();
             listar();
         }
-        
-
     }//GEN-LAST:event_btnConfirmarEdicionActionPerformed
 
     private void filtrar()

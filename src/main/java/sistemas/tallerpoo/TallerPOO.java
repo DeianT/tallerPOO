@@ -43,20 +43,12 @@ public class TallerPOO {
         Paciente pac = new Paciente(123987, "Pablo", "Preze", new Date(), "dmoiclio", 4561231, "+54 325678978", "casaso", "correo", "adad");
         Triage tr = new Triage();
         tr.setId(1);
-        Box b = null;
-        try {
-            b = lB.obtenerBoxDesocupado();
-            b.setOcupado(true);
-        } catch (Exception ex) {
-            System.out.println("no hay boxes disponibles");
-        }
-        Admision a = new Admision(new Date(), new Date(), "herida de cuchillo", pac, tr, b);
         
 //        adDatos.agregarAdmision(a);
         //agregarPaciente(pac)
 //        pDatos.agregarPersona(p);
         //agregarTriage(tr)
-//        System.out.println(adDatos.obtenerAdmisiones());
+        System.out.println(adDatos.admisionesSinTriage());
 //        new RegistroAdmision().setVisible(true);
         PacienteDatos rpd = new PacienteDatos();
 //        rpd.imprimirArchivo();
@@ -64,7 +56,6 @@ public class TallerPOO {
 //        System.out.println(mDatos.obtenerMedicos());
 //        System.out.println(new TriageDatos().obtenerTriages());
 //        System.out.println(new TriageDatos().obtenerTriage(1).getDniEncargado());
-//        Funcionario f = new Funcionario(1, "juan", "perex", new Date(), "casa", 321564, "+54 sadasd646|", "viudo", "correo", new SectorTrabajo("desposito"), new ArrayList<>());
-//        fDatos.agregarFuncionario(f);
+//System.out.println(pDatos.obtenerPersona(14).getFechaNacimiento());
     }
 }

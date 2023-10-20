@@ -6,6 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import org.javatuples.Pair;
 import sistemas.tallerpoo.clasesLogicas.NivelTriage;
 import sistemas.tallerpoo.clasesLogicas.Triage;
 
@@ -41,6 +43,20 @@ public class TriageDatos {
     
     public ArrayList<Triage> obtenerTriages(){
         return lista;
+    }
+    
+    public ArrayList<Pair<NivelTriage, NivelTriage>> obtenerTriagesModificados(){
+        ArrayList<Pair<NivelTriage, NivelTriage>> tuplas = new ArrayList<>();
+        for(Triage t: lista){
+            if(t.getColor() != t.getColorModificado()){
+                tuplas.add(new Pair(t.getColor(), t.getColorModificado()));
+            }
+        }
+        return tuplas;
+    }
+    
+    public int cantidadTriage(){
+        return lista.size();
     }
 
     private void escribirArchivo(){
@@ -131,4 +147,37 @@ public class TriageDatos {
             }
         }
     }
+    
+    public boolean cambioColor(String[] colores , String color ,String nuevoColor)
+    {
+        int indiceColor=0;
+        int indiceNuevoColor=0;
+        int res =0;
+        
+        for(int i = 0 ; i<colores.length;i++){
+          if(color.toLowerCase().equals(colores[i].toLowerCase())){
+            indiceColor=i;
+            }
+        } 
+                
+        for(int i = 0 ; i<colores.length;i++){
+          if(nuevoColor.toLowerCase().equals(colores[i].toLowerCase())){
+            indiceNuevoColor=i;
+          }
+        } 
+                
+        if(indiceColor > indiceNuevoColor ){
+          res = indiceColor - indiceNuevoColor;
+        }else{
+          res= indiceNuevoColor - indiceColor;
+        }
+
+        if(res > 2){
+          JOptionPane.showMessageDialog(null, "no se puede cambiar mas de dos niveles de color");
+          return false;
+         }
+        return true;
+    }
+    
+    
 }

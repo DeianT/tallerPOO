@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
+import sistemas.tallerpoo.clasesLogicas.Funcionario;
 import sistemas.tallerpoo.clasesLogicas.Medico;
 import sistemas.tallerpoo.clasesLogicas.Rol;
 import sistemas.tallerpoo.clasesLogicas.SectorTrabajo;
@@ -34,6 +35,7 @@ public class MedicoDatos {
         catch(Exception e){
             lista.add(medico);
             escribirArchivo();
+            new FuncionarioDatos().agregarFuncionario(medico);
             return true;
         }
     }
@@ -51,11 +53,12 @@ public class MedicoDatos {
         return lista;
     }
     
-    public boolean eliminarMedico(int id){
+    public boolean eliminarMedico(int dni){
         try{
-            Medico f = obtenerMedico(id);
+            Medico f = obtenerMedico(dni);
             lista.remove(f);
             escribirArchivo();
+            new FuncionarioDatos().eliminarFuncionario(dni);
             return true;
         }
         catch(Exception e){
@@ -77,6 +80,30 @@ public class MedicoDatos {
             m.setTrabajaEn(medico.getTrabajaEn());
             m.setRolesSistema(medico.getRolesSistema());
             m.setNMatricula(medico.getNMatricula());
+        
+            escribirArchivo();
+            new FuncionarioDatos().editarFuncionario(medico);
+            return true;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean editarMedico(Funcionario funcionario){
+        try{
+            Medico m = obtenerMedico(funcionario.getDni());
+            m.setNombre(funcionario.getNombre());
+            m.setApellido(funcionario.getApellido());
+            m.setFechaNacimiento(funcionario.getFechaNacimiento());
+            m.setDomicilio(funcionario.getDomicilio());
+            m.setTelFijo(funcionario.getTelFijo());
+            m.setTelCelular(funcionario.getTelCelular());
+            m.setEstadoCivil(funcionario.getEstadoCivil());
+            m.setCorreoElect(funcionario.getCorreoElect());
+            m.setTrabajaEn(funcionario.getTrabajaEn());
+            m.setRolesSistema(funcionario.getRolesSistema());
         
             escribirArchivo();
             return true;

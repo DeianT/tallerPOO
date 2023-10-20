@@ -67,33 +67,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
         sorter = new TableRowSorter<>(modelo);
         jtPacientes.setRowSorter(sorter);
     }
-    
-    public void listarr(ArrayList<Paciente> lista)
-    {
-        modelo = (DefaultTableModel) jtPacientes.getModel();
-        Object[] ob = new Object[10];
-        
-        for(int i =0; i<lista.size();i++)
-        {
-            ob[0]=lista.get(i).getDni();
-            ob[1]=lista.get(i).getNombre();
-            ob[2]=lista.get(i).getApellido();
-            ob[3]=lista.get(i).getFechaNacimiento();
-            ob[4]=lista.get(i).getDomicilio();
-            ob[5]=lista.get(i).getTelFijo();
-            ob[6]=lista.get(i).getTelCelular();
-            ob[7]=lista.get(i).getEstadoCivil();
-            ob[8]=lista.get(i).getCorreoElect();
-            ob[9]=lista.get(i).getContacto();
-            modelo.addRow(ob);
-        }
-        jtPacientes.setModel(modelo);
-        
-        jtPacientes.setAutoCreateRowSorter(true);
-        sorter = new TableRowSorter<>(modelo);
-        jtPacientes.setRowSorter(sorter);
-    }
-
+  
     public void limpiarTabla()
     {
         for(int i = 0; i < modelo.getRowCount(); i++)
@@ -199,18 +173,6 @@ public class RegistroPaciente extends javax.swing.JFrame {
 
         jLabel10.setText("Contacto");
 
-        txtDomicilio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDomicilioActionPerformed(evt);
-            }
-        });
-
-        txtTelefono.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTelefonoActionPerformed(evt);
-            }
-        });
-
         cbEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Soltero/a", "Casado/a", "Viudo/a", "Divorciado/a" }));
 
         txtCorreo.addActionListener(new java.awt.event.ActionListener() {
@@ -241,11 +203,6 @@ public class RegistroPaciente extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jtPacientes);
 
-        txtBuscarDni.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscarDniActionPerformed(evt);
-            }
-        });
         txtBuscarDni.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarDniKeyReleased(evt);
@@ -413,40 +370,30 @@ public class RegistroPaciente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtDomicilioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDomicilioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDomicilioActionPerformed
-
-    private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTelefonoActionPerformed
-
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-
         if (!validarCorreoElectronico(txtCorreo.getText())){
               JOptionPane.showMessageDialog(null, "Correo electrónico incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
               return;
         }
-
-        
         Admision a = new Admision();
-        if (datos.agregarPaciente(datos.capturar(txtDni, txtNombre, txtApellido, txtFechaNacimiento, txtDomicilio, txtTelefono, txtCelular, cbEstadoCivil, txtCorreo, txtContacto))){
+        Paciente p = datos.capturar(txtDni, txtNombre, txtApellido, txtFechaNacimiento, txtDomicilio, txtTelefono, txtCelular, cbEstadoCivil, txtCorreo, txtContacto);
+        if (datos.agregarPaciente(p)){
             String motivo = JOptionPane.showInputDialog(null, "Ingrese el motivo");
-             a.setFecha(new Date());
-             a.setHora(new Date());
-             a.setMotivo(motivo);
-             a.setBox(new Box());
-             a.setTriage(new Triage());
-             a.setPaciente(datos.capturar(txtDni, txtNombre, txtApellido, txtFechaNacimiento, txtDomicilio, txtTelefono, txtCelular, cbEstadoCivil, txtCorreo, txtContacto));
-             new AdmisionDatos().agregarAdmision(a);
+            a.setFecha(new Date());
+            a.setHora(new Date());
+            a.setMotivo(motivo);
+            a.setBox(new Box());
+            a.setTriage(new Triage());
+            a.setPaciente(p);
+            new AdmisionDatos().agregarAdmision(a);
             JOptionPane.showMessageDialog(null, "se registro con exito");
             listar();
             this.limpiarTexto();
+            RegistroAdmision.setPaciente(p);
         }
         else{
             JOptionPane.showMessageDialog(null, "Ya existe paciente con ese DNI", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnMostrarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarTodoActionPerformed
@@ -454,13 +401,11 @@ public class RegistroPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMostrarTodoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        
         Paciente pac;
         int fila = jtPacientes.getSelectedRow();
         pac = lista.get(fila);
         this.mostrarTodo(pac);
-        
-        
+        RegistroAdmision.setPaciente(pac);
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -475,27 +420,21 @@ public class RegistroPaciente extends javax.swing.JFrame {
         filtrar();
     }//GEN-LAST:event_txtBuscarDniKeyReleased
 
-    private void txtBuscarDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarDniActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscarDniActionPerformed
-
     private void btnConfirmarEdicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarEdicionActionPerformed
-        // TODO add your handling code here:
-        
         Paciente p = new Paciente();
         p=datos.capturar(txtDni, txtNombre, txtApellido, txtFechaNacimiento, txtDomicilio, txtDni, txtCelular, cbEstadoCivil, txtCorreo, txtContacto);
+
         try {
             if(datos.editarPaciente(p))
             {
               JOptionPane.showMessageDialog(null, "se edito con exito");
               limpiarTexto();
-              listar();  
+              listar();
+              RegistroAdmision.setPaciente(p);
             }     
         } catch (IOException ex) {
             Logger.getLogger(RegistroPaciente.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-
     }//GEN-LAST:event_btnConfirmarEdicionActionPerformed
 
     private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
