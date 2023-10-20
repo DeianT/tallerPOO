@@ -485,7 +485,6 @@ public class RealizarTriage extends javax.swing.JFrame {
             color = "Rojo";
         }
         
-        
         if(cboRespiracion.getSelectedIndex()!=0 && cboPulso.getSelectedIndex()!=0 && cboEstadoMental.getSelectedIndex()!=0 && cboConciencia.getSelectedIndex()!=0 && cboDolorPecho.getSelectedIndex()!=0 && cboLesionesGraves.getSelectedIndex()!=0 && cboEdad.getSelectedIndex()!=0 && cboFiebre.getSelectedIndex()!=0 && cboVomitos.getSelectedIndex()!=0 && cboDolorAbominal.getSelectedIndex()!=0 && cboSignosShock.getSelectedIndex()!=0 && cboLesionesLeves.getSelectedIndex()!=0 && cboSangrado.getSelectedIndex()!=0 )
         {
             JOptionPane.showMessageDialog(this," El nivel de atencion es de " + color.toUpperCase());
@@ -515,12 +514,7 @@ public class RealizarTriage extends javax.swing.JFrame {
                     {
                        bandera = d.cambioColor(colores, color, nuevoColor); 
                     }
-                   
-                 
                 }
-                
-             
-                
                 
                 String motivo = JOptionPane.showInputDialog(null,"Ingrese el motivo del cambio ");
                
@@ -533,11 +527,17 @@ public class RealizarTriage extends javax.swing.JFrame {
                 t.setColor(NivelTriage.valueOf(color));
                 t.setColorModificado(NivelTriage.valueOf(nuevoColor));
                 t.setMotivoModificacion(motivo);
-                new TriageDatos().agregarTriage(t);
-                admision.setTriage(t); 
             }
- 
+            JOptionPane.showMessageDialog(this, "se ha guardado con exito ");
             
+            TriageDatos td = new TriageDatos();
+            td.agregarTriage(t);
+            t.setId(td.cantidadTriage());
+            
+            admision.setTriage(t);
+            datos.editarAdmision(admision);
+            
+            listar();
         }else
         {
             JOptionPane.showMessageDialog(null, "Faltan completar casillas");
@@ -563,7 +563,6 @@ public class RealizarTriage extends javax.swing.JFrame {
     private void btnPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacienteActionPerformed
         int fila = jtAdmisiones.getSelectedRow();
         admision = lista.get(fila);
-        System.out.println(admision);
     }//GEN-LAST:event_btnPacienteActionPerformed
 
     /**
