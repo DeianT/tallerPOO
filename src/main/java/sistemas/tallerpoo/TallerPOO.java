@@ -48,7 +48,7 @@ public class TallerPOO {
         //agregarPaciente(pac)
 //        pDatos.agregarPersona(p);
         //agregarTriage(tr)
-        System.out.println(adDatos.admisionesSinTriage());
+//        System.out.println(adDatos.admisionesSinTriage());
 //        new RegistroAdmision().setVisible(true);
         PacienteDatos rpd = new PacienteDatos();
 //        rpd.imprimirArchivo();
