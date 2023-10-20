@@ -9,9 +9,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import sistemas.tallerpoo.clasesLogicas.Admision;
 import sistemas.tallerpoo.clasesLogicas.ListaBox;
-import sistemas.tallerpoo.clasesLogicas.Paciente;
-import sistemas.tallerpoo.clasesLogicas.Persona;
-import sistemas.tallerpoo.clasesLogicas.Triage;
 
 /**
  *
@@ -63,6 +60,7 @@ public class AdmisionDatos {
             return false;
         Admision a = lista.get(admision.getId() - 1);
         a.setTriage(admision.getTriage());
+        a.setBox(admision.getBox());
         escribirArchivo();
         return true;
     }

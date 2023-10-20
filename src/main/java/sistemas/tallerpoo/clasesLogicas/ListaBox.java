@@ -39,4 +39,8 @@ public class ListaBox {
             return null;
         }
     }
+    
+    public int cantidad(){
+        return CANTIDAD;
+    }
 }
