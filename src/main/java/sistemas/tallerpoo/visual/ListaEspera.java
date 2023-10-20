@@ -35,7 +35,6 @@ public class ListaEspera extends javax.swing.JFrame {
     public void listar()
     {   
         listaAdmision = datos.admisionesNoAtendidas();
-        System.out.println(listaAdmision);
         limpiarTabla();
         modeloAd = (DefaultTableModel) jtAdmisiones.getModel();
         Object[] ob = new Object[9];
@@ -177,15 +176,15 @@ public class ListaEspera extends javax.swing.JFrame {
             return;
         }
         
-        box = listaBox.obtenerBox(fila2);
+        box = listaBox.obtenerBox(fila2 + 1);
         if(box == null){
             JOptionPane.showMessageDialog(null, "Debe seleccionar un box", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
         admision.setBox(box);
-        System.out.println(fila2);
-//        System.out.println(admision.getBox().getNumero());
+        datos.editarAdmision(admision);
+        box.setOcupado(true);
         
         listar();
     }//GEN-LAST:event_btnConfirmarActionPerformed
