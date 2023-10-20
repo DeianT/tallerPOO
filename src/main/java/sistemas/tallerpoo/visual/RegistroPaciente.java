@@ -132,6 +132,14 @@ public class RegistroPaciente extends javax.swing.JFrame {
        txtCorreo.setText("");   
        txtContacto.setText("");
     }
+    private boolean validarCorreoElectronico(String correoElectronico){
+     
+     Pattern pat = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+     Matcher mat = pat.matcher(correoElectronico);
+     return mat.find();
+     
+   
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -274,8 +282,6 @@ public class RegistroPaciente extends javax.swing.JFrame {
             }
         });
 
-        lblMensaje.setText("lblMensaje");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -417,6 +423,11 @@ public class RegistroPaciente extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
 
+        if (!validarCorreoElectronico(txtCorreo.getText())){
+              JOptionPane.showMessageDialog(null, "Correo electrónico incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        
         Admision a = new Admision();
         if (datos.agregarPaciente(datos.capturar(txtDni, txtNombre, txtApellido, txtFechaNacimiento, txtDomicilio, txtTelefono, txtCelular, cbEstadoCivil, txtCorreo, txtContacto))){
             String motivo = JOptionPane.showInputDialog(null, "Ingrese el motivo");
@@ -504,16 +515,6 @@ public class RegistroPaciente extends javax.swing.JFrame {
       
     }//GEN-LAST:event_txtCorreoKeyReleased
  
-   private boolean validarCorreoElectronico(String correoElectronico){
-     
-     Pattern pat = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-     Matcher mat = pat.matcher(correoElectronico);
-     return mat.find();
-     
-   
-    }
-    
-    
     private void filtrar()
     {
         try {
