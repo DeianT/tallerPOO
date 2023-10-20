@@ -425,6 +425,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
 
         if (!validarCorreoElectronico(txtCorreo.getText())){
               JOptionPane.showMessageDialog(null, "Correo electrónico incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+              return;
         }
 
         
