@@ -18,7 +18,9 @@ public class RealizarTriage extends javax.swing.JFrame {
     private ArrayList<Admision> lista;
     private AdmisionDatos datos = new AdmisionDatos();
     private Admision admision = null;
-
+    private String[] editar = {"Editar","Terminar"};
+    private String[] colores = {"Azul","Verde","Amarillo","Naranja","Rojo"};
+    private String[] op = {"ok"};
     /**
      * Creates new form Triage
      */
@@ -471,10 +473,48 @@ public class RealizarTriage extends javax.swing.JFrame {
         
         if(cboRespiracion.getSelectedIndex()!=0 && cboPulso.getSelectedIndex()!=0 && cboEstadoMental.getSelectedIndex()!=0 && cboConciencia.getSelectedIndex()!=0 && cboDolorPecho.getSelectedIndex()!=0 && cboLesionesGraves.getSelectedIndex()!=0 && cboEdad.getSelectedIndex()!=0 && cboFiebre.getSelectedIndex()!=0 && cboVomitos.getSelectedIndex()!=0 && cboDolorAbominal.getSelectedIndex()!=0 && cboSignosShock.getSelectedIndex()!=0 && cboLesionesLeves.getSelectedIndex()!=0 && cboSangrado.getSelectedIndex()!=0 )
         {
-            t.setColor(NivelTriage.valueOf(color));
-            t.setColorModificado(NivelTriage.valueOf(color));
-
-            JOptionPane.showMessageDialog(this, "se ha guardado con exito " + "\n El nivel de atencion es de " + color.toUpperCase());
+            JOptionPane.showMessageDialog(this," El nivel de atencion es de " + color.toUpperCase());
+            int opcion =JOptionPane.showOptionDialog(null,"Desea editar el color?", "Confirmacion", 0, JOptionPane.QUESTION_MESSAGE, null , editar, "Terminar");
+            if(opcion == 1)
+            {
+               t.setColor(NivelTriage.valueOf(color));
+               t.setColorModificado(NivelTriage.valueOf(color));
+               new TriageDatos().agregarTriage(t);
+               admision.setTriage(t); 
+               //datos
+               //RegistroAdmision.setTriage(t);
+            }else
+            {             
+               // String nuevoColor = JOptionPane.showInputDialog(null,"El color asignado es: "+color+"Ingrese el nuevo color");
+                
+                TriageDatos d = new TriageDatos();
+                String nuevoColor=JOptionPane.showInputDialog(null,"El color asignado es: "+color+" Ingrese el nuevo color");;
+                boolean bandera = false;
+                
+                while(bandera == false)
+                {
+                    if(nuevoColor==null)
+                    {
+                      nuevoColor = JOptionPane.showInputDialog(null,"El color asignado es: "+color+" Ingrese el nuevo color");  
+                    }else
+                    {
+                       bandera = d.cambioColor(colores, color, nuevoColor); 
+                    }
+                }
+                
+                String motivo = JOptionPane.showInputDialog(null,"Ingrese el motivo del cambio ");
+               
+                while(motivo == null || motivo.isEmpty()==true)   
+                {
+                    JOptionPane.showMessageDialog(null, "Debe ingresar un motivo para continuar");
+                    motivo = JOptionPane.showInputDialog(null,"Ingrese el motivo del cambio ");
+                }
+                
+                t.setColor(NivelTriage.valueOf(color));
+                t.setColorModificado(NivelTriage.valueOf(nuevoColor));
+                t.setMotivoModificacion(motivo);
+            }
+            JOptionPane.showMessageDialog(this, "se ha guardado con exito ");
             
             TriageDatos td = new TriageDatos();
             td.agregarTriage(t);
