@@ -1,1 +1,7 @@
 1;Naranja;Dificultad respiratoria grave;Anormal;Confusion leve;Perdida de conciencia;Presente;No presentes;Niño o anciano;Fiebre moderada;Sin vomitos;Dolor abdominal moderado;No presentes;No presentes;Sangrado moderado;null;null;Naranja;null;0
+2;Verde;Dificultad respiratoria moderada;Normal;Normal;Conciente y alerta;No presente;No presentes;Niño o anciano;Fiebre moderada;Sin vomitos;Dolor abdominal moderado;No presentes;No presentes;No presente;null;null;Verde;null;0
+3;Amarillo;Dificultad respiratoria moderada;Anormal;Confusion leve;Perdida de conciencia;No presente;Presentes;Adulto;Fiebre moderada;Sin vomitos;Dolor abdominal moderado;No presentes;No presentes;No presente;null;null;Rojo;null;0
+4;Verde;Normal;Normal;Confusion leve;Conciente y alerta;No presente;Presentes;Adulto;Sin fiebre;Sin vomitos;No presente;No presentes;No presentes;Sangrado moderado;null;null;Verde;null;0
+5;Verde;Normal;Normal;Normal;Conciente y alerta;No presente;No presentes;Adulto;Sin fiebre;Sin vomitos;No presente;No presentes;No presentes;No presente;null;null;Rojo;null;0
+6;Rojo;Dificultad respiratoria grave;Anormal;Confusion grave;Perdida de conciencia;Presente;Presentes;Niño o anciano;Fiebre alta;Vomitos intensos;Dolor abdominal severo;Presentes;Presentes;Sangrado intenso;null;null;Amarillo;null;0
+7;Rojo;Dificultad respiratoria grave;Anormal;Confusion grave;Perdida de conciencia;Presente;Presentes;Niño o anciano;Fiebre alta;Vomitos intensos;Dolor abdominal severo;Presentes;Presentes;Sangrado intenso;null;null;Naranja;a;0

@@ -348,7 +348,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
              a.setMotivo(motivo);
              a.setBox(new Box());
              a.setTriage(new Triage());
-             a.setPaciente(p));
+             a.setPaciente(p);
              new AdmisionDatos().agregarAdmision(a);
             JOptionPane.showMessageDialog(null, "se registro con exito");
             listar();
