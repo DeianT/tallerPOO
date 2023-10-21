@@ -4,8 +4,11 @@
  */
 package sistemas.tallerpoo.visual;
 
+import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JOptionPane;
+import sistemas.tallerpoo.clasesLogicas.Especialidad;
+import sistemas.tallerpoo.clasesLogicas.Medico;
 import sistemas.tallerpoo.datos.EspacialidadDatos;
 
 /**
@@ -15,12 +18,18 @@ import sistemas.tallerpoo.datos.EspacialidadDatos;
 public class EspecialidadesMedico extends javax.swing.JFrame {
 
    Vector<String> lista2 = new Vector<>();
+   EspacialidadDatos esp =new EspacialidadDatos();
+   ArrayList<Medico> med = new ArrayList<Medico>();
+   
    
    
    
     public EspecialidadesMedico() {
         initComponents();
         this.setLocationRelativeTo(null);
+        esp.llenarCombo(cbDnis, med);
+        esp.mostrarNombre(cbDnis, txtNombreApellido, med);
+ 
     }
 
     /**
@@ -41,6 +50,7 @@ public class EspecialidadesMedico extends javax.swing.JFrame {
         cbDnis = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         txtNombreApellido = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -71,6 +81,9 @@ public class EspecialidadesMedico extends javax.swing.JFrame {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 cbDnisFocusGained(evt);
             }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cbDnisFocusLost(evt);
+            }
         });
         cbDnis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,56 +93,60 @@ public class EspecialidadesMedico extends javax.swing.JFrame {
 
         txtNombreApellido.setText("jLabel2");
 
+        jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel2.setText("Nombre del Medico");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnQuitar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(113, 113, 113)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
+                        .addGap(172, 172, 172)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnQuitar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cbDnis, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(113, 113, 113))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(210, 210, 210)
-                        .addComponent(cbDnis, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(226, 226, 226)
-                        .addComponent(txtNombreApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addGap(92, 92, 92)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(88, 88, 88)
+                        .addComponent(txtNombreApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addGap(47, 47, 47)
                 .addComponent(cbDnis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
+                .addComponent(jLabel1)
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtNombreApellido))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(txtNombreApellido)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(43, 43, 43))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
+                        .addGap(24, 24, 24)
                         .addComponent(btnAgregar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnQuitar)
-                        .addGap(98, 98, 98))))
+                        .addGap(93, 93, 93)
+                        .addComponent(btnQuitar))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43))
         );
 
         pack();
@@ -138,15 +155,28 @@ public class EspecialidadesMedico extends javax.swing.JFrame {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
         
-        
-         jlEspecialidadesMedico.removeAll();
+
+         lista2= esp.mostrarEspecilidades(cbDnis, jlEspecialidadesMedico);
          lista2.add(jlTodasLasEspecialidades.getSelectedValue());
          jlEspecialidadesMedico.setListData(lista2);
+         
+         String[] espe = new String[lista2.size()];
+         
+         //esp.agregarEspecilidades(cbDnis, jlTodasLasEspecialidades);
         
+        EspacialidadDatos an = new EspacialidadDatos();
         
-        
-        
-        
+         for(int i = 0 ; i<lista2.size();i++)
+         {
+             espe[i]= lista2.get(i);
+              System.out.println(espe[i]);
+         }
+       
+         
+         Especialidad a = new Especialidad(cbDnis.getSelectedItem().toString(),espe);
+         
+        an.agregar(a);
+         
         
         
         
@@ -162,17 +192,19 @@ public class EspecialidadesMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_btnQuitarActionPerformed
 
     private void cbDnisFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbDnisFocusGained
-        // TODO add your handling code here:
-      //EspacialidadDatos a = new EspacialidadDatos();
-      //a.agregarMedicosCbo(cbDnis, txtNombreApellido);
-      //a.agregarAlLabel(cbDnis, jLabel1);
-        
+ 
     }//GEN-LAST:event_cbDnisFocusGained
 
     private void cbDnisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDnisActionPerformed
         // TODO add your handling code here:
-     
+     jlEspecialidadesMedico.removeAll();
+     esp.mostrarNombre(cbDnis, txtNombreApellido, med);
+     esp.mostrarEspecilidades(cbDnis, jlEspecialidadesMedico);
     }//GEN-LAST:event_cbDnisActionPerformed
+
+    private void cbDnisFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbDnisFocusLost
+        // TODO add your handling code here: 
+    }//GEN-LAST:event_cbDnisFocusLost
 
     /**
      * @param args the command line arguments
@@ -214,6 +246,7 @@ public class EspecialidadesMedico extends javax.swing.JFrame {
     private javax.swing.JButton btnQuitar;
     private javax.swing.JComboBox<String> cbDnis;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList<String> jlEspecialidadesMedico;

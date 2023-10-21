@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 public class Medico extends CapacitadoTriage{
     private int nMatricula;
+    private Especialidad[] especialidades;
 
     public Medico() {
         super();

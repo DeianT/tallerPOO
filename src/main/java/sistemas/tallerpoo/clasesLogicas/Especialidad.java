@@ -11,6 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Especialidad {
-    private String nombre;
+    private String dni;
+    private String[] especialidades;
     
 }
