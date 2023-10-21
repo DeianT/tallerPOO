@@ -101,7 +101,7 @@ public class BoxDatos {
                 b.setNumero(i + 1);
                 b.setFecha(null);
                 b.setHora(null);
-                b.setOcupado(Boolean.getBoolean(campos[1]));
+                b.setOcupado(Boolean.parseBoolean(campos[1]));
                 
                 linea = br.readLine();
             }
