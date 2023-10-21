@@ -5,8 +5,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import sistemas.tallerpoo.clasesLogicas.Admision;
 import sistemas.tallerpoo.clasesLogicas.Box;
-import sistemas.tallerpoo.clasesLogicas.ListaBox;
 import sistemas.tallerpoo.datos.AdmisionDatos;
+import sistemas.tallerpoo.datos.BoxDatos;
 
 /**
  *
@@ -18,7 +18,7 @@ public class ListaEspera extends javax.swing.JFrame {
     private ArrayList<Admision> listaAdmision;
     private AdmisionDatos datos = new AdmisionDatos();
     private Admision admision = null;
-    private ListaBox listaBox = new ListaBox();
+    private BoxDatos listaBox = new BoxDatos();
     private Box box = null;
 
     /**
@@ -184,7 +184,8 @@ public class ListaEspera extends javax.swing.JFrame {
         
         admision.setBox(box);
         datos.editarAdmision(admision);
-        box.setOcupado(true);
+        listaBox.ocuparDesocupar(box.getNumero(), true);
+//        box.setOcupado(true);
         
         listar();
     }//GEN-LAST:event_btnConfirmarActionPerformed

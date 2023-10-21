@@ -16,6 +16,7 @@ import sistemas.tallerpoo.clasesLogicas.Rol;
 import sistemas.tallerpoo.clasesLogicas.SectorTrabajo;
 import sistemas.tallerpoo.clasesLogicas.Triage;
 import sistemas.tallerpoo.datos.AdmisionDatos;
+import sistemas.tallerpoo.datos.BoxDatos;
 import sistemas.tallerpoo.datos.FuncionarioDatos;
 import sistemas.tallerpoo.datos.MedicoDatos;
 import sistemas.tallerpoo.datos.PersonaDatos;
@@ -50,7 +51,8 @@ public class TallerPOO {
         //agregarTriage(tr)
 //        System.out.println(adDatos.admisionesSinTriage());
 //        new RegistroAdmision().setVisible(true);
-        PacienteDatos rpd = new PacienteDatos();
+//        PacienteDatos rpd = new PacienteDatos();
+        BoxDatos b = new BoxDatos();
 //        rpd.imprimirArchivo();
         new Login().setVisible(true);
 //        System.out.println(mDatos.obtenerMedicos());
