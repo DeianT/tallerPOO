@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 import sistemas.tallerpoo.clasesLogicas.Admision;
 import sistemas.tallerpoo.clasesLogicas.Box;
 import sistemas.tallerpoo.clasesLogicas.Funcionario;
-import sistemas.tallerpoo.clasesLogicas.ListaBox;
 import sistemas.tallerpoo.clasesLogicas.Medico;
 import sistemas.tallerpoo.clasesLogicas.Paciente;
 import sistemas.tallerpoo.clasesLogicas.Persona;
@@ -38,26 +37,7 @@ public class TallerPOO {
         FuncionarioDatos fDatos = new  FuncionarioDatos();
         MedicoDatos mDatos = new MedicoDatos();
         AdmisionDatos adDatos = new AdmisionDatos();
-        ListaBox lB = new ListaBox();
         
-        Persona p = new Persona(46488897, "n", "a", new Date(), "do", 0, "+54", "s", "c");
-        Paciente pac = new Paciente(123987, "Pablo", "Preze", new Date(), "dmoiclio", 4561231, "+54 325678978", "casaso", "correo", "adad");
-        Triage tr = new Triage();
-        tr.setId(1);
-        
-//        adDatos.agregarAdmision(a);
-        //agregarPaciente(pac)
-//        pDatos.agregarPersona(p);
-        //agregarTriage(tr)
-//        System.out.println(adDatos.admisionesSinTriage());
-//        new RegistroAdmision().setVisible(true);
-//        PacienteDatos rpd = new PacienteDatos();
-        BoxDatos b = new BoxDatos();
-//        rpd.imprimirArchivo();
         new Login().setVisible(true);
-//        System.out.println(mDatos.obtenerMedicos());
-//        System.out.println(new TriageDatos().obtenerTriages());
-//        System.out.println(new TriageDatos().obtenerTriage(1).getDniEncargado());
-//System.out.println(pDatos.obtenerPersona(14).getFechaNacimiento());
     }
 }

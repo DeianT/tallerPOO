@@ -24,7 +24,6 @@ public class BoxDatos {
             for (int i = 0; i < boxes.length; i++) {
                 boxes[i] = new Box(i + 1, null, null, false);
             }
-//        escribirArchivo();
             try {
                 leerArchivo();
             } catch (IOException ex) {}
@@ -104,7 +103,6 @@ public class BoxDatos {
                 b.setHora(null);
                 b.setOcupado(Boolean.getBoolean(campos[1]));
                 
-//                boxes[i] = b;
                 linea = br.readLine();
             }
         }

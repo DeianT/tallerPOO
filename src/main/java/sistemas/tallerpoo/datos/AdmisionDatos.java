@@ -8,7 +8,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import sistemas.tallerpoo.clasesLogicas.Admision;
-import sistemas.tallerpoo.clasesLogicas.ListaBox;
 
 /**
  *
@@ -124,7 +123,7 @@ public class AdmisionDatos {
                 catch(IOException e){
                     ad.setTriage(null);
                 }
-                ad.setBox(new ListaBox().obtenerBox(Integer.parseInt(campos[6])));
+                ad.setBox(new BoxDatos().obtenerBox(Integer.parseInt(campos[6])));
                 
                 lista.add(ad);
                 linea = br.readLine();

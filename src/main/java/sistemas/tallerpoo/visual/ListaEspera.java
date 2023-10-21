@@ -185,7 +185,6 @@ public class ListaEspera extends javax.swing.JFrame {
         admision.setBox(box);
         datos.editarAdmision(admision);
         listaBox.ocuparDesocupar(box.getNumero(), true);
-//        box.setOcupado(true);
         
         listar();
     }//GEN-LAST:event_btnConfirmarActionPerformed
