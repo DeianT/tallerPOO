@@ -42,6 +42,7 @@ public class Principal extends javax.swing.JFrame {
         jmRegistroAdmision = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jmListaEspera = new javax.swing.JMenuItem();
+        jmVerBoxes = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -155,6 +156,14 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu8.add(jmListaEspera);
 
+        jmVerBoxes.setText("Ver boxes");
+        jmVerBoxes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmVerBoxesActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jmVerBoxes);
+
         jMenuBar1.add(jMenu8);
 
         setJMenuBar(jMenuBar1);
@@ -222,6 +231,10 @@ public class Principal extends javax.swing.JFrame {
         new ListaEspera().setVisible(true);
     }//GEN-LAST:event_jmListaEsperaActionPerformed
 
+    private void jmVerBoxesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmVerBoxesActionPerformed
+        new Atencion().setVisible(true);
+    }//GEN-LAST:event_jmVerBoxesActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -274,5 +287,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmRegistroAdmision;
     private javax.swing.JMenuItem jmRegistroFuncionario;
     private javax.swing.JMenuItem jmSalir;
+    private javax.swing.JMenuItem jmVerBoxes;
     // End of variables declaration//GEN-END:variables
 }
