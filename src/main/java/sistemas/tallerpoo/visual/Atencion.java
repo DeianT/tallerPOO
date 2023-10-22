@@ -40,6 +40,7 @@ public class Atencion extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtAdmisiones = new javax.swing.JTable();
         btnAlta = new javax.swing.JButton();
+        btnHistoriaClinica = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -68,12 +69,21 @@ public class Atencion extends javax.swing.JFrame {
             }
         });
 
+        btnHistoriaClinica.setText("Historia clínica");
+        btnHistoriaClinica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHistoriaClinicaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(592, Short.MAX_VALUE)
+                .addContainerGap(426, Short.MAX_VALUE)
+                .addComponent(btnHistoriaClinica)
+                .addGap(56, 56, 56)
                 .addComponent(btnAlta)
                 .addGap(48, 48, 48))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,7 +96,9 @@ public class Atencion extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(462, Short.MAX_VALUE)
-                .addComponent(btnAlta)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAlta)
+                    .addComponent(btnHistoriaClinica))
                 .addGap(16, 16, 16))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -107,15 +119,28 @@ public class Atencion extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ningún paciente seleccionado", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         admision.setDadaDeAlta(true);
         datos.editarAdmision(admision);
         //reducir la cantidad de pacientes en el box
         new BoxDatos().ocuparDesocupar(admision.getBox().getNumero(), false);//esto posiblemente haya que modificar
-        
+
         listar();
         JOptionPane.showMessageDialog(null, "El paciente fue dado de alta");
     }//GEN-LAST:event_btnAltaActionPerformed
+
+    private void btnHistoriaClinicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoriaClinicaActionPerformed
+        int fila = jtAdmisiones.getSelectedRow();
+        try{//controla que haya una admisión seleccionada
+            admision = listaAdmision.get(fila);
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Ningún paciente seleccionado", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        
+    }//GEN-LAST:event_btnHistoriaClinicaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,6 +179,7 @@ public class Atencion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlta;
+    private javax.swing.JButton btnHistoriaClinica;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtAdmisiones;
     // End of variables declaration//GEN-END:variables
