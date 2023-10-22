@@ -13,6 +13,6 @@ import lombok.Setter;
 public class Estudios {
     private String universidad;
     private String fechaTitulo;
-    private Medico medico;
-    private Especialidad especialidad;
+    private String  dniMedico;
+    private String especialidad;
 }

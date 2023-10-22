@@ -7,6 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import sistemas.tallerpoo.clasesLogicas.Admision;
 import sistemas.tallerpoo.clasesLogicas.Box;
+import sistemas.tallerpoo.clasesLogicas.Especialidad;
 import sistemas.tallerpoo.clasesLogicas.Funcionario;
 import sistemas.tallerpoo.clasesLogicas.ListaBox;
 import sistemas.tallerpoo.clasesLogicas.Medico;
@@ -16,6 +17,7 @@ import sistemas.tallerpoo.clasesLogicas.Rol;
 import sistemas.tallerpoo.clasesLogicas.SectorTrabajo;
 import sistemas.tallerpoo.clasesLogicas.Triage;
 import sistemas.tallerpoo.datos.AdmisionDatos;
+import sistemas.tallerpoo.datos.EspacialidadDatos;
 import sistemas.tallerpoo.datos.FuncionarioDatos;
 import sistemas.tallerpoo.datos.MedicoDatos;
 import sistemas.tallerpoo.datos.PersonaDatos;
@@ -33,6 +35,7 @@ import sistemas.tallerpoo.visual.RegistroUsuario;
 public class TallerPOO {
 
     public static void main(String[] args) throws IOException {
+        /*
         PersonaDatos pDatos = new PersonaDatos();
         FuncionarioDatos fDatos = new  FuncionarioDatos();
         MedicoDatos mDatos = new MedicoDatos();
@@ -57,5 +60,11 @@ public class TallerPOO {
 //        System.out.println(new TriageDatos().obtenerTriages());
 //        System.out.println(new TriageDatos().obtenerTriage(1).getDniEncargado());
 //System.out.println(pDatos.obtenerPersona(14).getFechaNacimiento());
+
+*/
+        
+
+
+
     }
 }

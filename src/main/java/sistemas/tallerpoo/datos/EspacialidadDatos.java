@@ -6,6 +6,7 @@ package sistemas.tallerpoo.datos;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import sistemas.tallerpoo.clasesLogicas.Especialidad;
+import sistemas.tallerpoo.clasesLogicas.Estudios;
 import sistemas.tallerpoo.clasesLogicas.Medico;
 import sistemas.tallerpoo.clasesLogicas.SectorTrabajo;
 
@@ -28,10 +30,11 @@ import sistemas.tallerpoo.clasesLogicas.SectorTrabajo;
  */
 public class EspacialidadDatos {
     ArrayList<Especialidad> lista = new ArrayList();
+    ArrayList<Estudios>  estudios = new ArrayList<>();
     
     public EspacialidadDatos()
     {
-        leer();
+       leer();
     }
 
     
@@ -82,62 +85,32 @@ public class EspacialidadDatos {
         } 
     }
    
-    public void agregarEspecilidades(JComboBox cb, JList esp)
+    public void agregarEspecilidades(JComboBox cb, JList esp, String uni, String fecha)
     {
 
-        File f = new File("./especialidades.csv");
+        File f = new File("./estudios.csv");
         try (FileWriter fw = new FileWriter(f,true))
-                {
-                    if(comprobarExistencia(f,cb))
-                    {
-                        fw.append("-"+esp.getSelectedValue().toString());
-                    }else
-                    {
-                       fw.write("\n"+cb.getSelectedItem().toString()+","+esp.getSelectedValue().toString()); 
-                    }
-  
-  
-        } catch (Exception e) {
+         {
+             fw.write(cb.getSelectedItem().toString()+","+esp.getSelectedValue().toString()+","+uni+","+fecha+"\n"); 
+             
+         } catch (Exception e) {
+             System.out.println(e.getMessage());
         }
     }
     
     
-    private boolean comprobarExistencia(File f, JComboBox cb)
-    {
-        boolean bandera = false;
-        String[] datos;
-        try(Scanner sc = new Scanner(f)) {
-            while(sc.hasNextLine())
-            {
-                datos = sc.nextLine().split(",");
-                if(datos[0].equals(cb.getSelectedItem().toString()))
-                {
-                    bandera= true;
-                }
-            }
-        } catch (Exception e) {
-        }
-        return bandera;
-    }
-    
-    
-    
+ 
     public Vector<String> mostrarEspecilidades(JComboBox cb, JList esp)
     {
-        String[] datos;
-        String[] especilidades;
+        String[] datos;  
         Vector<String> lista = new Vector<>();
-        try(Scanner sc = new Scanner(new File("./especialidades.csv"))) {
+        try(Scanner sc = new Scanner(new File("./estudios.csv"))) {
             while(sc.hasNextLine())
             {
                 datos = sc.nextLine().split(",");
                 if(cb.getSelectedItem().toString().equals(datos[0]))
                 {
-                  especilidades = datos[1].split("-");  
-                  for(int i = 0 ; i<especilidades.length;i++)
-                  {
-                      lista.add(especilidades[i]);
-                  }
+                      lista.add(datos[1]);  
                 }
 
             }
@@ -148,78 +121,73 @@ public class EspacialidadDatos {
        return lista;
     }
     
-    public void leer()
+    
+    private void leer()
     {
         String[] datos;
-        String[] especialidades;
-        Especialidad esp;
-        try (Scanner sc = new Scanner(new File("./especialidades.csv")))
-        {
-         while(sc.hasNextLine())
-         {
-             datos = sc.nextLine().split(",");
-             especialidades = datos[1].split("-");
-             esp = new Especialidad(datos[0], especialidades);
-             lista.add(esp);
-         }
-    
+        Estudios est;
+        try (Scanner sc  = new Scanner(new File("estudios.csv"))){
+            while(sc.hasNextLine())
+            {
+                datos=sc.nextLine().split(",");
+                est = new Estudios(datos[0],datos[1],datos[2],datos[3]);
+                estudios.add(est);
+            }
+            
         } catch (Exception e) {
-            System.out.println(e.getMessage());
         }
     }
     
-    public void escribir()
+    private void escribir()
     {
-        String linea="";
-        String[] esp=null;
-        try (FileWriter fw = new FileWriter(new File("./especialidades.csv"))){
-            for(Especialidad e : lista)
+        try (FileWriter fw = new FileWriter(new File("estudios.csv"))){
+            String linea;
+            for(Estudios e: estudios)
             {
-                linea+= e.getDni()+",";
-                esp = convertirArray(e.getDni().trim());
-                for(int i =0 ; i< esp.length;i++)
-                {
-                    linea+=esp[i]+"-";
-                }
+                linea = e.getDniMedico() + ",";
+                linea+= e.getEspecialidad() + ",";
+                linea+= e.getUniversidad() + ",";
+                linea+= e.getFechaTitulo();
                 fw.write(linea);
             }
+            
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
     
-    private String[] convertirArray(String dni)
+    public Estudios obtenerEstudio(String id) throws IOException{
+        for(Estudios est: estudios){
+            if(est.getDniMedico().equals(id)){
+                return est;
+            }
+        }
+        throw new IOException("No existe Medico con dni = " + id);
+    }
+    
+    public void eliminar(String dni) throws IOException
     {
+        try {
+            Estudios e = obtenerEstudio(dni);
+            estudios.remove(e);
+            escribir();
+            
+     
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         
-        String[] datos;
-        String[] especialidades=null;
-        try (Scanner sc = new Scanner(new File("./especialidades.csv")))
-        {
-         while(sc.hasNextLine())
-         {
-             datos = sc.nextLine().split(",");
-             if(dni.equals(datos[0]))
-             {
-               especialidades = datos[1].split("-");
-             }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
    
-         }
-    
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return especialidades;
-        
-    }
-    
-    
-    public void agregar(Especialidad e)
-    {
-        lista.add(e);
-        escribir();
-    }
-    
-    
    
     
  }
