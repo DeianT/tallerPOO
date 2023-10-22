@@ -34,10 +34,10 @@ public class ListaEspera extends javax.swing.JFrame {
     
     public void listar()
     {   
-        listaAdmision = datos.admisionesNoAtendidas();
+        listaAdmision = datos.admisionesSinBoxAsignado();
         limpiarTabla();
         modeloAd = (DefaultTableModel) jtAdmisiones.getModel();
-        Object[] ob = new Object[9];
+        Object[] ob = new Object[7];
         
         for(int i = 0; i < listaAdmision.size(); i++)
         {
@@ -72,12 +72,10 @@ public class ListaEspera extends javax.swing.JFrame {
     {
         for(int i = 0; i < modeloAd.getRowCount(); i++)
         {
-            modeloAd.removeRow(i);
-            i -= 1;
+            modeloAd.removeRow(i--);
         }
         for(int i = 0; i < modeloBox.getRowCount(); i++){
-            modeloBox.removeRow(i);
-            i -= 1;
+            modeloBox.removeRow(i--);
         }
     }
     
@@ -187,6 +185,7 @@ public class ListaEspera extends javax.swing.JFrame {
         listaBox.ocuparDesocupar(box.getNumero(), true);
         
         listar();
+        JOptionPane.showMessageDialog(null, "El paciente " + admision.getPaciente().getDni() + " fue asignado al box " + box.getNumero());
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     /**

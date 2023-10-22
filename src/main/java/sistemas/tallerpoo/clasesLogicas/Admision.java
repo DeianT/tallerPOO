@@ -18,4 +18,5 @@ public class Admision {
     private Paciente paciente;
     private Triage triage;
     private Box box;
+    private boolean dadaDeAlta;
 }

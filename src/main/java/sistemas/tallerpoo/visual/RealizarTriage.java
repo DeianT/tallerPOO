@@ -36,7 +36,7 @@ public class RealizarTriage extends javax.swing.JFrame {
         lista = datos.admisionesSinTriage();
         limpiarTabla();
         modelo = (DefaultTableModel) jtAdmisiones.getModel();
-        Object[] ob = new Object[9];
+        Object[] ob = new Object[6];
         
         for(int i = 0; i < lista.size(); i++)
         {
@@ -59,8 +59,7 @@ public class RealizarTriage extends javax.swing.JFrame {
     {
         for(int i = 0; i < modelo.getRowCount(); i++)
         {
-            modelo.removeRow(i);
-            i -= 1;
+            modelo.removeRow(i--);
         }
     }
     
