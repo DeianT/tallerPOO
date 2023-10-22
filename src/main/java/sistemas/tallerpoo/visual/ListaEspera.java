@@ -72,12 +72,10 @@ public class ListaEspera extends javax.swing.JFrame {
     {
         for(int i = 0; i < modeloAd.getRowCount(); i++)
         {
-            modeloAd.removeRow(i);
-            i -= 1;
+            modeloAd.removeRow(i--);
         }
         for(int i = 0; i < modeloBox.getRowCount(); i++){
-            modeloBox.removeRow(i);
-            i -= 1;
+            modeloBox.removeRow(i--);
         }
     }
     

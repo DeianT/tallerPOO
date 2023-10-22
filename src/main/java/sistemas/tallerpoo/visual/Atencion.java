@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import sistemas.tallerpoo.clasesLogicas.Admision;
 import sistemas.tallerpoo.datos.AdmisionDatos;
+import sistemas.tallerpoo.datos.BoxDatos;
 
 /**
  *
@@ -110,6 +111,7 @@ public class Atencion extends javax.swing.JFrame {
         admision.setDadaDeAlta(true);
         datos.editarAdmision(admision);
         //reducir la cantidad de pacientes en el box
+        new BoxDatos().ocuparDesocupar(admision.getBox().getNumero(), false);//esto posiblemente haya que modificar
         
         listar();
         JOptionPane.showMessageDialog(null, "El paciente fue dado de alta");
@@ -178,6 +180,8 @@ public class Atencion extends javax.swing.JFrame {
     }
 
     private void limpiarTabla() {
-        
+        for(int i = 0; i < modelo.getRowCount(); i++){
+            modelo.removeRow(i--);
+        }
     }
 }
