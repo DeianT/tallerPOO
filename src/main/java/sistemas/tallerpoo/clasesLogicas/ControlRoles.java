@@ -21,7 +21,10 @@ public class ControlRoles {
 
     public static void setUsuarioActual(Usuario usuarioActual) {
         ControlRoles.usuarioActual = usuarioActual;
-        ControlRoles.rolesUsuario = new RolDatos().obtenerRolesFuncionario(usuarioActual.getDniFuncionario());
+        if(usuarioActual == null)
+            ControlRoles.rolesUsuario = new ArrayList<>();
+        else
+            ControlRoles.rolesUsuario = new RolDatos().obtenerRolesFuncionario(usuarioActual.getDniFuncionario());
     }
 
     public static ArrayList<Rol> getRolesUsuario() {
