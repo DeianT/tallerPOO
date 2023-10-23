@@ -20,18 +20,12 @@ import sistemas.tallerpoo.datos.EspacialidadDatos;
  */
 public class EspecialidadesMedico extends javax.swing.JFrame {
 
-   Vector<String> lista2 = new Vector<>();
-   EspacialidadDatos esp =new EspacialidadDatos();
-   ArrayList<Medico> med = new ArrayList<Medico>();
-   
-   ArrayList<Especialidad> lista = new ArrayList();
-   String[] confirmar = {"SI" , "NO"};
-   
-   
-   
-   
-   
-   
+    Vector<String> lista2 = new Vector<>();
+    EspacialidadDatos esp =new EspacialidadDatos();
+    ArrayList<Medico> med = new ArrayList<Medico>();
+
+    ArrayList<Especialidad> lista = new ArrayList();
+    String[] confirmar = {"SI" , "NO"};
    
     public EspecialidadesMedico() {
         initComponents();
@@ -159,25 +153,25 @@ public class EspecialidadesMedico extends javax.swing.JFrame {
         if(opcion == 0)
         {
            String uni = JOptionPane.showInputDialog(null,"ingrese el nombre de la universiad donde obtuvo la especialidad");
-        if(uni != null)
-        {
-            String fecha = JOptionPane.showInputDialog(null, "ingrese la fecha en que lo obtuvo");
-            if(fecha != null)
+            if(uni != null)
             {
-                lista2= esp.mostrarEspecilidades(cbDnis, jlEspecialidadesMedico);
-                lista2.add(jlTodasLasEspecialidades.getSelectedValue());
-                jlEspecialidadesMedico.setListData(lista2);
-                esp.agregarEspecilidades(cbDnis, jlTodasLasEspecialidades,uni,fecha);
-            }
-            else
+                String fecha = JOptionPane.showInputDialog(null, "ingrese la fecha en que lo obtuvo");
+                if(fecha != null)
+                {
+                    lista2= esp.mostrarEspecilidades(cbDnis, jlEspecialidadesMedico);
+                    lista2.add(jlTodasLasEspecialidades.getSelectedValue());
+                    jlEspecialidadesMedico.setListData(lista2);
+                    esp.agregarEspecilidades(cbDnis, jlTodasLasEspecialidades,uni,fecha);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "tiene que ingresar una fecha");
+                }
+            }else
             {
-                JOptionPane.showMessageDialog(null, "tiene que ingresar una fecha");
-            }
-        }else
-        {
-            JOptionPane.showMessageDialog(null, "tiene que ingresar una universidad");
-            
-        } 
+                JOptionPane.showMessageDialog(null, "tiene que ingresar una universidad");
+
+            } 
         }
         
         
@@ -189,9 +183,9 @@ public class EspecialidadesMedico extends javax.swing.JFrame {
 
     private void cbDnisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDnisActionPerformed
         // TODO add your handling code here:
-     jlEspecialidadesMedico.removeAll();
-     esp.mostrarNombre(cbDnis, txtNombreApellido, med);
-     esp.mostrarEspecilidades(cbDnis, jlEspecialidadesMedico);
+        jlEspecialidadesMedico.removeAll();
+        esp.mostrarNombre(cbDnis, txtNombreApellido, med);
+        esp.mostrarEspecilidades(cbDnis, jlEspecialidadesMedico);
     }//GEN-LAST:event_cbDnisActionPerformed
 
     private void cbDnisFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbDnisFocusLost
