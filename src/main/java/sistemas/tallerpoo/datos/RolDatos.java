@@ -40,14 +40,18 @@ public class RolDatos {
     }
     
     public boolean eliminarRol(Rol rol){
-        for(Rol r: obtenerRolesFuncionario(rol.getDniFuncionario())){
-            if(r.getNombre().equals(rol.getNombre())){
+        for(Rol r: lista){
+            if(r.getNombre().equals(rol.getNombre()) && r.getDniFuncionario() == rol.getDniFuncionario()){
                 lista.remove(r);
                 escribirArchivo();
                 return true;
             }
         }
         return false;
+    }
+    
+    public boolean eliminarRolesFuncionario(int dni){
+        return lista.removeAll(obtenerRolesFuncionario(dni));
     }
     
     private void escribirArchivo(){

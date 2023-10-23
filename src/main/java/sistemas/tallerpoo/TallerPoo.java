@@ -23,6 +23,7 @@ import sistemas.tallerpoo.datos.FuncionarioDatos;
 import sistemas.tallerpoo.datos.MedicoDatos;
 import sistemas.tallerpoo.datos.PersonaDatos;
 import sistemas.tallerpoo.datos.PacienteDatos;
+import sistemas.tallerpoo.datos.RolDatos;
 import sistemas.tallerpoo.datos.TriageDatos;
 import sistemas.tallerpoo.visual.Login;
 import sistemas.tallerpoo.visual.Principal;
@@ -41,7 +42,7 @@ public class TallerPoo {
         FuncionarioDatos fDatos = new  FuncionarioDatos();
         MedicoDatos mDatos = new MedicoDatos();
         AdmisionDatos adDatos = new AdmisionDatos();
-        
+        System.out.println(new RolDatos().obtenerRolesFuncionario(121));
         new Login().setVisible(true);
     }
     
