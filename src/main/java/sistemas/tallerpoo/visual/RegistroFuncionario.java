@@ -6,33 +6,34 @@ import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
-import sistemas.tallerpoo.clasesLogicas.Medico;
-import sistemas.tallerpoo.datos.MedicoDatos;
+import sistemas.tallerpoo.clasesLogicas.Funcionario;
+import sistemas.tallerpoo.clasesLogicas.SectorTrabajo;
+import sistemas.tallerpoo.datos.FuncionarioDatos;
 
 /**
  *
  * @author Thiago
  */
-public class RegistroMedico extends javax.swing.JFrame {
+public class RegistroFuncionario extends javax.swing.JFrame {
 
     DefaultTableModel modelo;
-    ArrayList<Medico> lista;
+    ArrayList<Funcionario> lista;
     TableRowSorter <DefaultTableModel> sorter;
-    MedicoDatos datos = new MedicoDatos();
+    FuncionarioDatos datos = new FuncionarioDatos();
    
-    public RegistroMedico() {
+    public RegistroFuncionario() {
         initComponents();
         this.setLocationRelativeTo(null);
         modelo = new DefaultTableModel();
-        lista = datos.obtenerMedicos();
+        lista = datos.obtenerFuncionarios();
         listar();
     }
 
     public void listar()
-    {
-        lista = datos.obtenerMedicos();
+    {   
+        lista = datos.obtenerFuncionarios();
         limpiarTabla();
-        modelo = (DefaultTableModel) jtMedicos.getModel();
+        modelo = (DefaultTableModel) jtFuncionarios.getModel();
         Object[] ob = new Object[10];
         
         for(int i = 0; i < lista.size(); i++)
@@ -46,40 +47,39 @@ public class RegistroMedico extends javax.swing.JFrame {
             ob[6]=lista.get(i).getTelCelular();
             ob[7]=lista.get(i).getEstadoCivil();
             ob[8]=lista.get(i).getCorreoElect();
-            ob[9]=lista.get(i).getNMatricula();
+            ob[9]=lista.get(i).getTrabajaEn().getNombre();
             modelo.addRow(ob);
         }
-        jtMedicos.setModel(modelo);
+        jtFuncionarios.setModel(modelo); 
         
-        jtMedicos.setAutoCreateRowSorter(true);
+        jtFuncionarios.setAutoCreateRowSorter(true);
         sorter = new TableRowSorter<>(modelo);
-        jtMedicos.setRowSorter(sorter);
+        jtFuncionarios.setRowSorter(sorter);
     }
-    
+
     public void limpiarTabla()
     {
-        for(int i =0 ; i<modelo.getRowCount();i++)
+        for(int i = 0; i < modelo.getRowCount(); i++)
         {
             modelo.removeRow(i);
-            i-=1;
+            i -= 1;
         }
     }
     
-    public void mostrarTodo(Medico m)
+    public void mostrarTodo(Funcionario p)
     {
-        String dni = Integer.toString(m.getDni());
-        String telefono = Integer.toString(m.getTelFijo());
-        String matricula = Integer.toString(m.getNMatricula());
+        String dni = Integer.toString(p.getDni());
+        String telefono = Integer.toString(p.getTelFijo());
         txtDni.setText(dni);
-        txtNombre.setText(m.getNombre());
-        txtApellido.setText(m.getApellido());
-        txtFechaNacimiento.setText(m.getFechaNacimiento().toString());
-        txtDomicilio.setText(m.getDomicilio());
+        txtNombre.setText(p.getNombre());
+        txtApellido.setText(p.getApellido());
+        txtFechaNacimiento.setText(p.getFechaNacimiento().toString());
+        txtDomicilio.setText(p.getDomicilio());
         txtTelefono.setText(telefono);
-        txtCelular.setText(m.getTelCelular());
-        cbEstadoCivil.setSelectedItem(m.getEstadoCivil());
-        txtCorreo.setText(m.getCorreoElect());
-        txtMatricula.setText(matricula);
+        txtCelular.setText(p.getTelCelular());
+        cbEstadoCivil.setSelectedItem(p.getEstadoCivil());
+        txtCorreo.setText(p.getCorreoElect());
+        txtSectorTrabajo.setText(p.getTrabajaEn().getNombre());
     }
     
     public void limpiarTexto()
@@ -92,15 +92,17 @@ public class RegistroMedico extends javax.swing.JFrame {
        txtTelefono.setText("");
        txtCelular.setText("");
        cbEstadoCivil.setSelectedIndex(0);
-       txtCorreo.setText("");  
-       txtMatricula.setText("");
+       txtCorreo.setText("");   
+       txtSectorTrabajo.setText("");
     }
     
-    Medico captar()
+    Funcionario captar()
     {
-        Medico m = new Medico();
+        Funcionario m = new Funcionario();
         int dni = Integer.parseInt(txtDni.getText());
         int telefono = Integer.parseInt(txtTelefono.getText());
+        SectorTrabajo sec = new SectorTrabajo();
+        sec.setNombre(txtSectorTrabajo.getText());
         String estado = String.valueOf(cbEstadoCivil.getSelectedItem());
         m.setDni(dni);
         m.setNombre(txtNombre.getText());
@@ -112,7 +114,7 @@ public class RegistroMedico extends javax.swing.JFrame {
         m.setTelCelular(txtCelular.getText());
         m.setEstadoCivil(estado);
         m.setCorreoElect(txtCorreo.getText());
-        m.setNMatricula(Integer.parseInt(txtMatricula.getText()));
+        m.setTrabajaEn(sec);
         //rolsistema
         
         return m;
@@ -142,15 +144,15 @@ public class RegistroMedico extends javax.swing.JFrame {
         txtCorreo = new javax.swing.JTextField();
         btnRegistrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtMedicos = new javax.swing.JTable();
+        jtFuncionarios = new javax.swing.JTable();
         txtBuscarDni = new javax.swing.JTextField();
         btnEliminar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         txtFechaNacimiento = new javax.swing.JTextField();
         btnMostrarTodo = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        txtMatricula = new javax.swing.JTextField();
         btnConfirmarEdicion = new javax.swing.JButton();
+        txtSectorTrabajo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -172,7 +174,7 @@ public class RegistroMedico extends javax.swing.JFrame {
 
         jLabel9.setText("Correo");
 
-        jLabel10.setText("Matricula");
+        jLabel10.setText("Sector de Trabajo");
 
         cbEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Soltero/a", "Casado/a", "Viudo/a", "Divorciado/a" }));
 
@@ -183,15 +185,15 @@ public class RegistroMedico extends javax.swing.JFrame {
             }
         });
 
-        jtMedicos.setModel(new javax.swing.table.DefaultTableModel(
+        jtFuncionarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "DNI", "Nombre", "Apellido", "Fecha de Nacimiento", "Domicilio", "Telefono", "Celular", "EstadoCivil", "Correo", "Matricula"
+                "DNI", "Nombre", "Apellido", "Fecha de Nacimiento", "Domicilio", "Telefono", "Celular", "EstadoCivil", "Correo", "Sector Trabajo"
             }
         ));
-        jScrollPane1.setViewportView(jtMedicos);
+        jScrollPane1.setViewportView(jtFuncionarios);
 
         txtBuscarDni.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -220,7 +222,7 @@ public class RegistroMedico extends javax.swing.JFrame {
             }
         });
 
-        jLabel11.setText("Buscar Medico");
+        jLabel11.setText("Buscar Funcionario");
 
         btnConfirmarEdicion.setText("Confrimar Edicion");
         btnConfirmarEdicion.addActionListener(new java.awt.event.ActionListener() {
@@ -257,7 +259,7 @@ public class RegistroMedico extends javax.swing.JFrame {
                     .addComponent(cbEstadoCivil, 0, 140, Short.MAX_VALUE)
                     .addComponent(txtCorreo)
                     .addComponent(txtFechaNacimiento)
-                    .addComponent(txtMatricula))
+                    .addComponent(txtSectorTrabajo))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -266,7 +268,7 @@ public class RegistroMedico extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnMostrarTodo, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtBuscarDni, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38))))
@@ -275,12 +277,12 @@ public class RegistroMedico extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnConfirmarEdicion)))
-                .addContainerGap(846, Short.MAX_VALUE))
+                .addContainerGap(864, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -331,7 +333,7 @@ public class RegistroMedico extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
-                            .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtSectorTrabajo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -347,31 +349,31 @@ public class RegistroMedico extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        if(datos.agregarMedico(captar())){
+        if (datos.agregarFuncionario(captar())){
             JOptionPane.showMessageDialog(null, "se registro con exito");
             listar();
             this.limpiarTexto();
         }
         else{
-            JOptionPane.showMessageDialog(null, "Ya existe médico con ese DNI", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ya existe paciente con ese DNI", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnMostrarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarTodoActionPerformed
-        listar();
+        listar();  
     }//GEN-LAST:event_btnMostrarTodoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        Medico med;
-        int fila = jtMedicos.getSelectedRow();
-        med = lista.get(fila);
-        this.mostrarTodo(med);
+        Funcionario pac;
+        int fila = jtFuncionarios.getSelectedRow();
+        pac = lista.get(fila);
+        this.mostrarTodo(pac);
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        int fila = jtMedicos.getSelectedRow();
-        String s = jtMedicos.getModel().getValueAt(fila, 0).toString();
-        datos.eliminarMedico(Integer.parseInt(s));
+        int fila = jtFuncionarios.getSelectedRow();
+        String s = jtFuncionarios.getModel().getValueAt(fila, 0).toString();
+        datos.eliminarFuncionario(Integer.parseInt(s));
         listar();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -380,13 +382,13 @@ public class RegistroMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarDniKeyReleased
 
     private void btnConfirmarEdicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarEdicionActionPerformed
-        Medico m = new Medico();
-        m = this.captar();
-        if(datos.editarMedico(m))
+        Funcionario p = new Funcionario();
+        p=datos.capturar(txtDni, txtNombre, txtApellido, txtDni, txtDomicilio, txtDni, txtCelular, cbEstadoCivil, txtCorreo, txtSectorTrabajo);
+        if(datos.editarFuncionario(p))
         {
-          JOptionPane.showMessageDialog(null, "se edito con exito");
-          limpiarTexto();
-          listar();
+            JOptionPane.showMessageDialog(null, "se edito con exito");
+            limpiarTexto();
+            listar();
         }
     }//GEN-LAST:event_btnConfirmarEdicionActionPerformed
 
@@ -415,13 +417,13 @@ public class RegistroMedico extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegistroMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegistroMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegistroMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegistroMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -431,7 +433,7 @@ public class RegistroMedico extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegistroMedico().setVisible(true);
+                new RegistroFuncionario().setVisible(true);
             }
         });
     }
@@ -455,7 +457,7 @@ public class RegistroMedico extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jtMedicos;
+    private javax.swing.JTable jtFuncionarios;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtBuscarDni;
     private javax.swing.JTextField txtCelular;
@@ -463,8 +465,8 @@ public class RegistroMedico extends javax.swing.JFrame {
     private javax.swing.JTextField txtDni;
     private javax.swing.JTextField txtDomicilio;
     private javax.swing.JTextField txtFechaNacimiento;
-    private javax.swing.JTextField txtMatricula;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtSectorTrabajo;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }

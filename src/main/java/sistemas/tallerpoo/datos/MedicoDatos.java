@@ -7,8 +7,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
+import sistemas.tallerpoo.clasesLogicas.Funcionario;
 import sistemas.tallerpoo.clasesLogicas.Medico;
 import sistemas.tallerpoo.clasesLogicas.Rol;
+import sistemas.tallerpoo.clasesLogicas.SectorTrabajo;
 
 /**
  *
@@ -33,6 +35,7 @@ public class MedicoDatos {
         catch(Exception e){
             lista.add(medico);
             escribirArchivo();
+            new FuncionarioDatos().agregarFuncionario(medico);
             return true;
         }
     }
@@ -50,11 +53,12 @@ public class MedicoDatos {
         return lista;
     }
     
-    public boolean eliminarMedico(int id){
+    public boolean eliminarMedico(int dni){
         try{
-            Medico f = obtenerMedico(id);
+            Medico f = obtenerMedico(dni);
             lista.remove(f);
             escribirArchivo();
+            new FuncionarioDatos().eliminarFuncionario(dni);
             return true;
         }
         catch(Exception e){
@@ -67,15 +71,39 @@ public class MedicoDatos {
             Medico m = obtenerMedico(medico.getDni());
             m.setNombre(medico.getNombre());
             m.setApellido(medico.getApellido());
-            m.setDomicilio(medico.getDomicilio());
             m.setFechaNacimiento(medico.getFechaNacimiento());
             m.setDomicilio(medico.getDomicilio());
             m.setTelFijo(medico.getTelFijo());
             m.setTelCelular(medico.getTelCelular());
             m.setEstadoCivil(medico.getEstadoCivil());
             m.setCorreoElect(medico.getCorreoElect());
+            m.setTrabajaEn(medico.getTrabajaEn());
+            m.setRolesSistema(medico.getRolesSistema());
             m.setNMatricula(medico.getNMatricula());
-            m.setRolSistema(medico.getRolSistema());
+        
+            escribirArchivo();
+            new FuncionarioDatos().editarFuncionario(medico);
+            return true;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean editarMedico(Funcionario funcionario){
+        try{
+            Medico m = obtenerMedico(funcionario.getDni());
+            m.setNombre(funcionario.getNombre());
+            m.setApellido(funcionario.getApellido());
+            m.setFechaNacimiento(funcionario.getFechaNacimiento());
+            m.setDomicilio(funcionario.getDomicilio());
+            m.setTelFijo(funcionario.getTelFijo());
+            m.setTelCelular(funcionario.getTelCelular());
+            m.setEstadoCivil(funcionario.getEstadoCivil());
+            m.setCorreoElect(funcionario.getCorreoElect());
+            m.setTrabajaEn(funcionario.getTrabajaEn());
+            m.setRolesSistema(funcionario.getRolesSistema());
         
             escribirArchivo();
             return true;
@@ -104,13 +132,15 @@ public class MedicoDatos {
                 linea += m.getTelCelular()+ separador;
                 linea += m.getEstadoCivil() + separador;
                 linea += m.getCorreoElect() + separador;
-                linea += m.getNMatricula() + separador;
-                if(m.getRolSistema() != null)
-                    linea += m.getRolSistema().getNombre();
+                if(m.getTrabajaEn()!= null)
+                    linea += m.getTrabajaEn().getNombre() + separador;
                 else
-                    linea += "null";
+                    linea += "null"  + separador;
+                linea += m.getNMatricula();
 
                 pw.println(linea);
+                
+//                new RolDatos().escribirArchivo()
             }
         }
         catch(Exception e){
@@ -143,8 +173,10 @@ public class MedicoDatos {
                 m.setTelCelular(campos[6]);
                 m.setEstadoCivil(campos[7]);
                 m.setCorreoElect(campos[8]);
-                m.setNMatricula(Integer.parseInt(campos[9]));
-                m.setRolSistema(new Rol(campos[10]));
+                m.setTrabajaEn(new SectorTrabajo(campos[9]));
+                m.setNMatricula(Integer.parseInt(campos[10]));
+                m.setRolesSistema(new ArrayList<>());
+//                m.setRolesSistema(new RolDatos().obtenerRolesFuncionario(m.getDni()));
                 
                 lista.add(m);
                 linea = br.readLine();

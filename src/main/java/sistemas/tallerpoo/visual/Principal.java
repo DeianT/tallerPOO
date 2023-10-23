@@ -11,6 +11,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -35,6 +36,12 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        jmRegistroFuncionario = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
+        jmRegistroAdmision = new javax.swing.JMenuItem();
+        jMenu8 = new javax.swing.JMenu();
+        jmListaEspera = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -114,67 +121,107 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
+        jMenu6.setText("Funcionarios");
+
+        jmRegistroFuncionario.setText("Registro");
+        jmRegistroFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmRegistroFuncionarioActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jmRegistroFuncionario);
+
+        jMenuBar1.add(jMenu6);
+
+        jMenu7.setText("Admision");
+
+        jmRegistroAdmision.setText("Registro");
+        jmRegistroAdmision.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmRegistroAdmisionActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jmRegistroAdmision);
+
+        jMenuBar1.add(jMenu7);
+
+        jMenu8.setText("Atención");
+
+        jmListaEspera.setText("Lista espera");
+        jmListaEspera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmListaEsperaActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jmListaEspera);
+
+        jMenuBar1.add(jMenu8);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 547, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGap(0, 355, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
         RegistroPaciente pac = new RegistroPaciente();
         pac.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
         RegistroMedico m = new RegistroMedico();
         m.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
         EspecialidadesMedico esp = new EspecialidadesMedico();
         esp.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
         RealizarTriage t = new RealizarTriage();
         t.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jmCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCerrarSesionActionPerformed
-        // TODO add your handling code here:
         Login l = new Login();
         l.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jmCerrarSesionActionPerformed
 
     private void jmRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRegistrarActionPerformed
-        // TODO add your handling code here:
         RegistroUsuario reg = new RegistroUsuario();
         reg.setVisible(true);
     }//GEN-LAST:event_jmRegistrarActionPerformed
 
     private void jmSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmSalirActionPerformed
-        // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jmSalirActionPerformed
 
-    
-    
-    
+    private void jmRegistroFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRegistroFuncionarioActionPerformed
+        RegistroFuncionario fun = new RegistroFuncionario();
+        fun.setVisible(true);
+    }//GEN-LAST:event_jmRegistroFuncionarioActionPerformed
+
+    private void jmRegistroAdmisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRegistroAdmisionActionPerformed
+        RegistroAdmision adm = new RegistroAdmision();
+        adm.setVisible(true);
+    }//GEN-LAST:event_jmRegistroAdmisionActionPerformed
+
+    private void jmListaEsperaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmListaEsperaActionPerformed
+        new ListaEspera().setVisible(true);
+    }//GEN-LAST:event_jmListaEsperaActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -213,13 +260,19 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jmCerrarSesion;
+    private javax.swing.JMenuItem jmListaEspera;
     private javax.swing.JMenuItem jmRegistrar;
+    private javax.swing.JMenuItem jmRegistroAdmision;
+    private javax.swing.JMenuItem jmRegistroFuncionario;
     private javax.swing.JMenuItem jmSalir;
     // End of variables declaration//GEN-END:variables
 }

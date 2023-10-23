@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Admision {
+    private int id;
     private Date fecha;
     private Date hora;
     private String motivo;
