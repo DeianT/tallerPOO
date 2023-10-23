@@ -20,6 +20,7 @@ import sistemas.tallerpoo.clasesLogicas.Paciente;
 import sistemas.tallerpoo.clasesLogicas.Triage;
 import sistemas.tallerpoo.datos.AdmisionDatos;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -106,6 +107,8 @@ public class RegistroPaciente extends javax.swing.JFrame {
        txtCorreo.setText("");   
        txtContacto.setText("");
     }
+    
+    
     private boolean validarCorreoElectronico(String correoElectronico){
      
      Pattern pat = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
@@ -172,6 +175,17 @@ public class RegistroPaciente extends javax.swing.JFrame {
         jLabel9.setText("Correo");
 
         jLabel10.setText("Contacto");
+
+        txtDni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDniActionPerformed(evt);
+            }
+        });
+        txtDni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDniKeyReleased(evt);
+            }
+        });
 
         cbEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Soltero/a", "Casado/a", "Viudo/a", "Divorciado/a" }));
 
@@ -364,7 +378,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnEliminar))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -378,7 +392,12 @@ public class RegistroPaciente extends javax.swing.JFrame {
         Admision a = new Admision();
         Paciente p = datos.capturar(txtDni, txtNombre, txtApellido, txtFechaNacimiento, txtDomicilio, txtTelefono, txtCelular, cbEstadoCivil, txtCorreo, txtContacto);
         if (datos.agregarPaciente(p)){
-            String motivo = JOptionPane.showInputDialog(null, "Ingrese el motivo");
+            String motivo= JOptionPane.showInputDialog(null, "Ingrese el motivo"); 
+            while(motivo==null || motivo.isEmpty())     
+            {
+             JOptionPane.showMessageDialog(null, "Por favor ingrese un motivo");   
+             motivo = JOptionPane.showInputDialog(null, "Ingrese el motivo");   
+            }  
             a.setFecha(new Date());
             a.setHora(new Date());
             a.setMotivo(motivo);
@@ -417,7 +436,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
 
     private void txtBuscarDniKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarDniKeyReleased
         // TODO add your handling code here:
-        filtrar();
+        filtrar(txtBuscarDni);
     }//GEN-LAST:event_txtBuscarDniKeyReleased
 
     private void btnConfirmarEdicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarEdicionActionPerformed
@@ -454,11 +473,20 @@ public class RegistroPaciente extends javax.swing.JFrame {
   
       
     }//GEN-LAST:event_txtCorreoKeyReleased
+
+    private void txtDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDniActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDniActionPerformed
+
+    private void txtDniKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDniKeyReleased
+        // TODO add your handling code here:
+        filtrar(txtDni);
+    }//GEN-LAST:event_txtDniKeyReleased
  
-    private void filtrar()
+    private void filtrar(JTextField a)
     {
         try {
-            sorter.setRowFilter(RowFilter.regexFilter(txtBuscarDni.getText()));
+            sorter.setRowFilter(RowFilter.regexFilter(a.getText()));
         } catch (Exception e) {
         }
     }
