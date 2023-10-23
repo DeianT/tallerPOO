@@ -8,10 +8,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import sistemas.tallerpoo.clasesLogicas.Admision;
-import sistemas.tallerpoo.clasesLogicas.ListaBox;
-import sistemas.tallerpoo.clasesLogicas.Paciente;
-import sistemas.tallerpoo.clasesLogicas.Persona;
-import sistemas.tallerpoo.clasesLogicas.Triage;
 
 /**
  *
@@ -48,10 +44,20 @@ public class AdmisionDatos {
         return p;
     }
     
-    public ArrayList<Admision> admisionesNoAtendidas(){
+    public ArrayList<Admision> admisionesSinBoxAsignado(){
         ArrayList<Admision> p = new ArrayList<>();
         for(Admision a: lista){
             if(a.getTriage() != null && a.getBox() == null){
+                p.add(a);
+            }
+        }
+        return p;
+    }
+    
+    public ArrayList<Admision> admisionesNoDadasDeAlta(){
+        ArrayList<Admision> p = new ArrayList<>();
+        for(Admision a: lista){
+            if(a.getTriage() != null && a.getBox() != null && !a.isDadaDeAlta()){
                 p.add(a);
             }
         }
@@ -63,6 +69,8 @@ public class AdmisionDatos {
             return false;
         Admision a = lista.get(admision.getId() - 1);
         a.setTriage(admision.getTriage());
+        a.setBox(admision.getBox());
+        a.setDadaDeAlta(admision.isDadaDeAlta());
         escribirArchivo();
         return true;
     }
@@ -85,9 +93,10 @@ public class AdmisionDatos {
                 else
                     linea += 0 + separador;
                 if(a.getBox() != null)
-                    linea += a.getBox().getNumero();
+                    linea += a.getBox().getNumero() + separador;
                 else
-                    linea += 0;
+                    linea += 0 + separador;
+                linea += a.isDadaDeAlta();
                 
                 pw.println(linea);
             }
@@ -126,7 +135,8 @@ public class AdmisionDatos {
                 catch(IOException e){
                     ad.setTriage(null);
                 }
-                ad.setBox(new ListaBox().obtenerBox(Integer.parseInt(campos[6])));
+                ad.setBox(new BoxDatos().obtenerBox(Integer.parseInt(campos[6])));
+                ad.setDadaDeAlta(Boolean.parseBoolean(campos[7]));
                 
                 lista.add(ad);
                 linea = br.readLine();

@@ -36,7 +36,7 @@ public class RealizarTriage extends javax.swing.JFrame {
         lista = datos.admisionesSinTriage();
         limpiarTabla();
         modelo = (DefaultTableModel) jtAdmisiones.getModel();
-        Object[] ob = new Object[9];
+        Object[] ob = new Object[6];
         
         for(int i = 0; i < lista.size(); i++)
         {
@@ -59,8 +59,7 @@ public class RealizarTriage extends javax.swing.JFrame {
     {
         for(int i = 0; i < modelo.getRowCount(); i++)
         {
-            modelo.removeRow(i);
-            i -= 1;
+            modelo.removeRow(i--);
         }
     }
     
@@ -212,7 +211,6 @@ public class RealizarTriage extends javax.swing.JFrame {
         btnLimpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtAdmisiones = new javax.swing.JTable();
-        btnPaciente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -300,13 +298,6 @@ public class RealizarTriage extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jtAdmisiones);
 
-        btnPaciente.setText("Seleccionar paciente");
-        btnPaciente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPacienteActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -367,13 +358,8 @@ public class RealizarTriage extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cboDolorPecho, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(296, 296, 296)
-                        .addComponent(btnPaciente)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -439,15 +425,10 @@ public class RealizarTriage extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel12)
                     .addComponent(cboLesionesLeves, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13)
-                            .addComponent(cboSangrado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(btnPaciente)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(cboSangrado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLimpiar)
@@ -459,7 +440,11 @@ public class RealizarTriage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        if(admision == null){
+        int fila = jtAdmisiones.getSelectedRow();
+        try{
+            admision = lista.get(fila);
+        }
+        catch(Exception e){
             JOptionPane.showMessageDialog(null, "Debe seleccionar un paciente", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -488,21 +473,15 @@ public class RealizarTriage extends javax.swing.JFrame {
         if(cboRespiracion.getSelectedIndex()!=0 && cboPulso.getSelectedIndex()!=0 && cboEstadoMental.getSelectedIndex()!=0 && cboConciencia.getSelectedIndex()!=0 && cboDolorPecho.getSelectedIndex()!=0 && cboLesionesGraves.getSelectedIndex()!=0 && cboEdad.getSelectedIndex()!=0 && cboFiebre.getSelectedIndex()!=0 && cboVomitos.getSelectedIndex()!=0 && cboDolorAbominal.getSelectedIndex()!=0 && cboSignosShock.getSelectedIndex()!=0 && cboLesionesLeves.getSelectedIndex()!=0 && cboSangrado.getSelectedIndex()!=0 )
         {
             JOptionPane.showMessageDialog(this," El nivel de atencion es de " + color.toUpperCase());
-            int opcion =JOptionPane.showOptionDialog(null,"Desea editar el color?", "Confirmacion", 0, JOptionPane.QUESTION_MESSAGE, null , editar, "Terminar");
-            if(opcion == 1)
+            int opcion = JOptionPane.showOptionDialog(null,"Desea editar el color?", "Confirmacion", 0, JOptionPane.QUESTION_MESSAGE, null , editar, "Terminar");
+            if(opcion != 0)//si no aprieta el botón Editar
             {
-               t.setColor(NivelTriage.valueOf(color));
-               t.setColorModificado(NivelTriage.valueOf(color));
-               new TriageDatos().agregarTriage(t);
-               admision.setTriage(t); 
-               //datos
-               //RegistroAdmision.setTriage(t);
+                t.setColor(NivelTriage.valueOf(color));
+                t.setColorModificado(NivelTriage.valueOf(color));
             }else
             {             
-               // String nuevoColor = JOptionPane.showInputDialog(null,"El color asignado es: "+color+"Ingrese el nuevo color");
-                
                 TriageDatos d = new TriageDatos();
-                String nuevoColor=JOptionPane.showInputDialog(null,"El color asignado es: "+color+" Ingrese el nuevo color");;
+                String nuevoColor = JOptionPane.showInputDialog(null,"El color asignado es: "+color+" Ingrese el nuevo color");
                 boolean bandera = false;
                 
                 while(bandera == false)
@@ -560,11 +539,6 @@ public class RealizarTriage extends javax.swing.JFrame {
         cboSangrado.setSelectedIndex(0);
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
-    private void btnPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacienteActionPerformed
-        int fila = jtAdmisiones.getSelectedRow();
-        admision = lista.get(fila);
-    }//GEN-LAST:event_btnPacienteActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -604,7 +578,6 @@ public class RealizarTriage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmar;
     private javax.swing.JButton btnLimpiar;
-    private javax.swing.JButton btnPaciente;
     private javax.swing.JComboBox<String> cboConciencia;
     private javax.swing.JComboBox<String> cboDolorAbominal;
     private javax.swing.JComboBox<String> cboDolorPecho;
