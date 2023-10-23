@@ -3,6 +3,7 @@ package sistemas.tallerpoo.visual;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import sistemas.tallerpoo.TallerPoo;
 import sistemas.tallerpoo.clasesLogicas.Admision;
 import sistemas.tallerpoo.clasesLogicas.NivelTriage;
 import sistemas.tallerpoo.clasesLogicas.Triage;
@@ -510,6 +511,7 @@ public class RealizarTriage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "se ha guardado con exito ");
             
             TriageDatos td = new TriageDatos();
+            t.setDniEncargado(TallerPoo.getUsuarioActual().getDniFuncionario());
             td.agregarTriage(t);
             t.setId(td.cantidadTriage());
             
