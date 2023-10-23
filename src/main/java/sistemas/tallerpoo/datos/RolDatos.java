@@ -24,6 +24,11 @@ public class RolDatos {
     }
     
     public boolean agregarRol(Rol rol){
+        for(Rol r: lista){
+            if(r.getNombre().toLowerCase().equals(rol.getNombre().toLowerCase()) && r.getDniFuncionario() == rol.getDniFuncionario()){
+                return false;//si ya existe no lo agrega
+            }
+        }
         lista.add(rol);
         escribirArchivo();
         return true;
@@ -41,7 +46,7 @@ public class RolDatos {
     
     public boolean eliminarRol(Rol rol){
         for(Rol r: lista){
-            if(r.getNombre().equals(rol.getNombre()) && r.getDniFuncionario() == rol.getDniFuncionario()){
+            if(r.getNombre().toLowerCase().equals(rol.getNombre().toLowerCase()) && r.getDniFuncionario() == rol.getDniFuncionario()){
                 lista.remove(r);
                 escribirArchivo();
                 return true;

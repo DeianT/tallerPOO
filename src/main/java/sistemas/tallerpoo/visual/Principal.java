@@ -1,5 +1,5 @@
 package sistemas.tallerpoo.visual;
-import sistemas.tallerpoo.TallerPoo;
+import sistemas.tallerpoo.clasesLogicas.ControlRoles;
 
 /**
  *
@@ -39,6 +39,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jmRegistroFuncionario = new javax.swing.JMenuItem();
+        jmRoles = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         jmRegistroAdmision = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
@@ -133,6 +134,14 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu6.add(jmRegistroFuncionario);
 
+        jmRoles.setText("Roles");
+        jmRoles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmRolesActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jmRoles);
+
         jMenuBar1.add(jMenu6);
 
         jMenu7.setText("Admision");
@@ -204,7 +213,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jmCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCerrarSesionActionPerformed
-        TallerPoo.setUsuarioActual(null);
+        ControlRoles.setUsuarioActual(null);
         Login l = new Login();
         l.setVisible(true);
         this.dispose();
@@ -236,6 +245,10 @@ public class Principal extends javax.swing.JFrame {
     private void jmVerBoxesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmVerBoxesActionPerformed
         new Atencion().setVisible(true);
     }//GEN-LAST:event_jmVerBoxesActionPerformed
+
+    private void jmRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRolesActionPerformed
+        new RolesFuncionario().setVisible(true);
+    }//GEN-LAST:event_jmRolesActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -288,6 +301,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmRegistrar;
     private javax.swing.JMenuItem jmRegistroAdmision;
     private javax.swing.JMenuItem jmRegistroFuncionario;
+    private javax.swing.JMenuItem jmRoles;
     private javax.swing.JMenuItem jmSalir;
     private javax.swing.JMenuItem jmVerBoxes;
     // End of variables declaration//GEN-END:variables

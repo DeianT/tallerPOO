@@ -1,15 +1,11 @@
 package sistemas.tallerpoo.visual;
 
 import java.util.ArrayList;
-import java.util.Vector;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import sistemas.tallerpoo.clasesLogicas.Especialidad;
 import sistemas.tallerpoo.clasesLogicas.Funcionario;
-import sistemas.tallerpoo.clasesLogicas.Medico;
 import sistemas.tallerpoo.clasesLogicas.Rol;
-import sistemas.tallerpoo.datos.EspacialidadDatos;
 import sistemas.tallerpoo.datos.FuncionarioDatos;
 import sistemas.tallerpoo.datos.RolDatos;
 
@@ -18,21 +14,15 @@ import sistemas.tallerpoo.datos.RolDatos;
  * @author Thiago
  */
 public class RolesFuncionario extends javax.swing.JFrame {
-
-    Vector<String> lista2 = new Vector<>();
     FuncionarioDatos fDatos = new FuncionarioDatos();
     RolDatos rolDatos = new RolDatos();
-    ArrayList<Medico> med = new ArrayList<Medico>();
-
-    ArrayList<Especialidad> lista = new ArrayList();
-    String[] confirmar = {"SI" , "NO"};
+    String[] confirmar = {"SI", "NO"};
    
     public RolesFuncionario() {
         initComponents();
         this.setLocationRelativeTo(null);
         llenarCombo();
         mostrarNombre(cbDnis, txtNombreApellido, fDatos.obtenerFuncionarios());
- 
     }
 
     /**
@@ -57,7 +47,7 @@ public class RolesFuncionario extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jlTodosLosRoles.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Alergología", "Anestesiología", "Angiología", "Cardiología", "Endocrinología", "Estomatología", "Farmacología Clínica", "Gastroenterología", "Genética", "Geriatría", "Hematología", "Hepatología", "Infectología", "Medicina aeroespacial", "Medicina del deporte", "Medicina familiar y comunitaria", "Medicina física y rehabilitación", "Medicina forense", "Medicina intensiva", "Medicina interna", "Medicina preventiva y salud pública", "Medicina del trabajo", "Nefrología", "Neumología", "Neurología", "Nutriología", "Oncología médica", "Oncología radioterápica", "Pediatría", "Psiquiatría", "Reumatología", "Toxicología", "Cirugía cardíaca", "Cirugía general", "Cirugía oral y maxilofacial", "Cirugía ortopédica", "Cirugía pediátrica", "Cirugía plástica", "Cirugía torácica", "Cirugía vascular", "Neurocirugía", "Dermatología", "Ginecología y obstetricia o tocología", "Medicina de emergencia", "Oftalmología", "Otorrinolaringología", "Traumatología", "Urología", "Análisis clínico", "Anatomía patológica", "Bioquímica clínica", "Farmacología", "Genética médica", "Inmunología", "Medicina nuclear", "Microbiología y parasitología", "Neurofisiología clínica", "Radiología" };
+            String[] strings = { "Administrador de Sistema", "Medico", "Recursos Humanos", "Admision de Pacientes", "Compras", "Auditoria", "Gestion", "Registros Medicos", "Informatica" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -72,14 +62,6 @@ public class RolesFuncionario extends javax.swing.JFrame {
             }
         });
 
-        cbDnis.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                cbDnisFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                cbDnisFocusLost(evt);
-            }
-        });
         cbDnis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbDnisActionPerformed(evt);
@@ -146,48 +128,25 @@ public class RolesFuncionario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        int opcion = JOptionPane.showOptionDialog(null, "esta seguro que desea agregar el rol " + jlTodosLosRoles.getSelectedValue().toUpperCase()+ " al funcionario con dni " + cbDnis.getSelectedItem().toString(), "confirmacion", 0, JOptionPane.QUESTION_MESSAGE, null, confirmar, "SI"  );
+        //controlar que exista antes de pedir confirmacion
+        int opcion = JOptionPane.showOptionDialog(null, "esta seguro que desea agregar el rol " + jlTodosLosRoles.getSelectedValue().toUpperCase() + " al funcionario con dni " + cbDnis.getSelectedItem().toString(), "confirmacion", 0, JOptionPane.QUESTION_MESSAGE, null, confirmar, "SI");
         
         if(opcion == 0)
         {
-           String uni = JOptionPane.showInputDialog(null,"ingrese el nombre de la universiad donde obtuvo la especialidad");
-            String fecha = JOptionPane.showInputDialog(null, "ingrese la fecha en que lo obtuvo");
-            if(fecha != null)
-            {
-//                lista2 = esp.mostrarEspecilidades(cbDnis, jlRolesFuncionario);
-                lista2.add(jlTodosLosRoles.getSelectedValue());
-                jlRolesFuncionario.setListData(lista2);
-//                esp.agregarEspecilidades(cbDnis, jlTodosLosRoles,uni,fecha);
+            int dni = Integer.parseInt((String) cbDnis.getSelectedItem());
+            Rol rol = new Rol(jlTodosLosRoles.getSelectedValue(), dni);
+            if(!rolDatos.agregarRol(rol)){
+                JOptionPane.showMessageDialog(null, "El funcionario ya tiene ese rol asignado");
             }
-            else
-            {
-                JOptionPane.showMessageDialog(null, "tiene que ingresar una fecha");
-            }
+            listarRoles();
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
-    private void cbDnisFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbDnisFocusGained
- 
-    }//GEN-LAST:event_cbDnisFocusGained
-
     private void cbDnisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDnisActionPerformed
-        // TODO add your handling code here:
         jlRolesFuncionario.removeAll();
         mostrarNombre(cbDnis, txtNombreApellido, fDatos.obtenerFuncionarios());
-        
-        int dni = cbDnis.getSelectedIndex();
-        ArrayList<Rol> roles = rolDatos.obtenerRolesFuncionario(dni);
-        String[] arr = new String[roles.size()];
-        
-        for(int i = 0; i < roles.size(); i++){
-            arr[i] = roles.get(i).getNombre();
-        }
-        jlRolesFuncionario.setListData(arr);
+        listarRoles();
     }//GEN-LAST:event_cbDnisActionPerformed
-
-    private void cbDnisFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbDnisFocusLost
-        // TODO add your handling code here: 
-    }//GEN-LAST:event_cbDnisFocusLost
 
     /**
      * @param args the command line arguments
@@ -228,14 +187,24 @@ public class RolesFuncionario extends javax.swing.JFrame {
     private void mostrarNombre(JComboBox cb, JLabel txt, ArrayList<Funcionario> lista)
     {
         Funcionario m = lista.get(cb.getSelectedIndex());
-        String dni = Integer.toString(m.getDni());
-        txt.setText(m.getNombre()+" "+m.getApellido());
+        txt.setText(m.getNombre() + " " + m.getApellido());
     }
     
     private void llenarCombo(){
         for(Funcionario f: fDatos.obtenerFuncionarios()){
             cbDnis.addItem(Integer.toString(f.getDni()));
         }
+    }
+    
+    private void listarRoles(){
+        int dni = Integer.parseInt((String) cbDnis.getSelectedItem());
+        ArrayList<Rol> roles = rolDatos.obtenerRolesFuncionario(dni);
+        String[] arr = new String[roles.size()];
+        
+        for(int i = 0; i < roles.size(); i++){
+            arr[i] = roles.get(i).getNombre();
+        }
+        jlRolesFuncionario.setListData(arr);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

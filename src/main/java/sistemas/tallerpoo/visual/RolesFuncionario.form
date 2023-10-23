@@ -96,65 +96,16 @@
         <Component class="javax.swing.JList" name="jlTodosLosRoles">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-              <StringArray count="58">
-                <StringItem index="0" value="Alergolog&#xed;a"/>
-                <StringItem index="1" value="Anestesiolog&#xed;a"/>
-                <StringItem index="2" value="Angiolog&#xed;a"/>
-                <StringItem index="3" value="Cardiolog&#xed;a"/>
-                <StringItem index="4" value="Endocrinolog&#xed;a"/>
-                <StringItem index="5" value="Estomatolog&#xed;a"/>
-                <StringItem index="6" value="Farmacolog&#xed;a Cl&#xed;nica"/>
-                <StringItem index="7" value="Gastroenterolog&#xed;a"/>
-                <StringItem index="8" value="Gen&#xe9;tica"/>
-                <StringItem index="9" value="Geriatr&#xed;a"/>
-                <StringItem index="10" value="Hematolog&#xed;a"/>
-                <StringItem index="11" value="Hepatolog&#xed;a"/>
-                <StringItem index="12" value="Infectolog&#xed;a"/>
-                <StringItem index="13" value="Medicina aeroespacial"/>
-                <StringItem index="14" value="Medicina del deporte"/>
-                <StringItem index="15" value="Medicina familiar y comunitaria"/>
-                <StringItem index="16" value="Medicina f&#xed;sica y rehabilitaci&#xf3;n"/>
-                <StringItem index="17" value="Medicina forense"/>
-                <StringItem index="18" value="Medicina intensiva"/>
-                <StringItem index="19" value="Medicina interna"/>
-                <StringItem index="20" value="Medicina preventiva y salud p&#xfa;blica"/>
-                <StringItem index="21" value="Medicina del trabajo"/>
-                <StringItem index="22" value="Nefrolog&#xed;a"/>
-                <StringItem index="23" value="Neumolog&#xed;a"/>
-                <StringItem index="24" value="Neurolog&#xed;a"/>
-                <StringItem index="25" value="Nutriolog&#xed;a"/>
-                <StringItem index="26" value="Oncolog&#xed;a m&#xe9;dica"/>
-                <StringItem index="27" value="Oncolog&#xed;a radioter&#xe1;pica"/>
-                <StringItem index="28" value="Pediatr&#xed;a"/>
-                <StringItem index="29" value="Psiquiatr&#xed;a"/>
-                <StringItem index="30" value="Reumatolog&#xed;a"/>
-                <StringItem index="31" value="Toxicolog&#xed;a"/>
-                <StringItem index="32" value="Cirug&#xed;a card&#xed;aca"/>
-                <StringItem index="33" value="Cirug&#xed;a general"/>
-                <StringItem index="34" value="Cirug&#xed;a oral y maxilofacial"/>
-                <StringItem index="35" value="Cirug&#xed;a ortop&#xe9;dica"/>
-                <StringItem index="36" value="Cirug&#xed;a pedi&#xe1;trica"/>
-                <StringItem index="37" value="Cirug&#xed;a pl&#xe1;stica"/>
-                <StringItem index="38" value="Cirug&#xed;a tor&#xe1;cica"/>
-                <StringItem index="39" value="Cirug&#xed;a vascular"/>
-                <StringItem index="40" value="Neurocirug&#xed;a"/>
-                <StringItem index="41" value="Dermatolog&#xed;a"/>
-                <StringItem index="42" value="Ginecolog&#xed;a y obstetricia o tocolog&#xed;a"/>
-                <StringItem index="43" value="Medicina de emergencia"/>
-                <StringItem index="44" value="Oftalmolog&#xed;a"/>
-                <StringItem index="45" value="Otorrinolaringolog&#xed;a"/>
-                <StringItem index="46" value="Traumatolog&#xed;a"/>
-                <StringItem index="47" value="Urolog&#xed;a"/>
-                <StringItem index="48" value="An&#xe1;lisis cl&#xed;nico"/>
-                <StringItem index="49" value="Anatom&#xed;a patol&#xf3;gica"/>
-                <StringItem index="50" value="Bioqu&#xed;mica cl&#xed;nica"/>
-                <StringItem index="51" value="Farmacolog&#xed;a"/>
-                <StringItem index="52" value="Gen&#xe9;tica m&#xe9;dica"/>
-                <StringItem index="53" value="Inmunolog&#xed;a"/>
-                <StringItem index="54" value="Medicina nuclear"/>
-                <StringItem index="55" value="Microbiolog&#xed;a y parasitolog&#xed;a"/>
-                <StringItem index="56" value="Neurofisiolog&#xed;a cl&#xed;nica"/>
-                <StringItem index="57" value="Radiolog&#xed;a"/>
+              <StringArray count="9">
+                <StringItem index="0" value="Administrador de Sistema"/>
+                <StringItem index="1" value="Medico"/>
+                <StringItem index="2" value="Recursos Humanos"/>
+                <StringItem index="3" value="Admision de Pacientes"/>
+                <StringItem index="4" value="Compras"/>
+                <StringItem index="5" value="Auditoria"/>
+                <StringItem index="6" value="Gestion"/>
+                <StringItem index="7" value="Registros Medicos"/>
+                <StringItem index="8" value="Informatica"/>
               </StringArray>
             </Property>
           </Properties>
@@ -198,8 +149,6 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="cbDnisFocusGained"/>
-        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="cbDnisFocusLost"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbDnisActionPerformed"/>
       </Events>
       <AuxValues>
