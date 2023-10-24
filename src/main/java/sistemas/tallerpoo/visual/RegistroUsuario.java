@@ -56,7 +56,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
 
         jLabel5.setText("Rol");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador de Sistema", "Medico", "Recursos Humanos", "Admision de Pacientes", "compras", "Auditoria", "Gestion", "Registros Medicos", "Informatica" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador de Sistema", "Admision de Pacientes", "Auditoria", "Compras", "Gestion", "Informatica", "Medico", "Recursos Humanos", "Registros Medicos" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

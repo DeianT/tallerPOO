@@ -24,9 +24,20 @@ public class RolDatos {
     }
     
     public boolean agregarRol(Rol rol){
+        if(existeRol(rol))
+            return false;//si ya existe no lo agrega
         lista.add(rol);
         escribirArchivo();
         return true;
+    }
+    
+    public boolean existeRol(Rol rol){
+        for(Rol r: lista){
+            if(r.getNombre().toLowerCase().equals(rol.getNombre().toLowerCase()) && r.getDniFuncionario() == rol.getDniFuncionario()){
+                return true;
+            }
+        }
+        return false;
     }
     
     public ArrayList<Rol> obtenerRolesFuncionario(int dni){
@@ -40,14 +51,18 @@ public class RolDatos {
     }
     
     public boolean eliminarRol(Rol rol){
-        for(Rol r: obtenerRolesFuncionario(rol.getDniFuncionario())){
-            if(r.getNombre().equals(rol.getNombre())){
+        for(Rol r: lista){
+            if(r.getNombre().toLowerCase().equals(rol.getNombre().toLowerCase()) && r.getDniFuncionario() == rol.getDniFuncionario()){
                 lista.remove(r);
                 escribirArchivo();
                 return true;
             }
         }
         return false;
+    }
+    
+    public boolean eliminarRolesFuncionario(int dni){
+        return lista.removeAll(obtenerRolesFuncionario(dni));
     }
     
     private void escribirArchivo(){

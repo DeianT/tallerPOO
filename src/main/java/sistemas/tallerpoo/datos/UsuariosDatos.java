@@ -8,7 +8,7 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import sistemas.tallerpoo.TallerPoo;
+import sistemas.tallerpoo.clasesLogicas.ControlRoles;
 
 /**
  *
@@ -123,7 +123,7 @@ public class UsuariosDatos {
                 user = new Usuario(Integer.parseInt(datos[0]), datos[1], datos[2]);
                 if(user.getNombreUsuario().equals(nombre) && user.getContraseñaUsuario().equals(contra))
                 {
-                    TallerPoo.setUsuarioActual(user);
+                    ControlRoles.setUsuarioActual(user);
                     return true;
                 }
             }   
