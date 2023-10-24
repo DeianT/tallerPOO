@@ -384,9 +384,13 @@ public class RegistroMedico extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-         if (!validarCorreoElectronico(txtCorreo.getText())){
-              JOptionPane.showMessageDialog(null, "Correo electrónico incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
-              return;
+        if ((Integer.parseInt(txtDni.getText()) <= 0)){
+            JOptionPane.showMessageDialog(null,"Ingrese un DNI válido", "Error",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!validarCorreoElectronico(txtCorreo.getText())){
+            JOptionPane.showMessageDialog(null, "Correo electrónico incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         if(datos.agregarMedico(captar())){
             JOptionPane.showMessageDialog(null, "se registro con exito");
