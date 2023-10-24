@@ -97,6 +97,7 @@ public class RegistroMedico extends javax.swing.JFrame {
        cbEstadoCivil.setSelectedIndex(0);
        txtCorreo.setText("");  
        txtMatricula.setText("");
+       lblMensaje.setText("");
     }
     
     Medico captar()
@@ -121,12 +122,9 @@ public class RegistroMedico extends javax.swing.JFrame {
         return m;
     }
     private boolean validarCorreoElectronico(String correoElectronico){
-     
-     Pattern pat = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-     Matcher mat = pat.matcher(correoElectronico);
-     return mat.find();
-     
-   
+        Pattern pat = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        Matcher mat = pat.matcher(correoElectronico);
+        return mat.find();
     }
     
     @SuppressWarnings("unchecked")
@@ -436,17 +434,13 @@ public class RegistroMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConfirmarEdicionActionPerformed
 
     private void txtCorreoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyReleased
-         if (validarCorreoElectronico(txtCorreo.getText())) {
-             lblMensaje.setText("Correcto");
-             lblMensaje.setForeground(Color.GREEN); 
+        if (validarCorreoElectronico(txtCorreo.getText())) {
+            lblMensaje.setText("Correcto");
+            lblMensaje.setForeground(Color.GREEN); 
         }else{
-              lblMensaje.setText("Incorrecto");
-              lblMensaje.setForeground(Color.RED);
-                    
+            lblMensaje.setText("Incorrecto");
+            lblMensaje.setForeground(Color.RED);      
         }
-  
-      
-         
     }//GEN-LAST:event_txtCorreoKeyReleased
 
     private void filtrar()
