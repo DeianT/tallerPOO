@@ -43,6 +43,7 @@ public class RolesFuncionario extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txtNombreApellido = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        btnEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -55,7 +56,7 @@ public class RolesFuncionario extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(jlRolesFuncionario);
 
-        btnAgregar.setText("--->");
+        btnAgregar.setText("Asignar rol");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
@@ -73,6 +74,13 @@ public class RolesFuncionario extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel2.setText("Nombre del funcionario");
 
+        btnEliminar.setText("Eliminar rol");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -81,7 +89,9 @@ public class RolesFuncionario extends javax.swing.JFrame {
                 .addGap(47, 47, 47)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
-                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(71, 71, 71)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(59, 59, 59))
@@ -121,23 +131,32 @@ public class RolesFuncionario extends javax.swing.JFrame {
                         .addGap(43, 43, 43))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnAgregar)
-                        .addGap(134, 134, 134))))
+                        .addGap(73, 73, 73)
+                        .addComponent(btnEliminar)
+                        .addGap(60, 60, 60))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        //controlar que exista antes de pedir confirmacion
-        int opcion = JOptionPane.showOptionDialog(null, "esta seguro que desea agregar el rol " + jlTodosLosRoles.getSelectedValue().toUpperCase() + " al funcionario con dni " + cbDnis.getSelectedItem().toString(), "confirmacion", 0, JOptionPane.QUESTION_MESSAGE, null, confirmar, "SI");
+        int dni = Integer.parseInt((String) cbDnis.getSelectedItem());
+        Rol rol = new Rol(jlTodosLosRoles.getSelectedValue(), dni);
+        
+        if(rol.getNombre() == null){//controla que haya un rol seleccionado
+            JOptionPane.showMessageDialog(null, "Ningún rol seleccionado");
+            return;
+        }
+        if(rolDatos.existeRol(rol)){
+            JOptionPane.showMessageDialog(null, "El funcionario ya tiene ese rol asignado");
+            return;
+        }
+
+        int opcion = JOptionPane.showOptionDialog(null, "¿Está seguro que desea agregar el rol " + jlTodosLosRoles.getSelectedValue().toUpperCase() + " al funcionario con dni " + cbDnis.getSelectedItem().toString() + "?", "confirmacion", 0, JOptionPane.QUESTION_MESSAGE, null, confirmar, "SI");
         
         if(opcion == 0)
         {
-            int dni = Integer.parseInt((String) cbDnis.getSelectedItem());
-            Rol rol = new Rol(jlTodosLosRoles.getSelectedValue(), dni);
-            if(!rolDatos.agregarRol(rol)){
-                JOptionPane.showMessageDialog(null, "El funcionario ya tiene ese rol asignado");
-            }
+            rolDatos.agregarRol(rol);
             listarRoles();
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
@@ -147,6 +166,23 @@ public class RolesFuncionario extends javax.swing.JFrame {
         mostrarNombre(cbDnis, txtNombreApellido, fDatos.obtenerFuncionarios());
         listarRoles();
     }//GEN-LAST:event_cbDnisActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        int dni = Integer.parseInt((String) cbDnis.getSelectedItem());
+        Rol rol = new Rol(jlRolesFuncionario.getSelectedValue(), dni);
+        if(rol.getNombre() == null){
+            JOptionPane.showMessageDialog(null, "Ningún rol seleccionado");
+            return;
+        }
+        
+        int opcion = JOptionPane.showOptionDialog(null, "¿Está seguro que desea eliminar el rol " + jlTodosLosRoles.getSelectedValue().toUpperCase() + " al funcionario con dni " + cbDnis.getSelectedItem().toString() + "?", "confirmacion", 0, JOptionPane.QUESTION_MESSAGE, null, confirmar, "SI");
+        
+        if(opcion == 0)
+        {
+            rolDatos.eliminarRol(rol);
+            listarRoles();
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,6 +245,7 @@ public class RolesFuncionario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JComboBox<String> cbDnis;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

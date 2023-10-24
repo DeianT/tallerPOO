@@ -24,14 +24,20 @@ public class RolDatos {
     }
     
     public boolean agregarRol(Rol rol){
-        for(Rol r: lista){
-            if(r.getNombre().toLowerCase().equals(rol.getNombre().toLowerCase()) && r.getDniFuncionario() == rol.getDniFuncionario()){
-                return false;//si ya existe no lo agrega
-            }
-        }
+        if(existeRol(rol))
+            return false;//si ya existe no lo agrega
         lista.add(rol);
         escribirArchivo();
         return true;
+    }
+    
+    public boolean existeRol(Rol rol){
+        for(Rol r: lista){
+            if(r.getNombre().toLowerCase().equals(rol.getNombre().toLowerCase()) && r.getDniFuncionario() == rol.getDniFuncionario()){
+                return true;
+            }
+        }
+        return false;
     }
     
     public ArrayList<Rol> obtenerRolesFuncionario(int dni){
