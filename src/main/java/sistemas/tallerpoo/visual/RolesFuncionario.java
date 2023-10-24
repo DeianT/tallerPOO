@@ -1,6 +1,7 @@
 package sistemas.tallerpoo.visual;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -48,7 +49,7 @@ public class RolesFuncionario extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jlTodosLosRoles.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Administrador de Sistema", "Medico", "Recursos Humanos", "Admision de Pacientes", "Compras", "Auditoria", "Gestion", "Registros Medicos", "Informatica" };
+            String[] strings = { "Administrador de Sistema", "Admision de Pacientes", "Auditoria", "Compras", "Gestion", "Informatica", "Medico", "Recursos Humanos", "Registros Medicos" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -240,6 +241,7 @@ public class RolesFuncionario extends javax.swing.JFrame {
         for(int i = 0; i < roles.size(); i++){
             arr[i] = roles.get(i).getNombre();
         }
+        Arrays.sort(arr);
         jlRolesFuncionario.setListData(arr);
     }
 
