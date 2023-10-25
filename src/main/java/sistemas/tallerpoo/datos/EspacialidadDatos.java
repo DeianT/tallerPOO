@@ -52,7 +52,7 @@ public class EspacialidadDatos {
                 m.setDni(Integer.parseInt(datos[0]));
                 m.setNombre(datos[1]);
                 m.setApellido(datos[2]);
-                m.setFechaNacimiento(new Date());
+                m.setFechaNacimiento(datos[3]);
                 m.setDomicilio(datos[4]);
                 m.setTelFijo(Integer.parseInt(datos[5]));
                 m.setTelCelular(datos[6]);

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
+import com.toedter.calendar.JDateChooser;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import sistemas.tallerpoo.clasesLogicas.Funcionario;
@@ -141,8 +142,8 @@ public class FuncionarioDatos {
                 f.setDni(Integer.parseInt(campos[0]));
                 f.setNombre(campos[1]);
                 f.setApellido(campos[2]);
-//                   f.setFechaNacimiento(new Date(campos[3]));
-                f.setFechaNacimiento(new Date());
+                f.setFechaNacimiento(campos[3]);
+                //f.setFechaNacimiento(new Date());
                 f.setDomicilio(campos[4]);
                 f.setTelFijo(Integer.parseInt(campos[5]));
                 f.setTelCelular(campos[6]);
@@ -150,7 +151,7 @@ public class FuncionarioDatos {
                 f.setCorreoElect(campos[8]);
                 f.setTrabajaEn(new SectorTrabajo(campos[9]));
                 f.setRolesSistema(new ArrayList<>());
-                //obtener los roles del funcionario y asignarlos
+                //Obtener los roles del funcionario y asignarlos
                 
                 lista.add(f);
                 linea = br.readLine();
@@ -166,7 +167,7 @@ public class FuncionarioDatos {
         }
     }
     
-    public Funcionario capturar(JTextField dni, JTextField nombre, JTextField apellido, JTextField fecha, JTextField domicilio, JTextField tel, JTextField celular, JComboBox estado, JTextField correo, JTextField sector)
+    public Funcionario capturar(JTextField dni, JTextField nombre, JTextField apellido, JDateChooser fecha, JTextField domicilio, JTextField tel, JTextField celular, JComboBox estado, JTextField correo, JTextField sector)
     {
         Funcionario pac = new Funcionario();
         int DNI = Integer.parseInt(dni.getText()); 
@@ -177,8 +178,8 @@ public class FuncionarioDatos {
         pac.setDni(DNI);
         pac.setNombre(nombre.getText());
         pac.setApellido(apellido.getText());
-        //pac.setFechaNacimiento(fecha.getText().toString());
-        pac.setFechaNacimiento(new Date());
+        String Fecha = ((JTextField)fecha.getDateEditor().getUiComponent()).getText();
+        pac.setFechaNacimiento(Fecha);
         pac.setDomicilio(domicilio.getText());
         pac.setTelFijo(telF);
         pac.setTelCelular(celular.getText());

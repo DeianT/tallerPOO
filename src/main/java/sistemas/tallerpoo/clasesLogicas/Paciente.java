@@ -11,7 +11,7 @@ import lombok.Setter;
 public class Paciente extends Persona {
     private String contacto;
 
-    public Paciente(int dni, String Nombre, String Apellido, Date fechaNacimiento, String domicilio, int telFijo, String telCelular, String estadoCivil, String correoElect, String contacto) {
+    public Paciente(int dni, String Nombre, String Apellido, String fechaNacimiento, String domicilio, int telFijo, String telCelular, String estadoCivil, String correoElect, String contacto) {
         super(dni, Nombre, Apellido, fechaNacimiento, domicilio, telFijo, telCelular, estadoCivil, correoElect);
         this.contacto = contacto;
     }
