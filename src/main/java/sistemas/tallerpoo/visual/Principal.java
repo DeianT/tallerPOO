@@ -1,5 +1,5 @@
 package sistemas.tallerpoo.visual;
-import sistemas.tallerpoo.TallerPoo;
+import sistemas.tallerpoo.clasesLogicas.ControlRoles;
 
 /**
  *
@@ -218,7 +218,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jmCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCerrarSesionActionPerformed
-        TallerPoo.setUsuarioActual(null);
+        ControlRoles.setUsuarioActual(null);
         Login l = new Login();
         l.setVisible(true);
         this.dispose();

@@ -58,6 +58,7 @@ public class FuncionarioDatos {
             lista.remove(f);
             escribirArchivo();
             new MedicoDatos().eliminarMedico(dni);
+            new RolDatos().eliminarRolesFuncionario(dni);
             return true;
         }
         catch(Exception e){

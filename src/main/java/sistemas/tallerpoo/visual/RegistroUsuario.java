@@ -1,5 +1,6 @@
 package sistemas.tallerpoo.visual;
 
+import javax.swing.JOptionPane;
 import sistemas.tallerpoo.datos.UsuariosDatos;
 
 /**
@@ -56,7 +57,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
 
         jLabel5.setText("Rol");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador de Sistema", "Medico", "Recursos Humanos", "Admision de Pacientes", "compras", "Auditoria", "Gestion", "Registros Medicos", "Informatica" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador de Sistema", "Admision de Pacientes", "Auditoria", "Compras", "Gestion", "Informatica", "Medico", "Recursos Humanos", "Registros Medicos" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -116,6 +117,11 @@ public class RegistroUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        if("".equals(txtUsuario.getText()) || "".equals(txtContraseña.getText()) || "".equals(txtDni.getText())){
+            JOptionPane.showMessageDialog(null, "Hay campos vacíos", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         UsuariosDatos user = new UsuariosDatos();
         if(user.Registrar(Integer.parseInt(txtDni.getText()), txtUsuario, txtContraseña, txtRepContra))
         {
