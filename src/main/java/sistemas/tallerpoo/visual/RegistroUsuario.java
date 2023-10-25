@@ -1,5 +1,6 @@
 package sistemas.tallerpoo.visual;
 
+import javax.swing.JOptionPane;
 import sistemas.tallerpoo.datos.UsuariosDatos;
 
 /**
@@ -116,6 +117,11 @@ public class RegistroUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        if("".equals(txtUsuario.getText()) || "".equals(txtContraseña.getText()) || "".equals(txtDni.getText())){
+            JOptionPane.showMessageDialog(null, "Hay campos vacíos", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         UsuariosDatos user = new UsuariosDatos();
         if(user.Registrar(Integer.parseInt(txtDni.getText()), txtUsuario, txtContraseña, txtRepContra))
         {

@@ -99,7 +99,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
        txtDni.setText("");
        txtNombre.setText("");
        txtApellido.setText("");
-       //txtFechaNacimiento.setText("");
+       txtFechaNacimiento.setText("");
        txtDomicilio .setText("");
        txtTelefono.setText("");
        txtCelular.setText("");

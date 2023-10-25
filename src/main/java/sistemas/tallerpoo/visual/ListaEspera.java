@@ -179,6 +179,10 @@ public class ListaEspera extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un box", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if(box.isOcupado()){
+            JOptionPane.showMessageDialog(null, "El box está ocupado");
+            return;
+        }
         
         admision.setBox(box);
         datos.editarAdmision(admision);
