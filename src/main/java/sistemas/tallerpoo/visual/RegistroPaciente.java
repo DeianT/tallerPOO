@@ -186,7 +186,6 @@ public class RegistroPaciente extends javax.swing.JFrame {
 
         jLabel10.setText("Contacto");
 
-        txtDni.setText("Ingrese el DNI sin puntos");
         txtDni.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtDniFocusGained(evt);
@@ -517,7 +516,6 @@ public class RegistroPaciente extends javax.swing.JFrame {
 
     private void txtDniFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDniFocusGained
         // TODO add your handling code here:
-        txtDni.setText(" ");
     }//GEN-LAST:event_txtDniFocusGained
 
     private void txtFechaNacimientoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFechaNacimientoFocusGained
