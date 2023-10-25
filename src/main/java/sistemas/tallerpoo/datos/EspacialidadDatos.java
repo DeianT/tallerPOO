@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.Vector;
+import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -114,6 +115,7 @@ public class EspacialidadDatos {
                 }
 
             }
+            
             esp.setListData(lista);
             
         } catch (Exception e) {
