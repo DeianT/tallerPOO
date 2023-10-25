@@ -137,7 +137,7 @@
             <StringItem index="1" value="Medico"/>
             <StringItem index="2" value="Recursos Humanos"/>
             <StringItem index="3" value="Admision de Pacientes"/>
-            <StringItem index="4" value="compras"/>
+            <StringItem index="4" value="Compras"/>
             <StringItem index="5" value="Auditoria"/>
             <StringItem index="6" value="Gestion"/>
             <StringItem index="7" value="Registros Medicos"/>

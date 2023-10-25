@@ -47,8 +47,8 @@
                   <Component id="txtCelular" alignment="0" max="32767" attributes="0"/>
                   <Component id="cbEstadoCivil" alignment="0" pref="140" max="32767" attributes="0"/>
                   <Component id="txtCorreo" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtFechaNacimiento" max="32767" attributes="0"/>
                   <Component id="txtSectorTrabajo" max="32767" attributes="0"/>
+                  <Component id="txtFechaNacimiento" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -108,10 +108,10 @@
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtApellido" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtFechaNacimiento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtFechaNacimiento" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -353,8 +353,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtFechaNacimiento">
-    </Component>
     <Component class="javax.swing.JButton" name="btnMostrarTodo">
       <Properties>
         <Property name="text" type="java.lang.String" value="Mostrar Todo"/>
@@ -377,6 +375,11 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtSectorTrabajo">
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="txtFechaNacimiento">
+      <Properties>
+        <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

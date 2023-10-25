@@ -38,13 +38,14 @@ public class IngresoContacto extends javax.swing.JFrame {
         p.setDni(DNI);
         p.setNombre(txtNombre.getText());
         p.setApellido(txtApellido.getText());
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+        /*SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
         try{
             p.setFechaNacimiento(formatoFecha.parse(txtFechaNacimiento.getText()));
         }catch(java.text.ParseException e){
              e.printStackTrace();
         }
-//        p.setFechaNacimiento(txtFechaNacimiento.getText());
+        */
+        p.setFechaNacimiento(txtFechaNacimiento.getText());
 //        p.setFechaNacimiento(new Date());
         p.setDomicilio(txtDomicilio.getText());
         p.setTelFijo(Telefono);

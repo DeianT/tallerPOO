@@ -1,8 +1,11 @@
 package sistemas.tallerpoo.visual;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -73,7 +76,13 @@ public class RegistroFuncionario extends javax.swing.JFrame {
         txtDni.setText(dni);
         txtNombre.setText(p.getNombre());
         txtApellido.setText(p.getApellido());
-        txtFechaNacimiento.setText(p.getFechaNacimiento().toString());
+        try {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                Date pruebita = dateFormat.parse(p.getFechaNacimiento());
+                txtFechaNacimiento.setDate(pruebita);
+            } catch (ParseException ex) {
+            }
+        
         txtDomicilio.setText(p.getDomicilio());
         txtTelefono.setText(telefono);
         txtCelular.setText(p.getTelCelular());
@@ -87,7 +96,7 @@ public class RegistroFuncionario extends javax.swing.JFrame {
        txtDni.setText("");
        txtNombre.setText("");
        txtApellido.setText("");
-       txtFechaNacimiento.setText("");
+       txtFechaNacimiento.setCalendar(null);
        txtDomicilio .setText("");
        txtTelefono.setText("");
        txtCelular.setText("");
@@ -107,8 +116,8 @@ public class RegistroFuncionario extends javax.swing.JFrame {
         m.setDni(dni);
         m.setNombre(txtNombre.getText());
         m.setApellido(txtApellido.getText());
-//        m.setFechaNacimiento(txtFechaNacimiento.getText());
-        m.setFechaNacimiento(new Date());
+        String Fecha = ((JTextField)txtFechaNacimiento.getDateEditor().getUiComponent()).getText();
+        m.setFechaNacimiento(Fecha);
         m.setDomicilio(txtDomicilio.getText());
         m.setTelFijo(telefono);
         m.setTelCelular(txtCelular.getText());
@@ -148,11 +157,11 @@ public class RegistroFuncionario extends javax.swing.JFrame {
         txtBuscarDni = new javax.swing.JTextField();
         btnEliminar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
-        txtFechaNacimiento = new javax.swing.JTextField();
         btnMostrarTodo = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         btnConfirmarEdicion = new javax.swing.JButton();
         txtSectorTrabajo = new javax.swing.JTextField();
+        txtFechaNacimiento = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -239,6 +248,8 @@ public class RegistroFuncionario extends javax.swing.JFrame {
             }
         });
 
+        txtFechaNacimiento.setDateFormatString("dd/MM/yyyy");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -266,8 +277,8 @@ public class RegistroFuncionario extends javax.swing.JFrame {
                     .addComponent(txtCelular)
                     .addComponent(cbEstadoCivil, 0, 140, Short.MAX_VALUE)
                     .addComponent(txtCorreo)
-                    .addComponent(txtFechaNacimiento)
-                    .addComponent(txtSectorTrabajo))
+                    .addComponent(txtSectorTrabajo)
+                    .addComponent(txtFechaNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -314,8 +325,8 @@ public class RegistroFuncionario extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(txtFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
@@ -358,7 +369,7 @@ public class RegistroFuncionario extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         if (datos.agregarFuncionario(captar())){
-            JOptionPane.showMessageDialog(null, "se registro con exito");
+            JOptionPane.showMessageDialog(null, "Se registró con exito");
             listar();
             this.limpiarTexto();
         }
@@ -391,10 +402,10 @@ public class RegistroFuncionario extends javax.swing.JFrame {
 
     private void btnConfirmarEdicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarEdicionActionPerformed
         Funcionario p = new Funcionario();
-        p=datos.capturar(txtDni, txtNombre, txtApellido, txtDni, txtDomicilio, txtDni, txtCelular, cbEstadoCivil, txtCorreo, txtSectorTrabajo);
+        p=datos.capturar(txtDni, txtNombre, txtApellido, txtFechaNacimiento, txtDomicilio, txtDni, txtCelular, cbEstadoCivil, txtCorreo, txtSectorTrabajo);
         if(datos.editarFuncionario(p))
         {
-            JOptionPane.showMessageDialog(null, "se edito con exito");
+            JOptionPane.showMessageDialog(null, "Se editó con exito");
             limpiarTexto();
             listar();
         }
@@ -472,7 +483,7 @@ public class RegistroFuncionario extends javax.swing.JFrame {
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDni;
     private javax.swing.JTextField txtDomicilio;
-    private javax.swing.JTextField txtFechaNacimiento;
+    private com.toedter.calendar.JDateChooser txtFechaNacimiento;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtSectorTrabajo;
     private javax.swing.JTextField txtTelefono;
