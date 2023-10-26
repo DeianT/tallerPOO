@@ -178,6 +178,10 @@ public class RealizarTriage extends javax.swing.JFrame {
         return contador;
     }
     
+    private int colorModificado(){
+        return JOptionPane.showOptionDialog(null,"Seleccione el nuevo color", "Confirmacion", 0, JOptionPane.QUESTION_MESSAGE, null , colores, "Terminar");
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -258,6 +262,7 @@ public class RealizarTriage extends javax.swing.JFrame {
         jLabel13.setText("Sangrado");
 
         cboRespiracion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Normal", "Dificultad respiratoria moderada", "Dificultad respiratoria grave" }));
+        cboRespiracion.setNextFocusableComponent(cboPulso);
 
         cboPulso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Normal", "Anormal" }));
 
@@ -459,22 +464,23 @@ public class RealizarTriage extends javax.swing.JFrame {
             }else
             {             
                 TriageDatos d = new TriageDatos();
-                String nuevoColor = JOptionPane.showInputDialog(null,"El color asignado es: "+color+" Ingrese el nuevo color");
-                boolean bandera = false;
                 
-                while(bandera == false)
-                {
-                    if(nuevoColor==null)
-                    {
-                      nuevoColor = JOptionPane.showInputDialog(null,"El color asignado es: "+color+" Ingrese el nuevo color");  
-                    }else
-                    {
-                       bandera = d.cambioColor(colores, color, nuevoColor); 
+                int nuevo = -1;
+                boolean cambioValido = false;
+                
+                while(nuevo == -1 || !cambioValido){//controla que haya alguna opción seleccionada
+                    nuevo = colorModificado();
+                    
+                    cambioValido = nuevo == -1 || d.cambioColor(colores, color, colores[nuevo]);
+                    if(!cambioValido){
+                        System.out.println(nuevo);
+                        JOptionPane.showMessageDialog(null, "No se puede cambiar mas de dos niveles de color");
                     }
                 }
                 
+                NivelTriage n = NivelTriage.valueOf(colores[nuevo]);
+                
                 String motivo = JOptionPane.showInputDialog(null,"Ingrese el motivo del cambio ");
-               
                 while(motivo == null || motivo.isEmpty()==true)   
                 {
                     JOptionPane.showMessageDialog(null, "Debe ingresar un motivo para continuar");
@@ -482,7 +488,7 @@ public class RealizarTriage extends javax.swing.JFrame {
                 }
                 
                 t.setColor(NivelTriage.valueOf(color));
-                t.setColorModificado(NivelTriage.valueOf(nuevoColor));
+                t.setColorModificado(n);
                 t.setMotivoModificacion(motivo);
             }
             JOptionPane.showMessageDialog(this, "se ha guardado con exito ");

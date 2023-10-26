@@ -173,7 +173,6 @@ public class TriageDatos {
         }
 
         if(res > 2){
-          JOptionPane.showMessageDialog(null, "no se puede cambiar mas de dos niveles de color");
           return false;
          }
         return true;
