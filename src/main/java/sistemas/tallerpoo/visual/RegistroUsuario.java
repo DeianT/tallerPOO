@@ -22,6 +22,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
     public RegistroUsuario() {
         initComponents();
         this.setLocationRelativeTo(null);
+        lblAviso.setVisible(false);
     }
 
     /**
@@ -34,12 +35,13 @@ public class RegistroUsuario extends javax.swing.JFrame {
     private void initComponents() {
 
         btnRegistrar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblUsuario = new javax.swing.JLabel();
+        lblContraseña = new javax.swing.JLabel();
+        lblConfirmar = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
         txtContraseña = new javax.swing.JPasswordField();
-        txtRepContra = new javax.swing.JPasswordField();
+        txtConfirmar = new javax.swing.JPasswordField();
+        lblAviso = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -50,17 +52,22 @@ public class RegistroUsuario extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Usuario");
+        lblUsuario.setText("Usuario");
 
-        jLabel2.setText("Contraseña");
+        lblContraseña.setText("Contraseña");
 
-        jLabel3.setText("Contraseña");
+        lblConfirmar.setText("Confirmar contraseña");
 
-        txtRepContra.addActionListener(new java.awt.event.ActionListener() {
+        txtConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtRepContraActionPerformed(evt);
+                txtConfirmarActionPerformed(evt);
             }
         });
+
+        lblAviso.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblAviso.setForeground(new java.awt.Color(255, 0, 0));
+        lblAviso.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAviso.setText("Completar Campos Vacios");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -69,37 +76,42 @@ public class RegistroUsuario extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(176, 176, 176)
-                        .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3))
+                            .addComponent(lblConfirmar)
+                            .addComponent(lblContraseña, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblUsuario, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(92, 92, 92)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtUsuario)
                             .addComponent(txtContraseña)
-                            .addComponent(txtRepContra, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))))
-                .addContainerGap(154, Short.MAX_VALUE))
+                            .addComponent(txtConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(176, 176, 176)
+                        .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(157, 157, 157)
+                        .addComponent(lblAviso, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                .addGap(51, 51, 51)
+                .addComponent(lblAviso)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblUsuario)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtRepContra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                    .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblContraseña))
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblConfirmar, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtConfirmar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
                 .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(80, 80, 80))
         );
@@ -107,18 +119,28 @@ public class RegistroUsuario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtRepContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRepContraActionPerformed
+    private void txtConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConfirmarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtRepContraActionPerformed
+    }//GEN-LAST:event_txtConfirmarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        // TODO add your handling code here:
+       if( txtUsuario.getText().trim().isEmpty()){ 
+         JOptionPane.showMessageDialog(null, "Completar los campos obligatorios", "Error", JOptionPane.WARNING_MESSAGE);
+         lblAviso.setVisible(true);
+     }else if(txtContraseña.getText().trim().isEmpty()){
+         JOptionPane.showMessageDialog(null, "Completar los campos obligatorios", "Error", JOptionPane.WARNING_MESSAGE);
+         lblAviso.setVisible(true);
+     }else if(txtConfirmar.getText().trim().isEmpty()){
+         JOptionPane.showMessageDialog(null, "Completar los campos obligatorios", "Error", JOptionPane.WARNING_MESSAGE);
+         lblAviso.setVisible(true);
+     }else{
+         lblAviso.setVisible(false);
          UsuariosDatos user = new UsuariosDatos();
          //acá hay que cambiar el 1 por un parametro que se ingresa
-         if(user.Registrar(1, txtUsuario, txtContraseña, txtRepContra))
+         if(user.Registrar(1, txtUsuario, txtContraseña, txtConfirmar))
          {
           this.dispose(); 
-         }
+         }}
          
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
@@ -159,11 +181,12 @@ public class RegistroUsuario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegistrar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel lblAviso;
+    private javax.swing.JLabel lblConfirmar;
+    private javax.swing.JLabel lblContraseña;
+    private javax.swing.JLabel lblUsuario;
+    private javax.swing.JPasswordField txtConfirmar;
     private javax.swing.JPasswordField txtContraseña;
-    private javax.swing.JPasswordField txtRepContra;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

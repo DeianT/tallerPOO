@@ -26,6 +26,7 @@ public class IngresoContacto extends javax.swing.JFrame {
     public IngresoContacto() {
         initComponents();
         this.setLocationRelativeTo(null);
+        lblAviso.setVisible(false);
     }
     
     public Persona captar()
@@ -72,26 +73,38 @@ public class IngresoContacto extends javax.swing.JFrame {
         cbEstadoCivil = new javax.swing.JComboBox<>();
         txtCorreo = new javax.swing.JTextField();
         btnIngresarContacto = new javax.swing.JButton();
+        lblAviso = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("DNI");
+        jLabel1.setText("DNI *");
 
-        jLabel2.setText("Nombre");
+        jLabel2.setText("Nombre *");
 
-        jLabel3.setText("Apellido");
+        jLabel3.setText("Apellido *");
 
-        jLabel4.setText("Fecha de Nacimiento");
+        jLabel4.setText("Fecha de Nacimiento *");
 
         jLabel6.setText("Telefono");
 
-        jLabel7.setText("Celular");
+        jLabel7.setText("Celular *");
 
         jLabel8.setText("Estado Civil");
 
-        jLabel9.setText("Domicilio");
+        txtDni.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDniFocusLost(evt);
+            }
+        });
+        txtDni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDniActionPerformed(evt);
+            }
+        });
 
-        jLabel10.setText("Correo");
+        jLabel9.setText("Domicilio *");
+
+        jLabel10.setText("Correo *");
 
         cbEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Soltero/a", "Casado/a", "Viudo/a", "Divorciado/a" }));
 
@@ -102,6 +115,16 @@ public class IngresoContacto extends javax.swing.JFrame {
             }
         });
 
+        lblAviso.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblAviso.setForeground(new java.awt.Color(255, 0, 51));
+        lblAviso.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblAviso.setText("Campos Obligatorios (*)");
+        lblAviso.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                lblAvisoKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,10 +132,11 @@ public class IngresoContacto extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(123, 123, 123)
+                        .addComponent(btnIngresarContacto, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
@@ -120,9 +144,13 @@ public class IngresoContacto extends javax.swing.JFrame {
                             .addComponent(jLabel7)
                             .addComponent(jLabel8)
                             .addComponent(jLabel9)
-                            .addComponent(jLabel10))
+                            .addComponent(jLabel10)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(58, 58, 58)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblAviso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtDni)
                             .addComponent(txtNombre)
                             .addComponent(txtApellido)
@@ -130,17 +158,16 @@ public class IngresoContacto extends javax.swing.JFrame {
                             .addComponent(txtDomicilio)
                             .addComponent(txtTelefono)
                             .addComponent(txtCelular)
-                            .addComponent(cbEstadoCivil, 0, 118, Short.MAX_VALUE)
-                            .addComponent(txtCorreo)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(123, 123, 123)
-                        .addComponent(btnIngresarContacto, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(70, Short.MAX_VALUE))
+                            .addComponent(cbEstadoCivil, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtCorreo))))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addGap(19, 19, 19)
+                .addComponent(lblAviso)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -187,11 +214,47 @@ public class IngresoContacto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIngresarContactoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarContactoActionPerformed
+           
+     if( txtDni.getText().trim().isEmpty()){ 
+         JOptionPane.showMessageDialog(null, "Completar los campos obligatorios", "Error", JOptionPane.WARNING_MESSAGE);
+         lblAviso.setVisible(true);
+     }else if(txtNombre.getText().trim().isEmpty()){
+         JOptionPane.showMessageDialog(null, "Completar los campos obligatorios", "Error", JOptionPane.WARNING_MESSAGE);
+         lblAviso.setVisible(true);
+     }else if(txtApellido.getText().trim().isEmpty()){
+         JOptionPane.showMessageDialog(null, "Completar los campos obligatorios", "Error", JOptionPane.WARNING_MESSAGE);
+         lblAviso.setVisible(true);
+     }else if(txtFechaNacimiento.getText().trim().isEmpty()){
+         JOptionPane.showMessageDialog(null, "Completar los campos obligatorios", "Error", JOptionPane.WARNING_MESSAGE);
+         lblAviso.setVisible(true);
+     }else if(txtDomicilio.getText().trim().isEmpty()){
+         JOptionPane.showMessageDialog(null, "Completar los campos obligatorios", "Error", JOptionPane.WARNING_MESSAGE);
+         lblAviso.setVisible(true);
+     }else if(txtCelular.getText().trim().isEmpty()){
+         JOptionPane.showMessageDialog(null, "Completar los campos obligatorios", "Error", JOptionPane.WARNING_MESSAGE);
+         lblAviso.setVisible(true);
+     }else if(txtCorreo.getText().trim().isEmpty()){
+         JOptionPane.showMessageDialog(null, "Completar los campos obligatorios", "Error", JOptionPane.WARNING_MESSAGE);
+         lblAviso.setVisible(true);
+     }else{
         PersonaDatos per = new PersonaDatos();
         per.agregarPersona(this.captar());
         JOptionPane.showMessageDialog(null, "Se ingresó con exito");
-        this.dispose();
+        this.dispose();}
+        lblAviso.setVisible(false);
     }//GEN-LAST:event_btnIngresarContactoActionPerformed
+
+    private void txtDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDniActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDniActionPerformed
+
+    private void lblAvisoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblAvisoKeyPressed
+ 
+    }//GEN-LAST:event_lblAvisoKeyPressed
+
+    private void txtDniFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDniFocusLost
+        
+    }//GEN-LAST:event_txtDniFocusLost
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -238,6 +301,7 @@ public class IngresoContacto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lblAviso;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCelular;
     private javax.swing.JTextField txtCorreo;
