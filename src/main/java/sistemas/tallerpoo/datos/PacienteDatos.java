@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Date; 
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import sistemas.tallerpoo.clasesLogicas.Paciente;
@@ -22,19 +22,18 @@ public class PacienteDatos {
     private final String archivo = "Pacientes.csv";
     private final String separador = ",";
     
-    public Paciente capturar(JTextField dni, JTextField nombre, JTextField apellido, JTextField fecha, JTextField domicilio, JTextField tel, JTextField celular, JComboBox estado, JTextField correo, JTextField contacto)
+    public Paciente capturar(JTextField dni, JTextField nombre, JTextField apellido, JDateChooser fecha, JTextField domicilio, JTextField tel, JTextField celular, JComboBox estado, JTextField correo, JTextField contacto)
     {
         Paciente pac = new Paciente();
         int DNI = Integer.parseInt(dni.getText()); 
         int telF = Integer.parseInt(tel.getText());
         String estadoo = String.valueOf(estado.getSelectedItem());
-        
-        
+        //A continuación se hace la conversión de JDateChooser a String.
+        String Fecha = ((JTextField)fecha.getDateEditor().getUiComponent()).getText();
+        pac.setFechaNacimiento(Fecha);
         pac.setDni(DNI);
         pac.setNombre(nombre.getText());
         pac.setApellido(apellido.getText());
-        //pac.setFechaNacimiento(fecha);
-        pac.setFechaNacimiento(new Date());
         pac.setDomicilio(domicilio.getText());
         pac.setTelFijo(telF);
         pac.setTelCelular(celular.getText());
@@ -167,8 +166,7 @@ public class PacienteDatos {
                 perso.setDni(Integer.parseInt(campos[0]));
                 perso.setNombre(campos[1]);
                 perso.setApellido(campos[2]);
-//                perso.setFechaNacimiento(campos[3]);
-                perso.setFechaNacimiento(new Date());
+                perso.setFechaNacimiento(campos[3]);
                 perso.setDomicilio(campos[4]);
                 perso.setTelFijo(Integer.parseInt(campos[5]));
                 perso.setTelCelular(campos[6]);

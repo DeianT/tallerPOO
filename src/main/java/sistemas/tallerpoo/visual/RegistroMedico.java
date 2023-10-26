@@ -1,11 +1,15 @@
 package sistemas.tallerpoo.visual;
 
 import java.awt.Color;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import com.toedter.calendar.JDateChooser;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -77,7 +81,12 @@ public class RegistroMedico extends javax.swing.JFrame {
         txtDni.setText(dni);
         txtNombre.setText(m.getNombre());
         txtApellido.setText(m.getApellido());
-        txtFechaNacimiento.setText(m.getFechaNacimiento().toString());
+         try {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                Date pruebita = dateFormat.parse(m.getFechaNacimiento());
+                txtFechaNacimiento.setDate(pruebita);
+            } catch (ParseException ex) {}
+        
         txtDomicilio.setText(m.getDomicilio());
         txtTelefono.setText(telefono);
         txtCelular.setText(m.getTelCelular());
@@ -91,7 +100,7 @@ public class RegistroMedico extends javax.swing.JFrame {
        txtDni.setText("");
        txtNombre.setText("");
        txtApellido.setText("");
-       txtFechaNacimiento.setText("");
+       txtFechaNacimiento.setCalendar(null);
        txtDomicilio .setText("");
        txtTelefono.setText("");
        txtCelular.setText("");
@@ -112,8 +121,8 @@ public class RegistroMedico extends javax.swing.JFrame {
         m.setDni(dni);
         m.setNombre(txtNombre.getText());
         m.setApellido(txtApellido.getText());
-//        m.setFechaNacimiento(txtFechaNacimiento.getText());
-        m.setFechaNacimiento(new Date());
+        String Fecha = ((JTextField)txtFechaNacimiento.getDateEditor().getUiComponent()).getText();
+        m.setFechaNacimiento(Fecha);
         m.setDomicilio(txtDomicilio.getText());
         m.setTelFijo(telefono);
         m.setTelCelular(txtCelular.getText());
@@ -158,7 +167,6 @@ public class RegistroMedico extends javax.swing.JFrame {
         txtBuscarDni = new javax.swing.JTextField();
         btnEliminar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
-        txtFechaNacimiento = new javax.swing.JTextField();
         btnMostrarTodo = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         txtMatricula = new javax.swing.JTextField();
@@ -167,6 +175,7 @@ public class RegistroMedico extends javax.swing.JFrame {
         lblMensaje = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         txtSectorTrabajo = new javax.swing.JTextField();
+        txtFechaNacimiento = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -260,6 +269,7 @@ public class RegistroMedico extends javax.swing.JFrame {
         });
 
         jLabel13.setText("Sector de Trabajo");
+        txtFechaNacimiento.setDateFormatString("dd/MM/yyyy");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -279,6 +289,7 @@ public class RegistroMedico extends javax.swing.JFrame {
                             .addComponent(jLabel7)
                             .addComponent(jLabel8)
                             .addComponent(jLabel9))
+                            .addComponent(jLabel10))
                         .addGap(80, 80, 80)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtDni)
@@ -288,7 +299,7 @@ public class RegistroMedico extends javax.swing.JFrame {
                             .addComponent(txtTelefono)
                             .addComponent(txtCelular)
                             .addComponent(cbEstadoCivil, 0, 140, Short.MAX_VALUE)
-                            .addComponent(txtFechaNacimiento)
+                            .addComponent(txtFechaNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtCorreo, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -349,8 +360,8 @@ public class RegistroMedico extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGap(19, 19, 19)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4)
                             .addComponent(txtFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
@@ -411,7 +422,7 @@ public class RegistroMedico extends javax.swing.JFrame {
             return;
         }
         if(datos.agregarMedico(captar())){
-            JOptionPane.showMessageDialog(null, "se registro con exito");
+            JOptionPane.showMessageDialog(null, "Se registró con exito");
             listar();
             this.limpiarTexto();
         }
@@ -447,7 +458,7 @@ public class RegistroMedico extends javax.swing.JFrame {
         m = this.captar();
         if(datos.editarMedico(m))
         {
-          JOptionPane.showMessageDialog(null, "se edito con exito");
+          JOptionPane.showMessageDialog(null, "Se editó con exito");
           limpiarTexto();
           listar();
         }
@@ -538,7 +549,7 @@ public class RegistroMedico extends javax.swing.JFrame {
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDni;
     private javax.swing.JTextField txtDomicilio;
-    private javax.swing.JTextField txtFechaNacimiento;
+    private com.toedter.calendar.JDateChooser txtFechaNacimiento;
     private javax.swing.JTextField txtMatricula;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtSectorTrabajo;

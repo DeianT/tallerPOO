@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import com.toedter.calendar.JDateChooser;
+import java.text.ParseException;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -85,7 +88,13 @@ public class RegistroPaciente extends javax.swing.JFrame {
         txtDni.setText(dni);
         txtNombre.setText(p.getNombre());
         txtApellido.setText(p.getApellido());
-        //txtFechaNacimiento.setText(p.getFechaNacimiento().toString());
+       
+        try {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                Date pruebita = dateFormat.parse(p.getFechaNacimiento());
+                txtFechaNacimiento.setDate(pruebita);
+            } catch (ParseException ex) {}
+        
         txtDomicilio.setText(p.getDomicilio());
         txtTelefono.setText(telefono);
         txtCelular.setText(p.getTelCelular());
@@ -99,7 +108,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
        txtDni.setText("");
        txtNombre.setText("");
        txtApellido.setText("");
-       txtFechaNacimiento.setText("");
+       txtFechaNacimiento.setCalendar(null);
        txtDomicilio .setText("");
        txtTelefono.setText("");
        txtCelular.setText("");
@@ -143,13 +152,13 @@ public class RegistroPaciente extends javax.swing.JFrame {
         txtBuscarDni = new javax.swing.JTextField();
         btnEliminar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
-        txtFechaNacimiento = new javax.swing.JTextField();
         btnMostrarTodo = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         btnConfirmarEdicion = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         txtContacto = new javax.swing.JTextField();
         lblMensaje = new javax.swing.JLabel();
+        txtFechaNacimiento = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -173,6 +182,11 @@ public class RegistroPaciente extends javax.swing.JFrame {
 
         jLabel10.setText("Contacto");
 
+        txtDni.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtDniFocusGained(evt);
+            }
+        });
         txtDni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDniActionPerformed(evt);
@@ -258,6 +272,14 @@ public class RegistroPaciente extends javax.swing.JFrame {
             }
         });
 
+        txtFechaNacimiento.setToolTipText("");
+        txtFechaNacimiento.setDateFormatString("dd/MM/yyyy");
+        txtFechaNacimiento.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtFechaNacimientoFocusGained(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -301,14 +323,14 @@ public class RegistroPaciente extends javax.swing.JFrame {
                                     .addComponent(txtDomicilio)
                                     .addComponent(txtTelefono)
                                     .addComponent(txtCelular)
-                                    .addComponent(cbEstadoCivil, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtFechaNacimiento)
+                                    .addComponent(cbEstadoCivil, 0, 194, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addComponent(txtCorreo, javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(txtContacto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                        .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(txtFechaNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -344,8 +366,8 @@ public class RegistroPaciente extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(txtFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
@@ -407,14 +429,23 @@ public class RegistroPaciente extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(null, "Por favor ingrese un motivo");   
              motivo = JOptionPane.showInputDialog(null, "Ingrese el motivo");   
             }  
-            a.setFecha(new Date());
-            a.setHora(new Date());
+            String fechaA;
+            String horaA;
+            //Se crean dos objetos de fecha para poder sacar hora y fecha actuales.
+            Date fechita = new Date();
+            Date horita = new Date();
+            SimpleDateFormat formatofecha = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat formatohora = new SimpleDateFormat("HH:mm:ss");
+            fechaA = formatofecha.format(fechita);
+            horaA = formatohora.format(horita);
+            a.setFecha(fechaA);
+            a.setHora(horaA);
             a.setMotivo(motivo);
             a.setBox(new Box());
             a.setTriage(new Triage());
             a.setPaciente(p);
             new AdmisionDatos().agregarAdmision(a);
-            JOptionPane.showMessageDialog(null, "se registro con exito");
+            JOptionPane.showMessageDialog(null, "Se registró con exito");
             listar();
             this.limpiarTexto();
             RegistroAdmision.setPaciente(p);
@@ -455,7 +486,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
         try {
             if(datos.editarPaciente(p))
             {
-              JOptionPane.showMessageDialog(null, "se edito con exito");
+              JOptionPane.showMessageDialog(null, "Se editó con exito");
               limpiarTexto();
               listar();
               RegistroAdmision.setPaciente(p);
@@ -487,6 +518,14 @@ public class RegistroPaciente extends javax.swing.JFrame {
         // TODO add your handling code here:
         filtrar(txtDni);
     }//GEN-LAST:event_txtDniKeyReleased
+
+    private void txtDniFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDniFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDniFocusGained
+
+    private void txtFechaNacimientoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFechaNacimientoFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFechaNacimientoFocusGained
  
     private void filtrar(JTextField a)
     {
@@ -561,7 +600,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDni;
     private javax.swing.JTextField txtDomicilio;
-    private javax.swing.JTextField txtFechaNacimiento;
+    private com.toedter.calendar.JDateChooser txtFechaNacimiento;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables

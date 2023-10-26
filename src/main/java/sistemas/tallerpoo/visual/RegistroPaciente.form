@@ -67,8 +67,7 @@
                                   <Component id="txtDomicilio" alignment="0" max="32767" attributes="0"/>
                                   <Component id="txtTelefono" alignment="0" max="32767" attributes="0"/>
                                   <Component id="txtCelular" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="cbEstadoCivil" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtFechaNacimiento" max="32767" attributes="0"/>
+                                  <Component id="cbEstadoCivil" alignment="0" pref="194" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                           <Component id="txtCorreo" alignment="0" max="32767" attributes="0"/>
@@ -77,6 +76,7 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel12" max="32767" attributes="0"/>
                                   </Group>
+                                  <Component id="txtFechaNacimiento" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -126,10 +126,10 @@
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtApellido" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtFechaNacimiento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtFechaNacimiento" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -233,6 +233,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtDni">
       <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtDniFocusGained"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDniActionPerformed"/>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDniKeyReleased"/>
       </Events>
@@ -382,8 +383,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtFechaNacimiento">
-    </Component>
     <Component class="javax.swing.JButton" name="btnMostrarTodo">
       <Properties>
         <Property name="text" type="java.lang.String" value="Mostrar Todo"/>
@@ -410,6 +409,15 @@
     <Component class="javax.swing.JTextField" name="txtContacto">
     </Component>
     <Component class="javax.swing.JLabel" name="lblMensaje">
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="txtFechaNacimiento">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
+      </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtFechaNacimientoFocusGained"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

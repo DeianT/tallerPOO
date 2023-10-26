@@ -16,7 +16,7 @@ public class Medico extends CapacitadoTriage{
         setEsMedico(true);
     }
     
-    public Medico(int dni, String nombre, String apellido, Date fechaNacimiento, String domicilio, int telFijo, String telCelular, String estadoCivil, String correoElect, SectorTrabajo trabajaEn, ArrayList<Rol> rolesSistema, int nMatricula){
+    public Medico(int dni, String nombre, String apellido, String fechaNacimiento, String domicilio, int telFijo, String telCelular, String estadoCivil, String correoElect, SectorTrabajo trabajaEn, ArrayList<Rol> rolesSistema, int nMatricula){
         super(dni, nombre, apellido, fechaNacimiento, domicilio, telFijo, telCelular, estadoCivil, correoElect, trabajaEn, rolesSistema, true);
         this.nMatricula = nMatricula;
     }
