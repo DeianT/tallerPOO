@@ -48,6 +48,8 @@ public class Principal extends javax.swing.JFrame {
         jMenu9 = new javax.swing.JMenu();
         mHistoriaClinica = new javax.swing.JMenuItem();
 
+        jLabel2.setText("jLabel2");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(720, 600));
 
