@@ -1,5 +1,6 @@
 package sistemas.tallerpoo.visual;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -147,11 +148,18 @@ public class Atencion extends javax.swing.JFrame {
             diagnosticoClinico = JOptionPane.showInputDialog(null, "Ingrese el resultado de estudios");   
         }
         
+        //Se crean dos objetos de fecha para poder sacar hora y fecha actuales.
+        Date fechita = new Date();
+        SimpleDateFormat formatofecha = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formatohora = new SimpleDateFormat("HH:mm");
+        String fecha = formatofecha.format(fechita);
+        String hora = formatohora.format(fechita);
+        
         HistoriaClinica h = new HistoriaClinica();
         h.setDniPaciente(admision.getPaciente().getDni());
         h.setDniMedico(ControlRoles.getUsuarioActual().getDniFuncionario());
-        h.setFecha(new Date().toString());
-        h.setHora(new Date().toString());
+        h.setFecha(fecha);
+        h.setHora(hora);
         h.setDiagnostico(diagnostico);
         h.setLugar(lugar);
         h.setDiagnosticoClinico(diagnosticoClinico);
