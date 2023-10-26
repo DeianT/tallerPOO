@@ -167,7 +167,7 @@ public class MedicoDatos {
                 m.setDni(Integer.parseInt(campos[0]));
                 m.setNombre(campos[1]);
                 m.setApellido(campos[2]);
-                m.setFechaNacimiento(new Date());
+                m.setFechaNacimiento(campos[3]);
                 m.setDomicilio(campos[4]);
                 m.setTelFijo(Integer.parseInt(campos[5]));
                 m.setTelCelular(campos[6]);

@@ -3,8 +3,8 @@ package sistemas.tallerpoo.visual;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import sistemas.tallerpoo.TallerPoo;
 import sistemas.tallerpoo.clasesLogicas.Admision;
+import sistemas.tallerpoo.clasesLogicas.ControlRoles;
 import sistemas.tallerpoo.clasesLogicas.NivelTriage;
 import sistemas.tallerpoo.clasesLogicas.Triage;
 import sistemas.tallerpoo.datos.AdmisionDatos;
@@ -178,6 +178,10 @@ public class RealizarTriage extends javax.swing.JFrame {
         return contador;
     }
     
+    private int colorModificado(){
+        return JOptionPane.showOptionDialog(null,"Seleccione el nuevo color", "Confirmacion", 0, JOptionPane.QUESTION_MESSAGE, null , colores, "Terminar");
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -239,7 +243,7 @@ public class RealizarTriage extends javax.swing.JFrame {
 
         cboSangrado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "No presente", "Sangrado moderado", "Sangrado intenso" }));
 
-        jLabel5.setText("Dolor de Pecho/Dif resp");
+        jLabel5.setText("Dolor de Pecho/Dificultad respiratoria");
 
         jLabel6.setText("Lesiones Graves");
 
@@ -258,6 +262,7 @@ public class RealizarTriage extends javax.swing.JFrame {
         jLabel13.setText("Sangrado");
 
         cboRespiracion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Normal", "Dificultad respiratoria moderada", "Dificultad respiratoria grave" }));
+        cboRespiracion.setNextFocusableComponent(cboPulso);
 
         cboPulso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Normal", "Anormal" }));
 
@@ -304,70 +309,46 @@ public class RealizarTriage extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(7, 7, 7)
-                                .addComponent(cboSangrado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(cboLesionesLeves, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(5, 5, 5)
-                                .addComponent(cboSignosShock, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addComponent(cboDolorAbominal, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(cboVomitos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(cboFiebre, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(7, 7, 7)
-                                .addComponent(cboEdad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(cboLesionesGraves, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(cboEstadoMental, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(cboConciencia, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cboRespiracion, 0, 332, Short.MAX_VALUE)
-                                    .addComponent(cboPulso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cboDolorPecho, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnLimpiar)
-                .addGap(18, 18, 18)
-                .addComponent(btnConfirmar)
-                .addGap(87, 87, 87))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnLimpiar)
+                        .addGap(68, 68, 68)
+                        .addComponent(btnConfirmar)
+                        .addGap(87, 87, 87))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(cboPulso, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cboEstadoMental, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cboConciencia, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cboDolorPecho, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cboLesionesGraves, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cboEdad, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cboFiebre, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cboVomitos, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cboDolorAbominal, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cboSignosShock, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cboLesionesLeves, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cboSangrado, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cboRespiracion, 0, 280, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -410,27 +391,28 @@ public class RealizarTriage extends javax.swing.JFrame {
                                 .addGap(40, 40, 40)
                                 .addComponent(cboPulso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel9)
-                            .addComponent(cboVomitos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cboVomitos)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
                             .addComponent(cboDolorAbominal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel11)
-                            .addComponent(cboSignosShock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cboSignosShock)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel12)
-                    .addComponent(cboLesionesLeves, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cboLesionesLeves, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(cboSangrado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLimpiar)
                     .addComponent(btnConfirmar))
@@ -473,8 +455,8 @@ public class RealizarTriage extends javax.swing.JFrame {
         
         if(cboRespiracion.getSelectedIndex()!=0 && cboPulso.getSelectedIndex()!=0 && cboEstadoMental.getSelectedIndex()!=0 && cboConciencia.getSelectedIndex()!=0 && cboDolorPecho.getSelectedIndex()!=0 && cboLesionesGraves.getSelectedIndex()!=0 && cboEdad.getSelectedIndex()!=0 && cboFiebre.getSelectedIndex()!=0 && cboVomitos.getSelectedIndex()!=0 && cboDolorAbominal.getSelectedIndex()!=0 && cboSignosShock.getSelectedIndex()!=0 && cboLesionesLeves.getSelectedIndex()!=0 && cboSangrado.getSelectedIndex()!=0 )
         {
-            JOptionPane.showMessageDialog(this," El nivel de atencion es de " + color.toUpperCase());
-            int opcion = JOptionPane.showOptionDialog(null,"Desea editar el color?", "Confirmacion", 0, JOptionPane.QUESTION_MESSAGE, null , editar, "Terminar");
+            JOptionPane.showMessageDialog(this," El nivel de atención es de " + color.toUpperCase());
+            int opcion = JOptionPane.showOptionDialog(null,"Desea editar el color?", "Confirmación", 0, JOptionPane.QUESTION_MESSAGE, null , editar, "Terminar");
             if(opcion != 0)//si no aprieta el botón Editar
             {
                 t.setColor(NivelTriage.valueOf(color));
@@ -482,22 +464,23 @@ public class RealizarTriage extends javax.swing.JFrame {
             }else
             {             
                 TriageDatos d = new TriageDatos();
-                String nuevoColor = JOptionPane.showInputDialog(null,"El color asignado es: "+color+" Ingrese el nuevo color");
-                boolean bandera = false;
                 
-                while(bandera == false)
-                {
-                    if(nuevoColor==null)
-                    {
-                      nuevoColor = JOptionPane.showInputDialog(null,"El color asignado es: "+color+" Ingrese el nuevo color");  
-                    }else
-                    {
-                       bandera = d.cambioColor(colores, color, nuevoColor); 
+                int nuevo = -1;
+                boolean cambioValido = false;
+                
+                while(nuevo == -1 || !cambioValido){//controla que haya alguna opción seleccionada
+                    nuevo = colorModificado();
+                    
+                    cambioValido = nuevo == -1 || d.cambioColor(colores, color, colores[nuevo]);
+                    if(!cambioValido){
+                        System.out.println(nuevo);
+                        JOptionPane.showMessageDialog(null, "No se puede cambiar mas de dos niveles de color");
                     }
                 }
                 
+                NivelTriage n = NivelTriage.valueOf(colores[nuevo]);
+                
                 String motivo = JOptionPane.showInputDialog(null,"Ingrese el motivo del cambio ");
-               
                 while(motivo == null || motivo.isEmpty()==true)   
                 {
                     JOptionPane.showMessageDialog(null, "Debe ingresar un motivo para continuar");
@@ -505,13 +488,13 @@ public class RealizarTriage extends javax.swing.JFrame {
                 }
                 
                 t.setColor(NivelTriage.valueOf(color));
-                t.setColorModificado(NivelTriage.valueOf(nuevoColor));
+                t.setColorModificado(n);
                 t.setMotivoModificacion(motivo);
             }
-            JOptionPane.showMessageDialog(this, "se ha guardado con exito ");
+            JOptionPane.showMessageDialog(this, "Se ha guardado con éxito ");
             
             TriageDatos td = new TriageDatos();
-            t.setDniEncargado(TallerPoo.getUsuarioActual().getDniFuncionario());
+            t.setDniEncargado(ControlRoles.getUsuarioActual().getDniFuncionario());
             td.agregarTriage(t);
             t.setId(td.cantidadTriage());
             

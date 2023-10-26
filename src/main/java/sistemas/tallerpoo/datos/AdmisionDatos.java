@@ -123,10 +123,10 @@ public class AdmisionDatos {
                 Admision ad = new Admision();
                 
                 ad.setId(Integer.parseInt(campos[0]));
-//                ad.setFecha(fecha);
-//                ad.setHora(fecha);
-                ad.setFecha(new Date());
-                ad.setHora(new Date());
+                ad.setFecha(campos[1]);
+                ad.setHora(campos[2]);
+                //ad.setFecha(new Date());
+                //ad.setHora(new Date());
                 ad.setMotivo(campos[3]);
                 ad.setPaciente(new PacienteDatos().obtenerPaciente(Integer.parseInt(campos[4])));
                 try{

@@ -1,36 +1,44 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package sistemas.tallerpoo.visual;
 
-import java.io.FileNotFoundException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
-import sistemas.tallerpoo.datos.historiaClinicaDatos;
+import sistemas.tallerpoo.clasesLogicas.Paciente;
+import sistemas.tallerpoo.datos.PacienteDatos;
+import sistemas.tallerpoo.datos.HistoriaClinicaDatos;
 
 /**
  *
  * @author Thiago
  */
-public class HistoriaClinica extends javax.swing.JFrame {
+public class FormularioHistoriaClinica extends javax.swing.JFrame {
 
     /**
-     * Creates new form HistoriaClinica
+     * Creates new form FormularioHistoriaClinica
      */
-    historiaClinicaDatos datos = new historiaClinicaDatos();
+    HistoriaClinicaDatos datos = new HistoriaClinicaDatos();
     DefaultComboBoxModel modelo = new DefaultComboBoxModel();
     
     
-    public HistoriaClinica (){
+    public FormularioHistoriaClinica (){
         initComponents();
         this.setLocationRelativeTo(null);
         jcDnis.setModel(modelo);
-        datos.llenarComboBox(jcDnis);
+        for(Paciente p: new PacienteDatos().obtenerPacientes()){
+            jcDnis.addItem(String.valueOf(p.getDni()));
+        }
         datos.mostrarNombre(jlNombre, jcDnis);
         
-        
+    }
+    
+    public FormularioHistoriaClinica(int dni){
+        this();
+        jcDnis.setSelectedItem(String.valueOf(dni));
+    }
+    
+    private void vaciarCampos(){
+        txtLugar.setText("");
+        txtResultados.setText("");
+        txtDiagnostico.setText("");
+        txtMedico.setText("");
     }
 
     /**
@@ -62,19 +70,28 @@ public class HistoriaClinica extends javax.swing.JFrame {
 
         jLabel3.setText("Medico Encargado");
 
+        txtMedico.setEditable(false);
+
         jLabel4.setText("Diagnostico");
 
+        txtDiagnostico.setEditable(false);
         txtDiagnostico.setColumns(20);
+        txtDiagnostico.setLineWrap(true);
         txtDiagnostico.setRows(5);
+        txtDiagnostico.setWrapStyleWord(true);
         jScrollPane1.setViewportView(txtDiagnostico);
 
         jLabel5.setText("Lugar de Atencion");
 
+        txtLugar.setEditable(false);
+
         jLabel6.setText("Resultados de Estudios");
+
+        txtResultados.setEditable(false);
 
         jLabel7.setText("Dni del Paciente");
 
-        jLabel8.setText("Fechas de Historia Clinica");
+        jLabel8.setText("Fechas de consulta");
 
         jcDnis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,7 +152,7 @@ public class HistoriaClinica extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlNombre)
                             .addComponent(jLabel9))))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,13 +192,15 @@ public class HistoriaClinica extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcDnisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcDnisActionPerformed
-        // TODO add your handling code here:
         datos.llenarFechas(jcDnis, jcFechas);
         datos.mostrarNombre(jlNombre, jcDnis);
     }//GEN-LAST:event_jcDnisActionPerformed
 
     private void jcFechasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcFechasActionPerformed
-        // TODO add your handling code here:
+        if(jcFechas.getItemCount() <= 0){
+            vaciarCampos();
+            return;
+        }
         datos.mostrarHistoriaClinica(txtLugar, txtResultados, txtMedico, txtDiagnostico, jcDnis, jcFechas);
     }//GEN-LAST:event_jcFechasActionPerformed
 
@@ -202,20 +221,21 @@ public class HistoriaClinica extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HistoriaClinica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormularioHistoriaClinica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HistoriaClinica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormularioHistoriaClinica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HistoriaClinica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormularioHistoriaClinica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HistoriaClinica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormularioHistoriaClinica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-            new HistoriaClinica().setVisible(true);
+            new FormularioHistoriaClinica().setVisible(true);
                 
             }
         });
