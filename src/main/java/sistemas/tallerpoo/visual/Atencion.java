@@ -139,7 +139,7 @@ public class Atencion extends javax.swing.JFrame {
             return;
         }
         
-        
+        new HistoriaClinica(admision.getPaciente().getDni()).setVisible(true);
     }//GEN-LAST:event_btnHistoriaClinicaActionPerformed
 
     /**
