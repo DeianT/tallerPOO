@@ -199,6 +199,8 @@ public class RegistroMedico extends javax.swing.JFrame {
 
         jLabel10.setText("Matricula");
 
+        txtDni.setNextFocusableComponent(txtNombre);
+
         cbEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Soltero/a", "Casado/a", "Viudo/a", "Divorciado/a" }));
 
         txtCorreo.addKeyListener(new java.awt.event.KeyAdapter() {

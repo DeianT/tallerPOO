@@ -194,6 +194,8 @@ public class RegistroFuncionario extends javax.swing.JFrame {
 
         jLabel10.setText("Sector de Trabajo");
 
+        txtDni.setNextFocusableComponent(txtNombre);
+
         cbEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Soltero/a", "Casado/a", "Viudo/a", "Divorciado/a" }));
 
         txtCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
