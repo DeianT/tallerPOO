@@ -80,10 +80,10 @@ public class RegistroFuncionario extends javax.swing.JFrame {
         txtNombre.setText(p.getNombre());
         txtApellido.setText(p.getApellido());
         try {
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                Date pruebita = dateFormat.parse(p.getFechaNacimiento());
-                txtFechaNacimiento.setDate(pruebita);
-            } catch (ParseException ex) {}
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date fecha = dateFormat.parse(p.getFechaNacimiento());
+            txtFechaNacimiento.setDate(fecha);
+        } catch (ParseException ex) {}
         
         txtDomicilio.setText(p.getDomicilio());
         txtTelefono.setText(telefono);
@@ -169,8 +169,8 @@ public class RegistroFuncionario extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         btnConfirmarEdicion = new javax.swing.JButton();
         txtSectorTrabajo = new javax.swing.JTextField();
-        lblMensaje = new javax.swing.JLabel();
         txtFechaNacimiento = new com.toedter.calendar.JDateChooser();
+        lblMensaje = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -256,14 +256,13 @@ public class RegistroFuncionario extends javax.swing.JFrame {
 
         jLabel11.setText("Buscar Funcionario");
 
-        btnConfirmarEdicion.setText("Confirmar Edicion");
+        btnConfirmarEdicion.setText("Confrimar Edicion");
         btnConfirmarEdicion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfirmarEdicionActionPerformed(evt);
             }
         });
 
-        lblMensaje.setName(""); // NOI18N
         txtFechaNacimiento.setDateFormatString("dd/MM/yyyy");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -272,30 +271,32 @@ public class RegistroFuncionario extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(54, 54, 54)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel10))
-                .addGap(80, 80, 80)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtDni)
-                    .addComponent(txtNombre)
-                    .addComponent(txtApellido)
-                    .addComponent(txtDomicilio)
-                    .addComponent(txtTelefono)
-                    .addComponent(txtCelular)
-                    .addComponent(cbEstadoCivil, 0, 140, Short.MAX_VALUE)
-                    .addComponent(txtCorreo)
-                    .addComponent(txtSectorTrabajo)
-                    .addComponent(lblMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFechaNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10))
+                        .addGap(80, 80, 80)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtDni)
+                            .addComponent(txtNombre)
+                            .addComponent(txtApellido)
+                            .addComponent(txtDomicilio)
+                            .addComponent(txtTelefono)
+                            .addComponent(txtCelular)
+                            .addComponent(cbEstadoCivil, 0, 140, Short.MAX_VALUE)
+                            .addComponent(txtCorreo)
+                            .addComponent(txtSectorTrabajo)
+                            .addComponent(txtFechaNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(lblMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -362,9 +363,9 @@ public class RegistroFuncionario extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(cbEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(3, 3, 3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblMensaje)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(3, 3, 3)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
                             .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -447,7 +448,7 @@ public class RegistroFuncionario extends javax.swing.JFrame {
             lblMensaje.setForeground(Color.RED);      
         }
     }//GEN-LAST:event_txtCorreoKeyReleased
-
+                                   
     private void filtrar()
     {
         try {
