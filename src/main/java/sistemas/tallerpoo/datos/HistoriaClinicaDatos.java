@@ -1,6 +1,7 @@
 package sistemas.tallerpoo.datos;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.util.HashSet;
 import java.util.Scanner;
 import javax.swing.JComboBox;
@@ -24,13 +25,13 @@ public class HistoriaClinicaDatos{
             while (sc.hasNextLine()) {
                 datos = sc.nextLine().split(",");
                 HistoriaClinica h = new HistoriaClinica();
-                h.setDniPaciente(datos[0]);
+                h.setDniPaciente(Integer.parseInt(datos[0]));
                 h.setFecha(datos[1]);
                 h.setHora(datos[2]);
                 h.setDiagnostico(datos[3]);
                 h.setLugar(datos[4]);
                 h.setDiagnosticoClinico(datos[5]);
-                if(conjunto.add(h.getDniPaciente()))
+                if(conjunto.add(String.valueOf(h.getDniPaciente())))
                 {
                     cb.addItem(h.getDniPaciente());
                 }
@@ -49,15 +50,15 @@ public class HistoriaClinicaDatos{
             {
                 datos = sc.nextLine().split(",");
                 HistoriaClinica h = new HistoriaClinica();
-                h.setDniPaciente(datos[0]);
-                h.setDniMedico(datos[1]);
+                h.setDniPaciente(Integer.parseInt(datos[0]));
+                h.setDniMedico(Integer.parseInt(datos[1]));
                 h.setFecha(datos[2]);
                 h.setHora(datos[3]);
                 h.setDiagnostico(datos[4]);
                 h.setLugar(datos[5]);
                 h.setDiagnosticoClinico(datos[6]);
                 
-                if(cbDnis.getSelectedItem().toString().equals(h.getDniPaciente()))
+                if(cbDnis.getSelectedItem().toString().equals(String.valueOf(h.getDniPaciente())))
                 {
                     cbFechas.addItem(h.getFecha()+"  ---  "+h.getHora());
                 }
@@ -129,5 +130,23 @@ public class HistoriaClinicaDatos{
             System.out.println(e.getMessage());
         } 
         return nombre;
+    }
+
+    public void agregarHistoriaClinica(HistoriaClinica h) {
+        File f = new File("historiaClinica.csv");
+        try (FileWriter fw = new FileWriter(f,true))
+        {
+            String linea = h.getDniPaciente() + ",";
+            linea += h.getDniMedico()+ ",";
+            linea += h.getFecha()+ ",";
+            linea += h.getHora()+ ",";
+            linea += h.getDiagnostico()+ ",";
+            linea += h.getLugar()+ ",";
+            linea += h.getDiagnosticoClinico()+ ",";
+            fw.write(linea + "\n"); 
+             
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
