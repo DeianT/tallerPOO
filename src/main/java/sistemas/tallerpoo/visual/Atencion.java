@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import sistemas.tallerpoo.clasesLogicas.Admision;
+import sistemas.tallerpoo.clasesLogicas.HistoriaClinica;
 import sistemas.tallerpoo.datos.AdmisionDatos;
 import sistemas.tallerpoo.datos.BoxDatos;
 
@@ -144,7 +145,7 @@ public class Atencion extends javax.swing.JFrame {
         }
         
         HistoriaClinica h = new HistoriaClinica();
-//        h.set
+        h.setDniPaciente(admision.getPaciente().getDni());
 
         listar();
         JOptionPane.showMessageDialog(null, "El paciente fue dado de alta");
@@ -160,7 +161,7 @@ public class Atencion extends javax.swing.JFrame {
             return;
         }
         
-        new HistoriaClinica(admision.getPaciente().getDni()).setVisible(true);
+        new FormularioHistoriaClinica(admision.getPaciente().getDni()).setVisible(true);
     }//GEN-LAST:event_btnHistoriaClinicaActionPerformed
 
     /**

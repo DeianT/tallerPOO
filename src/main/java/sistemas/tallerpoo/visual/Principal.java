@@ -262,7 +262,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmVerBoxesActionPerformed
 
     private void mHistoriaClinicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mHistoriaClinicaActionPerformed
-        new HistoriaClinica().setVisible(true);
+        new FormularioHistoriaClinica().setVisible(true);
     }//GEN-LAST:event_mHistoriaClinicaActionPerformed
 
     private void jmRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRolesActionPerformed
