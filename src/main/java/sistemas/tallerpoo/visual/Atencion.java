@@ -124,6 +124,27 @@ public class Atencion extends javax.swing.JFrame {
         datos.editarAdmision(admision);
         //reducir la cantidad de pacientes en el box
         new BoxDatos().ocuparDesocupar(admision.getBox().getNumero(), false);//esto posiblemente haya que modificar
+        
+        String diagnostico = JOptionPane.showInputDialog(null, "Ingrese el diagnóstico"); 
+        while(diagnostico == null || diagnostico.isEmpty())     
+        {
+            diagnostico = JOptionPane.showInputDialog(null, "Ingrese el diagnóstico");   
+        }
+        
+        String lugar = JOptionPane.showInputDialog(null, "Ingrese el lugar de atención"); 
+        while(lugar == null || lugar.isEmpty())     
+        {
+            lugar = JOptionPane.showInputDialog(null, "Ingrese el lugar de atención");   
+        }
+        
+        String diagnosticoClinico = JOptionPane.showInputDialog(null, "Ingrese el resultado de estudios"); 
+        while(diagnosticoClinico == null || diagnosticoClinico.isEmpty())     
+        {
+            diagnosticoClinico = JOptionPane.showInputDialog(null, "Ingrese el resultado de estudios");   
+        }
+        
+        HistoriaClinica h = new HistoriaClinica();
+//        h.set
 
         listar();
         JOptionPane.showMessageDialog(null, "El paciente fue dado de alta");
