@@ -12,8 +12,8 @@ import lombok.AllArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class HistoriaClinica {
-    private int dniPaciente;
-    private int dniMedico;
+    private String dniPaciente;
+    private String dniMedico;
     private String fecha;
     private String hora;
     private String diagnostico;

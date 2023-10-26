@@ -10,22 +10,22 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import sistemas.tallerpoo.clasesLogicas.Paciente;
 import sistemas.tallerpoo.datos.PacienteDatos;
-import sistemas.tallerpoo.datos.HistoriaClinicaDatos;
+import sistemas.tallerpoo.datos.historiaClinicaDatos;
 
 /**
  *
  * @author Thiago
  */
-public class FormularioHistoriaClinica extends javax.swing.JFrame {
+public class HistoriaClinica extends javax.swing.JFrame {
 
     /**
-     * Creates new form FormularioHistoriaClinica
+     * Creates new form HistoriaClinica
      */
-    HistoriaClinicaDatos datos = new HistoriaClinicaDatos();
+    historiaClinicaDatos datos = new historiaClinicaDatos();
     DefaultComboBoxModel modelo = new DefaultComboBoxModel();
     
     
-    public FormularioHistoriaClinica (){
+    public HistoriaClinica (){
         initComponents();
         this.setLocationRelativeTo(null);
         jcDnis.setModel(modelo);
@@ -36,7 +36,7 @@ public class FormularioHistoriaClinica extends javax.swing.JFrame {
         
     }
     
-    public FormularioHistoriaClinica(int dni){
+    public HistoriaClinica(int dni){
         this();
         jcDnis.setSelectedItem(String.valueOf(dni));
     }
@@ -229,21 +229,20 @@ public class FormularioHistoriaClinica extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormularioHistoriaClinica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HistoriaClinica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormularioHistoriaClinica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HistoriaClinica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormularioHistoriaClinica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HistoriaClinica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormularioHistoriaClinica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HistoriaClinica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-            new FormularioHistoriaClinica().setVisible(true);
+            new HistoriaClinica().setVisible(true);
                 
             }
         });

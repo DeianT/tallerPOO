@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import sistemas.tallerpoo.clasesLogicas.Admision;
-import sistemas.tallerpoo.clasesLogicas.ControlRoles;
 import sistemas.tallerpoo.datos.AdmisionDatos;
 import sistemas.tallerpoo.datos.BoxDatos;
-import sistemas.tallerpoo.clasesLogicas.HistoriaClinica;
 
 /**
  *
@@ -126,34 +124,6 @@ public class Atencion extends javax.swing.JFrame {
         datos.editarAdmision(admision);
         //reducir la cantidad de pacientes en el box
         new BoxDatos().ocuparDesocupar(admision.getBox().getNumero(), false);//esto posiblemente haya que modificar
-        
-        HistoriaClinica h = new HistoriaClinica();
-        h.setDniPaciente(admision.getPaciente().getDni());
-        h.setDniMedico(ControlRoles.getUsuarioActual().getDniFuncionario());
-        
-        String diagnostico = JOptionPane.showInputDialog(null, "Ingrese el diagnóstico"); 
-        while(diagnostico == null || diagnostico.isEmpty())     
-        {
-            diagnostico = JOptionPane.showInputDialog(null, "Ingrese el diagnóstico");   
-        }
-        h.setDiagnostico(diagnostico);
-        
-        String resEstudios = JOptionPane.showInputDialog(null, "Ingrese el resultado de estudios"); 
-        while(resEstudios == null || resEstudios.isEmpty())     
-        {
-            resEstudios = JOptionPane.showInputDialog(null, "Ingrese el resultado de estudios");   
-        }
-        h.setDiagnosticoClinico(resEstudios);
-        
-        String lugar = JOptionPane.showInputDialog(null, "Ingrese el lugar de atención"); 
-        while(lugar == null || lugar.isEmpty())     
-        {
-            lugar = JOptionPane.showInputDialog(null, "Ingrese el lugar de atención");   
-        }
-        h.setLugar(lugar);
-        
-        //acá hay que setear la fecha en h
-        //datos.agregar(h)
 
         listar();
         JOptionPane.showMessageDialog(null, "El paciente fue dado de alta");
@@ -169,7 +139,7 @@ public class Atencion extends javax.swing.JFrame {
             return;
         }
         
-        new FormularioHistoriaClinica(admision.getPaciente().getDni()).setVisible(true);
+        new HistoriaClinica(admision.getPaciente().getDni()).setVisible(true);
     }//GEN-LAST:event_btnHistoriaClinicaActionPerformed
 
     /**

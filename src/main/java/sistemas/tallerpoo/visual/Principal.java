@@ -39,7 +39,6 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jmRegistroFuncionario = new javax.swing.JMenuItem();
-        jmRoles = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         jmRegistroAdmision = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
@@ -136,14 +135,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jMenu6.add(jmRegistroFuncionario);
-
-        jmRoles.setText("Roles");
-        jmRoles.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmRolesActionPerformed(evt);
-            }
-        });
-        jMenu6.add(jmRoles);
 
         jMenuBar1.add(jMenu6);
 
@@ -263,12 +254,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void mHistoriaClinicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mHistoriaClinicaActionPerformed
         // TODO add your handling code here:
-        new FormularioHistoriaClinica().setVisible(true);
+        new HistoriaClinica().setVisible(true);
     }//GEN-LAST:event_mHistoriaClinicaActionPerformed
-
-    private void jmRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRolesActionPerformed
-        new RolesFuncionario().setVisible(true);
-    }//GEN-LAST:event_jmRolesActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -322,7 +309,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmRegistrar;
     private javax.swing.JMenuItem jmRegistroAdmision;
     private javax.swing.JMenuItem jmRegistroFuncionario;
-    private javax.swing.JMenuItem jmRoles;
     private javax.swing.JMenuItem jmSalir;
     private javax.swing.JMenuItem jmVerBoxes;
     private javax.swing.JMenuItem mHistoriaClinica;
