@@ -39,14 +39,16 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jmRegistroFuncionario = new javax.swing.JMenuItem();
-        jmRoles = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         jmRegistroAdmision = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jmListaEspera = new javax.swing.JMenuItem();
         jmVerBoxes = new javax.swing.JMenuItem();
+        jMenu9 = new javax.swing.JMenu();
+        mHistoriaClinica = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(720, 600));
 
         jMenu5.setText("Usuario");
 
@@ -134,14 +136,6 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu6.add(jmRegistroFuncionario);
 
-        jmRoles.setText("Roles");
-        jmRoles.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmRolesActionPerformed(evt);
-            }
-        });
-        jMenu6.add(jmRoles);
-
         jMenuBar1.add(jMenu6);
 
         jMenu7.setText("Admision");
@@ -176,17 +170,29 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu8);
 
+        jMenu9.setText("Historia Clinica");
+
+        mHistoriaClinica.setText("Ver Historias Clinicas");
+        mHistoriaClinica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mHistoriaClinicaActionPerformed(evt);
+            }
+        });
+        jMenu9.add(mHistoriaClinica);
+
+        jMenuBar1.add(jMenu9);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 547, Short.MAX_VALUE)
+            .addGap(0, 720, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 355, Short.MAX_VALUE)
+            .addGap(0, 720, Short.MAX_VALUE)
         );
 
         pack();
@@ -246,9 +252,10 @@ public class Principal extends javax.swing.JFrame {
         new Atencion().setVisible(true);
     }//GEN-LAST:event_jmVerBoxesActionPerformed
 
-    private void jmRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRolesActionPerformed
-        new RolesFuncionario().setVisible(true);
-    }//GEN-LAST:event_jmRolesActionPerformed
+    private void mHistoriaClinicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mHistoriaClinicaActionPerformed
+        // TODO add your handling code here:
+        new HistoriaClinica().setVisible(true);
+    }//GEN-LAST:event_mHistoriaClinicaActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -291,6 +298,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
@@ -301,8 +309,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmRegistrar;
     private javax.swing.JMenuItem jmRegistroAdmision;
     private javax.swing.JMenuItem jmRegistroFuncionario;
-    private javax.swing.JMenuItem jmRoles;
     private javax.swing.JMenuItem jmSalir;
     private javax.swing.JMenuItem jmVerBoxes;
+    private javax.swing.JMenuItem mHistoriaClinica;
     // End of variables declaration//GEN-END:variables
 }
