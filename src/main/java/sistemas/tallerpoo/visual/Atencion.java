@@ -1,12 +1,15 @@
 package sistemas.tallerpoo.visual;
 
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import sistemas.tallerpoo.clasesLogicas.Admision;
+import sistemas.tallerpoo.clasesLogicas.ControlRoles;
 import sistemas.tallerpoo.clasesLogicas.HistoriaClinica;
 import sistemas.tallerpoo.datos.AdmisionDatos;
 import sistemas.tallerpoo.datos.BoxDatos;
+import sistemas.tallerpoo.datos.HistoriaClinicaDatos;
 
 /**
  *
@@ -146,6 +149,14 @@ public class Atencion extends javax.swing.JFrame {
         
         HistoriaClinica h = new HistoriaClinica();
         h.setDniPaciente(admision.getPaciente().getDni());
+        h.setDniMedico(ControlRoles.getUsuarioActual().getDniFuncionario());
+        h.setFecha(new Date().toString());
+        h.setHora(new Date().toString());
+        h.setDiagnostico(diagnostico);
+        h.setLugar(lugar);
+        h.setDiagnosticoClinico(diagnosticoClinico);
+        
+        new HistoriaClinicaDatos().agregarHistoriaClinica(h);
 
         listar();
         JOptionPane.showMessageDialog(null, "El paciente fue dado de alta");
