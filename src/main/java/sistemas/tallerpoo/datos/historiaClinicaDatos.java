@@ -1,12 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package sistemas.tallerpoo.datos;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Scanner;
 import javax.swing.JComboBox;
@@ -22,32 +16,29 @@ import sistemas.tallerpoo.clasesLogicas.Paciente;
  */
 public class historiaClinicaDatos{
         
-     HashSet<String> conjunto = new HashSet<>();
+    HashSet<String> conjunto = new HashSet<>();
     
     public void llenarComboBox(JComboBox cb) {
-    String[] datos;
-    try (Scanner sc = new Scanner(new File("historiaClinica.csv"))) {
-        while (sc.hasNextLine()) {
-            datos = sc.nextLine().split(",");
-            HistoriaClinica h = new HistoriaClinica();
-            h.setDniPaciente(datos[0]);
-            h.setFecha(datos[1]);
-            h.setHora(datos[2]);
-            h.setDiagnostico(datos[3]);
-            h.setLugar(datos[4]);
-            h.setDiagnosticoClinico(datos[5]);
-            if(conjunto.add(h.getDniPaciente()))
-            {
-                cb.addItem(h.getDniPaciente());
-            }
-           
-                
-            
-        } 
-    } catch (Exception e) {
-        // Manejo de errores aquí
+        String[] datos;
+        try (Scanner sc = new Scanner(new File("historiaClinica.csv"))) {
+            while (sc.hasNextLine()) {
+                datos = sc.nextLine().split(",");
+                HistoriaClinica h = new HistoriaClinica();
+                h.setDniPaciente(datos[0]);
+                h.setFecha(datos[1]);
+                h.setHora(datos[2]);
+                h.setDiagnostico(datos[3]);
+                h.setLugar(datos[4]);
+                h.setDiagnosticoClinico(datos[5]);
+                if(conjunto.add(h.getDniPaciente()))
+                {
+                    cb.addItem(h.getDniPaciente());
+                }
+            } 
+        } catch (Exception e) {
+            // Manejo de errores aquí
+        }
     }
-}
     
     public void llenarFechas(JComboBox cbDnis, JComboBox cbFechas)
     {
@@ -66,12 +57,10 @@ public class historiaClinicaDatos{
                 h.setLugar(datos[5]);
                 h.setDiagnosticoClinico(datos[6]);
                 
-                
                 if(cbDnis.getSelectedItem().toString().equals(h.getDniPaciente()))
                 {
                     cbFechas.addItem(h.getFecha()+"  ---  "+h.getHora());
                 }
-  
             }
             
         } catch (Exception e) {
@@ -99,8 +88,6 @@ public class historiaClinicaDatos{
         }
     }
     
-    
-    
     public void mostrarHistoriaClinica(JTextField lugarAtencion ,JTextField ResultadoEst,JTextField medico, JTextArea diagnostico, JComboBox cbDnis, JComboBox cbFechas)
     {
         String[] datos;
@@ -108,7 +95,6 @@ public class historiaClinicaDatos{
             while(sc.hasNextLine())
             {
                 datos = sc.nextLine().split(",");
-                
                 
                 String[] fecha = cbFechas.getSelectedItem().toString().split("---");
                 
@@ -127,24 +113,21 @@ public class historiaClinicaDatos{
     
     private String buscarMedico(String dni)
     {       
-        String Nombre="";
-       try (Scanner sc = new Scanner(new File("medicos.csv"))){
+        String nombre = "";
+        try (Scanner sc = new Scanner(new File("medicos.csv"))){
             while(sc.hasNextLine())
             {
                 String[] campos = sc.nextLine().split(";");
                 
-               
                 if(dni.equals(campos[0]))
                 {
-                   Nombre= campos[1] +" "+ campos[2];
-                   return Nombre;
+                    nombre = campos[1] +" "+ campos[2];
+                    return nombre;
                 }
             }
-       }catch(Exception e){
-           System.out.println(e.getMessage());
-       } 
-       return Nombre;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        } 
+        return nombre;
     }
-    
-    
 }
