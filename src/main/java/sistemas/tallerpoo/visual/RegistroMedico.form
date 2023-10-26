@@ -50,22 +50,13 @@
                           <Component id="cbEstadoCivil" alignment="0" pref="140" max="32767" attributes="0"/>
                           <Component id="txtFechaNacimiento" max="32767" attributes="0"/>
                           <Component id="txtCorreo" alignment="1" max="32767" attributes="0"/>
-                          <Component id="txtFechaNacimiento" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="jLabel12" min="-2" pref="43" max="-2" attributes="0"/>
                   <Component id="lblMensaje" min="-2" pref="43" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jLabel13" max="32767" attributes="0"/>
-                              <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="jLabel10" min="-2" pref="107" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <Component id="jLabel13" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="txtMatricula" pref="140" max="32767" attributes="0"/>
                           <Component id="txtSectorTrabajo" max="32767" attributes="0"/>
