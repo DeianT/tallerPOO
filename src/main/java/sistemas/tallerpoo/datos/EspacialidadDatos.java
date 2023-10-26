@@ -4,22 +4,18 @@
  */
 package sistemas.tallerpoo.datos;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.Vector;
-import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import sistemas.tallerpoo.clasesLogicas.Especialidad;
 import sistemas.tallerpoo.clasesLogicas.Estudios;
 import sistemas.tallerpoo.clasesLogicas.Medico;
@@ -30,7 +26,6 @@ import sistemas.tallerpoo.clasesLogicas.SectorTrabajo;
  * @author Thiago
  */
 public class EspacialidadDatos {
-    ArrayList<Especialidad> lista = new ArrayList();
     ArrayList<Estudios>  estudios = new ArrayList<>();
     
     public EspacialidadDatos()
@@ -81,21 +76,57 @@ public class EspacialidadDatos {
             String dni = Integer.toString(m.getDni());
             if(dni.equals(cb.getSelectedItem().toString()))
             {              
-                txt.setText(m.getNombre()+" "+m.getApellido());
+                txt.setText(m.getNombre().toUpperCase()+" "+m.getApellido().toUpperCase());
             }
         } 
     }
    
-    public void agregarEspecilidades(JComboBox cb, JList esp, String uni, String fecha)
+    public void agregarEspecilidades(JComboBox cb, JTextField esp, String uni, String fecha)
     {
+        Estudios es;
 
         File f = new File("./estudios.csv");
         try (FileWriter fw = new FileWriter(f,true))
          {
-             fw.write(cb.getSelectedItem().toString()+","+esp.getSelectedValue().toString()+","+uni+","+fecha+"\n"); 
+             es = new Estudios(cb.getSelectedItem().toString(), esp.getText(), uni, fecha  );
+             estudios.add(es);
+             escribir();
+             //fw.write(cb.getSelectedItem().toString()+","+esp.getText()+","+uni+","+fecha+"\n"); 
              
          } catch (Exception e) {
              System.out.println(e.getMessage());
+        }
+    }
+    
+    public void eliminarEspecialidad(JComboBox cb, JList espe)
+    {
+        for(int i = 0 ; i<estudios.size();i++)
+        {
+            Estudios e = estudios.get(i);
+            if(e.getDniMedico().equals(cb.getSelectedItem().toString()))
+            {
+                if(e.getEspecialidad().equals(espe.getSelectedValue().toString()))
+                {
+                    estudios.remove(e);
+                    escribir();
+                }
+            }
+        }
+       
+    }
+    
+    public void mostrarDatos(JComboBox cb, JList espe)
+    {
+        for(int i = 0 ; i<estudios.size();i++)
+        {
+            Estudios e = estudios.get(i);
+            if(e.getDniMedico().equals(cb.getSelectedItem().toString()))
+            {
+                if(e.getEspecialidad().equals(espe.getSelectedValue().toString()))
+                {
+                    JOptionPane.showMessageDialog(null, "Recibido en: " + e.getUniversidad() +"\n"+ "en la fecha: "+ e.getFechaTitulo() );
+                }
+            }
         }
     }
     
@@ -149,7 +180,7 @@ public class EspacialidadDatos {
                 linea = e.getDniMedico() + ",";
                 linea+= e.getEspecialidad() + ",";
                 linea+= e.getUniversidad() + ",";
-                linea+= e.getFechaTitulo();
+                linea+= e.getFechaTitulo() + "\n" ;
                 fw.write(linea);
             }
             

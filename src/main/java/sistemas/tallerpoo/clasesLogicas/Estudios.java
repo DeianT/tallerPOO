@@ -11,8 +11,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Estudios {
-    private String universidad;
-    private String fechaTitulo;
-    private String  dniMedico;
+    private String dniMedico;
     private String especialidad;
+    private String  universidad;
+    private String fechaTitulo;
 }
+
