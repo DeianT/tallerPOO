@@ -1,11 +1,16 @@
 package sistemas.tallerpoo.visual;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import sistemas.tallerpoo.clasesLogicas.Admision;
+import sistemas.tallerpoo.clasesLogicas.ControlRoles;
+import sistemas.tallerpoo.clasesLogicas.HistoriaClinica;
 import sistemas.tallerpoo.datos.AdmisionDatos;
 import sistemas.tallerpoo.datos.BoxDatos;
+import sistemas.tallerpoo.datos.HistoriaClinicaDatos;
 
 /**
  *
@@ -124,6 +129,42 @@ public class Atencion extends javax.swing.JFrame {
         datos.editarAdmision(admision);
         //reducir la cantidad de pacientes en el box
         new BoxDatos().ocuparDesocupar(admision.getBox().getNumero(), false);//esto posiblemente haya que modificar
+        
+        String diagnostico = JOptionPane.showInputDialog(null, "Ingrese el diagnóstico"); 
+        while(diagnostico == null || diagnostico.isEmpty())     
+        {
+            diagnostico = JOptionPane.showInputDialog(null, "Ingrese el diagnóstico");   
+        }
+        
+        String lugar = JOptionPane.showInputDialog(null, "Ingrese el lugar de atención"); 
+        while(lugar == null || lugar.isEmpty())     
+        {
+            lugar = JOptionPane.showInputDialog(null, "Ingrese el lugar de atención");   
+        }
+        
+        String diagnosticoClinico = JOptionPane.showInputDialog(null, "Ingrese el resultado de estudios"); 
+        while(diagnosticoClinico == null || diagnosticoClinico.isEmpty())     
+        {
+            diagnosticoClinico = JOptionPane.showInputDialog(null, "Ingrese el resultado de estudios");   
+        }
+        
+        //Se crean dos objetos de fecha para poder sacar hora y fecha actuales.
+        Date fechita = new Date();
+        SimpleDateFormat formatofecha = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formatohora = new SimpleDateFormat("HH:mm");
+        String fecha = formatofecha.format(fechita);
+        String hora = formatohora.format(fechita);
+        
+        HistoriaClinica h = new HistoriaClinica();
+        h.setDniPaciente(admision.getPaciente().getDni());
+        h.setDniMedico(ControlRoles.getUsuarioActual().getDniFuncionario());
+        h.setFecha(fecha);
+        h.setHora(hora);
+        h.setDiagnostico(diagnostico);
+        h.setLugar(lugar);
+        h.setDiagnosticoClinico(diagnosticoClinico);
+        
+        new HistoriaClinicaDatos().agregarHistoriaClinica(h);
 
         listar();
         JOptionPane.showMessageDialog(null, "El paciente fue dado de alta");
@@ -139,7 +180,7 @@ public class Atencion extends javax.swing.JFrame {
             return;
         }
         
-        
+        new FormularioHistoriaClinica(admision.getPaciente().getDni()).setVisible(true);
     }//GEN-LAST:event_btnHistoriaClinicaActionPerformed
 
     /**

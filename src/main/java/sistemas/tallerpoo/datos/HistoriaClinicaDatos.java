@@ -14,7 +14,7 @@ import sistemas.tallerpoo.clasesLogicas.Paciente;
  *
  * @author Thiago
  */
-public class historiaClinicaDatos{
+public class HistoriaClinicaDatos{
         
     HashSet<String> conjunto = new HashSet<>();
     
