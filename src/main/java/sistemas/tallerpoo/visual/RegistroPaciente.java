@@ -93,8 +93,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                 Date pruebita = dateFormat.parse(p.getFechaNacimiento());
                 txtFechaNacimiento.setDate(pruebita);
-            } catch (ParseException ex) {
-            }
+            } catch (ParseException ex) {}
         
         txtDomicilio.setText(p.getDomicilio());
         txtTelefono.setText(telefono);
@@ -429,8 +428,17 @@ public class RegistroPaciente extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(null, "Por favor ingrese un motivo");   
              motivo = JOptionPane.showInputDialog(null, "Ingrese el motivo");   
             }  
-            a.setFecha(new Date());
-            a.setHora(new Date());
+            String fechaA;
+            String horaA;
+            //Se crean dos objetos de fecha para poder sacar hora y fecha actuales.
+            Date fechita = new Date();
+            Date horita = new Date();
+            SimpleDateFormat formatofecha = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat formatohora = new SimpleDateFormat("HH:mm:ss");
+            fechaA = formatofecha.format(fechita);
+            horaA = formatohora.format(horita);
+            a.setFecha(fechaA);
+            a.setHora(horaA);
             a.setMotivo(motivo);
             a.setBox(new Box());
             a.setTriage(new Triage());

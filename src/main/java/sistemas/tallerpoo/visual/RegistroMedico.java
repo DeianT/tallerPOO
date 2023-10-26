@@ -81,8 +81,7 @@ public class RegistroMedico extends javax.swing.JFrame {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                 Date pruebita = dateFormat.parse(m.getFechaNacimiento());
                 txtFechaNacimiento.setDate(pruebita);
-            } catch (ParseException ex) {
-            }
+            } catch (ParseException ex) {}
         
         txtDomicilio.setText(m.getDomicilio());
         txtTelefono.setText(telefono);

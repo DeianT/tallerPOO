@@ -80,8 +80,7 @@ public class RegistroFuncionario extends javax.swing.JFrame {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                 Date pruebita = dateFormat.parse(p.getFechaNacimiento());
                 txtFechaNacimiento.setDate(pruebita);
-            } catch (ParseException ex) {
-            }
+            } catch (ParseException ex) {}
         
         txtDomicilio.setText(p.getDomicilio());
         txtTelefono.setText(telefono);

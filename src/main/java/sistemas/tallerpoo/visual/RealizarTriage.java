@@ -473,8 +473,8 @@ public class RealizarTriage extends javax.swing.JFrame {
         
         if(cboRespiracion.getSelectedIndex()!=0 && cboPulso.getSelectedIndex()!=0 && cboEstadoMental.getSelectedIndex()!=0 && cboConciencia.getSelectedIndex()!=0 && cboDolorPecho.getSelectedIndex()!=0 && cboLesionesGraves.getSelectedIndex()!=0 && cboEdad.getSelectedIndex()!=0 && cboFiebre.getSelectedIndex()!=0 && cboVomitos.getSelectedIndex()!=0 && cboDolorAbominal.getSelectedIndex()!=0 && cboSignosShock.getSelectedIndex()!=0 && cboLesionesLeves.getSelectedIndex()!=0 && cboSangrado.getSelectedIndex()!=0 )
         {
-            JOptionPane.showMessageDialog(this," El nivel de atencion es de " + color.toUpperCase());
-            int opcion = JOptionPane.showOptionDialog(null,"Desea editar el color?", "Confirmacion", 0, JOptionPane.QUESTION_MESSAGE, null , editar, "Terminar");
+            JOptionPane.showMessageDialog(this," El nivel de atención es de " + color.toUpperCase());
+            int opcion = JOptionPane.showOptionDialog(null,"Desea editar el color?", "Confirmación", 0, JOptionPane.QUESTION_MESSAGE, null , editar, "Terminar");
             if(opcion != 0)//si no aprieta el botón Editar
             {
                 t.setColor(NivelTriage.valueOf(color));
@@ -508,7 +508,7 @@ public class RealizarTriage extends javax.swing.JFrame {
                 t.setColorModificado(NivelTriage.valueOf(nuevoColor));
                 t.setMotivoModificacion(motivo);
             }
-            JOptionPane.showMessageDialog(this, "se ha guardado con exito ");
+            JOptionPane.showMessageDialog(this, "Se ha guardado con éxito ");
             
             TriageDatos td = new TriageDatos();
             t.setDniEncargado(TallerPoo.getUsuarioActual().getDniFuncionario());

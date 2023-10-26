@@ -12,8 +12,8 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class Admision {
     private int id;
-    private Date fecha;
-    private Date hora;
+    private String fecha;
+    private String hora;
     private String motivo;
     private Paciente paciente;
     private Triage triage;

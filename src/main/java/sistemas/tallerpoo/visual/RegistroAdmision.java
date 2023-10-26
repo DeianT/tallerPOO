@@ -1,6 +1,7 @@
 package sistemas.tallerpoo.visual;
 
 import static java.awt.image.ImageObserver.HEIGHT;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import sistemas.tallerpoo.clasesLogicas.Admision;
@@ -127,14 +128,23 @@ public class RegistroAdmision extends javax.swing.JFrame {
         try{
             
             Admision a = new Admision();
-            a.setFecha(new Date());
-            a.setHora(new Date());
+            String fechaA;
+            String horaA;
+            //Se crean dos objetos de fecha para poder sacar hora y fecha actuales.
+            Date fechita = new Date();
+            Date horita = new Date();
+            SimpleDateFormat formatofecha = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat formatohora = new SimpleDateFormat("HH:mm:ss");
+            fechaA = formatofecha.format(fechita);
+            horaA = formatohora.format(horita);
+            a.setFecha(fechaA);
+            a.setHora(horaA);
             a.setMotivo(jtaMotivoCampo.getText());
             a.setPaciente(paciente);
             a.setTriage(triage);
             a.setBox(new Box());
             new AdmisionDatos().agregarAdmision(a);
-            JOptionPane.showMessageDialog(null, "se ingreso con exito");
+            JOptionPane.showMessageDialog(null, "Se ingresó con exito");
         }
         catch(Exception e){
             e.printStackTrace();
