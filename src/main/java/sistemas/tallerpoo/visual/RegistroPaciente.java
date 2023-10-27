@@ -24,6 +24,8 @@ import sistemas.tallerpoo.clasesLogicas.Triage;
 import sistemas.tallerpoo.datos.AdmisionDatos;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import sistemas.tallerpoo.clasesLogicas.ControlRoles;
+import sistemas.tallerpoo.clasesLogicas.Rol;
 
 /**
  *
@@ -427,6 +429,11 @@ public class RegistroPaciente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        if(!ControlRoles.usuarioTieneRol(new Rol("Medico", 0)) && !ControlRoles.usuarioTieneRol(new Rol("Admision de Pacientes", 0))){
+            JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
+            return;
+        }
+        
         if ((Integer.parseInt(txtDni.getText()) <= 0)){
             JOptionPane.showMessageDialog(null,"Ingrese un DNI válido", "Error",JOptionPane.ERROR_MESSAGE);
             return;
@@ -474,6 +481,11 @@ public class RegistroPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMostrarTodoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        if(!ControlRoles.usuarioTieneRol(new Rol("Medico", 0)) && !ControlRoles.usuarioTieneRol(new Rol("Admision de Pacientes", 0))){
+            JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
+            return;
+        }
+        
         Paciente pac;
         int fila = jtPacientes.getSelectedRow();
         pac = lista.get(fila);
@@ -481,6 +493,11 @@ public class RegistroPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        if(!ControlRoles.usuarioTieneRol(new Rol("Medico", 0)) && !ControlRoles.usuarioTieneRol(new Rol("Admision de Pacientes", 0))){
+            JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
+            return;
+        }
+        
         int fila = jtPacientes.getSelectedRow();
         String s = jtPacientes.getModel().getValueAt(fila, 0).toString();
         datos.eliminarPaciente(Integer.parseInt(s));
@@ -493,6 +510,11 @@ public class RegistroPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarDniKeyReleased
 
     private void btnConfirmarEdicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarEdicionActionPerformed
+        if(!ControlRoles.usuarioTieneRol(new Rol("Medico", 0)) && !ControlRoles.usuarioTieneRol(new Rol("Admision de Pacientes", 0))){
+            JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
+            return;
+        }
+        
         Paciente p = new Paciente();
         p=datos.capturar(txtDni, txtNombre, txtApellido, txtFechaNacimiento, txtDomicilio, txtDni, txtCelular, cbEstadoCivil, txtCorreo, txtContacto);
 
@@ -540,6 +562,11 @@ public class RegistroPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtFechaNacimientoFocusGained
 
     private void btnAdmisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmisionActionPerformed
+        if(!ControlRoles.usuarioTieneRol(new Rol("Medico", 0)) && !ControlRoles.usuarioTieneRol(new Rol("Admision de Pacientes", 0))){
+            JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
+            return;
+        }
+        
         int fila = jtPacientes.getSelectedRow();
         if(fila == -1){
             JOptionPane.showMessageDialog(null, "Debe seleccionar un paciente", "Error", JOptionPane.ERROR_MESSAGE);
