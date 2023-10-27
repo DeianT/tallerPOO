@@ -6,9 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date; 
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import sistemas.tallerpoo.clasesLogicas.Paciente;
@@ -89,25 +87,23 @@ public class PacienteDatos {
     public boolean editarPaciente(Paciente paciente) throws IOException{
         try {
             Paciente p = obtenerPaciente(paciente.getDni());
-        p.setNombre(paciente.getNombre());
-        p.setApellido(paciente.getApellido());
-        p.setDomicilio(paciente.getDomicilio());
-        p.setFechaNacimiento(paciente.getFechaNacimiento());
-        p.setDomicilio(paciente.getDomicilio());
-        p.setTelFijo(paciente.getTelFijo());
-        p.setTelCelular(paciente.getTelCelular());
-        p.setEstadoCivil(paciente.getEstadoCivil());
-        p.setCorreoElect(paciente.getCorreoElect());
-        p.setContacto(paciente.getContacto());
-        
-        
-        escribirArchivo();
-        return true;
+            p.setNombre(paciente.getNombre());
+            p.setApellido(paciente.getApellido());
+            p.setDomicilio(paciente.getDomicilio());
+            p.setFechaNacimiento(paciente.getFechaNacimiento());
+            p.setDomicilio(paciente.getDomicilio());
+            p.setTelFijo(paciente.getTelFijo());
+            p.setTelCelular(paciente.getTelCelular());
+            p.setEstadoCivil(paciente.getEstadoCivil());
+            p.setCorreoElect(paciente.getCorreoElect());
+            p.setContacto(paciente.getContacto());
+
+            escribirArchivo();
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
-        
     }
     
     private void escribirArchivo () {        
@@ -128,7 +124,6 @@ public class PacienteDatos {
                 linea += p.getEstadoCivil() + separador;
                 linea += p.getCorreoElect() + separador;
                 linea += p.getContacto();
-                
 
                 pw.println(linea);
             }
@@ -174,7 +169,6 @@ public class PacienteDatos {
                 perso.setCorreoElect(campos[8]);
                 perso.setContacto(campos[9]);
                 
-                
                 lista.add(perso); //Agrega la persona creada a la lista
                 linea = br.readLine();
             }            
@@ -184,13 +178,6 @@ public class PacienteDatos {
             if (br != null) {
                 br.close();
             }
-        }
-    }
-    
-    public void imprimirArchivo(){//Imprime el contenido de la lista, se usa para testeo
-    System.out.println("cant" + this.lista.size());
-        for (Paciente p: lista) {
-            System.out.println(p.toString());
         }
     }
 }
