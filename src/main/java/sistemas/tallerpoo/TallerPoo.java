@@ -21,7 +21,6 @@ import sistemas.tallerpoo.datos.EspacialidadDatos;
 import sistemas.tallerpoo.datos.BoxDatos;
 import sistemas.tallerpoo.datos.FuncionarioDatos;
 import sistemas.tallerpoo.datos.MedicoDatos;
-import sistemas.tallerpoo.datos.PersonaDatos;
 import sistemas.tallerpoo.datos.PacienteDatos;
 import sistemas.tallerpoo.datos.RolDatos;
 import sistemas.tallerpoo.datos.TriageDatos;
@@ -35,7 +34,6 @@ import sistemas.tallerpoo.visual.RegistroUsuario;
  */
 public class TallerPoo {
     public static void main(String[] args) throws IOException {
-        PersonaDatos pDatos = new PersonaDatos();
         FuncionarioDatos fDatos = new  FuncionarioDatos();
         MedicoDatos mDatos = new MedicoDatos();
         AdmisionDatos adDatos = new AdmisionDatos();
