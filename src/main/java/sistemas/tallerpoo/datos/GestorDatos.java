@@ -60,25 +60,54 @@ public class GestorDatos {
             int[] fechaHist = this.pasarArrayAInt(fechaH);
             
             String dniMedico = Integer.toString(h.getDniMedico());
-            System.out.println(h.getDniMedico());
-            System.out.println(h.getFecha());
 
-            
+
+
             if(med.getSelectedItem().toString().equals(dniMedico))
             {
-                if(fechaHist[2] > Desde[2] && fechaHist[2] < Hasta[2])
+                if(fechaHist[2] == Desde[2] && fechaHist[2] == Hasta[2] )
                 {
-                    contador++;
-                }else if(fechaHist[1] > Desde[1] && fechaHist[1] < Hasta[1])
-                {
-                    contador++;
-                }else if(fechaHist[0] > Desde[0] && fechaHist[0] < Hasta[0])
-                {
-                    contador++;
-                }               
+                    if(fechaHist[1] == Desde[1] && fechaHist[1] == Hasta[1] )
+                    {
+                        if(fechaHist[0] == Desde[0] && fechaHist[0] == Hasta[0])
+                        {
+                            contador++;
+                        }else if(fechaHist[0] >= Desde[0] && fechaHist[0] <= Hasta[0])
+                        {
+                            contador++;
+                        }
+                    }else if(fechaHist[1] >= Desde[1] && fechaHist[1] <= Hasta[1])
+                    {
+                            contador++;
+                        
+                    }
+                }else if(fechaHist[2] >= Desde[2] && fechaHist[2] <= Hasta[2])
+                {           
+                    if(Desde[2] < Hasta[2] && fechaHist[2] == Desde[2])
+                    {
+                        if(fechaHist[1] == Desde[1])
+                        {
+                            
+                            if(fechaHist[0] == Desde[0])
+                            {
+                              contador++;   
+                            }else if(fechaHist[0] > Desde[0])
+                            {
+                               contador++; 
+                            }                           
+                        }else if(fechaHist[1] > Desde[1])
+                        {
+                            contador++;
+                        }
+                        
+                    }else
+                    {
+                      contador++;    
+                    }                        
+                }
             }
         }
-        String resultado = Integer.toHexString(contador);
+        String resultado = Integer.toString(contador);
         cantidad.setText(resultado);
     }
     
