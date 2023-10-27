@@ -22,17 +22,17 @@ import lombok.Setter;
 public class AdministradorDelSistema extends Funcionario{
     /**
      *  Constructor de AministradorDelSistema
-     * @param dni
-     * @param Nombre
-     * @param Apellido
-     * @param fechaNacimiento
-     * @param domicilio
-     * @param telFijo
-     * @param telCelular
-     * @param estadoCivil
-     * @param correoElect
-     * @param trabajaEn
-     * @param rolesSistema 
+     * @param dni  Dni
+     * @param Nombre Nombre
+     * @param Apellido Apellido
+     * @param fechaNacimiento Fecha de Nacimiento
+     * @param domicilio Domicilio
+     * @param telFijo Telefono Fijo
+     * @param telCelular Telefono Celular
+     * @param estadoCivil Estado Civil
+     * @param correoElect Correo Electronico
+     * @param trabajaEn Sector de Trabajo
+     * @param rolesSistema  Rol dentro del Sistema
      */
     public AdministradorDelSistema(int dni, String Nombre, String Apellido, String fechaNacimiento, String domicilio, int telFijo, String telCelular, String estadoCivil, String correoElect, SectorTrabajo trabajaEn, ArrayList<Rol> rolesSistema){
         super(dni,Nombre,Apellido,fechaNacimiento,domicilio,telFijo,telCelular,estadoCivil,correoElect,trabajaEn,rolesSistema);
