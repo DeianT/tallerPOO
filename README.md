@@ -25,9 +25,17 @@ Dar de alta un paciente:
 -Presionar el botón "Dar de alta"
 -Completar los datos de diagnóstico, lugar de atencion y resultados de estudios
 
+Registrar un funcionario:
+-Ir a Funcionarios -> Registro
+-Cargar los datos en el formulario de la izquierda y presionar el botón "Registrar"
+
 Crear un usuario:
+-Ir a usuario -> Registrar
+-Cargar el nombre de usuario, el dni del funcionario que utilizará ese usuario (deben estar sus datos en el sistema) y la contraseña
+-Presionar el botón "Registrar"
 
 Asignar roles a un funcionario:
+-Ir a Funcionarios -> Roles
 
 A continuación una lista de las funciones del sistema y los roles necesarios para acceder a ellas:
 -Registrar usuarios: Administrador de Sistema - informatica
