@@ -36,7 +36,6 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -48,6 +47,8 @@ public class Principal extends javax.swing.JFrame {
         jmVerBoxes = new javax.swing.JMenuItem();
         jMenu9 = new javax.swing.JMenu();
         mHistoriaClinica = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
+        jmEstadisticas = new javax.swing.JMenuItem();
 
         jLabel2.setText("jLabel2");
 
@@ -103,19 +104,15 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem2);
 
-        jMenuBar1.add(jMenu1);
-
-        jMenu3.setText("Especialidades");
-
         jMenuItem3.setText("Especialidades");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem3);
+        jMenu1.add(jMenuItem3);
 
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(jMenu1);
 
         jMenu4.setText("Triage");
 
@@ -180,6 +177,18 @@ public class Principal extends javax.swing.JFrame {
         jMenu9.add(mHistoriaClinica);
 
         jMenuBar1.add(jMenu9);
+
+        jMenu7.setText("Gestores");
+
+        jmEstadisticas.setText("Estadísticas");
+        jmEstadisticas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmEstadisticasActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jmEstadisticas);
+
+        jMenuBar1.add(jMenu7);
 
         setJMenuBar(jMenuBar1);
 
@@ -297,6 +306,14 @@ public class Principal extends javax.swing.JFrame {
         new RolesFuncionario().setVisible(true);
     }//GEN-LAST:event_jmRolesActionPerformed
 
+    private void jmEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmEstadisticasActionPerformed
+        if(!ControlRoles.usuarioTieneRol(new Rol("Gestion"))){
+            JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
+            return;
+        }
+        new AnalisisGestor().setVisible(true);
+    }//GEN-LAST:event_jmEstadisticasActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -333,10 +350,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
@@ -345,6 +362,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jmCerrarSesion;
+    private javax.swing.JMenuItem jmEstadisticas;
     private javax.swing.JMenuItem jmListaEspera;
     private javax.swing.JMenuItem jmRegistrar;
     private javax.swing.JMenuItem jmRegistroFuncionario;

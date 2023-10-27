@@ -8,4 +8,6 @@
 8;Amarillo;Normal;Anormal;Normal;Perdida de conciencia;No presente;No presentes;Niï¿½o o anciano;Sin fiebre;Vomitos moderados;Dolor abdominal moderado;Presentes;No presentes;No presente;null;null;Amarillo;null;0
 9;Verde;Normal;Normal;Normal;Conciente y alerta;No presente;No presentes;Adulto;Sin fiebre;Sin vomitos;No presente;No presentes;No presentes;No presente;null;null;Verde;null;0
 10;Amarillo;Normal;Anormal;Confusion leve;Conciente y alerta;Presente;Presentes;Adulto;Fiebre moderada;Sin vomitos;Dolor abdominal severo;No presentes;Presentes;No presente;null;null;Amarillo;null;0
-11;Verde;Normal;Normal;Normal;Conciente y alerta;No presente;No presentes;Niño o anciano;Sin fiebre;Sin vomitos;No presente;No presentes;No presentes;Sangrado moderado;null;null;Verde;null;121
+11;Verde;Normal;Normal;Normal;Conciente y alerta;No presente;No presentes;Adulto;Sin fiebre;Vomitos moderados;No presente;No presentes;No presentes;No presente;null;null;Naranja;motivo;11
+12;Verde;Normal;Normal;Normal;Conciente y alerta;No presente;No presentes;Adulto;Sin fiebre;Vomitos moderados;No presente;No presentes;No presentes;No presente;null;null;Amarillo;si;11
+13;Verde;Normal;Normal;Normal;Conciente y alerta;No presente;No presentes;Adulto;Sin fiebre;Vomitos moderados;No presente;No presentes;No presentes;No presente;null;null;Azul;no tiene nada;11
