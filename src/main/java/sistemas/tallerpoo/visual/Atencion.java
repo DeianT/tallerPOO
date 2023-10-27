@@ -54,7 +54,7 @@ public class Atencion extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Box", "Nivel triage", "Motivo", "Hora ingreso", "DNI", "Nombre", "Apellido", "Fecha de Nacimiento"
+                "Box", "Nivel triage", "Motivo", "Ingreso", "DNI", "Nombre", "Apellido", "Fecha de Nacimiento"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -236,7 +236,7 @@ public class Atencion extends javax.swing.JFrame {
             ob[0] = listaAdmision.get(i).getBox().getNumero();
             ob[1] = listaAdmision.get(i).getTriage().getColorModificado();
             ob[2] = listaAdmision.get(i).getMotivo();
-            ob[3] = listaAdmision.get(i).getHora();
+            ob[3] = listaAdmision.get(i).getFecha() + " " + listaAdmision.get(i).getHora();
             ob[4] = listaAdmision.get(i).getPaciente().getDni();
             ob[5] = listaAdmision.get(i).getPaciente().getNombre();
             ob[6] = listaAdmision.get(i).getPaciente().getApellido();
