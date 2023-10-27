@@ -10,7 +10,31 @@ package sistemas.tallerpoo.clasesLogicas;
  */
 public enum NivelTriage 
 {
-    Rojo,Naranja,Amarillo,Verde,Azul
+
+    /**
+     *  
+     */
+    Rojo,
+
+    /**
+     *
+     */
+    Naranja,
+
+    /**
+     *
+     */
+    Amarillo,
+
+    /**
+     *
+     */
+    Verde,
+
+    /**
+     *
+     */
+    Azul
 }
 
 

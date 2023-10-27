@@ -5,6 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ *
+ * @author 
+ */
 @Getter
 @Setter
 @NoArgsConstructor
@@ -14,6 +18,10 @@ public class Usuario {
     private String nombreUsuario;
     private String contraseñaUsuario;
     
+    /**
+     *
+     * @return Devuelve el DNI del funcionario, Nombre de Usuario, Contraseña de Usuario
+     */
     public String toCSV(){
         return dniFuncionario + "," + nombreUsuario + "," + contraseñaUsuario + "\n";              
     }

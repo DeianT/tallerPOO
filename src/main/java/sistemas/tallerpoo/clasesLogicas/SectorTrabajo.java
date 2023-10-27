@@ -16,6 +16,10 @@ import lombok.Setter;
 public class SectorTrabajo {
     private String nombre;
     
+    /**
+     *
+     * @return Devuelve el Nombre del Sector de Trabajo
+     */
     @Override
     public String toString(){
         return "SectorTrabajo(" + nombre +")";
