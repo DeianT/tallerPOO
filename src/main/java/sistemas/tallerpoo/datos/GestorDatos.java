@@ -19,10 +19,6 @@ import sistemas.tallerpoo.clasesLogicas.Paciente;
  * @author Thiago
  */
 public class GestorDatos {
-    
-    
-    
-    
     public void llenarCombo(JComboBox cb)
     {
         for(Medico p: new MedicoDatos().obtenerMedicos()){
