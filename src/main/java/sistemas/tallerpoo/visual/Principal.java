@@ -281,7 +281,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmVerBoxesActionPerformed
 
     private void mHistoriaClinicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mHistoriaClinicaActionPerformed
-        if(!ControlRoles.usuarioTieneRol(new Rol("Medico")) && !ControlRoles.usuarioTieneRol(new Rol("Admision de Pacientes")) && !ControlRoles.usuarioTieneRol(new Rol("Gestion"))){
+        if(!ControlRoles.usuarioTieneRol(new Rol("Medico")) && !ControlRoles.usuarioTieneRol(new Rol("Admision de Pacientes")) && !ControlRoles.usuarioTieneRol(new Rol("Gestion")) && !ControlRoles.usuarioTieneRol(new Rol("Registros Medicos"))){
             JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
             return;
         }
