@@ -27,6 +27,7 @@ import sistemas.tallerpoo.datos.RolDatos;
 import sistemas.tallerpoo.datos.TriageDatos;
 import sistemas.tallerpoo.visual.Login;
 import sistemas.tallerpoo.visual.Principal;
+import sistemas.tallerpoo.visual.RegistroAdmision;
 import sistemas.tallerpoo.visual.RegistroUsuario;
 
 /**
