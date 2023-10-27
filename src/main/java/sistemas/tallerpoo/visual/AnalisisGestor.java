@@ -563,6 +563,11 @@ DefaultComboBoxModel modelo = new DefaultComboBoxModel();
         jdHasta5.setDateFormatString("dd/MM/yyyy");
 
         btnConsultar5.setText("Consultar");
+        btnConsultar5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultar5ActionPerformed(evt);
+            }
+        });
 
         jLabel25.setForeground(new java.awt.Color(0, 0, 255));
         jLabel25.setText("AZUL");
@@ -673,8 +678,9 @@ DefaultComboBoxModel modelo = new DefaultComboBoxModel();
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 908, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -713,6 +719,14 @@ DefaultComboBoxModel modelo = new DefaultComboBoxModel();
         
         
     }//GEN-LAST:event_btnConsultar2ActionPerformed
+
+    private void btnConsultar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultar5ActionPerformed
+        // TODO add your handling code here:
+        String Fecha1 = ((JTextField)jdDesde5.getDateEditor().getUiComponent()).getText();
+        String Fecha2 = ((JTextField)jdHasta5.getDateEditor().getUiComponent()).getText();
+        
+        datos.triagesPorFechas(Fecha1, Fecha2, txtAzul, txtVerde, txtNaranja, txtAmarillo, txtRojo);
+    }//GEN-LAST:event_btnConsultar5ActionPerformed
 
     /**
      * @param args the command line arguments

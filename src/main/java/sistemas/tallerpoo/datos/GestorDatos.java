@@ -8,20 +8,213 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import sistemas.tallerpoo.clasesLogicas.HistoriaClinica;
 import sistemas.tallerpoo.clasesLogicas.Medico;
 import sistemas.tallerpoo.clasesLogicas.Paciente;
+import sistemas.tallerpoo.clasesLogicas.Triage;
 
 /**
  *
  * @author Thiago
  */
 public class GestorDatos {
-    
-    
-    
+
+ 
+      
+      
+      public void triagesPorFechas(String f1, String f2, JLabel Azul, JLabel Verde, JLabel Naranja,JLabel Amarillo,JLabel Rojo )
+      {
+
+          int rojo=0,naranja=0,amarillo=0,verde=0,azul=0;
+          
+          
+            String[] desde = f1.split("/");
+            String[] hasta = f2.split("/");
+            int[] Desde = this.pasarArrayAInt(desde);
+            int[] Hasta = this.pasarArrayAInt(hasta);
+          
+          for(Triage t: new TriageDatos().obtenerTriages())
+          {
+              
+                String[] fechaH = t.getFecha().split("/");
+                int[] fechaHist = this.pasarArrayAInt(fechaH);
+                
+                
+                if(fechaHist[2] == Desde[2] && fechaHist[2] == Hasta[2] )
+                {
+                    if(fechaHist[1] == Desde[1] && fechaHist[1] == Hasta[1] )
+                    {
+                        if(fechaHist[0] == Desde[0] && fechaHist[0] == Hasta[0])
+                        {
+                            switch(t.getColor().toString())
+                            {
+                                case "Rojo": 
+                                    rojo++; 
+                                    break;
+                                case "Naranja":
+                                    naranja++;
+                                    break;
+                                case "Amarillo":
+                                    amarillo++;
+                                    break;
+                                case "Verde":
+                                    verde++;
+                                    break;
+                                case "Azul": 
+                                    azul++;
+                                    break;
+                            }   
+                        }else if(fechaHist[0] >= Desde[0] && fechaHist[0] <= Hasta[0])
+                        {
+                            switch(t.getColor().toString())
+                            {
+                                case "Rojo": 
+                                    rojo++; 
+                                    break;
+                                case "Naranja":
+                                    naranja++;
+                                    break;
+                                case "Amarillo":
+                                    amarillo++;
+                                    break;
+                                case "Verde":
+                                    verde++;
+                                    break;
+                                case "Azul": 
+                                    azul++;
+                                    break;
+                            }
+                        }
+                    }else if(fechaHist[1] >= Desde[1] && fechaHist[1] <= Hasta[1])
+                    {
+                            switch(t.getColor().toString())
+                            {
+                                case "Rojo": 
+                                    rojo++; 
+                                    break;
+                                case "Naranja":
+                                    naranja++;
+                                    break;
+                                case "Amarillo":
+                                    amarillo++;
+                                    break;
+                                case "Verde":
+                                    verde++;
+                                    break;
+                                case "Azul": 
+                                    azul++;
+                                    break;
+                            }
+                        
+                    }
+                }else if(fechaHist[2] >= Desde[2] && fechaHist[2] <= Hasta[2])
+                {           
+                    if(Desde[2] < Hasta[2] && fechaHist[2] == Desde[2])
+                    {
+                        if(fechaHist[1] == Desde[1])
+                        {
+                            
+                            if(fechaHist[0] == Desde[0])
+                            {
+                              switch(t.getColor().toString())
+                            {
+                                case "Rojo": 
+                                    rojo++; 
+                                    break;
+                                case "Naranja":
+                                    naranja++;
+                                    break;
+                                case "Amarillo":
+                                    amarillo++;
+                                    break;
+                                case "Verde":
+                                    verde++;
+                                    break;
+                                case "Azul": 
+                                    azul++;
+                                    break;
+                            }   
+                            }else if(fechaHist[0] > Desde[0])
+                            {
+                               switch(t.getColor().toString())
+                            {
+                                case "Rojo": 
+                                    rojo++; 
+                                    break;
+                                case "Naranja":
+                                    naranja++;
+                                    break;
+                                case "Amarillo":
+                                    amarillo++;
+                                    break;
+                                case "Verde":
+                                    verde++;
+                                    break;
+                                case "Azul": 
+                                    azul++;
+                                    break;
+                            } 
+                            }                           
+                        }else if(fechaHist[1] > Desde[1])
+                        {
+                            switch(t.getColor().toString())
+                            {
+                                case "Rojo": 
+                                    rojo++; 
+                                    break;
+                                case "Naranja":
+                                    naranja++;
+                                    break;
+                                case "Amarillo":
+                                    amarillo++;
+                                    break;
+                                case "Verde":
+                                    verde++;
+                                    break;
+                                case "Azul": 
+                                    azul++;
+                                    break;
+                            }
+                        }
+                        
+                    }else
+                    {
+                      switch(t.getColor().toString())
+                            {
+                                case "Rojo": 
+                                    rojo++; 
+                                    break;
+                                case "Naranja":
+                                    naranja++;
+                                    break;
+                                case "Amarillo":
+                                    amarillo++;
+                                    break;
+                                case "Verde":
+                                    verde++;
+                                    break;
+                                case "Azul": 
+                                    azul++;
+                                    break;
+                            }    
+                    }                        
+                }
+  
+          }
+          Rojo.setText(Integer.toString(rojo));
+          Naranja.setText(Integer.toString(naranja));
+          Amarillo.setText(Integer.toString(amarillo));
+          Verde.setText(Integer.toString(verde));
+          Azul.setText(Integer.toString(azul));
+      }
+      
+      
+      
+      
     
     public void llenarCombo(JComboBox cb)
     {
@@ -245,8 +438,8 @@ public class GestorDatos {
        return edad;     
     }
     
-    
-    
+  
+
     
     
     
