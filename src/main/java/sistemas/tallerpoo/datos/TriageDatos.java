@@ -126,8 +126,8 @@ public class TriageDatos {
                 t.setSignosDeShock(campos[12]);
                 t.setLesionesLeves(campos[13]);
                 t.setSangrado(campos[14]);
-//                t.setFecha(fecha15);
-//                t.setHora(hora16);
+                t.setFecha(campos[15]);
+                t.setHora(campos[16]);
                 t.setColorModificado(NivelTriage.valueOf(campos[17]));
                 t.setMotivoModificacion(campos[18]);
                 t.setDniEncargado(Integer.parseInt(campos[19]));

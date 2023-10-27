@@ -3,7 +3,6 @@ package sistemas.tallerpoo.clasesLogicas;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.util.Date;
 import lombok.AllArgsConstructor;
 
 @Getter
@@ -26,8 +25,8 @@ public class Triage {
     private String signosDeShock;
     private String lesionesLeves;
     private String sangrado;
-    private Date fecha;
-    private Date hora;
+    private String fecha;
+    private String hora;
     private NivelTriage colorModificado;
     private String motivoModificacion;
     private int dniEncargado;

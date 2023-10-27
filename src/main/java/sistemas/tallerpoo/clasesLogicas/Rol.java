@@ -16,4 +16,8 @@ import lombok.Setter;
 public class Rol {
     private String nombre;
     private int dniFuncionario;
+
+    public Rol(String nombre) {
+        this.nombre = nombre;
+    }
 }

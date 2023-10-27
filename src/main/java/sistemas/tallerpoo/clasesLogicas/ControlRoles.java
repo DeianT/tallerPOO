@@ -11,8 +11,13 @@ public class ControlRoles {
     private static Usuario usuarioActual = null;
     private static ArrayList<Rol> rolesUsuario = new ArrayList<>();
     
-    public boolean usuarioTieneRol(Rol rol){
-        return true;
+    public static boolean usuarioTieneRol(Rol rol){
+        for(Rol r: rolesUsuario){
+            if(rol.getNombre().toLowerCase().equals(r.getNombre().toLowerCase())){
+               return true; 
+            }
+        }
+        return false;
     }
 
     public static Usuario getUsuarioActual() {
