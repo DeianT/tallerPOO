@@ -21,8 +21,13 @@ public class ControlRoles {
      * @param rol
      * @return retorna verdadero si el usuario posee un rol
      */
-    public boolean usuarioTieneRol(Rol rol){
-        return true;
+    public static boolean usuarioTieneRol(Rol rol){
+        for(Rol r: rolesUsuario){
+            if(rol.getNombre().toLowerCase().equals(r.getNombre().toLowerCase())){
+               return true; 
+            }
+        }
+        return false;
     }
 
     /**
