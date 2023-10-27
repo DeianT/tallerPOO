@@ -43,7 +43,7 @@ public class ListaEspera extends javax.swing.JFrame {
         {
             ob[0] = listaAdmision.get(i).getTriage().getColorModificado();
             ob[1] = listaAdmision.get(i).getMotivo();
-            ob[2] = listaAdmision.get(i).getHora();
+            ob[2] = listaAdmision.get(i).getFecha() + " " + listaAdmision.get(i).getHora();
             ob[3] = listaAdmision.get(i).getPaciente().getDni();
             ob[4] = listaAdmision.get(i).getPaciente().getNombre();
             ob[5] = listaAdmision.get(i).getPaciente().getApellido();
@@ -103,7 +103,7 @@ public class ListaEspera extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nivel triage", "Motivo", "Hora ingreso", "DNI", "Nombre", "Apellido", "Fecha de Nacimiento"
+                "Nivel triage", "Motivo", "Ingreso", "DNI", "Nombre", "Apellido", "Fecha de Nacimiento"
             }
         ) {
             boolean[] canEdit = new boolean [] {
