@@ -28,6 +28,7 @@ DefaultComboBoxModel modelo = new DefaultComboBoxModel();
         jcDnis.setModel(modelo);
         datos.llenarCombo(jcDnis);
         datos.mostrarNombresMedicos(txtNombre, jcDnis);
+        txtCantidad.setVisible(false);
        
        
        
@@ -259,6 +260,11 @@ DefaultComboBoxModel modelo = new DefaultComboBoxModel();
         jLabel10.setText("Entre");
 
         btnConsultar2.setText("Consultar");
+        btnConsultar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultar2ActionPerformed(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel11.setText("Ingrese un Rango de Fechas");
@@ -281,19 +287,8 @@ DefaultComboBoxModel modelo = new DefaultComboBoxModel();
                             .addComponent(jLabel10)
                             .addComponent(jLabel12)))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(344, 344, 344)
-                        .addComponent(jsEdad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jsEdad2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(145, 145, 145)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtCantidad2))
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -304,7 +299,18 @@ DefaultComboBoxModel modelo = new DefaultComboBoxModel();
                                         .addComponent(jdHasta1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel6Layout.createSequentialGroup()
                                         .addGap(34, 34, 34)
-                                        .addComponent(jdDesde1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(jdDesde1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel6Layout.createSequentialGroup()
+                                        .addComponent(jsEdad1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jsEdad2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel8))
+                                .addGap(18, 18, 18)
+                                .addComponent(txtCantidad2))))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(354, 354, 354)
                         .addComponent(btnConsultar2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -684,6 +690,7 @@ DefaultComboBoxModel modelo = new DefaultComboBoxModel();
        String Fecha2 = ((JTextField)jdHasta.getDateEditor().getUiComponent()).getText();
         
         datos.atencionPorFechas(Fecha1, Fecha2, jcDnis, txtCantidad);
+        txtCantidad.setVisible(false);
         
     }//GEN-LAST:event_btnConsultarActionPerformed
 
@@ -691,6 +698,21 @@ DefaultComboBoxModel modelo = new DefaultComboBoxModel();
         // TODO add your handling code here:
         datos.mostrarNombresMedicos(txtNombre, jcDnis);
     }//GEN-LAST:event_jcDnisActionPerformed
+
+    private void btnConsultar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultar2ActionPerformed
+        // TODO add your handling code here:
+        String Fecha1 = ((JTextField)jdDesde1.getDateEditor().getUiComponent()).getText();
+        String Fecha2 = ((JTextField)jdHasta1.getDateEditor().getUiComponent()).getText();
+        
+        int edad1 = (Integer)jsEdad1.getValue();
+        int edad2 = (Integer)jsEdad2.getValue();
+        
+       
+        
+        txtCantidad2.setText(datos.atencionPorFechasYEdades(edad1, edad2, Fecha1,Fecha2));
+        
+        
+    }//GEN-LAST:event_btnConsultar2ActionPerformed
 
     /**
      * @param args the command line arguments

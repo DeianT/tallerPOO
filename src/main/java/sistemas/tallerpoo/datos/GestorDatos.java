@@ -4,17 +4,15 @@
  */
 package sistemas.tallerpoo.datos;
 
-import java.io.File;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Scanner;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import sistemas.tallerpoo.clasesLogicas.Admision;
 import sistemas.tallerpoo.clasesLogicas.HistoriaClinica;
 import sistemas.tallerpoo.clasesLogicas.Medico;
 import sistemas.tallerpoo.clasesLogicas.Paciente;
-import sistemas.tallerpoo.clasesLogicas.SectorTrabajo;
 
 /**
  *
@@ -112,7 +110,6 @@ public class GestorDatos {
     }
     
     
-    
     private int[] pasarArrayAInt(String[] array)
     {
         int[] arr = new int[array.length];
@@ -122,4 +119,145 @@ public class GestorDatos {
         }
         return arr;
     }
+    
+    
+    public String atencionPorFechasYEdades(int edadDesde, int edadHasta,String f1, String f2)
+    {
+        String resultado="";
+        int contador = 0;
+        String[] dnis = dnisHistoriaClinica(); 
+        String[] fechasNac = new String[dnis.length];
+
+        for(Paciente p : new PacienteDatos().obtenerPacientes())
+        {
+            String dni = Integer.toString(p.getDni());
+            for(int i = 0 ; i<dnis.length;i++)
+           {
+             if(dni.equals(dnis[i]))
+             {
+                 fechasNac[i]=p.getFechaNacimiento();
+                 System.out.println(p.getFechaNacimiento());
+             }
+           }          
+        }
+        
+        int i =0;
+      for(HistoriaClinica h : new HistoriaClinicaDatos().obtenerHistoriaClinica())
+      {  
+        
+            
+            int edad= this.obtenerEdad(fechasNac[i]);
+            i++;
+            System.out.println(edad+">="+edadDesde +"    "+ edad+"<="+edadHasta);
+            System.out.println(edad >= edadDesde && edad<= edadHasta);
+            if(edad >= edadDesde && edad<= edadHasta )
+            {
+                
+                
+                String[] desde = f1.split("/");
+                String[] hasta = f2.split("/");
+                int[] Desde = this.pasarArrayAInt(desde);
+                int[] Hasta = this.pasarArrayAInt(hasta);
+        
+                
+                
+            
+        
+              String[] fechaH = h.getFecha().split("/");
+              int[] fechaHist = this.pasarArrayAInt(fechaH);
+
+           
+                if(fechaHist[2] == Desde[2] && fechaHist[2] == Hasta[2] )
+                {
+                    if(fechaHist[1] == Desde[1] && fechaHist[1] == Hasta[1] )
+                    {
+                        if(fechaHist[0] == Desde[0] && fechaHist[0] == Hasta[0])
+                        {
+                            contador++;
+                        }else if(fechaHist[0] >= Desde[0] && fechaHist[0] <= Hasta[0])
+                        {
+                            contador++;
+                        }
+                    }else if(fechaHist[1] >= Desde[1] && fechaHist[1] <= Hasta[1])
+                    {
+                            contador++;
+                        
+                    }
+                }else if(fechaHist[2] >= Desde[2] && fechaHist[2] <= Hasta[2])
+                {           
+                    if(Desde[2] < Hasta[2] && fechaHist[2] == Desde[2])
+                    {
+                        if(fechaHist[1] == Desde[1])
+                        {
+                            
+                            if(fechaHist[0] == Desde[0])
+                            {
+                              contador++;   
+                            }else if(fechaHist[0] > Desde[0])
+                            {
+                               contador++; 
+                            }                           
+                        }else if(fechaHist[1] > Desde[1])
+                        {
+                            contador++;
+                        }
+                        
+                    }else
+                    {
+                      contador++;    
+                    }                        
+                }
+                resultado = Integer.toString(contador);
+            
+              }   
+            }            
+        return resultado;
+     }   
+       
+    private String[] dnisHistoriaClinica()
+    {
+        ArrayList<String> dnis = new ArrayList<>();
+       
+        for(HistoriaClinica h : new HistoriaClinicaDatos().obtenerHistoriaClinica())
+        {
+            dnis.add( Integer.toString(h.getDniPaciente()));
+        }
+         String[] dni = new String[dnis.size()];
+        
+         for(int i = 0 ; i<dnis.size();i++)
+         {
+             dni[i] = dnis.get(i);
+         }
+        
+        
+        return dni;
+    }
+    
+    private int obtenerEdad(String fechaNaci)
+    {
+       DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy"); 
+       LocalDate fechaNac = LocalDate.parse(fechaNaci, fmt);
+       LocalDate ahora = LocalDate.now();
+       
+       Period periodo = Period.between(fechaNac, ahora);
+       int edad =periodo.getYears();
+       
+       return edad;     
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
