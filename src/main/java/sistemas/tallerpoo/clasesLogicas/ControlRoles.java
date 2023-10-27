@@ -13,7 +13,7 @@ public class ControlRoles {
     
     public static boolean usuarioTieneRol(Rol rol){
         for(Rol r: rolesUsuario){
-            if(rol.getNombre().equals(r.getNombre())){
+            if(rol.getNombre().toLowerCase().equals(r.getNombre().toLowerCase())){
                return true; 
             }
         }
