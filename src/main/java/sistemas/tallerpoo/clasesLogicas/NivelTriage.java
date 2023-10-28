@@ -1,28 +1,35 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package sistemas.tallerpoo.clasesLogicas;
 
 /**
- *
- * @author Thiago
+ * 
+ *  La enumeración `NivelTriage` representa los diferentes niveles de triage utilizados para categorizar la gravedad de un paciente en una situación de emergencia.
+ * Los niveles de triage incluyen Rojo, Naranja, Amarillo, Verde y Azul.
  */
 public enum NivelTriage 
 {
-    Rojo,Naranja,Amarillo,Verde,Azul
+
+    /**
+     *  Representa el nivel de triage "Rojo", que indica una situación de emergencia crítica
+     */
+    Rojo,
+
+    /**
+     *Representa el nivel de triage "Naranja", que indica una situación de urgencia alta
+     */
+    Naranja,
+
+    /**
+     *Representa el nivel de triage "Amarillo", que indica una situación de urgencia moderada
+     */
+    Amarillo,
+
+    /**
+     *Representa el nivel de triage "Verde", que indica una situación de urgencia baja
+     */
+    Verde,
+
+    /**
+     *Representa el nivel de triage "Azul", que suele utilizarse para situaciones no críticas o leves.
+     */
+    Azul
 }
-
-
-
-
-/* EJEMPLO DE USO DE LA CLASE ENUM
-*
-public enum Demarcacion{PORTERO, DEFENSA, CENTROCAMPISTA, DELANTERO}
-Demarcacion delantero = Demarcacion.DELANTERO;    // Instancia de un enum de la clase Demarcación
-delantero.name();    // Devuelve un String con el nombre de la constante (DELANTERO)
-delantero.toString();    // Devuelve un String con el nombre de la constante (DELANTERO)
-delantero.ordinal();    // Devuelve un entero con la posición del enum según está declarada (3).
-delantero.compareTo(Enum otro);    // Compara el enum con el parámetro según el orden en el que están declarados lo enum
-Demarcacion.values();    // Devuelve un array que contiene todos los enum
-*/

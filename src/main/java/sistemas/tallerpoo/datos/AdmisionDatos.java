@@ -6,9 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Date;
 import sistemas.tallerpoo.clasesLogicas.Admision;
-import sistemas.tallerpoo.clasesLogicas.ListaBox;
 
 /**
  *
@@ -45,10 +43,20 @@ public class AdmisionDatos {
         return p;
     }
     
-    public ArrayList<Admision> admisionesNoAtendidas(){
+    public ArrayList<Admision> admisionesSinBoxAsignado(){
         ArrayList<Admision> p = new ArrayList<>();
         for(Admision a: lista){
             if(a.getTriage() != null && a.getBox() == null){
+                p.add(a);
+            }
+        }
+        return p;
+    }
+    
+    public ArrayList<Admision> admisionesNoDadasDeAlta(){
+        ArrayList<Admision> p = new ArrayList<>();
+        for(Admision a: lista){
+            if(a.getTriage() != null && a.getBox() != null && !a.isDadaDeAlta()){
                 p.add(a);
             }
         }
@@ -61,6 +69,7 @@ public class AdmisionDatos {
         Admision a = lista.get(admision.getId() - 1);
         a.setTriage(admision.getTriage());
         a.setBox(admision.getBox());
+        a.setDadaDeAlta(admision.isDadaDeAlta());
         escribirArchivo();
         return true;
     }
@@ -83,9 +92,10 @@ public class AdmisionDatos {
                 else
                     linea += 0 + separador;
                 if(a.getBox() != null)
-                    linea += a.getBox().getNumero();
+                    linea += a.getBox().getNumero() + separador;
                 else
-                    linea += 0;
+                    linea += 0 + separador;
+                linea += a.isDadaDeAlta();
                 
                 pw.println(linea);
             }
@@ -112,10 +122,8 @@ public class AdmisionDatos {
                 Admision ad = new Admision();
                 
                 ad.setId(Integer.parseInt(campos[0]));
-//                ad.setFecha(fecha);
-//                ad.setHora(fecha);
-                ad.setFecha(new Date());
-                ad.setHora(new Date());
+                ad.setFecha(campos[1]);
+                ad.setHora(campos[2]);
                 ad.setMotivo(campos[3]);
                 ad.setPaciente(new PacienteDatos().obtenerPaciente(Integer.parseInt(campos[4])));
                 try{
@@ -124,7 +132,8 @@ public class AdmisionDatos {
                 catch(IOException e){
                     ad.setTriage(null);
                 }
-                ad.setBox(new ListaBox().obtenerBox(Integer.parseInt(campos[6])));
+                ad.setBox(new BoxDatos().obtenerBox(Integer.parseInt(campos[6])));
+                ad.setDadaDeAlta(Boolean.parseBoolean(campos[7]));
                 
                 lista.add(ad);
                 linea = br.readLine();

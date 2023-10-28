@@ -4,8 +4,16 @@
  */
 package sistemas.tallerpoo.visual;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import sistemas.tallerpoo.clasesLogicas.Especialidad;
+import sistemas.tallerpoo.clasesLogicas.Medico;
 import sistemas.tallerpoo.datos.EspacialidadDatos;
 
 /**
@@ -14,13 +22,80 @@ import sistemas.tallerpoo.datos.EspacialidadDatos;
  */
 public class EspecialidadesMedico extends javax.swing.JFrame {
 
-   Vector<String> lista2 = new Vector<>();
-   
-   
+    Vector<String> lista = new Vector<>();
+    EspacialidadDatos esp =new EspacialidadDatos();
+    ArrayList<Medico> med = new ArrayList<Medico>();
+    String[] confirmar = {"SI" , "NO"};
+    ArrayList<String> allEspecialidades = new ArrayList<>(Arrays.asList("Alergología",
+"Anestesiología",
+"Angiología",
+"Cardiología",
+"Endocrinología",
+"Estomatología",
+"Farmacología Clínica",
+"Gastroenterología",
+"Genética",
+"Geriatría",
+"Hematología",
+"Hepatología",
+"Infectología",
+"Medicina aeroespacial",
+"Medicina del deporte",
+"Medicina familiar y comunitaria",
+"Medicina física y rehabilitación",
+"Medicina forense",
+"Medicina intensiva",
+"Medicina interna",
+"Medicina preventiva y salud pública",
+"Medicina del trabajo",
+"Nefrología",
+"Neumología",
+"Neurología",
+"Nutriología",
+"Oncología médica",
+"Oncología radioterápica",
+"Pediatría",
+"Psiquiatría",
+"Reumatología",
+"Toxicología",
+"Cirugía cardíaca",
+"Cirugía general",
+"Cirugía oral y maxilofacial",
+"Cirugía ortopédica",
+"Cirugía pediátrica",
+"Cirugía plástica",
+"Cirugía torácica",
+"Cirugía vascular",
+"Neurocirugía",
+"Dermatología",
+"Ginecología y obstetricia o tocología",
+"Medicina de emergencia",
+"Oftalmología",
+"Otorrinolaringología",
+"Traumatología",
+"Urología",
+"Análisis clínico",
+"Anatomía patológica",
+"Bioquímica clínica",
+"Farmacología",
+"Genética médica",
+"Inmunología",
+"Medicina nuclear",
+"Microbiología y parasitología",
+"Neurofisiología clínica",
+"Radiología"));
+    
+    
+    
+    
+    
    
     public EspecialidadesMedico() {
         initComponents();
         this.setLocationRelativeTo(null);
+        esp.llenarCombo(cbDnis, med);
+        esp.mostrarNombre(cbDnis, txtNombreApellido, med);
+ 
     }
 
     /**
@@ -32,15 +107,34 @@ public class EspecialidadesMedico extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jInternalFrame1 = new javax.swing.JInternalFrame();
         jScrollPane1 = new javax.swing.JScrollPane();
         jlTodasLasEspecialidades = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jlEspecialidadesMedico = new javax.swing.JList<>();
         btnAgregar = new javax.swing.JButton();
-        btnQuitar = new javax.swing.JButton();
         cbDnis = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         txtNombreApellido = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtEspecialidad = new javax.swing.JTextField();
+        btnEliminarEspecialidad = new javax.swing.JButton();
+        btnMostrarDatos = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+
+        jInternalFrame1.setVisible(true);
+
+        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
+        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
+        jInternalFrame1Layout.setHorizontalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jInternalFrame1Layout.setVerticalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -53,23 +147,19 @@ public class EspecialidadesMedico extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(jlEspecialidadesMedico);
 
-        btnAgregar.setText("--->");
+        btnAgregar.setText("Agregar Especialidad");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
             }
         });
 
-        btnQuitar.setText("<---");
-        btnQuitar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnQuitarActionPerformed(evt);
-            }
-        });
-
         cbDnis.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 cbDnisFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cbDnisFocusLost(evt);
             }
         });
         cbDnis.addActionListener(new java.awt.event.ActionListener() {
@@ -80,6 +170,34 @@ public class EspecialidadesMedico extends javax.swing.JFrame {
 
         txtNombreApellido.setText("jLabel2");
 
+        jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel2.setText("Nombre del Medico");
+
+        txtEspecialidad.setText("Ingrese el nombre de la especialidad");
+        txtEspecialidad.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtEspecialidadFocusGained(evt);
+            }
+        });
+
+        btnEliminarEspecialidad.setText("Eliminar Especialidad");
+        btnEliminarEspecialidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarEspecialidadActionPerformed(evt);
+            }
+        });
+
+        btnMostrarDatos.setText("Mostrar Datos ");
+        btnMostrarDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMostrarDatosActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("DNI del Medico");
+
+        jLabel4.setText("Lista de todas las especialidades disponibles");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -87,49 +205,76 @@ public class EspecialidadesMedico extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnQuitar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(299, 299, 299)
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(48, 48, 48)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(btnEliminarEspecialidad)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(btnMostrarDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(108, 108, 108)
+                                    .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(84, 84, 84)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(73, 73, 73)
+                            .addComponent(txtEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(118, 118, 118)
+                                    .addComponent(jLabel4)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(210, 210, 210)
+                        .addGap(266, 266, 266)
                         .addComponent(cbDnis, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(226, 226, 226)
-                        .addComponent(txtNombreApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addGap(161, 161, 161)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(69, 69, 69)
+                        .addComponent(txtNombreApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addGap(17, 17, 17)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cbDnis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtNombreApellido))
+                .addGap(72, 72, 72)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(txtNombreApellido)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(43, 43, 43))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(btnAgregar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnQuitar)
-                        .addGap(98, 98, 98))))
+                        .addComponent(btnAgregar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnEliminarEspecialidad)
+                            .addComponent(btnMostrarDatos))
+                        .addGap(24, 24, 24))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
@@ -138,41 +283,83 @@ public class EspecialidadesMedico extends javax.swing.JFrame {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
         
+        if(allEspecialidades.contains(txtEspecialidad.getText()))
+        {
+            int opcion = JOptionPane.showOptionDialog(null, "esta seguro que desea agregar la especialidad " + txtEspecialidad.getText() + " al medico con dni " + cbDnis.getSelectedItem().toString(), "confirmacion", 0, JOptionPane.QUESTION_MESSAGE, null, confirmar, "SI"  );
         
-         jlEspecialidadesMedico.removeAll();
-         lista2.add(jlTodasLasEspecialidades.getSelectedValue());
-         jlEspecialidadesMedico.setListData(lista2);
+        if(opcion == 0)
+        {
+           String uni = JOptionPane.showInputDialog(null,"ingrese el nombre de la universiad donde obtuvo la especialidad");
+            if(uni != null)
+            {
+                String fecha = JOptionPane.showInputDialog(null, "ingrese la fecha en que lo obtuvo");
+                if(fecha != null)
+                {
+                    lista= esp.mostrarEspecilidades(cbDnis, jlEspecialidadesMedico);
+                    if(!lista.contains(txtEspecialidad.getText()))
+                    {
+                      lista.add(txtEspecialidad.getText());
+                      jlEspecialidadesMedico.setListData(lista);
+                      esp.agregarEspecilidades(cbDnis, txtEspecialidad,uni,fecha);  
+                    }else
+                    {
+                        JOptionPane.showMessageDialog(null, "el medico ya cuenta con esa especialidad");
+                    }   
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "tiene que ingresar una fecha");
+                }
+            }else
+            {
+                JOptionPane.showMessageDialog(null, "tiene que ingresar una universidad");
+            } 
+        }
+            
+        }else
+        {
+            JOptionPane.showMessageDialog(null, "esa especialidad no existe");
+        }
         
         
         
-        
-        
-        
-        
-        
+              
     }//GEN-LAST:event_btnAgregarActionPerformed
 
-    private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
-        // TODO add your handling code here:
-        
-        jlEspecialidadesMedico.removeAll();
-        lista2.remove(jlEspecialidadesMedico.getSelectedValue());
-        jlEspecialidadesMedico.setListData(lista2);
-        
-    }//GEN-LAST:event_btnQuitarActionPerformed
-
     private void cbDnisFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbDnisFocusGained
-        // TODO add your handling code here:
-      //EspacialidadDatos a = new EspacialidadDatos();
-      //a.agregarMedicosCbo(cbDnis, txtNombreApellido);
-      //a.agregarAlLabel(cbDnis, jLabel1);
-        
+ 
     }//GEN-LAST:event_cbDnisFocusGained
 
     private void cbDnisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDnisActionPerformed
         // TODO add your handling code here:
-     
+        jlEspecialidadesMedico.removeAll();
+        esp.mostrarNombre(cbDnis, txtNombreApellido, med);
+        esp.mostrarEspecilidades(cbDnis, jlEspecialidadesMedico);
     }//GEN-LAST:event_cbDnisActionPerformed
+
+    private void cbDnisFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbDnisFocusLost
+        // TODO add your handling code here: 
+    }//GEN-LAST:event_cbDnisFocusLost
+
+    private void txtEspecialidadFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEspecialidadFocusGained
+        // TODO add your handling code here:
+        txtEspecialidad.setText("");
+    }//GEN-LAST:event_txtEspecialidadFocusGained
+
+    private void btnEliminarEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEspecialidadActionPerformed
+        // TODO add your handling code here:
+        
+       esp.eliminarEspecialidad(cbDnis, jlEspecialidadesMedico);
+       lista.remove(jlEspecialidadesMedico.getSelectedValue());
+       jlEspecialidadesMedico.setListData(lista);
+       
+    }//GEN-LAST:event_btnEliminarEspecialidadActionPerformed
+
+    private void btnMostrarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarDatosActionPerformed
+        // TODO add your handling code here:
+        esp.mostrarDatos(cbDnis, jlEspecialidadesMedico);
+        
+    }//GEN-LAST:event_btnMostrarDatosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,13 +398,19 @@ public class EspecialidadesMedico extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
-    private javax.swing.JButton btnQuitar;
+    private javax.swing.JButton btnEliminarEspecialidad;
+    private javax.swing.JButton btnMostrarDatos;
     private javax.swing.JComboBox<String> cbDnis;
+    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList<String> jlEspecialidadesMedico;
     private javax.swing.JList<String> jlTodasLasEspecialidades;
+    private javax.swing.JTextField txtEspecialidad;
     private javax.swing.JLabel txtNombreApellido;
     // End of variables declaration//GEN-END:variables
 }

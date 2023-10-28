@@ -6,8 +6,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
-import org.javatuples.Pair;
 import sistemas.tallerpoo.clasesLogicas.NivelTriage;
 import sistemas.tallerpoo.clasesLogicas.Triage;
 
@@ -45,14 +43,14 @@ public class TriageDatos {
         return lista;
     }
     
-    public ArrayList<Pair<NivelTriage, NivelTriage>> obtenerTriagesModificados(){
-        ArrayList<Pair<NivelTriage, NivelTriage>> tuplas = new ArrayList<>();
+    public ArrayList<Triage> obtenerTriagesModificados(){
+        ArrayList<Triage> triages = new ArrayList<>();
         for(Triage t: lista){
             if(t.getColor() != t.getColorModificado()){
-                tuplas.add(new Pair(t.getColor(), t.getColorModificado()));
+                triages.add(t);
             }
         }
-        return tuplas;
+        return triages;
     }
     
     public int cantidadTriage(){
@@ -128,8 +126,8 @@ public class TriageDatos {
                 t.setSignosDeShock(campos[12]);
                 t.setLesionesLeves(campos[13]);
                 t.setSangrado(campos[14]);
-//                t.setFecha(fecha15);
-//                t.setHora(hora16);
+                t.setFecha(campos[15]);
+                t.setHora(campos[16]);
                 t.setColorModificado(NivelTriage.valueOf(campos[17]));
                 t.setMotivoModificacion(campos[18]);
                 t.setDniEncargado(Integer.parseInt(campos[19]));
@@ -150,34 +148,31 @@ public class TriageDatos {
     
     public boolean cambioColor(String[] colores , String color ,String nuevoColor)
     {
-        int indiceColor=0;
-        int indiceNuevoColor=0;
-        int res =0;
+        int indiceColor = 0;
+        int indiceNuevoColor = 0;
+        int res = 0;
         
         for(int i = 0 ; i<colores.length;i++){
           if(color.toLowerCase().equals(colores[i].toLowerCase())){
-            indiceColor=i;
+            indiceColor = i;
             }
         } 
                 
         for(int i = 0 ; i<colores.length;i++){
-          if(nuevoColor.toLowerCase().equals(colores[i].toLowerCase())){
-            indiceNuevoColor=i;
-          }
+            if(nuevoColor.toLowerCase().equals(colores[i].toLowerCase())){
+                indiceNuevoColor = i;
+            }
         } 
                 
         if(indiceColor > indiceNuevoColor ){
-          res = indiceColor - indiceNuevoColor;
+            res = indiceColor - indiceNuevoColor;
         }else{
-          res= indiceNuevoColor - indiceColor;
+            res= indiceNuevoColor - indiceColor;
         }
 
         if(res > 2){
-          JOptionPane.showMessageDialog(null, "no se puede cambiar mas de dos niveles de color");
-          return false;
-         }
+            return false;
+        }
         return true;
     }
-    
-    
 }

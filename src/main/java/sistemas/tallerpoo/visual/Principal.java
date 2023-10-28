@@ -1,4 +1,7 @@
 package sistemas.tallerpoo.visual;
+import javax.swing.JOptionPane;
+import sistemas.tallerpoo.clasesLogicas.ControlRoles;
+import sistemas.tallerpoo.clasesLogicas.Rol;
 
 /**
  *
@@ -23,6 +26,7 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu5 = new javax.swing.JMenu();
         jmCerrarSesion = new javax.swing.JMenuItem();
@@ -32,16 +36,21 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jmRegistroFuncionario = new javax.swing.JMenuItem();
-        jMenu7 = new javax.swing.JMenu();
-        jmRegistroAdmision = new javax.swing.JMenuItem();
+        jmRoles = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jmListaEspera = new javax.swing.JMenuItem();
+        jmVerBoxes = new javax.swing.JMenuItem();
+        jMenu9 = new javax.swing.JMenu();
+        mHistoriaClinica = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
+        jmEstadisticas = new javax.swing.JMenuItem();
+
+        jLabel2.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -95,19 +104,15 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem2);
 
-        jMenuBar1.add(jMenu1);
-
-        jMenu3.setText("Especialidades");
-
         jMenuItem3.setText("Especialidades");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem3);
+        jMenu1.add(jMenuItem3);
 
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(jMenu1);
 
         jMenu4.setText("Triage");
 
@@ -131,19 +136,15 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu6.add(jmRegistroFuncionario);
 
-        jMenuBar1.add(jMenu6);
-
-        jMenu7.setText("Admision");
-
-        jmRegistroAdmision.setText("Registro");
-        jmRegistroAdmision.addActionListener(new java.awt.event.ActionListener() {
+        jmRoles.setText("Roles");
+        jmRoles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmRegistroAdmisionActionPerformed(evt);
+                jmRolesActionPerformed(evt);
             }
         });
-        jMenu7.add(jmRegistroAdmision);
+        jMenu6.add(jmRoles);
 
-        jMenuBar1.add(jMenu7);
+        jMenuBar1.add(jMenu6);
 
         jMenu8.setText("Atención");
 
@@ -155,7 +156,39 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu8.add(jmListaEspera);
 
+        jmVerBoxes.setText("Ver boxes");
+        jmVerBoxes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmVerBoxesActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jmVerBoxes);
+
         jMenuBar1.add(jMenu8);
+
+        jMenu9.setText("Historia Clinica");
+
+        mHistoriaClinica.setText("Ver Historias Clinicas");
+        mHistoriaClinica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mHistoriaClinicaActionPerformed(evt);
+            }
+        });
+        jMenu9.add(mHistoriaClinica);
+
+        jMenuBar1.add(jMenu9);
+
+        jMenu7.setText("Gestores");
+
+        jmEstadisticas.setText("Estadísticas");
+        jmEstadisticas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmEstadisticasActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jmEstadisticas);
+
+        jMenuBar1.add(jMenu7);
 
         setJMenuBar(jMenuBar1);
 
@@ -163,43 +196,66 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 547, Short.MAX_VALUE)
+            .addGap(0, 649, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 355, Short.MAX_VALUE)
+            .addGap(0, 468, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        if(!ControlRoles.usuarioTieneRol(new Rol("Medico")) && !ControlRoles.usuarioTieneRol(new Rol("Admision de Pacientes"))){
+            JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
+            return;
+        }
         RegistroPaciente pac = new RegistroPaciente();
         pac.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        if(!ControlRoles.usuarioTieneRol(new Rol("Registros Medicos")) && !ControlRoles.usuarioTieneRol(new Rol("Gestion")) && !ControlRoles.usuarioTieneRol(new Rol("Recursos Humanos"))){
+            JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
+            return;
+        }
+        
         RegistroMedico m = new RegistroMedico();
         m.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        if(!ControlRoles.usuarioTieneRol(new Rol("Registros Medicos")) && !ControlRoles.usuarioTieneRol(new Rol("Gestion"))){
+            JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
+            return;
+        }
+        
         EspecialidadesMedico esp = new EspecialidadesMedico();
         esp.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        if(!ControlRoles.usuarioTieneRol(new Rol("Medico")) && !ControlRoles.usuarioTieneRol(new Rol("Admision de Pacientes"))){
+            JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
+            return;
+        }
         RealizarTriage t = new RealizarTriage();
         t.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jmCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCerrarSesionActionPerformed
+        ControlRoles.setUsuarioActual(null);
         Login l = new Login();
         l.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jmCerrarSesionActionPerformed
 
     private void jmRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRegistrarActionPerformed
+        if(!ControlRoles.usuarioTieneRol(new Rol("Administrador de Sistema")) && !ControlRoles.usuarioTieneRol(new Rol("Informatica"))){
+            JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
+            return;
+        }
         RegistroUsuario reg = new RegistroUsuario();
         reg.setVisible(true);
     }//GEN-LAST:event_jmRegistrarActionPerformed
@@ -209,18 +265,54 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmSalirActionPerformed
 
     private void jmRegistroFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRegistroFuncionarioActionPerformed
+        if(!ControlRoles.usuarioTieneRol(new Rol("Administrador de Sistema")) && !ControlRoles.usuarioTieneRol(new Rol("Gestion")) && !ControlRoles.usuarioTieneRol(new Rol("Recursos Humanos"))){
+            JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
+            return;
+        }
         RegistroFuncionario fun = new RegistroFuncionario();
         fun.setVisible(true);
     }//GEN-LAST:event_jmRegistroFuncionarioActionPerformed
 
-    private void jmRegistroAdmisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRegistroAdmisionActionPerformed
-        RegistroAdmision adm = new RegistroAdmision();
-        adm.setVisible(true);
-    }//GEN-LAST:event_jmRegistroAdmisionActionPerformed
-
     private void jmListaEsperaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmListaEsperaActionPerformed
+        if(!ControlRoles.usuarioTieneRol(new Rol("Medico"))){
+            JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
+            return;
+        }
         new ListaEspera().setVisible(true);
     }//GEN-LAST:event_jmListaEsperaActionPerformed
+
+    private void jmVerBoxesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmVerBoxesActionPerformed
+        if(!ControlRoles.usuarioTieneRol(new Rol("Medico"))){
+            JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
+            return;
+        }
+        new Atencion().setVisible(true);
+    }//GEN-LAST:event_jmVerBoxesActionPerformed
+
+    private void mHistoriaClinicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mHistoriaClinicaActionPerformed
+        if(!ControlRoles.usuarioTieneRol(new Rol("Medico")) && !ControlRoles.usuarioTieneRol(new Rol("Admision de Pacientes")) && !ControlRoles.usuarioTieneRol(new Rol("Gestion")) && !ControlRoles.usuarioTieneRol(new Rol("Registros Medicos"))){
+            JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
+            return;
+        }
+        
+        new FormularioHistoriaClinica().setVisible(true);
+    }//GEN-LAST:event_mHistoriaClinicaActionPerformed
+
+    private void jmRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRolesActionPerformed
+        if(!ControlRoles.usuarioTieneRol(new Rol("Administrador de Sistema"))){
+            JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
+            return;
+        }
+        new RolesFuncionario().setVisible(true);
+    }//GEN-LAST:event_jmRolesActionPerformed
+
+    private void jmEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmEstadisticasActionPerformed
+        if(!ControlRoles.usuarioTieneRol(new Rol("Gestion"))){
+            JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
+            return;
+        }
+        new AnalisisGestor().setVisible(true);
+    }//GEN-LAST:event_jmEstadisticasActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -255,24 +347,28 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jmCerrarSesion;
+    private javax.swing.JMenuItem jmEstadisticas;
     private javax.swing.JMenuItem jmListaEspera;
     private javax.swing.JMenuItem jmRegistrar;
-    private javax.swing.JMenuItem jmRegistroAdmision;
     private javax.swing.JMenuItem jmRegistroFuncionario;
+    private javax.swing.JMenuItem jmRoles;
     private javax.swing.JMenuItem jmSalir;
+    private javax.swing.JMenuItem jmVerBoxes;
+    private javax.swing.JMenuItem mHistoriaClinica;
     // End of variables declaration//GEN-END:variables
 }

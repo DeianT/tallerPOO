@@ -5,8 +5,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import sistemas.tallerpoo.clasesLogicas.Admision;
 import sistemas.tallerpoo.clasesLogicas.Box;
-import sistemas.tallerpoo.clasesLogicas.ListaBox;
 import sistemas.tallerpoo.datos.AdmisionDatos;
+import sistemas.tallerpoo.datos.BoxDatos;
 
 /**
  *
@@ -18,7 +18,7 @@ public class ListaEspera extends javax.swing.JFrame {
     private ArrayList<Admision> listaAdmision;
     private AdmisionDatos datos = new AdmisionDatos();
     private Admision admision = null;
-    private ListaBox listaBox = new ListaBox();
+    private BoxDatos listaBox = new BoxDatos();
     private Box box = null;
 
     /**
@@ -34,16 +34,16 @@ public class ListaEspera extends javax.swing.JFrame {
     
     public void listar()
     {   
-        listaAdmision = datos.admisionesNoAtendidas();
+        listaAdmision = datos.admisionesSinBoxAsignado();
         limpiarTabla();
         modeloAd = (DefaultTableModel) jtAdmisiones.getModel();
-        Object[] ob = new Object[9];
+        Object[] ob = new Object[7];
         
         for(int i = 0; i < listaAdmision.size(); i++)
         {
             ob[0] = listaAdmision.get(i).getTriage().getColorModificado();
             ob[1] = listaAdmision.get(i).getMotivo();
-            ob[2] = listaAdmision.get(i).getHora();
+            ob[2] = listaAdmision.get(i).getFecha() + " " + listaAdmision.get(i).getHora();
             ob[3] = listaAdmision.get(i).getPaciente().getDni();
             ob[4] = listaAdmision.get(i).getPaciente().getNombre();
             ob[5] = listaAdmision.get(i).getPaciente().getApellido();
@@ -72,12 +72,10 @@ public class ListaEspera extends javax.swing.JFrame {
     {
         for(int i = 0; i < modeloAd.getRowCount(); i++)
         {
-            modeloAd.removeRow(i);
-            i -= 1;
+            modeloAd.removeRow(i--);
         }
         for(int i = 0; i < modeloBox.getRowCount(); i++){
-            modeloBox.removeRow(i);
-            i -= 1;
+            modeloBox.removeRow(i--);
         }
     }
     
@@ -105,7 +103,7 @@ public class ListaEspera extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nivel triage", "Motivo", "Hora ingreso", "DNI", "Nombre", "Apellido", "Fecha de Nacimiento"
+                "Nivel triage", "Motivo", "Ingreso", "DNI", "Nombre", "Apellido", "Fecha de Nacimiento"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -181,12 +179,17 @@ public class ListaEspera extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un box", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if(box.isOcupado()){
+            JOptionPane.showMessageDialog(null, "El box está ocupado");
+            return;
+        }
         
         admision.setBox(box);
         datos.editarAdmision(admision);
-        box.setOcupado(true);
+        listaBox.ocuparDesocupar(box.getNumero(), true);
         
         listar();
+        JOptionPane.showMessageDialog(null, "El paciente " + admision.getPaciente().getDni() + " fue asignado al box " + box.getNumero());
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     /**
