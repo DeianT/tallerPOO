@@ -1,6 +1,5 @@
 package sistemas.tallerpoo.clasesLogicas;
 
-import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,10 +9,13 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+/**
+ * Clase Estudios
+ * Contiene información relacionada a las especialidades de los médicos
+ */
 public class Estudios {
     private String dniMedico;
     private String especialidad;
-    private String  universidad;
+    private String universidad;
     private String fechaTitulo;
 }
-

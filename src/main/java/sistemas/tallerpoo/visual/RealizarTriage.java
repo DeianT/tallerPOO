@@ -44,7 +44,7 @@ public class RealizarTriage extends javax.swing.JFrame {
         for(int i = 0; i < lista.size(); i++)
         {
             ob[0] = lista.get(i).getMotivo();
-            ob[1] = lista.get(i).getHora();
+            ob[1] = lista.get(i).getFecha() + " " + lista.get(i).getHora();
             ob[2] = lista.get(i).getPaciente().getDni();
             ob[3] = lista.get(i).getPaciente().getNombre();
             ob[4] = lista.get(i).getPaciente().getApellido();
@@ -293,7 +293,7 @@ public class RealizarTriage extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Motivo", "Hora ingreso", "DNI", "Nombre", "Apellido", "Fecha de Nacimiento"
+                "Motivo", "Ingreso", "DNI", "Nombre", "Apellido", "Fecha de Nacimiento"
             }
         ) {
             boolean[] canEdit = new boolean [] {

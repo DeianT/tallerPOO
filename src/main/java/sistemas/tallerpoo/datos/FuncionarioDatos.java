@@ -15,7 +15,6 @@ import sistemas.tallerpoo.clasesLogicas.SectorTrabajo;
 /**
  * Declaracion de la clase FuncionarioDatos
  *
- * @author Deian
  */
 public class FuncionarioDatos {
 
@@ -160,7 +159,6 @@ public class FuncionarioDatos {
                 } else {
                     linea += null;
                 }
-
                 pw.println(linea);
             }
         } catch (Exception e) {
@@ -194,7 +192,6 @@ public class FuncionarioDatos {
                 f.setNombre(campos[1]);
                 f.setApellido(campos[2]);
                 f.setFechaNacimiento(campos[3]);
-                //f.setFechaNacimiento(new Date());
                 f.setDomicilio(campos[4]);
                 f.setTelFijo(Integer.parseInt(campos[5]));
                 f.setTelCelular(campos[6]);
@@ -202,7 +199,6 @@ public class FuncionarioDatos {
                 f.setCorreoElect(campos[8]);
                 f.setTrabajaEn(new SectorTrabajo(campos[9]));
                 f.setRolesSistema(new ArrayList<>());
-                //Obtener los roles del funcionario y asignarlos
 
                 lista.add(f);
                 linea = br.readLine();
@@ -255,5 +251,4 @@ public class FuncionarioDatos {
 
         return pac;
     }
-
 }

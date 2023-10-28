@@ -163,7 +163,6 @@ public class PacienteDatos {
             e.printStackTrace();
             return false;
         }
-
     }
 
     /**
@@ -235,8 +234,8 @@ public class PacienteDatos {
                 perso.setEstadoCivil(campos[7]);
                 perso.setCorreoElect(campos[8]);
                 perso.setContacto(campos[9]);
-
-                lista.add(perso);
+                
+                lista.add(perso); //Agrega la persona creada a la lista
                 linea = br.readLine();
             }
         } catch (Exception e) {
@@ -245,16 +244,6 @@ public class PacienteDatos {
             if (br != null) {
                 br.close();
             }
-        }
-    }
-
-    /**
-     * Imprime el contenido de la lista por consola
-     */
-    public void imprimirArchivo() {//Imprime el contenido de la lista, se usa para testeo
-        System.out.println("cant" + this.lista.size());
-        for (Paciente p : lista) {
-            System.out.println(p.toString());
         }
     }
 }

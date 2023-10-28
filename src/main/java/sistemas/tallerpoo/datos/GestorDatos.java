@@ -16,11 +16,9 @@ import sistemas.tallerpoo.clasesLogicas.Triage;
 /**
  * Declaracion de la clase GestorDatos
  *
- * @author Thiago
  * @version 28/10/2023
  */
 public class GestorDatos {
-
     /**
      * Calcula la cantidad de cada color de los Triages registrados en un rango
      * de fechas recibiendo como parametro las dos fechas, f1 y f2, y los jlabel
@@ -35,7 +33,6 @@ public class GestorDatos {
      * @param Rojo JLabel donde se va a settear la cantidad de ese color
      */
     public void triagesPorFechas(String f1, String f2, JLabel Azul, JLabel Verde, JLabel Naranja, JLabel Amarillo, JLabel Rojo) {
-
         int rojo = 0, naranja = 0, amarillo = 0, verde = 0, azul = 0;
 
         String[] desde = f1.split("/");

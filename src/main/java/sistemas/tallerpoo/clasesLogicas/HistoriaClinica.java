@@ -11,6 +11,9 @@ import lombok.AllArgsConstructor;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+/**
+ * Clase HistoriaClinica contiene los datos de cada atención de un paciente
+ */
 public class HistoriaClinica {
     private int dniPaciente;
     private int dniMedico;
