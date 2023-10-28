@@ -36,6 +36,15 @@ Crear un usuario:
 
 Asignar roles a un funcionario:
 -Ir a Funcionarios -> Roles
+-Elegir un funcionario en la lista desplegable
+-Seleccionar un rol en la lista de la izquierda
+-Presionar "Asignar rol"
+
+Visualizar estadísticas:
+-Ir a Gestores -> Estadísticas
+-Seleccionar una pestaña de acuerdo a las estadísticas que se deseen consultar
+-Completar los campos que se soliciten
+-Presionar el botón "Consultar"
 
 A continuación una lista de las funciones del sistema y los roles necesarios para acceder a ellas:
 -Registrar usuarios: Administrador de Sistema - informatica
