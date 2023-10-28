@@ -21,7 +21,7 @@ public class Atencion extends javax.swing.JFrame {
     private ArrayList<Admision> listaAdmision;
     private AdmisionDatos datos = new AdmisionDatos();
     private Admision admision = null;
-    
+    private final String[] lugaresAtencion = {"Consultorio", "Emergencia", "Internaciones"};
 
     /**
      * Creates new form Atencion
@@ -54,7 +54,7 @@ public class Atencion extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Box", "Nivel triage", "Motivo", "Hora ingreso", "DNI", "Nombre", "Apellido", "Fecha de Nacimiento"
+                "Box", "Nivel triage", "Motivo", "Ingreso", "DNI", "Nombre", "Apellido", "Fecha de Nacimiento"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -136,11 +136,11 @@ public class Atencion extends javax.swing.JFrame {
             diagnostico = JOptionPane.showInputDialog(null, "Ingrese el diagnóstico");   
         }
         
-        String lugar = JOptionPane.showInputDialog(null, "Ingrese el lugar de atención"); 
-        while(lugar == null || lugar.isEmpty())     
-        {
-            lugar = JOptionPane.showInputDialog(null, "Ingrese el lugar de atención");   
+        int l = JOptionPane.showOptionDialog(null,"Indique el lugar de atención", "Confirmacion", 0, JOptionPane.QUESTION_MESSAGE, null , lugaresAtencion, "Terminar");
+        while (l == -1){
+            l = JOptionPane.showOptionDialog(null,"Indique el lugar de atención", "Confirmacion", 0, JOptionPane.QUESTION_MESSAGE, null , lugaresAtencion, "Terminar");
         }
+        String lugar = lugaresAtencion[l];
         
         String diagnosticoClinico = JOptionPane.showInputDialog(null, "Ingrese el resultado de estudios"); 
         while(diagnosticoClinico == null || diagnosticoClinico.isEmpty())     
@@ -148,7 +148,6 @@ public class Atencion extends javax.swing.JFrame {
             diagnosticoClinico = JOptionPane.showInputDialog(null, "Ingrese el resultado de estudios");   
         }
         
-        //Se crean dos objetos de fecha para poder sacar hora y fecha actuales.
         Date fechita = new Date();
         SimpleDateFormat formatofecha = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat formatohora = new SimpleDateFormat("HH:mm");
@@ -236,7 +235,7 @@ public class Atencion extends javax.swing.JFrame {
             ob[0] = listaAdmision.get(i).getBox().getNumero();
             ob[1] = listaAdmision.get(i).getTriage().getColorModificado();
             ob[2] = listaAdmision.get(i).getMotivo();
-            ob[3] = listaAdmision.get(i).getHora();
+            ob[3] = listaAdmision.get(i).getFecha() + " " + listaAdmision.get(i).getHora();
             ob[4] = listaAdmision.get(i).getPaciente().getDni();
             ob[5] = listaAdmision.get(i).getPaciente().getNombre();
             ob[6] = listaAdmision.get(i).getPaciente().getApellido();

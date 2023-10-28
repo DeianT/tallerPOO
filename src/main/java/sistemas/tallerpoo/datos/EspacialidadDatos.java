@@ -1,14 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package sistemas.tallerpoo.datos;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 import java.util.Vector;
 import javax.swing.JComboBox;
@@ -16,7 +11,6 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import sistemas.tallerpoo.clasesLogicas.Especialidad;
 import sistemas.tallerpoo.clasesLogicas.Estudios;
 import sistemas.tallerpoo.clasesLogicas.Medico;
 import sistemas.tallerpoo.clasesLogicas.SectorTrabajo;
@@ -32,7 +26,6 @@ public class EspacialidadDatos {
     {
        leer();
     }
-
     
     public void llenarCombo(JComboBox cb , ArrayList<Medico> lista)
     {
@@ -91,7 +84,6 @@ public class EspacialidadDatos {
              es = new Estudios(cb.getSelectedItem().toString(), esp.getText(), uni, fecha  );
              estudios.add(es);
              escribir();
-             //fw.write(cb.getSelectedItem().toString()+","+esp.getText()+","+uni+","+fecha+"\n"); 
              
          } catch (Exception e) {
              System.out.println(e.getMessage());
@@ -129,8 +121,6 @@ public class EspacialidadDatos {
             }
         }
     }
-    
-    
  
     public Vector<String> mostrarEspecilidades(JComboBox cb, JList esp)
     {
@@ -142,7 +132,7 @@ public class EspacialidadDatos {
                 datos = sc.nextLine().split(",");
                 if(cb.getSelectedItem().toString().equals(datos[0]))
                 {
-                      lista.add(datos[1]);  
+                    lista.add(datos[1]);  
                 }
 
             }
@@ -153,7 +143,6 @@ public class EspacialidadDatos {
         }
        return lista;
     }
-    
     
     private void leer()
     {
@@ -205,25 +194,9 @@ public class EspacialidadDatos {
             estudios.remove(e);
             escribir();
             
-     
-            
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         
     }
-    
-    
-    
-    
-    
-    
-    
-    
-   
-   
-    
  }
-    
-        
-
