@@ -6,8 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- *
- * @author Deian
+ * Representa los distintos sectores en donde pueden trabajar los funcionarios
  */
 @Getter
 @Setter

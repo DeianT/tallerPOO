@@ -1,6 +1,8 @@
 package sistemas.tallerpoo.visual;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import sistemas.tallerpoo.clasesLogicas.Admision;
@@ -42,7 +44,7 @@ public class RealizarTriage extends javax.swing.JFrame {
         for(int i = 0; i < lista.size(); i++)
         {
             ob[0] = lista.get(i).getMotivo();
-            ob[1] = lista.get(i).getHora();
+            ob[1] = lista.get(i).getFecha() + " " + lista.get(i).getHora();
             ob[2] = lista.get(i).getPaciente().getDni();
             ob[3] = lista.get(i).getPaciente().getNombre();
             ob[4] = lista.get(i).getPaciente().getApellido();
@@ -291,7 +293,7 @@ public class RealizarTriage extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Motivo", "Hora ingreso", "DNI", "Nombre", "Apellido", "Fecha de Nacimiento"
+                "Motivo", "Ingreso", "DNI", "Nombre", "Apellido", "Fecha de Nacimiento"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -492,6 +494,18 @@ public class RealizarTriage extends javax.swing.JFrame {
                 t.setMotivoModificacion(motivo);
             }
             JOptionPane.showMessageDialog(this, "Se ha guardado con éxito ");
+            
+            String fechaA;
+            String horaA;
+            Date fechita = new Date();
+            Date horita = new Date();
+            SimpleDateFormat formatofecha = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat formatohora = new SimpleDateFormat("HH:mm:ss");
+            fechaA = formatofecha.format(fechita);
+            horaA = formatohora.format(horita);
+
+            t.setFecha(fechaA);
+            t.setHora(horaA);
             
             TriageDatos td = new TriageDatos();
             t.setDniEncargado(ControlRoles.getUsuarioActual().getDniFuncionario());

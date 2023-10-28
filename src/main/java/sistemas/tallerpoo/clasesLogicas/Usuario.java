@@ -6,8 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- *
- * @author 
+ * Representa los usuarios que los funcionarios utilizan para acceder al sistema
+ * Contiene el nombre de usuario, la contraseña y el dni de quien usa ese usuario
  */
 @Getter
 @Setter

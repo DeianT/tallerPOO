@@ -1,14 +1,9 @@
 package sistemas.tallerpoo.clasesLogicas;
 
 import java.util.ArrayList;
-import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- *
- * @author 
- */
 @Getter
 @Setter
 /**

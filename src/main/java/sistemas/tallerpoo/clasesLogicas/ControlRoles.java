@@ -3,10 +3,6 @@ package sistemas.tallerpoo.clasesLogicas;
 import java.util.ArrayList;
 import sistemas.tallerpoo.datos.RolDatos;
 
-/**
- *
- * @author Deian
- */
 /** 
  * 
  * Clase ControlRoles se encarga de gestionar los roles de los usuarios en el sistema.
@@ -22,8 +18,13 @@ public class ControlRoles {
      * @param rol Rol que se desea verificar
      * @return retorna "true" si el usuario posee un rol, de lo contrario, "false"
      */
-    public boolean usuarioTieneRol(Rol rol){
-        return true;
+    public static boolean usuarioTieneRol(Rol rol){
+        for(Rol r: rolesUsuario){
+            if(rol.getNombre().toLowerCase().equals(r.getNombre().toLowerCase())){
+               return true; 
+            }
+        }
+        return false;
     }
 
     /**

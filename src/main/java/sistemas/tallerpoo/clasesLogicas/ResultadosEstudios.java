@@ -6,10 +6,6 @@ import lombok.Setter;
 import java.util.Date;
 import lombok.AllArgsConstructor;
 
-/**
- *
- * @author 
- */
 @Getter
 @Setter
 @NoArgsConstructor

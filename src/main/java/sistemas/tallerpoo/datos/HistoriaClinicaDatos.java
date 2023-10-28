@@ -2,6 +2,7 @@ package sistemas.tallerpoo.datos;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
 import javax.swing.JComboBox;
@@ -18,6 +19,9 @@ import sistemas.tallerpoo.clasesLogicas.Paciente;
 public class HistoriaClinicaDatos{
         
     HashSet<String> conjunto = new HashSet<>();
+    ArrayList<HistoriaClinica> lista = new ArrayList<>();
+    
+    
     
     public void llenarComboBox(JComboBox cb) {
         String[] datos;
@@ -31,6 +35,7 @@ public class HistoriaClinicaDatos{
                 h.setDiagnostico(datos[3]);
                 h.setLugar(datos[4]);
                 h.setDiagnosticoClinico(datos[5]);
+                lista.add(h);
                 if(conjunto.add(String.valueOf(h.getDniPaciente())))
                 {
                     cb.addItem(h.getDniPaciente());
@@ -148,5 +153,27 @@ public class HistoriaClinicaDatos{
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+    
+    public ArrayList<HistoriaClinica> obtenerHistoriaClinica()
+    {
+         String[] datos;
+        try (Scanner sc = new Scanner(new File("historiaClinica.csv"))) 
+        {
+            while (sc.hasNextLine()) 
+            {
+                datos = sc.nextLine().split(",");
+                HistoriaClinica h = new HistoriaClinica();
+                h.setDniPaciente(Integer.parseInt(datos[0]));
+                h.setDniMedico(Integer.parseInt(datos[1]));
+                h.setFecha(datos[2]);
+                h.setHora(datos[3]);
+                h.setDiagnostico(datos[4]);
+                h.setLugar(datos[5]);
+                h.setDiagnosticoClinico(datos[6]);
+                lista.add(h);
+            }
+        }catch(Exception e) {}
+        return lista;
     }
 }

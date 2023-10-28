@@ -3,13 +3,8 @@ package sistemas.tallerpoo.clasesLogicas;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.util.Date;
 import lombok.AllArgsConstructor;
 
-/**
- *
- * @author 
- */
 @Getter
 @Setter
 @NoArgsConstructor
@@ -38,4 +33,5 @@ public class Triage {
     private NivelTriage colorModificado;// Nivel de triage modificado
     private String motivoModificacion;// Motivo de la modificación del triage.
     private int dniEncargado; // Número de documento del encargado del triage.
+
 }

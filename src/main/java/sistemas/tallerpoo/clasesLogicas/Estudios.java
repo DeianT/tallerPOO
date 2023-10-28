@@ -1,15 +1,10 @@
 package sistemas.tallerpoo.clasesLogicas;
 
-import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-/**
- *
- * @author 
- */
 @Getter
 @Setter
 @NoArgsConstructor
@@ -23,5 +18,3 @@ public class Estudios {
     private String  universidad;// La universidad donde el médico obtuvo su título.
     private String fechaTitulo;// La fecha en la que el médico obtuvo su título.
 }
-
-
