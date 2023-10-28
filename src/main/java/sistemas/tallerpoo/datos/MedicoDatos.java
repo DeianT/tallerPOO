@@ -6,10 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Date;
 import sistemas.tallerpoo.clasesLogicas.Funcionario;
 import sistemas.tallerpoo.clasesLogicas.Medico;
-import sistemas.tallerpoo.clasesLogicas.Rol;
 import sistemas.tallerpoo.clasesLogicas.SectorTrabajo;
 
 /**
@@ -139,8 +137,6 @@ public class MedicoDatos {
                 linea += m.getNMatricula();
 
                 pw.println(linea);
-                
-//                new RolDatos().escribirArchivo()
             }
         }
         catch(Exception e){
@@ -176,7 +172,6 @@ public class MedicoDatos {
                 m.setTrabajaEn(new SectorTrabajo(campos[9]));
                 m.setNMatricula(Integer.parseInt(campos[10]));
                 m.setRolesSistema(new ArrayList<>());
-//                m.setRolesSistema(new RolDatos().obtenerRolesFuncionario(m.getDni()));
                 
                 lista.add(m);
                 linea = br.readLine();

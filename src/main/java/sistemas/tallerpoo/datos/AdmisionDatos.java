@@ -6,7 +6,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Date;
 import sistemas.tallerpoo.clasesLogicas.Admision;
 
 /**
@@ -125,8 +124,6 @@ public class AdmisionDatos {
                 ad.setId(Integer.parseInt(campos[0]));
                 ad.setFecha(campos[1]);
                 ad.setHora(campos[2]);
-                //ad.setFecha(new Date());
-                //ad.setHora(new Date());
                 ad.setMotivo(campos[3]);
                 ad.setPaciente(new PacienteDatos().obtenerPaciente(Integer.parseInt(campos[4])));
                 try{
