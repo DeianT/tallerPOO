@@ -28,10 +28,9 @@ public class Triage {
     private String signosDeShock; // Signos de shock en el paciente.
     private String lesionesLeves; // Información sobre lesiones leves.
     private String sangrado;  // Presencia de sangrado en el paciente.
-    private Date fecha;// Fecha en que se realizó el triage.
-    private Date hora;// Hora en que se realizó el triage.
+    private String fecha;// Fecha en que se realizó el triage.
+    private String hora;// Hora en que se realizó el triage.
     private NivelTriage colorModificado;// Nivel de triage modificado
     private String motivoModificacion;// Motivo de la modificación del triage.
     private int dniEncargado; // Número de documento del encargado del triage.
-
 }
