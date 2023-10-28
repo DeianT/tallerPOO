@@ -49,8 +49,8 @@ A continuación una lista de las funciones del sistema y los roles necesarios pa
 -Hist clinica: Admision de Pacientes - Gestion - Medico - Registros Medicos
 
 Usuarios creados y sus roles:
--Nombre: 
--Contraseña: 
+-Nombre: deian
+-Contraseña: 123
   Administrador de Sistema
   Admision de Pacientes
   Auditoria
