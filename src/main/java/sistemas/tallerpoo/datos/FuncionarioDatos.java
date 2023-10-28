@@ -34,7 +34,7 @@ public class FuncionarioDatos {
     }
 
     /**
-     * Agrega un paciente a un ArrayList<Funcionario> y luego escribe la lista
+     * Agrega un paciente a un ArrayList de Funcionario y luego escribe la lista
      * en el archivo "funcionarios.csv"
      *
      * @param funcionario Objeto Funcionario
@@ -73,7 +73,7 @@ public class FuncionarioDatos {
     /**
      * Lista completa de todos los funcionarios
      *
-     * @return Devuelve un ArrayList<Funcionario> con todos los funcionarios
+     * @return Devuelve un ArrayList de Funcionario con todos los funcionarios
      * registrados
      */
     public ArrayList<Funcionario> obtenerFuncionarios() {
@@ -133,7 +133,7 @@ public class FuncionarioDatos {
     }
 
     /**
-     * Itera todos los elemento del ArrayList<Funcionario>, concatena cada
+     * Itera todos los elemento del ArrayList de Funcionario, concatena cada
      * atributo del objeto Funcionario en un String separado por "," y luego lo
      * escribe en el archivo "funcionarios.csv"
      */

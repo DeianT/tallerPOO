@@ -71,7 +71,7 @@ public class PacienteDatos {
     }
 
     /**
-     * Agrega un paciente a un ArrayList<Paciente> y luego escribe la lista en
+     * Agrega un paciente a un ArrayList de Paciente y luego escribe la lista en
      * el archivo "pacientes.csv"
      *
      * @param p Objeto paciente
@@ -109,7 +109,7 @@ public class PacienteDatos {
     /**
      * Lista completa de todos los pacientes
      *
-     * @return Devuelve un ArrayList<Paciente> con todos los pacientes
+     * @return Devuelve un ArrayList de Paciente con todos los pacientes
      * registrados
      */
     public ArrayList<Paciente> obtenerPacientes() {
@@ -166,7 +166,7 @@ public class PacienteDatos {
     }
 
     /**
-     * Itera todos los elemento del ArrayList<Paciente>, concatena cada atributo
+     * Itera todos los elemento del ArrayList de Paciente, concatena cada atributo
      * del objeto paciente en un String separado por "," y luego lo escribe en
      * el archivo "Pacientes.csv"
      */
