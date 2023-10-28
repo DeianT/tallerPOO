@@ -13,8 +13,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+/**
+ *  La clase `SectorTrabajo` representa un sector de trabajo en el sistema de salud
+ */
 public class SectorTrabajo {
-    private String nombre;
+    private String nombre;// El nombre del sector de trabajo.
     
     /**
      *

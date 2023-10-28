@@ -13,7 +13,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+/**
+ * La clase `Rol` representa un rol  en el sistema que se asigna a un funcionario
+ */
 public class Rol {
-    private String nombre;
-    private int dniFuncionario;
+    private String nombre;// El nombre del rol
+    private int dniFuncionario; // El número de documento del funcionario al que se asigna este rol
 }
