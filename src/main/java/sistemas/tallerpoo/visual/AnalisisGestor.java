@@ -125,7 +125,7 @@ public class AnalisisGestor extends javax.swing.JFrame {
 
         jButton3.setText("jButton3");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Desde :");
 
@@ -434,7 +434,7 @@ public class AnalisisGestor extends javax.swing.JFrame {
         });
 
         jLabel34.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel34.setText("La Cantidad de Triages Cambiados por el Funcionario es de");
+        jLabel34.setText("La cantidad de triages cambiados es de");
 
         txtCantidadTriage.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         txtCantidadTriage.setText("  ");
@@ -471,6 +471,7 @@ public class AnalisisGestor extends javax.swing.JFrame {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(87, 87, 87)
                                 .addComponent(jLabel34)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtCantidadTriage)))))
@@ -481,11 +482,11 @@ public class AnalisisGestor extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(60, 60, 60)
                 .addComponent(btnConsultar6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
+                .addGap(60, 60, 60)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel34)
                     .addComponent(txtCantidadTriage))
-                .addGap(40, 40, 40)
+                .addGap(38, 38, 38)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(49, Short.MAX_VALUE))
         );
