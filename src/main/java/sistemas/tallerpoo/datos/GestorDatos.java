@@ -314,10 +314,8 @@ public class GestorDatos {
     }
     
     
-    public String atencionPorFechasYEdades(int edadDesde, int edadHasta,String f1, String f2)
+    private String[] obtenerFechaNacimientoPacientes()
     {
-        String resultado="";
-        int contador = 0;
         String[] dnis = dnisHistoriaClinica(); 
         String[] fechasNac = new String[dnis.length];
 
@@ -329,10 +327,21 @@ public class GestorDatos {
              if(dni.equals(dnis[i]))
              {
                  fechasNac[i]=p.getFechaNacimiento();
-                 System.out.println(p.getFechaNacimiento());
              }
            }          
         }
+        return fechasNac;
+    }
+    
+    
+    
+    public String atencionPorFechasYEdades(int edadDesde, int edadHasta,String f1, String f2)
+    {
+        String resultado="";
+        int contador = 0;
+        String[] fechasNac = obtenerFechaNacimientoPacientes();
+
+        
         
         int i =0;
       for(HistoriaClinica h : new HistoriaClinicaDatos().obtenerHistoriaClinica())
@@ -341,8 +350,10 @@ public class GestorDatos {
             
             int edad= this.obtenerEdad(fechasNac[i]);
             i++;
+            
             System.out.println(edad+">="+edadDesde +"    "+ edad+"<="+edadHasta);
             System.out.println(edad >= edadDesde && edad<= edadHasta);
+            
             if(edad >= edadDesde && edad<= edadHasta )
             {
                 
@@ -351,11 +362,8 @@ public class GestorDatos {
                 String[] hasta = f2.split("/");
                 int[] Desde = this.pasarArrayAInt(desde);
                 int[] Hasta = this.pasarArrayAInt(hasta);
-        
+
                 
-                
-            
-        
               String[] fechaH = h.getFecha().split("/");
               int[] fechaHist = this.pasarArrayAInt(fechaH);
 
@@ -393,20 +401,19 @@ public class GestorDatos {
                         }else if(fechaHist[1] > Desde[1])
                         {
                             contador++;
-                        }
-                        
+                        }                       
                     }else
                     {
                       contador++;    
                     }                        
                 }
-                resultado = Integer.toString(contador);
-            
+                resultado = Integer.toString(contador);         
               }   
             }            
         return resultado;
      }   
        
+    
     private String[] dnisHistoriaClinica()
     {
         ArrayList<String> dnis = new ArrayList<>();
@@ -420,9 +427,7 @@ public class GestorDatos {
          for(int i = 0 ; i<dnis.size();i++)
          {
              dni[i] = dnis.get(i);
-         }
-        
-        
+         }    
         return dni;
     }
     
@@ -439,6 +444,188 @@ public class GestorDatos {
     }
     
   
+    
+    
+    
+public Map<String, Integer> pacienteConsultasRangoDeFechas(String f1, String f2)
+{
+    Map<String, Integer> map = MapConDnisPacientes();
+    
+    for(HistoriaClinica h : new HistoriaClinicaDatos().obtenerHistoriaClinica())
+    {
+        String clave = Integer.toString(h.getDniPaciente());//clave a la q le quiero sumar 1
+        int valorActual = map.get(clave);// valor asociado a la clave
+        int nuevoValor = 0;
+        
+                String[] desde = f1.split("/");
+                String[] hasta = f2.split("/");
+                int[] Desde = this.pasarArrayAInt(desde);
+                int[] Hasta = this.pasarArrayAInt(hasta);
+
+                
+              String[] fechaH = h.getFecha().split("/");
+              int[] fechaHist = this.pasarArrayAInt(fechaH);
+
+           
+                if(fechaHist[2] == Desde[2] && fechaHist[2] == Hasta[2] )
+                {
+                    if(fechaHist[1] == Desde[1] && fechaHist[1] == Hasta[1] )
+                    {
+                        if(fechaHist[0] == Desde[0] && fechaHist[0] == Hasta[0])
+                        {
+                            nuevoValor = valorActual + 1;
+                        }else if(fechaHist[0] >= Desde[0] && fechaHist[0] <= Hasta[0])
+                        {
+                            nuevoValor = valorActual + 1;
+                        }
+                    }else if(fechaHist[1] >= Desde[1] && fechaHist[1] <= Hasta[1])
+                    {
+                            nuevoValor = valorActual + 1;
+                        
+                    }
+                }else if(fechaHist[2] >= Desde[2] && fechaHist[2] <= Hasta[2])
+                {           
+                    if(Desde[2] < Hasta[2] && fechaHist[2] == Desde[2])
+                    {
+                        if(fechaHist[1] == Desde[1])
+                        {
+                            
+                            if(fechaHist[0] == Desde[0])
+                            {
+                              nuevoValor = valorActual + 1;   
+                            }else if(fechaHist[0] > Desde[0])
+                            {
+                               nuevoValor = valorActual + 1; 
+                            }                           
+                        }else if(fechaHist[1] > Desde[1])
+                        {
+                            nuevoValor = valorActual + 1;
+                        }                       
+                    }else
+                    {
+                      nuevoValor = valorActual + 1;    
+                    }                        
+                }
+                map.put(clave, nuevoValor);
+    }
+    System.out.println(map);
+    return map;
+  }            
+        
+    private Map<String, Integer> MapConDnisPacientes()
+    {
+        Map<String, Integer> map = new HashMap<String, Integer>();
+    
+        for(Paciente p : new PacienteDatos().obtenerPacientes())
+        {
+        String dni =Integer.toString(p.getDni());
+        map.put(dni, 0);
+        }
+      return map;
+    }
+        
+        
+        
+    public Map<String, Integer> medicosAtencionPorFechas(String f1, String f2)
+    {
+       Map<String, Integer> map = MapConDnisMedicos();
+       
+       for(HistoriaClinica h : new HistoriaClinicaDatos().obtenerHistoriaClinica())
+       {
+        String clave = Integer.toString(h.getDniMedico());//clave a la q le quiero sumar 1
+        int valorActual = map.get(clave);// valor asociado a la clave
+        int nuevoValor = 0;
+        
+        
+         String[] desde = f1.split("/");
+                String[] hasta = f2.split("/");
+                int[] Desde = this.pasarArrayAInt(desde);
+                int[] Hasta = this.pasarArrayAInt(hasta);
+
+                
+              String[] fechaH = h.getFecha().split("/");
+              int[] fechaHist = this.pasarArrayAInt(fechaH);
+
+           
+                if(fechaHist[2] == Desde[2] && fechaHist[2] == Hasta[2] )
+                {
+                    if(fechaHist[1] == Desde[1] && fechaHist[1] == Hasta[1] )
+                    {
+                        if(fechaHist[0] == Desde[0] && fechaHist[0] == Hasta[0])
+                        {
+                            nuevoValor = valorActual + 1;
+                        }else if(fechaHist[0] >= Desde[0] && fechaHist[0] <= Hasta[0])
+                        {
+                            nuevoValor = valorActual + 1;
+                        }
+                    }else if(fechaHist[1] >= Desde[1] && fechaHist[1] <= Hasta[1])
+                    {
+                            nuevoValor = valorActual + 1;
+                        
+                    }
+                }else if(fechaHist[2] >= Desde[2] && fechaHist[2] <= Hasta[2])
+                {           
+                    if(Desde[2] < Hasta[2] && fechaHist[2] == Desde[2])
+                    {
+                        if(fechaHist[1] == Desde[1])
+                        {
+                            
+                            if(fechaHist[0] == Desde[0])
+                            {
+                              nuevoValor = valorActual + 1;   
+                            }else if(fechaHist[0] > Desde[0])
+                            {
+                               nuevoValor = valorActual + 1; 
+                            }                           
+                        }else if(fechaHist[1] > Desde[1])
+                        {
+                            nuevoValor = valorActual + 1;
+                        }                       
+                    }else
+                    {
+                      nuevoValor = valorActual + 1;    
+                    }                        
+                }
+                map.put(clave, nuevoValor);
+    }
+    System.out.println(map);
+    return map;
+   }
+        
+       
+       
+       private Map<String, Integer> MapConDnisMedicos()
+        {
+        Map<String, Integer> map = new HashMap<String, Integer>();
+    
+        for(Medico m : new MedicoDatos().obtenerMedicos())
+        {
+        String dni =Integer.toString(m.getDni());
+        map.put(dni, 0);
+        }
+      return map;
+        }
+       
+       
+        
+        
+    }
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     
     
@@ -453,4 +640,4 @@ public class GestorDatos {
     
     
     
-}
+
