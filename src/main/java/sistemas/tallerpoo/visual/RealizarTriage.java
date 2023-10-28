@@ -495,12 +495,6 @@ public class RealizarTriage extends javax.swing.JFrame {
             }
             JOptionPane.showMessageDialog(this, "Se ha guardado con éxito ");
             
-            TriageDatos td = new TriageDatos();
-            t.setDniEncargado(ControlRoles.getUsuarioActual().getDniFuncionario());
-            td.agregarTriage(t);
-            t.setId(td.cantidadTriage());
-            
-            
             String fechaA;
             String horaA;
             Date fechita = new Date();
@@ -512,6 +506,11 @@ public class RealizarTriage extends javax.swing.JFrame {
 
             t.setFecha(fechaA);
             t.setHora(horaA);
+            
+            TriageDatos td = new TriageDatos();
+            t.setDniEncargado(ControlRoles.getUsuarioActual().getDniFuncionario());
+            td.agregarTriage(t);
+            t.setId(td.cantidadTriage());
             
             admision.setTriage(t);
             datos.editarAdmision(admision);
