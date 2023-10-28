@@ -13,7 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 /**
- *  Clase Especialidad
+ *  La clase `Especialidad` representa una especialidad médica
  */
 public class Especialidad {
     private String nombre;
