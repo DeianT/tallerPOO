@@ -13,25 +13,26 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 /**
- * Clase CapacitadoTriage que extiende de la clase Funcionario
- */
+ * Clase CapacitadoTriage es una subclase de la clase Funcionario
+ * Representa a una persona capacitada para llevar a cabo el triage.
+ */ 
 public class CapacitadoTriage extends Funcionario{
     private boolean esMedico;
     
     /**
      * Constructor de la clase CapacitadoTriage
-     * @param dni
-     * @param Nombre
-     * @param Apellido
-     * @param fechaNacimiento
-     * @param domicilio
-     * @param telFijo
-     * @param telCelular
-     * @param estadoCivil
-     * @param correoElect
-     * @param trabajaEn
-     * @param rolesSistema
-     * @param esMedico
+     * @param dni DNI 
+     * @param Nombre Nombre
+     * @param Apellido Apellido
+     * @param fechaNacimiento Fecha de Nacimiento
+     * @param domicilio Domicilio
+     * @param telFijo Telefono Fijo
+     * @param telCelular Telefono Celular
+     * @param estadoCivil Estado Civil
+     * @param correoElect Correo Electronico
+     * @param trabajaEn Sector de Trabajo
+     * @param rolesSistema Rol en el sistema
+     * @param esMedico Indicador si es medico o no
      */
     public CapacitadoTriage(int dni, String Nombre, String Apellido, String fechaNacimiento, String domicilio, int telFijo, String telCelular, String estadoCivil, String correoElect, SectorTrabajo trabajaEn, ArrayList<Rol> rolesSistema, boolean esMedico){
         super(dni,Nombre,Apellido,fechaNacimiento,domicilio,telFijo,telCelular,estadoCivil,correoElect,trabajaEn,rolesSistema);

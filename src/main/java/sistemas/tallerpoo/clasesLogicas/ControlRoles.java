@@ -9,7 +9,8 @@ import sistemas.tallerpoo.datos.RolDatos;
  */
 /** 
  * 
- * Clase ControlRoles 
+ * Clase ControlRoles se encarga de gestionar los roles de los usuarios en el sistema.
+ * Permite verificar si un usuario tiene un rol específico y mantener un seguimiento de los roles del usuario actual.
  * 
  */
 public class ControlRoles {
@@ -17,9 +18,9 @@ public class ControlRoles {
     private static ArrayList<Rol> rolesUsuario = new ArrayList<>();
     
     /**
-     *
-     * @param rol
-     * @return retorna verdadero si el usuario posee un rol
+     * Verifica si un usuario tiene un rol especifico
+     * @param rol Rol que se desea verificar
+     * @return retorna "true" si el usuario posee un rol, de lo contrario, "false"
      */
     public static boolean usuarioTieneRol(Rol rol){
         for(Rol r: rolesUsuario){
@@ -31,16 +32,17 @@ public class ControlRoles {
     }
 
     /**
-     *
-     * @return Devuelve el Usuario que ingresó
+     *Obtiene el usuario que ha iniciado sesión en el sistema.
+     * @return Devuelve el Usuario actual autenticado
      */
     public static Usuario getUsuarioActual() {
         return usuarioActual;
     }
 
     /**
-     *
-     * @param usuarioActual
+     *Establece el usuario que ha iniciado sesión en el sistema.
+     * Actualiza los roles del usuario actual al iniciar o cerrar sesión.
+     * @param usuarioActual 
      */
     public static void setUsuarioActual(Usuario usuarioActual) {
         ControlRoles.usuarioActual = usuarioActual;
@@ -51,8 +53,8 @@ public class ControlRoles {
     }
 
     /**
-     *
-     * @return Devuelve el Rol del usuario
+     *Obtiene los roles asociados al usuario actual.
+     * @return Devuelve lista de roles que el usuario tiene en el sistema
      */
     public static ArrayList<Rol> getRolesUsuario() {
         return rolesUsuario;
