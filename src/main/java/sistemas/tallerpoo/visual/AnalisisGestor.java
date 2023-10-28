@@ -4,10 +4,14 @@
  */
 package sistemas.tallerpoo.visual;
 
+import java.util.ArrayList;
 import java.util.Map;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import sistemas.tallerpoo.clasesLogicas.Triage;
 import sistemas.tallerpoo.datos.GestorDatos;
+import sistemas.tallerpoo.datos.TriageDatos;
 
 /**
  *
@@ -87,15 +91,11 @@ public class AnalisisGestor extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtaMedicos = new javax.swing.JTextArea();
         jPanel4 = new javax.swing.JPanel();
-        jLabel30 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
-        jcDniFuncionarios = new javax.swing.JComboBox<>();
-        jLabel32 = new javax.swing.JLabel();
-        txtNombreFuncionario = new javax.swing.JLabel();
         btnConsultar6 = new javax.swing.JButton();
         jLabel34 = new javax.swing.JLabel();
         txtCantidadTriage = new javax.swing.JLabel();
-        jtaTriagesCambiados = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jtaTriagesCambiados = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
@@ -238,7 +238,7 @@ public class AnalisisGestor extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtCantidad))
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(187, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Atencion Por Fechas", jPanel5);
@@ -337,7 +337,7 @@ public class AnalisisGestor extends javax.swing.JFrame {
                     .addComponent(jsEdad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
                     .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 196, Short.MAX_VALUE)
                 .addComponent(btnConsultar2)
                 .addGap(60, 60, 60)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -415,7 +415,7 @@ public class AnalisisGestor extends javax.swing.JFrame {
                     .addComponent(jdDesde4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel20)
                     .addComponent(jdHasta4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
                 .addComponent(btnConsultar4, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jLabel21)
@@ -426,22 +426,36 @@ public class AnalisisGestor extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Medico/s Atencion por Fecha", jPanel2);
 
-        jLabel30.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel30.setText("Seleccione un Funcionario");
-
-        jLabel31.setText("DNI del Funcionario");
-
-        jLabel32.setText("Nombre");
-
-        txtNombreFuncionario.setText("jLabel33");
-
         btnConsultar6.setText("Consultar");
+        btnConsultar6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultar6ActionPerformed(evt);
+            }
+        });
 
         jLabel34.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel34.setText("La Cantidad de Triages Cambiados por el Funcionario es de");
 
         txtCantidadTriage.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        txtCantidadTriage.setText("jLabel35");
+        txtCantidadTriage.setText("  ");
+
+        jtaTriagesCambiados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Color original", "Color modificado", "Fecha", "Realizado por", "Motivo de cambio"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jtaTriagesCambiados);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -450,52 +464,30 @@ public class AnalisisGestor extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(277, 277, 277)
+                        .addGap(348, 348, 348)
+                        .addComponent(btnConsultar6, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(142, 142, 142)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel31)
-                            .addComponent(jLabel32))
-                        .addGap(55, 55, 55)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jcDniFuncionarios, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtNombreFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(326, 326, 326)
-                        .addComponent(jLabel30))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(145, 145, 145)
-                        .addComponent(jLabel34)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtCantidadTriage))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(272, 272, 272)
-                        .addComponent(jtaTriagesCambiados, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(352, 352, 352)
-                        .addComponent(btnConsultar6, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(200, Short.MAX_VALUE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel34)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtCantidadTriage)))))
+                .addContainerGap(196, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(jLabel30)
-                .addGap(46, 46, 46)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel31)
-                    .addComponent(jcDniFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel32)
-                    .addComponent(txtNombreFuncionario))
-                .addGap(31, 31, 31)
+                .addGap(60, 60, 60)
                 .addComponent(btnConsultar6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(58, 58, 58)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel34)
                     .addComponent(txtCantidadTriage))
-                .addGap(18, 18, 18)
-                .addComponent(jtaTriagesCambiados, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(40, 40, 40)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Triages Cambiados", jPanel4);
@@ -609,7 +601,7 @@ public class AnalisisGestor extends javax.swing.JFrame {
                     .addComponent(jdHasta5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(99, 99, 99)
                 .addComponent(btnConsultar5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel29)
                     .addComponent(txtRojo))
@@ -697,7 +689,7 @@ public class AnalisisGestor extends javax.swing.JFrame {
                 .addComponent(btnConsultar3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(158, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Paciente/s Consultas por Fechas", jPanel1);
@@ -790,6 +782,26 @@ public class AnalisisGestor extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnConsultar3ActionPerformed
 
+    private void btnConsultar6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultar6ActionPerformed
+        DefaultTableModel modeloTabla = (DefaultTableModel) jtaTriagesCambiados.getModel();
+        for(int i = 0; i < modeloTabla.getRowCount(); i++){
+            modeloTabla.removeRow(i--);
+        }
+        ArrayList<Triage> lista = new TriageDatos().obtenerTriagesModificados();
+        Object[] ob = new Object[5];
+        for(int i = 0; i < lista.size(); i++)
+        {
+            ob[0] = lista.get(i).getColor();
+            ob[1] = lista.get(i).getColorModificado();
+            ob[2] = lista.get(i).getFecha();
+            ob[3] = lista.get(i).getDniEncargado();
+            ob[4] = lista.get(i).getMotivoModificacion();
+            modeloTabla.addRow(ob);
+        }
+        txtCantidadTriage.setText(String.valueOf(lista.size()));
+        jtaTriagesCambiados.setModel(modeloTabla);
+    }//GEN-LAST:event_btnConsultar6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -856,9 +868,6 @@ public class AnalisisGestor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -873,10 +882,10 @@ public class AnalisisGestor extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JComboBox<String> jcDniFuncionarios;
     private javax.swing.JComboBox<String> jcDnis;
     private com.toedter.calendar.JDateChooser jdDesde;
     private com.toedter.calendar.JDateChooser jdDesde1;
@@ -890,7 +899,7 @@ public class AnalisisGestor extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser jdHasta5;
     private javax.swing.JSpinner jsEdad1;
     private javax.swing.JSpinner jsEdad2;
-    private javax.swing.JTextField jtaTriagesCambiados;
+    private javax.swing.JTable jtaTriagesCambiados;
     private javax.swing.JLabel txtAmarillo;
     private javax.swing.JLabel txtAzul;
     private javax.swing.JLabel txtCantidad;
@@ -898,7 +907,6 @@ public class AnalisisGestor extends javax.swing.JFrame {
     private javax.swing.JLabel txtCantidadTriage;
     private javax.swing.JLabel txtNaranja;
     private javax.swing.JLabel txtNombre;
-    private javax.swing.JLabel txtNombreFuncionario;
     private javax.swing.JLabel txtRojo;
     private javax.swing.JLabel txtVerde;
     private javax.swing.JTextArea txtaMedicos;
