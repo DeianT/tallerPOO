@@ -7,25 +7,22 @@ package sistemas.tallerpoo.visual;
 import java.util.Map;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
-import sistemas.tallerpoo.clasesLogicas.Medico;
 import sistemas.tallerpoo.datos.GestorDatos;
-import sistemas.tallerpoo.datos.MedicoDatos;
-import sistemas.tallerpoo.datos.PacienteDatos;
 
 /**
  *
  * @author Thiago
  */
 public class AnalisisGestor extends javax.swing.JFrame {
-GestorDatos datos = new GestorDatos();
-DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+
+    GestorDatos datos = new GestorDatos();
+    DefaultComboBoxModel modelo = new DefaultComboBoxModel();
 
     /**
      * Creates new form AnalisisGestor
      */
-    public AnalisisGestor()
-    {
-      initComponents();
+    public AnalisisGestor() {
+        initComponents();
         jcDnis.setModel(modelo);
         datos.llenarCombo(jcDnis);
         datos.mostrarNombresMedicos(txtNombre, jcDnis);
@@ -36,7 +33,6 @@ DefaultComboBoxModel modelo = new DefaultComboBoxModel();
         txtVerde.setVisible(false);
         txtAzul.setVisible(false);
         txtCantidad2.setVisible(false);
-       
 
     }
 
@@ -725,12 +721,12 @@ DefaultComboBoxModel modelo = new DefaultComboBoxModel();
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         // TODO add your handling code here:
-       String Fecha1 = ((JTextField)jdDesde.getDateEditor().getUiComponent()).getText();
-       String Fecha2 = ((JTextField)jdHasta.getDateEditor().getUiComponent()).getText();
-        
+        String Fecha1 = ((JTextField) jdDesde.getDateEditor().getUiComponent()).getText();
+        String Fecha2 = ((JTextField) jdHasta.getDateEditor().getUiComponent()).getText();
+
         datos.atencionPorFechas(Fecha1, Fecha2, jcDnis, txtCantidad);
         txtCantidad.setVisible(true);
-        
+
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void jcDnisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcDnisActionPerformed
@@ -740,24 +736,22 @@ DefaultComboBoxModel modelo = new DefaultComboBoxModel();
 
     private void btnConsultar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultar2ActionPerformed
         // TODO add your handling code here:
-        String Fecha1 = ((JTextField)jdDesde1.getDateEditor().getUiComponent()).getText();
-        String Fecha2 = ((JTextField)jdHasta1.getDateEditor().getUiComponent()).getText();
-        
-        int edad1 = (Integer)jsEdad1.getValue();
-        int edad2 = (Integer)jsEdad2.getValue();
-        
-       
-        
-        txtCantidad2.setText(datos.atencionPorFechasYEdades(edad1, edad2, Fecha1,Fecha2));
+        String Fecha1 = ((JTextField) jdDesde1.getDateEditor().getUiComponent()).getText();
+        String Fecha2 = ((JTextField) jdHasta1.getDateEditor().getUiComponent()).getText();
+
+        int edad1 = (Integer) jsEdad1.getValue();
+        int edad2 = (Integer) jsEdad2.getValue();
+
+        txtCantidad2.setText(datos.atencionPorFechasYEdades(edad1, edad2, Fecha1, Fecha2));
         txtCantidad2.setVisible(true);
-        
+
     }//GEN-LAST:event_btnConsultar2ActionPerformed
 
     private void btnConsultar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultar5ActionPerformed
         // TODO add your handling code here:
-        String Fecha1 = ((JTextField)jdDesde5.getDateEditor().getUiComponent()).getText();
-        String Fecha2 = ((JTextField)jdHasta5.getDateEditor().getUiComponent()).getText();
-        
+        String Fecha1 = ((JTextField) jdDesde5.getDateEditor().getUiComponent()).getText();
+        String Fecha2 = ((JTextField) jdHasta5.getDateEditor().getUiComponent()).getText();       
+
         datos.triagesPorFechas(Fecha1, Fecha2, txtAzul, txtVerde, txtNaranja, txtAmarillo, txtRojo);
         txtRojo.setVisible(true);
         txtNaranja.setVisible(true);
@@ -768,34 +762,32 @@ DefaultComboBoxModel modelo = new DefaultComboBoxModel();
 
     private void btnConsultar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultar4ActionPerformed
         // TODO add your handling code here:
-        String Fecha1 = ((JTextField)jdDesde4.getDateEditor().getUiComponent()).getText();
-        String Fecha2 = ((JTextField)jdHasta4.getDateEditor().getUiComponent()).getText();
-        
+        String Fecha1 = ((JTextField) jdDesde4.getDateEditor().getUiComponent()).getText();
+        String Fecha2 = ((JTextField) jdHasta4.getDateEditor().getUiComponent()).getText();
+
         Map<String, Integer> map = datos.medicosAtencionPorFechas(Fecha1, Fecha2);
-        String linea="";
-         for(String key : map.keySet())
-         {
-             linea+=(key + " = " + map.get(key)+"\n");    
-         }
-         txtaMedicos.setText(linea);
-        
+        String linea = "";
+        for (String key : map.keySet()) {
+            linea += (key + " = " + map.get(key) + "\n");
+        }
+        txtaMedicos.setText(linea);
+
     }//GEN-LAST:event_btnConsultar4ActionPerformed
 
     private void btnConsultar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultar3ActionPerformed
         // TODO add your handling code here:
-         String Fecha1 = ((JTextField)jdDesde3.getDateEditor().getUiComponent()).getText();
-         String Fecha2 = ((JTextField)jdHasta3.getDateEditor().getUiComponent()).getText();
-         
-         Map<String, Integer> map = datos.pacienteConsultasRangoDeFechas(Fecha1, Fecha2);
-         String linea="";
-         for(String key : map.keySet())
-         {
-             linea+=(key + " = " + map.get(key)+"\n");    
-         }
-         
-         txtaPacientes.setText(linea);
-           
-        
+        String Fecha1 = ((JTextField) jdDesde3.getDateEditor().getUiComponent()).getText();
+        String Fecha2 = ((JTextField) jdHasta3.getDateEditor().getUiComponent()).getText();
+
+        Map<String, Integer> map = datos.pacienteConsultasRangoDeFechas(Fecha1, Fecha2);
+        String linea = "";
+        for (String key : map.keySet()) {
+            linea += (key + " = " + map.get(key) + "\n");
+        }
+
+        txtaPacientes.setText(linea);
+
+
     }//GEN-LAST:event_btnConsultar3ActionPerformed
 
     /**
