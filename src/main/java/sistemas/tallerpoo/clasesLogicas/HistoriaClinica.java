@@ -16,14 +16,15 @@ import lombok.AllArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 /**
- * Clase HistoriaClinica
+ * Clase HistoriaClinica representa un registro médico que contiene información sobre la historia clínica de un paciente
+ * 
  */
 public class HistoriaClinica {
-    private int dniPaciente;
-    private int dniMedico;
-    private String fecha;
-    private String hora;
-    private String diagnostico;
-    private String lugar;
-    private String diagnosticoClinico;
+    private int dniPaciente; // El DNI del paciente
+    private int dniMedico; // El DNI del médico que atendió al paciente.
+    private String fecha; // La fecha de la consulta.
+    private String hora;// La hora de la consulta.
+    private String diagnostico;// El diagnóstico realizado.
+    private String lugar;  // El lugar donde se realizó la consulta.
+    private String diagnosticoClinico;  // El diagnóstico clínico detallado.
 }
