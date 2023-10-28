@@ -6,8 +6,7 @@ import lombok.Setter;
 import lombok.AllArgsConstructor;
 
 /**
- *
- * @author 
+ * Contiene los datos de cada triage realizado, así como quién lo realizó
  */
 @Getter
 @Setter

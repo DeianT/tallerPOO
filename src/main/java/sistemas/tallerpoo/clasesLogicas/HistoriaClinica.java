@@ -6,17 +6,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
 
-/**
- *
- * @author 
- */
 @EqualsAndHashCode
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 /**
- * Clase HistoriaClinica
+ * Clase HistoriaClinica contiene los datos de cada atención de un paciente
  */
 public class HistoriaClinica {
     private int dniPaciente;

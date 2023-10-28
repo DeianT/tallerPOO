@@ -6,8 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- *
- * @author 
+ * Representa las distintas especialidades que pueden tener los médicos
  */
 @Getter
 @Setter
@@ -18,5 +17,4 @@ import lombok.Setter;
  */
 public class Especialidad {
     private String nombre;
-    
 }

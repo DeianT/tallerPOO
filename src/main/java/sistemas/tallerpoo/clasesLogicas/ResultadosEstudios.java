@@ -7,8 +7,7 @@ import java.util.Date;
 import lombok.AllArgsConstructor;
 
 /**
- *
- * @author 
+ * Resultados de los estudios que se realiza a los pacientes
  */
 @Getter
 @Setter

@@ -1,26 +1,22 @@
 package sistemas.tallerpoo.clasesLogicas;
 
 import java.util.ArrayList;
-import java.util.Date;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-/**
- *
- * @author Deian
- */
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
 /**
  * Clase Funcionario que extiende de la clase Persona
+ * Representa a cada trabajador
  */
 public class Funcionario extends Persona{
     private SectorTrabajo trabajaEn;
-    private ArrayList<Rol> rolesSistema;//capaz que no lo necesita
+    private ArrayList<Rol> rolesSistema;
 
     /**
      * Constructor de la Clase Funcionario

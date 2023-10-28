@@ -3,10 +3,6 @@ package sistemas.tallerpoo.clasesLogicas;
 import java.util.ArrayList;
 import sistemas.tallerpoo.datos.RolDatos;
 
-/**
- *
- * @author Deian
- */
 /** 
  * 
  * Clase ControlRoles se encarga de gestionar los roles de los usuarios en el sistema.
