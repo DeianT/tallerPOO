@@ -7,10 +7,20 @@ import sistemas.tallerpoo.datos.RolDatos;
  *
  * @author Deian
  */
+/** 
+ * 
+ * Clase ControlRoles 
+ * 
+ */
 public class ControlRoles {
     private static Usuario usuarioActual = null;
     private static ArrayList<Rol> rolesUsuario = new ArrayList<>();
     
+    /**
+     *
+     * @param rol
+     * @return retorna verdadero si el usuario posee un rol
+     */
     public static boolean usuarioTieneRol(Rol rol){
         for(Rol r: rolesUsuario){
             if(rol.getNombre().toLowerCase().equals(r.getNombre().toLowerCase())){
@@ -20,10 +30,18 @@ public class ControlRoles {
         return false;
     }
 
+    /**
+     *
+     * @return Devuelve el Usuario que ingresó
+     */
     public static Usuario getUsuarioActual() {
         return usuarioActual;
     }
 
+    /**
+     *
+     * @param usuarioActual
+     */
     public static void setUsuarioActual(Usuario usuarioActual) {
         ControlRoles.usuarioActual = usuarioActual;
         if(usuarioActual == null)
@@ -32,6 +50,10 @@ public class ControlRoles {
             ControlRoles.rolesUsuario = new RolDatos().obtenerRolesFuncionario(usuarioActual.getDniFuncionario());
     }
 
+    /**
+     *
+     * @return Devuelve el Rol del usuario
+     */
     public static ArrayList<Rol> getRolesUsuario() {
         return rolesUsuario;
     }

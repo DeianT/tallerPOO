@@ -6,10 +6,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ *
+ * @author 
+ */
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+/**
+ * Clase Estudios
+ */
 public class Estudios {
     private String dniMedico;
     private String especialidad;
