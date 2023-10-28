@@ -1,6 +1,8 @@
 package sistemas.tallerpoo.visual;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import sistemas.tallerpoo.clasesLogicas.Admision;
@@ -497,6 +499,19 @@ public class RealizarTriage extends javax.swing.JFrame {
             t.setDniEncargado(ControlRoles.getUsuarioActual().getDniFuncionario());
             td.agregarTriage(t);
             t.setId(td.cantidadTriage());
+            
+            
+            String fechaA;
+            String horaA;
+            Date fechita = new Date();
+            Date horita = new Date();
+            SimpleDateFormat formatofecha = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat formatohora = new SimpleDateFormat("HH:mm:ss");
+            fechaA = formatofecha.format(fechita);
+            horaA = formatohora.format(horita);
+
+            t.setFecha(fechaA);
+            t.setHora(horaA);
             
             admision.setTriage(t);
             datos.editarAdmision(admision);
