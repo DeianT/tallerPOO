@@ -6,8 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- *
- * @author Deian
+ * Representa los distintos sectores en donde pueden trabajar los funcionarios
  */
 @Getter
 @Setter
@@ -16,6 +15,10 @@ import lombok.Setter;
 public class SectorTrabajo {
     private String nombre;
     
+    /**
+     *
+     * @return Devuelve el Nombre del Sector de Trabajo
+     */
     @Override
     public String toString(){
         return "SectorTrabajo(" + nombre +")";

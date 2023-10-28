@@ -37,19 +37,6 @@ public class BoxDatos {
         escribirArchivo();
     }
     
-    public Box obtenerBoxDesocupado() throws Exception{
-        for(Box b: boxes){
-            if(!b.isOcupado()){
-                return b;
-            }
-        }
-        throw new Exception("No hay boxes disponibles");
-    }
-
-    public Box[] getBoxes() {
-        return boxes;
-    }
-
     public Box obtenerBox(int numero) {
         try{
             return boxes[numero - 1];

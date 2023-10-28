@@ -3,9 +3,11 @@ package sistemas.tallerpoo.clasesLogicas;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.util.Date;
 import lombok.AllArgsConstructor;
 
+/**
+ * Contiene los datos de cada triage realizado, así como quién lo realizó
+ */
 @Getter
 @Setter
 @NoArgsConstructor

@@ -163,7 +163,6 @@ public class PacienteDatos {
             e.printStackTrace();
             return false;
         }
-
     }
 
     /**
@@ -245,16 +244,6 @@ public class PacienteDatos {
             if (br != null) {
                 br.close();
             }
-        }
-    }
-
-    /**
-     * Imprime el contenido de la lista por consola
-     */
-    public void imprimirArchivo() {//Imprime el contenido de la lista, se usa para testeo
-        System.out.println("cant" + this.lista.size());
-        for (Paciente p : lista) {
-            System.out.println(p.toString());
         }
     }
 }

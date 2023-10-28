@@ -189,7 +189,6 @@ public class MedicoDatos {
 
                 pw.println(linea);
 
-//                new RolDatos().escribirArchivo()
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -230,7 +229,6 @@ public class MedicoDatos {
                 m.setTrabajaEn(new SectorTrabajo(campos[9]));
                 m.setNMatricula(Integer.parseInt(campos[10]));
                 m.setRolesSistema(new ArrayList<>());
-//                m.setRolesSistema(new RolDatos().obtenerRolesFuncionario(m.getDni()));
 
                 lista.add(m);
                 linea = br.readLine();
