@@ -3,32 +3,37 @@ package sistemas.tallerpoo.clasesLogicas;
 import java.util.ArrayList;
 import sistemas.tallerpoo.datos.RolDatos;
 
-/** 
- * 
- * Clase ControlRoles se encarga de gestionar los roles de los usuarios en el sistema.
- * Permite verificar si un usuario tiene un rol específico y mantener un seguimiento de los roles del usuario actual.
- * 
+/**
+ *
+ * Clase ControlRoles se encarga de gestionar los roles de los usuarios en el
+ * sistema. Permite verificar si un usuario tiene un rol específico y mantener
+ * un seguimiento de los roles del usuario actual.
+ *
  */
 public class ControlRoles {
+
     private static Usuario usuarioActual = null;
     private static ArrayList<Rol> rolesUsuario = new ArrayList<>();
-    
+
     /**
      * Verifica si un usuario tiene un rol especifico
+     *
      * @param rol Rol que se desea verificar
-     * @return retorna "true" si el usuario posee un rol, de lo contrario, "false"
+     * @return retorna "true" si el usuario posee un rol, de lo contrario,
+     * "false"
      */
-    public static boolean usuarioTieneRol(Rol rol){
-        for(Rol r: rolesUsuario){
-            if(rol.getNombre().toLowerCase().equals(r.getNombre().toLowerCase())){
-               return true; 
+    public static boolean usuarioTieneRol(Rol rol) {
+        for (Rol r : rolesUsuario) {
+            if (rol.getNombre().toLowerCase().equals(r.getNombre().toLowerCase())) {
+                return true;
             }
         }
         return false;
     }
 
     /**
-     *Obtiene el usuario que ha iniciado sesión en el sistema.
+     * Obtiene el usuario que ha iniciado sesión en el sistema.
+     *
      * @return Devuelve el Usuario actual autenticado
      */
     public static Usuario getUsuarioActual() {
@@ -36,20 +41,23 @@ public class ControlRoles {
     }
 
     /**
-     *Establece el usuario que ha iniciado sesión en el sistema.
-     * Actualiza los roles del usuario actual al iniciar o cerrar sesión.
-     * @param usuarioActual 
+     * Establece el usuario que ha iniciado sesión en el sistema. Actualiza los
+     * roles del usuario actual al iniciar o cerrar sesión.
+     *
+     * @param usuarioActual
      */
     public static void setUsuarioActual(Usuario usuarioActual) {
         ControlRoles.usuarioActual = usuarioActual;
-        if(usuarioActual == null)
+        if (usuarioActual == null) {
             ControlRoles.rolesUsuario = new ArrayList<>();
-        else
+        } else {
             ControlRoles.rolesUsuario = new RolDatos().obtenerRolesFuncionario(usuarioActual.getDniFuncionario());
+        }
     }
 
     /**
-     *Obtiene los roles asociados al usuario actual.
+     * Obtiene los roles asociados al usuario actual.
+     *
      * @return Devuelve lista de roles que el usuario tiene en el sistema
      */
     public static ArrayList<Rol> getRolesUsuario() {

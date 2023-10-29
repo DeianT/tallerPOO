@@ -10,62 +10,97 @@ import sistemas.tallerpoo.clasesLogicas.NivelTriage;
 import sistemas.tallerpoo.clasesLogicas.Triage;
 
 /**
- *
- * @author Deian
+ * Declaracion de la clase TriageDatos.
  */
 public class TriageDatos {
+
     private ArrayList<Triage> lista = new ArrayList();
     private static String archivo = "triages.csv";
     private static String separador = ";";
-    
-    public TriageDatos(){
-        try{
+
+    /**
+     * Constructor que inicializa la clase leyendo los triages desde el archivo.
+     */
+    public TriageDatos() {
+        try {
             leerArchivo();
-        }catch(IOException ex){}
+        } catch (IOException ex) {
+        }
     }
-    
-    public void agregarTriage(Triage triage){
+
+    /**
+     * Agrega un nuevo triage a la lista y lo persiste.
+     *
+     * @param triage El triage a ser agregado.
+     */
+    public void agregarTriage(Triage triage) {
         triage.setId(lista.size() + 1);
         lista.add(triage);
         escribirArchivo();
     }
-    
-    public Triage obtenerTriage(int id) throws IOException{
-        for(Triage t: lista){
-            if(t.getId()== id){
+
+    /**
+     * Obtiene un triage a partir de su identificador.
+     *
+     * @param id El identificador del triage a obtener.
+     * @return El triage correspondiente al identificador.
+     * @throws IOException si no se encuentra un triage con el ID proporcionado.
+     */
+    public Triage obtenerTriage(int id) throws IOException {
+        for (Triage t : lista) {
+            if (t.getId() == id) {
                 return t;
             }
         }
         throw new IOException("No existe Triage con id = " + id);
     }
-    
-    public ArrayList<Triage> obtenerTriages(){
+
+    /**
+     * Obtiene todos los triages existentes.
+     *
+     * @return ArrayList que contiene todos los triages.
+     */
+    public ArrayList<Triage> obtenerTriages() {
         return lista;
     }
-    
-    public ArrayList<Triage> obtenerTriagesModificados(){
+
+    /**
+     * Obtiene los triages que han sido modificados en comparación con su
+     * versión original.
+     *
+     * @return ArrayList que contiene los triages modificados.
+     */
+    public ArrayList<Triage> obtenerTriagesModificados() {
         ArrayList<Triage> triages = new ArrayList<>();
-        for(Triage t: lista){
-            if(t.getColor() != t.getColorModificado()){
+        for (Triage t : lista) {
+            if (t.getColor() != t.getColorModificado()) {
                 triages.add(t);
             }
         }
         return triages;
     }
-    
-    public int cantidadTriage(){
+
+    /**
+     * Obtiene la cantidad de triages almacenados.
+     *
+     * @return La cantidad total de triages almacenados.
+     */
+    public int cantidadTriage() {
         return lista.size();
     }
 
-    private void escribirArchivo(){
+    /**
+     * Escribe la información de los triages en un archivo.
+     */
+    private void escribirArchivo() {
         FileWriter nuevo = null;
         PrintWriter pw = null;
-        
-        try{
+
+        try {
             nuevo = new FileWriter(archivo);
             pw = new PrintWriter(nuevo);
             String linea;
-            for(Triage t: lista){
+            for (Triage t : lista) {
                 linea = t.getId() + separador;
                 linea += t.getColor() + separador;
                 linea += t.getRespiracion() + separador;
@@ -89,11 +124,9 @@ public class TriageDatos {
 
                 pw.println(linea);
             }
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally{
+        } finally {
             try {
                 nuevo.close();
             } catch (Exception ex) {
@@ -102,15 +135,20 @@ public class TriageDatos {
         }
     }
 
+    /**
+     * Lee la información de triages desde un archivo y la almacena en la lista.
+     *
+     * @throws IOException si hay un error al leer el archivo.
+     */
     private void leerArchivo() throws IOException {
         BufferedReader br = null;
-        try{
+        try {
             br = new BufferedReader(new FileReader(archivo));
             String linea = br.readLine();
-            while(linea != null){
+            while (linea != null) {
                 String[] campos = linea.split(separador);
                 Triage t = new Triage();
-                
+
                 t.setId(Integer.parseInt(campos[0]));
                 t.setColor(NivelTriage.valueOf(campos[1]));
                 t.setRespiracion(campos[2]);
@@ -131,46 +169,51 @@ public class TriageDatos {
                 t.setColorModificado(NivelTriage.valueOf(campos[17]));
                 t.setMotivoModificacion(campos[18]);
                 t.setDniEncargado(Integer.parseInt(campos[19]));
-                
+
                 lista.add(t);
                 linea = br.readLine();
             }
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally{
-            if(br != null) {
+        } finally {
+            if (br != null) {
                 br.close();
             }
         }
     }
-    
-    public boolean cambioColor(String[] colores , String color ,String nuevoColor)
-    {
+
+    /**
+     * Comprueba si el cambio de color de triage es válido.
+     *
+     * @param colores Array de colores permitidos.
+     * @param color Color original a cambiar.
+     * @param nuevoColor Nuevo color a asignar.
+     * @return true si el cambio es válido, false en caso contrario.
+     */
+    public boolean cambioColor(String[] colores, String color, String nuevoColor) {
         int indiceColor = 0;
         int indiceNuevoColor = 0;
         int res = 0;
-        
-        for(int i = 0 ; i<colores.length;i++){
-          if(color.toLowerCase().equals(colores[i].toLowerCase())){
-            indiceColor = i;
+
+        for (int i = 0; i < colores.length; i++) {
+            if (color.toLowerCase().equals(colores[i].toLowerCase())) {
+                indiceColor = i;
             }
-        } 
-                
-        for(int i = 0 ; i<colores.length;i++){
-            if(nuevoColor.toLowerCase().equals(colores[i].toLowerCase())){
-                indiceNuevoColor = i;
-            }
-        } 
-                
-        if(indiceColor > indiceNuevoColor ){
-            res = indiceColor - indiceNuevoColor;
-        }else{
-            res= indiceNuevoColor - indiceColor;
         }
 
-        if(res > 2){
+        for (int i = 0; i < colores.length; i++) {
+            if (nuevoColor.toLowerCase().equals(colores[i].toLowerCase())) {
+                indiceNuevoColor = i;
+            }
+        }
+
+        if (indiceColor > indiceNuevoColor) {
+            res = indiceColor - indiceNuevoColor;
+        } else {
+            res = indiceNuevoColor - indiceColor;
+        }
+
+        if (res > 2) {
             return false;
         }
         return true;

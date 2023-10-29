@@ -4,13 +4,26 @@ import javax.swing.JOptionPane;
 import sistemas.tallerpoo.datos.UsuariosDatos;
 
 /**
+ * Clase que representa un formulario para registrar usuarios en el sistema.
+ * Proporciona una interfaz gráfica para la creación y gestión de usuarios.
  *
- * @author Thiago
+ * Puede ser utilizado para la creación de usuarios, asignación de roles, y
+ * otras operaciones relacionadas con la administración de usuarios en el
+ * sistema.
+ *
+ * Este formulario se encarga de la presentación visual y la interacción con el
+ * usuario. No se muestran operaciones o lógica específica de manipulación de
+ * datos en este fragmento.
+ *
+ * Puede ser utilizado como plantilla base para el registro de usuarios en el
+ * sistema.
+ *
  */
 public class RegistroUsuario extends javax.swing.JFrame {
 
     /**
-     * Creates new form RegistroUsuario
+     * Constructor que inicializa los componentes del formulario para el
+     * Registro de Usuario.
      */
     public RegistroUsuario() {
         initComponents();
@@ -104,47 +117,34 @@ public class RegistroUsuario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Acción realizada al hacer clic en el botón "Registrar". Realiza la
+     * validación de campos y registra un nuevo usuario si los campos requeridos
+     * no están vacíos.
+     *
+     * @param evt Evento de acción que desencadena esta función al hacer clic en
+     * el botón de registro.
+     */
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        if("".equals(txtUsuario.getText()) || "".equals(txtContraseña.getText()) || "".equals(txtDni.getText())){
+        if ("".equals(txtUsuario.getText()) || "".equals(txtContraseña.getText()) || "".equals(txtDni.getText())) {
             JOptionPane.showMessageDialog(null, "Hay campos vacíos", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         UsuariosDatos user = new UsuariosDatos();
-        if(user.Registrar(Integer.parseInt(txtDni.getText()), txtUsuario, txtContraseña, txtRepContra))
-        {
-            this.dispose(); 
+        if (user.Registrar(Integer.parseInt(txtDni.getText()), txtUsuario, txtContraseña, txtRepContra)) {
+            this.dispose();
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     /**
-     * @param args the command line arguments
+     * El método main es el punto de entrada del programa. Inicializa la ventana
+     * de RegistroUsuario.
+     *
+     * @param args Los argumentos de la línea de comandos.
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegistroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegistroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegistroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegistroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new RegistroUsuario().setVisible(true);

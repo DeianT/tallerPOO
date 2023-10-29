@@ -18,16 +18,25 @@ import sistemas.tallerpoo.clasesLogicas.SectorTrabajo;
 import sistemas.tallerpoo.datos.MedicoDatos;
 
 /**
- *
- * @author Thiago
+ * La clase RegistroMedico es una interfaz de usuario que muestra y maneja los
+ * datos de los médicos. Se encarga de listar, limpiar la tabla y filtrar la
+ * información de los médicos. Extiende la funcionalidad de la clase
+ * javax.swing.JFrame.
  */
 public class RegistroMedico extends javax.swing.JFrame {
 
     DefaultTableModel modelo;
     ArrayList<Medico> lista;
-    TableRowSorter <DefaultTableModel> sorter;
+    TableRowSorter<DefaultTableModel> sorter;
     MedicoDatos datos = new MedicoDatos();
-   
+
+    /**
+     * Constructor de la clase RegistroMedico. Inicializa la interfaz y
+     * establece la posición inicial de la ventana en el centro de la pantalla.
+     * Inicializa el modelo de la tabla, obtiene la lista de médicos y muestra
+     * los datos en la tabla. Configura los mensajes de aviso como ocultos al
+     * iniciar la ventana.
+     */
     public RegistroMedico() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -45,57 +54,68 @@ public class RegistroMedico extends javax.swing.JFrame {
         avisoMATRICULA.setVisible(false);
     }
 
-    public void listar()
-    {
+    /**
+     * Lista los datos de los médicos en la tabla. Obtiene la lista de médicos,
+     * los agrega al modelo de la tabla y visualiza los datos. Configura la
+     * tabla para permitir ordenamiento y filtrado.
+     */
+    public void listar() {
         lista = datos.obtenerMedicos();
         limpiarTabla();
         modelo = (DefaultTableModel) jtMedicos.getModel();
         Object[] ob = new Object[10];
-        
-        for(int i = 0; i < lista.size(); i++)
-        {
-            ob[0]=lista.get(i).getDni();
-            ob[1]=lista.get(i).getNombre();
-            ob[2]=lista.get(i).getApellido();
-            ob[3]=lista.get(i).getFechaNacimiento();
-            ob[4]=lista.get(i).getDomicilio();
-            ob[5]=lista.get(i).getTelFijo();
-            ob[6]=lista.get(i).getTelCelular();
-            ob[7]=lista.get(i).getEstadoCivil();
-            ob[8]=lista.get(i).getCorreoElect();
-            ob[9]=lista.get(i).getNMatricula();
+
+        for (int i = 0; i < lista.size(); i++) {
+            ob[0] = lista.get(i).getDni();
+            ob[1] = lista.get(i).getNombre();
+            ob[2] = lista.get(i).getApellido();
+            ob[3] = lista.get(i).getFechaNacimiento();
+            ob[4] = lista.get(i).getDomicilio();
+            ob[5] = lista.get(i).getTelFijo();
+            ob[6] = lista.get(i).getTelCelular();
+            ob[7] = lista.get(i).getEstadoCivil();
+            ob[8] = lista.get(i).getCorreoElect();
+            ob[9] = lista.get(i).getNMatricula();
             modelo.addRow(ob);
         }
         jtMedicos.setModel(modelo);
-        
+
         jtMedicos.setAutoCreateRowSorter(true);
         sorter = new TableRowSorter<>(modelo);
         jtMedicos.setRowSorter(sorter);
     }
-    
-    public void limpiarTabla()
-    {
-        for(int i =0 ; i<modelo.getRowCount();i++)
-        {
+
+    /**
+     * Limpia la tabla de datos. Remueve todas las filas de la tabla,
+     * eliminándolas de la vista.
+     */
+    public void limpiarTabla() {
+        for (int i = 0; i < modelo.getRowCount(); i++) {
             modelo.removeRow(i);
-            i-=1;
+            i -= 1;
         }
     }
-    
-    public void mostrarTodo(Medico m)
-    {
+
+    /**
+     * Muestra los datos de un médico en los campos correspondientes de la
+     * interfaz.
+     *
+     * @param m Objeto de tipo Medico con los datos a visualizar.
+     */
+    public void mostrarTodo(Medico m) {
         String dni = Integer.toString(m.getDni());
         String telefono = Integer.toString(m.getTelFijo());
         String matricula = Integer.toString(m.getNMatricula());
         txtDni.setText(dni);
         txtNombre.setText(m.getNombre());
         txtApellido.setText(m.getApellido());
-         try {
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                Date pruebita = dateFormat.parse(m.getFechaNacimiento());
-                txtFechaNacimiento.setDate(pruebita);
-            } catch (ParseException ex) {}
-        
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date pruebita = dateFormat.parse(m.getFechaNacimiento());
+            txtFechaNacimiento.setDate(pruebita);
+        } catch (ParseException ex) {
+        }
+
         txtDomicilio.setText(m.getDomicilio());
         txtTelefono.setText(telefono);
         txtCelular.setText(m.getTelCelular());
@@ -103,24 +123,32 @@ public class RegistroMedico extends javax.swing.JFrame {
         txtCorreo.setText(m.getCorreoElect());
         txtMatricula.setText(matricula);
     }
-    
-    public void limpiarTexto()
-    {
-       txtDni.setText("");
-       txtNombre.setText("");
-       txtApellido.setText("");
-       txtFechaNacimiento.setCalendar(null);
-       txtDomicilio .setText("");
-       txtTelefono.setText("");
-       txtCelular.setText("");
-       cbEstadoCivil.setSelectedIndex(0);
-       txtCorreo.setText("");  
-       txtMatricula.setText("");
-       lblMensaje.setText("");
+
+    /**
+     * Limpia los campos de texto en la interfaz, restableciéndolos a sus
+     * valores predeterminados.
+     */
+    public void limpiarTexto() {
+        txtDni.setText("");
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtFechaNacimiento.setCalendar(null);
+        txtDomicilio.setText("");
+        txtTelefono.setText("");
+        txtCelular.setText("");
+        cbEstadoCivil.setSelectedIndex(0);
+        txtCorreo.setText("");
+        txtMatricula.setText("");
+        lblMensaje.setText("");
     }
-    
-    Medico captar()
-    {
+
+    /**
+     * Captura los datos ingresados en los campos de la interfaz y los devuelve
+     * en un objeto de tipo Medico.
+     *
+     * @return Objeto Medico con la información capturada de la interfaz.
+     */
+    Medico captar() {
         Medico m = new Medico();
         int dni = Integer.parseInt(txtDni.getText());
         int telefono = Integer.parseInt(txtTelefono.getText());
@@ -130,7 +158,7 @@ public class RegistroMedico extends javax.swing.JFrame {
         m.setDni(dni);
         m.setNombre(txtNombre.getText());
         m.setApellido(txtApellido.getText());
-        String Fecha = ((JTextField)txtFechaNacimiento.getDateEditor().getUiComponent()).getText();
+        String Fecha = ((JTextField) txtFechaNacimiento.getDateEditor().getUiComponent()).getText();
         m.setFechaNacimiento(Fecha);
         m.setDomicilio(txtDomicilio.getText());
         m.setTelFijo(telefono);
@@ -139,15 +167,24 @@ public class RegistroMedico extends javax.swing.JFrame {
         m.setCorreoElect(txtCorreo.getText());
         m.setTrabajaEn(sec);
         m.setNMatricula(Integer.parseInt(txtMatricula.getText()));
-        
+
         return m;
     }
-    private boolean validarCorreoElectronico(String correoElectronico){
+
+    /**
+     * Verifica si la cadena pasada como argumento es un correo electrónico
+     * válido.
+     *
+     * @param correoElectronico Cadena que se verificará si es un correo
+     * electrónico válido.
+     * @return true si es un correo electrónico válido; de lo contrario, false.
+     */
+    private boolean validarCorreoElectronico(String correoElectronico) {
         Pattern pat = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
         Matcher mat = pat.matcher(correoElectronico);
         return mat.find();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -486,6 +523,14 @@ public class RegistroMedico extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Realiza la acción de registrar un nuevo médico a partir de la información
+     * ingresada en la interfaz. Comprueba que los campos requeridos estén
+     * completos, verifica la validez de la información, y muestra mensajes de
+     * error si es necesario.
+     *
+     * @param evt Objeto que contiene la información del evento desencadenante.
+     */
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         avisoDNI.setVisible(false);
         avisoNOMBRE.setVisible(false);
@@ -496,54 +541,51 @@ public class RegistroMedico extends javax.swing.JFrame {
         avisoESTADOCIVIL.setVisible(false);
         avisoSECTORTRABAJO.setVisible(false);
         avisoMATRICULA.setVisible(false);
-        if(txtDni.getText().trim().isEmpty()||txtNombre.getText().trim().isEmpty()||
-                txtApellido.getText().trim().isEmpty()||txtNombre.getText().trim().isEmpty()||
-                txtTelefono.getText().trim().isEmpty()||txtCelular.getText().trim().isEmpty()||
-                txtDomicilio.getText().trim().isEmpty()||txtSectorTrabajo.getText().trim().isEmpty()||
-                cbEstadoCivil.getSelectedIndex() == 0|| txtMatricula.getText().trim().isEmpty())
-        {
+        if (txtDni.getText().trim().isEmpty() || txtNombre.getText().trim().isEmpty()
+                || txtApellido.getText().trim().isEmpty() || txtNombre.getText().trim().isEmpty()
+                || txtTelefono.getText().trim().isEmpty() || txtCelular.getText().trim().isEmpty()
+                || txtDomicilio.getText().trim().isEmpty() || txtSectorTrabajo.getText().trim().isEmpty()
+                || cbEstadoCivil.getSelectedIndex() == 0 || txtMatricula.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Hay campos incompletos, por favor complételos", "Error", JOptionPane.WARNING_MESSAGE);
-            if(txtDni.getText().trim().isEmpty()){
+            if (txtDni.getText().trim().isEmpty()) {
                 avisoDNI.setVisible(true);
             }
-            if(txtNombre.getText().trim().isEmpty()){
+            if (txtNombre.getText().trim().isEmpty()) {
                 avisoNOMBRE.setVisible(true);
             }
-            if(txtApellido.getText().trim().isEmpty()){
+            if (txtApellido.getText().trim().isEmpty()) {
                 avisoAPELLIDO.setVisible(true);
             }
-            if(txtDomicilio.getText().trim().isEmpty()){
+            if (txtDomicilio.getText().trim().isEmpty()) {
                 avisoDOMICILIO.setVisible(true);
             }
-            if(txtTelefono.getText().trim().isEmpty()){
+            if (txtTelefono.getText().trim().isEmpty()) {
                 avisoTELEFONO.setVisible(true);
             }
-            if(txtCelular.getText().trim().isEmpty()){
+            if (txtCelular.getText().trim().isEmpty()) {
                 avisoCELULAR.setVisible(true);
             }
-            if(cbEstadoCivil.getSelectedIndex() == 0){
+            if (cbEstadoCivil.getSelectedIndex() == 0) {
                 avisoESTADOCIVIL.setVisible(true);
             }
-            if(txtSectorTrabajo.getText().trim().isEmpty()){
+            if (txtSectorTrabajo.getText().trim().isEmpty()) {
                 avisoSECTORTRABAJO.setVisible(true);
             }
-            if(txtMatricula.getText().trim().isEmpty()){
+            if (txtMatricula.getText().trim().isEmpty()) {
                 avisoMATRICULA.setVisible(true);
             }
             return;
         }
-        
-        
-        
-        if ((Integer.parseInt(txtDni.getText()) <= 0)){
-            JOptionPane.showMessageDialog(null,"Ingrese un DNI válido", "Error",JOptionPane.ERROR_MESSAGE);
+
+        if ((Integer.parseInt(txtDni.getText()) <= 0)) {
+            JOptionPane.showMessageDialog(null, "Ingrese un DNI válido", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if (!validarCorreoElectronico(txtCorreo.getText())){
+        if (!validarCorreoElectronico(txtCorreo.getText())) {
             JOptionPane.showMessageDialog(null, "Correo electrónico incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if(datos.agregarMedico(captar())){
+        if (datos.agregarMedico(captar())) {
             JOptionPane.showMessageDialog(null, "Se registró con exito");
             avisoDNI.setVisible(false);
             avisoNOMBRE.setVisible(false);
@@ -556,16 +598,26 @@ public class RegistroMedico extends javax.swing.JFrame {
             avisoMATRICULA.setVisible(false);
             listar();
             this.limpiarTexto();
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(null, "Ya existe médico con ese DNI", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
+    /**
+     * Acción que muestra la lista completa de médicos en la interfaz.
+     *
+     * @param evt Objeto que contiene la información del evento desencadenante.
+     */
     private void btnMostrarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarTodoActionPerformed
         listar();
     }//GEN-LAST:event_btnMostrarTodoActionPerformed
 
+    /**
+     * Acción que permite la edición de un médico seleccionado en la interfaz.
+     * Obtiene los detalles del médico seleccionado para su edición.
+     *
+     * @param evt Objeto que contiene la información del evento desencadenante.
+     */
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         Medico med;
         int fila = jtMedicos.getSelectedRow();
@@ -573,6 +625,11 @@ public class RegistroMedico extends javax.swing.JFrame {
         this.mostrarTodo(med);
     }//GEN-LAST:event_btnEditarActionPerformed
 
+    /**
+     * Acción que elimina un médico seleccionado en la interfaz.
+     *
+     * @param evt Objeto que contiene la información del evento desencadenante.
+     */
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int fila = jtMedicos.getSelectedRow();
         String s = jtMedicos.getModel().getValueAt(fila, 0).toString();
@@ -580,70 +637,67 @@ public class RegistroMedico extends javax.swing.JFrame {
         listar();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    /**
+     * Actualiza la lista de médicos según el valor ingresado en el campo de
+     * búsqueda.
+     *
+     * @param evt Objeto que contiene la información del evento desencadenante.
+     */
     private void txtBuscarDniKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarDniKeyReleased
         filtrar();
     }//GEN-LAST:event_txtBuscarDniKeyReleased
 
+    /**
+     * Confirma la edición del médico mostrado en la interfaz.
+     *
+     * @param evt Objeto que contiene la información del evento desencadenante.
+     */
     private void btnConfirmarEdicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarEdicionActionPerformed
         Medico m = new Medico();
         m = this.captar();
-        if(datos.editarMedico(m))
-        {
-          JOptionPane.showMessageDialog(null, "Se editó con exito");
-          limpiarTexto();
-          listar();
+        if (datos.editarMedico(m)) {
+            JOptionPane.showMessageDialog(null, "Se editó con exito");
+            limpiarTexto();
+            listar();
         }
     }//GEN-LAST:event_btnConfirmarEdicionActionPerformed
+
+    /**
+     * Verifica si el correo electrónico ingresado es válido y muestra un
+     * mensaje visual según el resultado.
+     *
+     * @param evt Objeto que contiene la información del evento desencadenante.
+     */
 
     private void txtCorreoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyReleased
         if (validarCorreoElectronico(txtCorreo.getText())) {
             lblMensaje.setText("Correcto");
-            lblMensaje.setForeground(Color.GREEN); 
-        }else{
+            lblMensaje.setForeground(Color.GREEN);
+        } else {
             lblMensaje.setText("Incorrecto");
-            lblMensaje.setForeground(Color.RED);      
+            lblMensaje.setForeground(Color.RED);
         }
     }//GEN-LAST:event_txtCorreoKeyReleased
 
-    private void filtrar()
-    {
+    /**
+     * Realiza el filtrado de la tabla de médicos basado en el valor del campo
+     * de búsqueda por DNI.
+     */
+    private void filtrar() {
         try {
             sorter.setRowFilter(RowFilter.regexFilter(txtBuscarDni.getText()));
         } catch (Exception e) {
         }
     }
-    
+
     /**
-     * @param args the command line arguments
+     * El método main es el punto de entrada del programa. Inicializa la ventana
+     * de RegistroMedico.
+     *
+     * @param args Los argumentos de la línea de comandos.
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegistroMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegistroMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegistroMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegistroMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new RegistroMedico().setVisible(true);

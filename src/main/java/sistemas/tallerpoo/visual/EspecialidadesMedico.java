@@ -17,85 +17,86 @@ import sistemas.tallerpoo.clasesLogicas.Medico;
 import sistemas.tallerpoo.datos.EspacialidadDatos;
 
 /**
- *
- * @author Thiago
+ * La clase EspecialidadesMedico es una interfaz gráfica para gestionar
+ * especialidades médicas. Permite agregar y quitar especialidades médicas a un
+ * médico.
  */
 public class EspecialidadesMedico extends javax.swing.JFrame {
 
     Vector<String> lista = new Vector<>();
-    EspacialidadDatos esp =new EspacialidadDatos();
+    EspacialidadDatos esp = new EspacialidadDatos();
     ArrayList<Medico> med = new ArrayList<Medico>();
-    String[] confirmar = {"SI" , "NO"};
+    String[] confirmar = {"SI", "NO"};
     ArrayList<String> allEspecialidades = new ArrayList<>(Arrays.asList("Alergología",
-"Anestesiología",
-"Angiología",
-"Cardiología",
-"Endocrinología",
-"Estomatología",
-"Farmacología Clínica",
-"Gastroenterología",
-"Genética",
-"Geriatría",
-"Hematología",
-"Hepatología",
-"Infectología",
-"Medicina aeroespacial",
-"Medicina del deporte",
-"Medicina familiar y comunitaria",
-"Medicina física y rehabilitación",
-"Medicina forense",
-"Medicina intensiva",
-"Medicina interna",
-"Medicina preventiva y salud pública",
-"Medicina del trabajo",
-"Nefrología",
-"Neumología",
-"Neurología",
-"Nutriología",
-"Oncología médica",
-"Oncología radioterápica",
-"Pediatría",
-"Psiquiatría",
-"Reumatología",
-"Toxicología",
-"Cirugía cardíaca",
-"Cirugía general",
-"Cirugía oral y maxilofacial",
-"Cirugía ortopédica",
-"Cirugía pediátrica",
-"Cirugía plástica",
-"Cirugía torácica",
-"Cirugía vascular",
-"Neurocirugía",
-"Dermatología",
-"Ginecología y obstetricia o tocología",
-"Medicina de emergencia",
-"Oftalmología",
-"Otorrinolaringología",
-"Traumatología",
-"Urología",
-"Análisis clínico",
-"Anatomía patológica",
-"Bioquímica clínica",
-"Farmacología",
-"Genética médica",
-"Inmunología",
-"Medicina nuclear",
-"Microbiología y parasitología",
-"Neurofisiología clínica",
-"Radiología"));
-    
-    
-    
-    
-    
-   
+            "Anestesiología",
+            "Angiología",
+            "Cardiología",
+            "Endocrinología",
+            "Estomatología",
+            "Farmacología Clínica",
+            "Gastroenterología",
+            "Genética",
+            "Geriatría",
+            "Hematología",
+            "Hepatología",
+            "Infectología",
+            "Medicina aeroespacial",
+            "Medicina del deporte",
+            "Medicina familiar y comunitaria",
+            "Medicina física y rehabilitación",
+            "Medicina forense",
+            "Medicina intensiva",
+            "Medicina interna",
+            "Medicina preventiva y salud pública",
+            "Medicina del trabajo",
+            "Nefrología",
+            "Neumología",
+            "Neurología",
+            "Nutriología",
+            "Oncología médica",
+            "Oncología radioterápica",
+            "Pediatría",
+            "Psiquiatría",
+            "Reumatología",
+            "Toxicología",
+            "Cirugía cardíaca",
+            "Cirugía general",
+            "Cirugía oral y maxilofacial",
+            "Cirugía ortopédica",
+            "Cirugía pediátrica",
+            "Cirugía plástica",
+            "Cirugía torácica",
+            "Cirugía vascular",
+            "Neurocirugía",
+            "Dermatología",
+            "Ginecología y obstetricia o tocología",
+            "Medicina de emergencia",
+            "Oftalmología",
+            "Otorrinolaringología",
+            "Traumatología",
+            "Urología",
+            "Análisis clínico",
+            "Anatomía patológica",
+            "Bioquímica clínica",
+            "Farmacología",
+            "Genética médica",
+            "Inmunología",
+            "Medicina nuclear",
+            "Microbiología y parasitología",
+            "Neurofisiología clínica",
+            "Radiología"));
+
+    /**
+     * Constructor de la interfaz de gestión de especialidades médicas.
+     * Inicializa y configura la interfaz gráfica, llenando el combo de DNI con
+     * médicos y mostrando el nombre y apellido del médico seleccionado.
+     */
     public EspecialidadesMedico() {
         initComponents();
         this.setLocationRelativeTo(null);
         esp.llenarCombo(cbDnis, med);
         esp.mostrarNombre(cbDnis, txtNombreApellido, med);
- 
+
     }
 
     /**
@@ -280,115 +281,128 @@ public class EspecialidadesMedico extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Maneja la acción de agregar una especialidad a un médico seleccionado.
+     * Verifica si la especialidad proporcionada existe en la lista de
+     * especialidades. En caso afirmativo, confirma la adición de la
+     * especialidad al médico y solicita detalles adicionales como la
+     * universidad y la fecha de obtención de la especialidad. Posteriormente,
+     * agrega la especialidad al médico si no está ya asignada.
+     *
+     * @param evt El evento de acción que desencadena este método.
+     */
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-        
-        if(allEspecialidades.contains(txtEspecialidad.getText()))
-        {
-            int opcion = JOptionPane.showOptionDialog(null, "esta seguro que desea agregar la especialidad " + txtEspecialidad.getText() + " al medico con dni " + cbDnis.getSelectedItem().toString(), "confirmacion", 0, JOptionPane.QUESTION_MESSAGE, null, confirmar, "SI"  );
-        
-        if(opcion == 0)
-        {
-           String uni = JOptionPane.showInputDialog(null,"ingrese el nombre de la universiad donde obtuvo la especialidad");
-            if(uni != null)
-            {
-                String fecha = JOptionPane.showInputDialog(null, "ingrese la fecha en que lo obtuvo");
-                if(fecha != null)
-                {
-                    lista= esp.mostrarEspecilidades(cbDnis, jlEspecialidadesMedico);
-                    if(!lista.contains(txtEspecialidad.getText()))
-                    {
-                      lista.add(txtEspecialidad.getText());
-                      jlEspecialidadesMedico.setListData(lista);
-                      esp.agregarEspecilidades(cbDnis, txtEspecialidad,uni,fecha);  
-                    }else
-                    {
-                        JOptionPane.showMessageDialog(null, "el medico ya cuenta con esa especialidad");
-                    }   
+
+        if (allEspecialidades.contains(txtEspecialidad.getText())) {
+            int opcion = JOptionPane.showOptionDialog(null, "esta seguro que desea agregar la especialidad " + txtEspecialidad.getText() + " al medico con dni " + cbDnis.getSelectedItem().toString(), "confirmacion", 0, JOptionPane.QUESTION_MESSAGE, null, confirmar, "SI");
+
+            if (opcion == 0) {
+                String uni = JOptionPane.showInputDialog(null, "ingrese el nombre de la universiad donde obtuvo la especialidad");
+                if (uni != null) {
+                    String fecha = JOptionPane.showInputDialog(null, "ingrese la fecha en que lo obtuvo");
+                    if (fecha != null) {
+                        lista = esp.mostrarEspecilidades(cbDnis, jlEspecialidadesMedico);
+                        if (!lista.contains(txtEspecialidad.getText())) {
+                            lista.add(txtEspecialidad.getText());
+                            jlEspecialidadesMedico.setListData(lista);
+                            esp.agregarEspecilidades(cbDnis, txtEspecialidad, uni, fecha);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "el medico ya cuenta con esa especialidad");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "tiene que ingresar una fecha");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "tiene que ingresar una universidad");
                 }
-                else
-                {
-                    JOptionPane.showMessageDialog(null, "tiene que ingresar una fecha");
-                }
-            }else
-            {
-                JOptionPane.showMessageDialog(null, "tiene que ingresar una universidad");
-            } 
-        }
-            
-        }else
-        {
+            }
+
+        } else {
             JOptionPane.showMessageDialog(null, "esa especialidad no existe");
         }
-        
-        
-        
-              
+
+
     }//GEN-LAST:event_btnAgregarActionPerformed
 
+    /**
+     * Este método es ejecutado cuando el JComboBox recibe el foco
+     * (seleccionado).
+     *
+     * @param evt El evento de Focus que desencadena este método.
+     */
     private void cbDnisFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbDnisFocusGained
- 
+
     }//GEN-LAST:event_cbDnisFocusGained
 
+    /**
+     * Maneja el evento de selección del JComboBox "cbDnis". Muestra el nombre y
+     * las especialidades asociadas al médico seleccionado.
+     *
+     * @param evt El evento de selección que desencadena este método.
+     */
     private void cbDnisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDnisActionPerformed
-        // TODO add your handling code here:
+
         jlEspecialidadesMedico.removeAll();
         esp.mostrarNombre(cbDnis, txtNombreApellido, med);
         esp.mostrarEspecilidades(cbDnis, jlEspecialidadesMedico);
     }//GEN-LAST:event_cbDnisActionPerformed
 
+    /**
+     * Este método es ejecutado cuando el JComboBox pierde el foco.
+     *
+     * @param evt El evento de Focus que desencadena este método.
+     */
     private void cbDnisFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbDnisFocusLost
-        // TODO add your handling code here: 
+
     }//GEN-LAST:event_cbDnisFocusLost
 
+    /**
+     * Método invocado cuando el campo de texto "txtEspecialidad" gana el foco.
+     * Limpia el campo de texto de la especialidad cuando se selecciona.
+     *
+     * @param evt El evento de Focus que desencadena este método.
+     */
     private void txtEspecialidadFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEspecialidadFocusGained
-        // TODO add your handling code here:
+
         txtEspecialidad.setText("");
     }//GEN-LAST:event_txtEspecialidadFocusGained
 
+    /**
+     * Maneja la acción del botón "btnEliminarEspecialidad". Elimina una
+     * especialidad de la lista asociada al médico seleccionado.
+     *
+     * @param evt El evento de acción que desencadena este método.
+     */
     private void btnEliminarEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEspecialidadActionPerformed
         // TODO add your handling code here:
-        
-       esp.eliminarEspecialidad(cbDnis, jlEspecialidadesMedico);
-       lista.remove(jlEspecialidadesMedico.getSelectedValue());
-       jlEspecialidadesMedico.setListData(lista);
-       
+
+        esp.eliminarEspecialidad(cbDnis, jlEspecialidadesMedico);
+        lista.remove(jlEspecialidadesMedico.getSelectedValue());
+        jlEspecialidadesMedico.setListData(lista);
+
     }//GEN-LAST:event_btnEliminarEspecialidadActionPerformed
 
+    /**
+     * Maneja la acción del botón "btnMostrarDatos". Muestra los datos asociados
+     * al médico y sus especialidades en el JComboBox "cbDnis".
+     *
+     * @param evt El evento de acción que desencadena este método.
+     */
     private void btnMostrarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarDatosActionPerformed
         // TODO add your handling code here:
         esp.mostrarDatos(cbDnis, jlEspecialidadesMedico);
-        
+
     }//GEN-LAST:event_btnMostrarDatosActionPerformed
 
     /**
-     * @param args the command line arguments
+     * El método main es el punto de entrada del programa. Inicializa la ventana
+     * de EspecialidadesMedico.
+     *
+     * @param args Los argumentos de la línea de comandos.
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EspecialidadesMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EspecialidadesMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EspecialidadesMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EspecialidadesMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new EspecialidadesMedico().setVisible(true);

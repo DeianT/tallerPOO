@@ -1,16 +1,18 @@
 package sistemas.tallerpoo.visual;
+
 import javax.swing.JOptionPane;
 import sistemas.tallerpoo.clasesLogicas.ControlRoles;
 import sistemas.tallerpoo.clasesLogicas.Rol;
 
 /**
- *
- * @author Thiago
+ * Ventana principal del sistema. Esta ventana contiene la interfaz principal
+ * del programa.
  */
 public class Principal extends javax.swing.JFrame {
 
     /**
-     * Creates new form Principal
+     * Constructor que inicializa la interfaz principal. Crea y muestra la
+     * ventana principal del sistema.
      */
     public Principal() {
         initComponents();
@@ -206,8 +208,18 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Acciones realizadas al seleccionar la opción 1 en el menú.
+     *
+     * Si el usuario no tiene los roles 'Medico' y 'Admision de Pacientes',
+     * muestra un mensaje de error y detiene la ejecución. En caso contrario,
+     * muestra la ventana para registrar un nuevo paciente.
+     *
+     * @param evt Evento que representa la acción de seleccionar la opción del
+     * menú.
+     */
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        if(!ControlRoles.usuarioTieneRol(new Rol("Medico")) && !ControlRoles.usuarioTieneRol(new Rol("Admision de Pacientes"))){
+        if (!ControlRoles.usuarioTieneRol(new Rol("Medico")) && !ControlRoles.usuarioTieneRol(new Rol("Admision de Pacientes"))) {
             JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
             return;
         }
@@ -215,28 +227,58 @@ public class Principal extends javax.swing.JFrame {
         pac.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    /**
+     * Acciones realizadas al seleccionar la opción 2 en el menú.
+     *
+     * Si el usuario no tiene los roles 'Registros Medicos', 'Gestion' y
+     * 'Recursos Humanos', muestra un mensaje de error y detiene la ejecución.
+     * En caso contrario, muestra la ventana para registrar un nuevo médico.
+     *
+     * @param evt Evento que representa la acción de seleccionar la opción del
+     * menú.
+     */
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        if(!ControlRoles.usuarioTieneRol(new Rol("Registros Medicos")) && !ControlRoles.usuarioTieneRol(new Rol("Gestion")) && !ControlRoles.usuarioTieneRol(new Rol("Recursos Humanos"))){
+        if (!ControlRoles.usuarioTieneRol(new Rol("Registros Medicos")) && !ControlRoles.usuarioTieneRol(new Rol("Gestion")) && !ControlRoles.usuarioTieneRol(new Rol("Recursos Humanos"))) {
             JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
             return;
         }
-        
+
         RegistroMedico m = new RegistroMedico();
         m.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    /**
+     * Acciones realizadas al seleccionar la opción 3 en el menú.
+     *
+     * Si el usuario no tiene los roles 'Registros Medicos' y 'Gestion', muestra
+     * un mensaje de error y detiene la ejecución. En caso contrario, muestra la
+     * ventana para administrar las especialidades médicas.
+     *
+     * @param evt Evento que representa la acción de seleccionar la opción del
+     * menú.
+     */
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        if(!ControlRoles.usuarioTieneRol(new Rol("Registros Medicos")) && !ControlRoles.usuarioTieneRol(new Rol("Gestion"))){
+        if (!ControlRoles.usuarioTieneRol(new Rol("Registros Medicos")) && !ControlRoles.usuarioTieneRol(new Rol("Gestion"))) {
             JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
             return;
         }
-        
+
         EspecialidadesMedico esp = new EspecialidadesMedico();
         esp.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    /**
+     * Acciones realizadas al seleccionar la opción 4 en el menú.
+     *
+     * Si el usuario no tiene los roles 'Medico' y 'Admision de Pacientes',
+     * muestra un mensaje de error y detiene la ejecución. En caso contrario,
+     * muestra la ventana para realizar el triage de un paciente.
+     *
+     * @param evt Evento que representa la acción de seleccionar la opción del
+     * menú.
+     */
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        if(!ControlRoles.usuarioTieneRol(new Rol("Medico")) && !ControlRoles.usuarioTieneRol(new Rol("Admision de Pacientes"))){
+        if (!ControlRoles.usuarioTieneRol(new Rol("Medico")) && !ControlRoles.usuarioTieneRol(new Rol("Admision de Pacientes"))) {
             JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
             return;
         }
@@ -244,6 +286,14 @@ public class Principal extends javax.swing.JFrame {
         t.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    /**
+     * Acciones realizadas al seleccionar la opción de cerrar sesión en el menú.
+     * Establece el usuario actual como nulo, muestra la ventana de inicio de
+     * sesión y cierra la ventana actual.
+     *
+     * @param evt Evento que representa la acción de seleccionar la opción del
+     * menú.
+     */
     private void jmCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCerrarSesionActionPerformed
         ControlRoles.setUsuarioActual(null);
         Login l = new Login();
@@ -251,8 +301,16 @@ public class Principal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jmCerrarSesionActionPerformed
 
+    /**
+     * Acciones realizadas al seleccionar la opción de registrar en el menú.
+     * Verifica los roles del usuario y muestra la ventana de registro de
+     * usuario en caso de tener permisos.
+     *
+     * @param evt Evento que representa la acción de seleccionar la opción del
+     * menú.
+     */
     private void jmRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRegistrarActionPerformed
-        if(!ControlRoles.usuarioTieneRol(new Rol("Administrador de Sistema")) && !ControlRoles.usuarioTieneRol(new Rol("Informatica"))){
+        if (!ControlRoles.usuarioTieneRol(new Rol("Administrador de Sistema")) && !ControlRoles.usuarioTieneRol(new Rol("Informatica"))) {
             JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
             return;
         }
@@ -260,12 +318,27 @@ public class Principal extends javax.swing.JFrame {
         reg.setVisible(true);
     }//GEN-LAST:event_jmRegistrarActionPerformed
 
+    /**
+     * Acciones realizadas al seleccionar la opción de salir en el menú. Cierra
+     * la ventana actual.
+     *
+     * @param evt Evento que representa la acción de seleccionar la opción del
+     * menú.
+     */
     private void jmSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmSalirActionPerformed
         this.dispose();
     }//GEN-LAST:event_jmSalirActionPerformed
 
+    /**
+     * Acciones realizadas al seleccionar la opción de registro de funcionario
+     * en el menú. Verifica los roles del usuario y muestra la ventana de
+     * registro de funcionario en caso de tener permisos.
+     *
+     * @param evt Evento que representa la acción de seleccionar la opción del
+     * menú.
+     */
     private void jmRegistroFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRegistroFuncionarioActionPerformed
-        if(!ControlRoles.usuarioTieneRol(new Rol("Administrador de Sistema")) && !ControlRoles.usuarioTieneRol(new Rol("Gestion")) && !ControlRoles.usuarioTieneRol(new Rol("Recursos Humanos"))){
+        if (!ControlRoles.usuarioTieneRol(new Rol("Administrador de Sistema")) && !ControlRoles.usuarioTieneRol(new Rol("Gestion")) && !ControlRoles.usuarioTieneRol(new Rol("Recursos Humanos"))) {
             JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
             return;
         }
@@ -273,72 +346,96 @@ public class Principal extends javax.swing.JFrame {
         fun.setVisible(true);
     }//GEN-LAST:event_jmRegistroFuncionarioActionPerformed
 
+    /**
+     * Acciones realizadas al seleccionar la opción de lista de espera en el
+     * menú. Verifica si el usuario tiene el rol 'Medico' y muestra la ventana
+     * de la lista de espera en caso de tener permisos.
+     *
+     * @param evt Evento que representa la acción de seleccionar la opción del
+     * menú.
+     */
     private void jmListaEsperaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmListaEsperaActionPerformed
-        if(!ControlRoles.usuarioTieneRol(new Rol("Medico"))){
+        if (!ControlRoles.usuarioTieneRol(new Rol("Medico"))) {
             JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
             return;
         }
         new ListaEspera().setVisible(true);
     }//GEN-LAST:event_jmListaEsperaActionPerformed
 
+    /**
+     * Acciones realizadas al seleccionar la opción de ver boxes en el menú.
+     * Verifica si el usuario tiene el rol 'Medico' y muestra la ventana de
+     * Atención en caso de tener permisos.
+     *
+     * @param evt Evento que representa la acción de seleccionar la opción del
+     * menú.
+     */
+
     private void jmVerBoxesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmVerBoxesActionPerformed
-        if(!ControlRoles.usuarioTieneRol(new Rol("Medico"))){
+        if (!ControlRoles.usuarioTieneRol(new Rol("Medico"))) {
             JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
             return;
         }
         new Atencion().setVisible(true);
     }//GEN-LAST:event_jmVerBoxesActionPerformed
 
+    /**
+     * Acciones realizadas al seleccionar la opción de historia clínica en el
+     * menú. Verifica si el usuario tiene los roles adecuados y muestra la
+     * ventana de Formulario de Historia Clínica en caso de tener permisos.
+     *
+     * @param evt Evento que representa la acción de seleccionar la opción del
+     * menú.
+     */
     private void mHistoriaClinicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mHistoriaClinicaActionPerformed
-        if(!ControlRoles.usuarioTieneRol(new Rol("Medico")) && !ControlRoles.usuarioTieneRol(new Rol("Admision de Pacientes")) && !ControlRoles.usuarioTieneRol(new Rol("Gestion")) && !ControlRoles.usuarioTieneRol(new Rol("Registros Medicos"))){
+        if (!ControlRoles.usuarioTieneRol(new Rol("Medico")) && !ControlRoles.usuarioTieneRol(new Rol("Admision de Pacientes")) && !ControlRoles.usuarioTieneRol(new Rol("Gestion")) && !ControlRoles.usuarioTieneRol(new Rol("Registros Medicos"))) {
             JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
             return;
         }
-        
+
         new FormularioHistoriaClinica().setVisible(true);
     }//GEN-LAST:event_mHistoriaClinicaActionPerformed
 
+    /**
+     * Acciones realizadas al seleccionar la opción de roles en el menú.
+     * Verifica si el usuario tiene el rol 'Administrador de Sistema' y muestra
+     * la ventana de Roles del Funcionario en caso de tener permisos.
+     *
+     * @param evt Evento que representa la acción de seleccionar la opción del
+     * menú.
+     */
     private void jmRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRolesActionPerformed
-        if(!ControlRoles.usuarioTieneRol(new Rol("Administrador de Sistema"))){
+        if (!ControlRoles.usuarioTieneRol(new Rol("Administrador de Sistema"))) {
             JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
             return;
         }
         new RolesFuncionario().setVisible(true);
     }//GEN-LAST:event_jmRolesActionPerformed
 
+    /**
+     * Acciones realizadas al seleccionar la opción de estadísticas en el menú.
+     * Verifica si el usuario tiene el rol 'Gestion' y muestra la ventana de
+     * Análisis Gestor en caso de tener permisos.
+     *
+     * @param evt Evento que representa la acción de seleccionar la opción del
+     * menú.
+     */
     private void jmEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmEstadisticasActionPerformed
-        if(!ControlRoles.usuarioTieneRol(new Rol("Gestion"))){
+        if (!ControlRoles.usuarioTieneRol(new Rol("Gestion"))) {
             JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
             return;
         }
         new AnalisisGestor().setVisible(true);
     }//GEN-LAST:event_jmEstadisticasActionPerformed
 
+    /**
+     * El método main es el punto de entrada del programa. Inicializa la ventana
+     * de Principal.
+     *
+     * @param args Los argumentos de la línea de comandos.
+     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Principal().setVisible(true);
