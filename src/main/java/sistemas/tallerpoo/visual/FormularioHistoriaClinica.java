@@ -6,35 +6,57 @@ import sistemas.tallerpoo.datos.PacienteDatos;
 import sistemas.tallerpoo.datos.HistoriaClinicaDatos;
 
 /**
+ * Ventana de formulario de Historia Clínica. Proporciona métodos para mostrar y
+ * gestionar la información relacionada con la historia clínica de los
+ * pacientes. Puede mostrar la historia clínica asociada a un paciente
+ * seleccionado.
  *
- * @author Thiago
+ * Este formulario permite seleccionar un paciente y visualizar su historial
+ * clínico. Puede utilizarse para mostrar el historial clínico de un paciente
+ * mediante su identificación de dni.
+ *
  */
 public class FormularioHistoriaClinica extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FormularioHistoriaClinica
-     */
     HistoriaClinicaDatos datos = new HistoriaClinicaDatos();
     DefaultComboBoxModel modelo = new DefaultComboBoxModel();
-    
-    
-    public FormularioHistoriaClinica (){
+
+    /**
+     * Constructor para crear una instancia de FormularioHistoriaClinica. Carga
+     * el formulario de historias clínicas y establece su posición relativa en
+     * la ventana. Llena el JComboBox con los DNIs de los pacientes y muestra el
+     * nombre asociado al DNI seleccionado.
+     */
+    public FormularioHistoriaClinica() {
         initComponents();
         this.setLocationRelativeTo(null);
         jcDnis.setModel(modelo);
-        for(Paciente p: new PacienteDatos().obtenerPacientes()){
+        for (Paciente p : new PacienteDatos().obtenerPacientes()) {
             jcDnis.addItem(String.valueOf(p.getDni()));
         }
         datos.mostrarNombre(jlNombre, jcDnis);
-        
+
     }
-    
-    public FormularioHistoriaClinica(int dni){
+
+    /**
+     * Constructor para crear una instancia de FormularioHistoriaClinica con un
+     * DNI específico. Utiliza el constructor predeterminado y selecciona un DNI
+     * particular en el JComboBox.
+     *
+     * @param dni El DNI del paciente para seleccionar y mostrar su historial
+     * clínico.
+     */
+    public FormularioHistoriaClinica(int dni) {
         this();
         jcDnis.setSelectedItem(String.valueOf(dni));
     }
-    
-    private void vaciarCampos(){
+
+    /**
+     * Vacía los campos de texto en el formulario de Historia Clínica. Establece
+     * en blanco los campos de texto para el lugar, resultados, diagnóstico y
+     * médico.
+     */
+    private void vaciarCampos() {
         txtLugar.setText("");
         txtResultados.setText("");
         txtDiagnostico.setText("");
@@ -191,13 +213,27 @@ public class FormularioHistoriaClinica extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Se activa al seleccionar un DNI en el ComboBox correspondiente. Llena el
+     * ComboBox de fechas con las fechas de historia clínica disponibles y
+     * muestra el nombre del paciente.
+     *
+     * @param evt El evento generado al seleccionar un DNI en el ComboBox.
+     */
     private void jcDnisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcDnisActionPerformed
         datos.llenarFechas(jcDnis, jcFechas);
         datos.mostrarNombre(jlNombre, jcDnis);
     }//GEN-LAST:event_jcDnisActionPerformed
 
+    /**
+     * Se activa al seleccionar una fecha en el ComboBox de fechas. Muestra la
+     * historia clínica correspondiente a la fecha seleccionada. Si no hay
+     * fechas disponibles, vacía los campos de texto.
+     *
+     * @param evt El evento generado al seleccionar una fecha en el ComboBox.
+     */
     private void jcFechasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcFechasActionPerformed
-        if(jcFechas.getItemCount() <= 0){
+        if (jcFechas.getItemCount() <= 0) {
             vaciarCampos();
             return;
         }
@@ -205,38 +241,17 @@ public class FormularioHistoriaClinica extends javax.swing.JFrame {
     }//GEN-LAST:event_jcFechasActionPerformed
 
     /**
-     * @param args the command line arguments
+     * El método main es el punto de entrada del programa. Inicializa la ventana
+     * de FormularioHistoriaClinica.
+     *
+     * @param args Los argumentos de la línea de comandos.
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormularioHistoriaClinica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormularioHistoriaClinica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormularioHistoriaClinica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormularioHistoriaClinica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-            new FormularioHistoriaClinica().setVisible(true);
-                
+                new FormularioHistoriaClinica().setVisible(true);
+
             }
         });
     }

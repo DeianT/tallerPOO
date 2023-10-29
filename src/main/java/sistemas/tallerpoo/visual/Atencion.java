@@ -13,10 +13,15 @@ import sistemas.tallerpoo.datos.BoxDatos;
 import sistemas.tallerpoo.datos.HistoriaClinicaDatos;
 
 /**
- *
- * @author Deian
+ * Clase que representa la ventana principal para la gestión de la atención a
+ * los pacientes. Proporciona la interfaz gráfica con funcionalidades para la
+ * gestión de las admisiones de los pacientes. La clase incluye funcionalidades
+ * para mostrar la lista de admisiones, permitiendo acciones como dar de alta a
+ * un paciente, visualizar la historia clínica, etc. Utiliza elementos de las
+ * clases de datos `AdmisionDatos` y `HistoriaClinicaDatos`.
  */
 public class Atencion extends javax.swing.JFrame {
+
     private DefaultTableModel modelo;
     private ArrayList<Admision> listaAdmision;
     private AdmisionDatos datos = new AdmisionDatos();
@@ -24,7 +29,9 @@ public class Atencion extends javax.swing.JFrame {
     private final String[] lugaresAtencion = {"Consultorio", "Emergencia", "Internaciones"};
 
     /**
-     * Creates new form Atencion
+     * Constructor de la clase. Inicializa la interfaz y la ubicación de la
+     * ventana. Se encarga de instanciar un modelo de tabla y listar las
+     * admisiones.
      */
     public Atencion() {
         initComponents();
@@ -115,12 +122,26 @@ public class Atencion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Acción realizada al presionar el botón "Alta" en la interfaz. Obtiene la
+     * fila seleccionada en la tabla de admisiones. Si no se ha seleccionado una
+     * admisión, muestra un mensaje de error indicando que no se ha seleccionado
+     * ningún paciente. En caso contrario, accede a la admisión seleccionada,
+     * establece el estado de alta, realiza la edición de la admisión y reduce
+     * la cantidad de pacientes en el box asociado. Luego, solicita información
+     * al usuario mediante diálogos para ingresar el diagnóstico, el lugar de
+     * atención y el resultado de estudios. Se valida que se ingrese información
+     * válida en los diálogos. Finalmente, registra esta información en la base
+     * de datos como Historia Clínica y actualiza la lista de admisiones.
+     * Muestra un mensaje indicando que el paciente fue dado de alta.
+     *
+     * @param evt Evento de acción asociado al botón "Alta".
+     */
     private void btnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaActionPerformed
         int fila = jtAdmisiones.getSelectedRow();
-        try{
+        try {
             admision = listaAdmision.get(fila);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ningún paciente seleccionado", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -129,31 +150,29 @@ public class Atencion extends javax.swing.JFrame {
         datos.editarAdmision(admision);
         //reducir la cantidad de pacientes en el box
         new BoxDatos().ocuparDesocupar(admision.getBox().getNumero(), false);//esto posiblemente haya que modificar
-        
-        String diagnostico = JOptionPane.showInputDialog(null, "Ingrese el diagnóstico"); 
-        while(diagnostico == null || diagnostico.isEmpty())     
-        {
-            diagnostico = JOptionPane.showInputDialog(null, "Ingrese el diagnóstico");   
+
+        String diagnostico = JOptionPane.showInputDialog(null, "Ingrese el diagnóstico");
+        while (diagnostico == null || diagnostico.isEmpty()) {
+            diagnostico = JOptionPane.showInputDialog(null, "Ingrese el diagnóstico");
         }
-        
-        int l = JOptionPane.showOptionDialog(null,"Indique el lugar de atención", "Confirmacion", 0, JOptionPane.QUESTION_MESSAGE, null , lugaresAtencion, "Terminar");
-        while (l == -1){
-            l = JOptionPane.showOptionDialog(null,"Indique el lugar de atención", "Confirmacion", 0, JOptionPane.QUESTION_MESSAGE, null , lugaresAtencion, "Terminar");
+
+        int l = JOptionPane.showOptionDialog(null, "Indique el lugar de atención", "Confirmacion", 0, JOptionPane.QUESTION_MESSAGE, null, lugaresAtencion, "Terminar");
+        while (l == -1) {
+            l = JOptionPane.showOptionDialog(null, "Indique el lugar de atención", "Confirmacion", 0, JOptionPane.QUESTION_MESSAGE, null, lugaresAtencion, "Terminar");
         }
         String lugar = lugaresAtencion[l];
-        
-        String diagnosticoClinico = JOptionPane.showInputDialog(null, "Ingrese el resultado de estudios"); 
-        while(diagnosticoClinico == null || diagnosticoClinico.isEmpty())     
-        {
-            diagnosticoClinico = JOptionPane.showInputDialog(null, "Ingrese el resultado de estudios");   
+
+        String diagnosticoClinico = JOptionPane.showInputDialog(null, "Ingrese el resultado de estudios");
+        while (diagnosticoClinico == null || diagnosticoClinico.isEmpty()) {
+            diagnosticoClinico = JOptionPane.showInputDialog(null, "Ingrese el resultado de estudios");
         }
-        
+
         Date fechita = new Date();
         SimpleDateFormat formatofecha = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat formatohora = new SimpleDateFormat("HH:mm");
         String fecha = formatofecha.format(fechita);
         String hora = formatohora.format(fechita);
-        
+
         HistoriaClinica h = new HistoriaClinica();
         h.setDniPaciente(admision.getPaciente().getDni());
         h.setDniMedico(ControlRoles.getUsuarioActual().getDniFuncionario());
@@ -162,54 +181,42 @@ public class Atencion extends javax.swing.JFrame {
         h.setDiagnostico(diagnostico);
         h.setLugar(lugar);
         h.setDiagnosticoClinico(diagnosticoClinico);
-        
+
         new HistoriaClinicaDatos().agregarHistoriaClinica(h);
 
         listar();
         JOptionPane.showMessageDialog(null, "El paciente fue dado de alta");
     }//GEN-LAST:event_btnAltaActionPerformed
 
+    /**
+     * Acción realizada al presionar el botón "Historia Clínica" en la interfaz.
+     * Obtiene la fila seleccionada en la tabla de admisiones. Si no se ha
+     * seleccionado una admisión, muestra un mensaje de error indicando que no
+     * se ha seleccionado ningún paciente. En caso contrario, obtiene la
+     * admisión seleccionada y abre un nuevo formulario de Historia Clínica
+     * relacionado al paciente asociado a esa admisión. Si no hay un paciente
+     * seleccionado, muestra un mensaje de error.
+     *
+     * @param evt Evento de acción asociado al botón "Historia Clínica".
+     */
     private void btnHistoriaClinicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoriaClinicaActionPerformed
         int fila = jtAdmisiones.getSelectedRow();
-        try{//controla que haya una admisión seleccionada
+        try {//controla que haya una admisión seleccionada
             admision = listaAdmision.get(fila);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ningún paciente seleccionado", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         new FormularioHistoriaClinica(admision.getPaciente().getDni()).setVisible(true);
     }//GEN-LAST:event_btnHistoriaClinicaActionPerformed
 
     /**
-     * @param args the command line arguments
+     * El método main es el punto de entrada del programa. Inicializa la ventana de Atencion.
+     *
+     * @param args Los argumentos de la línea de comandos.
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Atencion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Atencion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Atencion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Atencion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Atencion().setVisible(true);
@@ -229,9 +236,8 @@ public class Atencion extends javax.swing.JFrame {
         limpiarTabla();
         modelo = (DefaultTableModel) jtAdmisiones.getModel();
         Object[] ob = new Object[8];
-        
-        for(int i = 0; i < listaAdmision.size(); i++)
-        {
+
+        for (int i = 0; i < listaAdmision.size(); i++) {
             ob[0] = listaAdmision.get(i).getBox().getNumero();
             ob[1] = listaAdmision.get(i).getTriage().getColorModificado();
             ob[2] = listaAdmision.get(i).getMotivo();
@@ -242,11 +248,11 @@ public class Atencion extends javax.swing.JFrame {
             ob[7] = listaAdmision.get(i).getPaciente().getFechaNacimiento();
             modelo.addRow(ob);
         }
-        jtAdmisiones.setModel(modelo); 
+        jtAdmisiones.setModel(modelo);
     }
 
     private void limpiarTabla() {
-        for(int i = 0; i < modelo.getRowCount(); i++){
+        for (int i = 0; i < modelo.getRowCount(); i++) {
             modelo.removeRow(i--);
         }
     }

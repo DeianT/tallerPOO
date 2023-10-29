@@ -16,27 +16,36 @@ import sistemas.tallerpoo.clasesLogicas.Medico;
 import sistemas.tallerpoo.clasesLogicas.SectorTrabajo;
 
 /**
- *
- * @author Thiago
+ * Declaracion de la clase EspacialidadDatos.
  */
 public class EspacialidadDatos {
-    ArrayList<Estudios>  estudios = new ArrayList<>();
-    
-    public EspacialidadDatos()
-    {
-       leer();
+
+    ArrayList<Estudios> estudios = new ArrayList<>();
+
+    /**
+     * Constructor de la clase. Lee los datos del archivo al inicializar la
+     * clase.
+     */
+    public EspacialidadDatos() {
+        leer();
     }
-    
-    public void llenarCombo(JComboBox cb , ArrayList<Medico> lista)
-    {
-        String [] datos;
+
+    /**
+     * Llena un JComboBox con los médicos y sus detalles. Lee los datos de los
+     * médicos desde un archivo CSV, agrega sus nombres al JComboBox y almacena
+     * los detalles de cada médico en una lista.
+     *
+     * @param cb El JComboBox donde se cargarán los nombres de los médicos.
+     * @param lista La lista donde se almacenan los detalles de los médicos.
+     */
+    public void llenarCombo(JComboBox cb, ArrayList<Medico> lista) {
+        String[] datos;
         Medico m;
-        try(Scanner sc = new Scanner(new File("medicos.csv"))) {
-            while(sc.hasNextLine())
-            {
+        try (Scanner sc = new Scanner(new File("medicos.csv"))) {
+            while (sc.hasNextLine()) {
                 datos = sc.nextLine().split(";");
                 cb.addItem(datos[0]);
-                
+
                 m = new Medico();
                 m.setDni(Integer.parseInt(datos[0]));
                 m.setNombre(datos[1]);
@@ -57,146 +66,193 @@ public class EspacialidadDatos {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-        
+
     }
-    
-    public void mostrarNombre(JComboBox cb , JLabel txt, ArrayList<Medico> lista )
-    {
+
+    /**
+     * Muestra el nombre completo del médico correspondiente al DNI seleccionado
+     * en un JComboBox.
+     *
+     * @param cb El JComboBox que contiene los DNIs de los médicos.
+     * @param txt El JLabel donde se mostrará el nombre completo del médico.
+     * @param lista La lista de médicos donde se buscará el DNI seleccionado.
+     */
+    public void mostrarNombre(JComboBox cb, JLabel txt, ArrayList<Medico> lista) {
         Medico m;
-        for(int i =0 ; i<lista.size();i++)
-        {
+        for (int i = 0; i < lista.size(); i++) {
             m = lista.get(i);
             String dni = Integer.toString(m.getDni());
-            if(dni.equals(cb.getSelectedItem().toString()))
-            {              
-                txt.setText(m.getNombre().toUpperCase()+" "+m.getApellido().toUpperCase());
+            if (dni.equals(cb.getSelectedItem().toString())) {
+                txt.setText(m.getNombre().toUpperCase() + " " + m.getApellido().toUpperCase());
             }
-        } 
+        }
     }
-   
-    public void agregarEspecilidades(JComboBox cb, JTextField esp, String uni, String fecha)
-    {
+
+    /**
+     * Agrega una especialidad a la lista de estudios médicos y escribe los
+     * detalles en un archivo CSV.
+     *
+     * @param cb El JComboBox que contiene las especialidades disponibles.
+     * @param esp El JTextField que contiene detalles adicionales sobre la
+     * especialidad.
+     * @param uni La universidad donde se obtuvo la especialidad.
+     * @param fecha La fecha de obtención de la especialidad.
+     */
+    public void agregarEspecilidades(JComboBox cb, JTextField esp, String uni, String fecha) {
         Estudios es;
 
         File f = new File("./estudios.csv");
-        try (FileWriter fw = new FileWriter(f,true))
-         {
-             es = new Estudios(cb.getSelectedItem().toString(), esp.getText(), uni, fecha  );
-             estudios.add(es);
-             escribir();
-             
-         } catch (Exception e) {
-             System.out.println(e.getMessage());
+        try (FileWriter fw = new FileWriter(f, true)) {
+            es = new Estudios(cb.getSelectedItem().toString(), esp.getText(), uni, fecha);
+            estudios.add(es);
+            escribir();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
-    
-    public void eliminarEspecialidad(JComboBox cb, JList espe)
-    {
-        for(int i = 0 ; i<estudios.size();i++)
-        {
+
+    /**
+     * Elimina una especialidad de la lista de estudios médicos y actualiza el
+     * archivo CSV correspondiente.
+     *
+     * @param cb El JComboBox que contiene los DNIs de los médicos.
+     * @param espe El JList que muestra las especialidades del médico
+     * seleccionado.
+     */
+    public void eliminarEspecialidad(JComboBox cb, JList espe) {
+        for (int i = 0; i < estudios.size(); i++) {
             Estudios e = estudios.get(i);
-            if(e.getDniMedico().equals(cb.getSelectedItem().toString()))
-            {
-                if(e.getEspecialidad().equals(espe.getSelectedValue().toString()))
-                {
+            if (e.getDniMedico().equals(cb.getSelectedItem().toString())) {
+                if (e.getEspecialidad().equals(espe.getSelectedValue().toString())) {
                     estudios.remove(e);
                     escribir();
                 }
             }
         }
-       
+
     }
-    
-    public void mostrarDatos(JComboBox cb, JList espe)
-    {
-        for(int i = 0 ; i<estudios.size();i++)
-        {
+
+    /**
+     * Muestra los detalles de una especialidad seleccionada del médico en el
+     * JComboBox y JList.
+     *
+     * @param cb El JComboBox que contiene los DNIs de los médicos.
+     * @param espe El JList que muestra las especialidades del médico
+     * seleccionado.
+     */
+    public void mostrarDatos(JComboBox cb, JList espe) {
+        for (int i = 0; i < estudios.size(); i++) {
             Estudios e = estudios.get(i);
-            if(e.getDniMedico().equals(cb.getSelectedItem().toString()))
-            {
-                if(e.getEspecialidad().equals(espe.getSelectedValue().toString()))
-                {
-                    JOptionPane.showMessageDialog(null, "Recibido en: " + e.getUniversidad() +"\n"+ "en la fecha: "+ e.getFechaTitulo() );
+            if (e.getDniMedico().equals(cb.getSelectedItem().toString())) {
+                if (e.getEspecialidad().equals(espe.getSelectedValue().toString())) {
+                    JOptionPane.showMessageDialog(null, "Recibido en: " + e.getUniversidad() + "\n" + "en la fecha: " + e.getFechaTitulo());
                 }
             }
         }
     }
- 
-    public Vector<String> mostrarEspecilidades(JComboBox cb, JList esp)
-    {
-        String[] datos;  
+
+    /**
+     * Muestra las especialidades del médico seleccionado en un JComboBox y
+     * actualiza un JList con las mismas.
+     *
+     * @param cb El JComboBox que contiene los DNIs de los médicos.
+     * @param esp El JList que mostrará las especialidades del médico
+     * seleccionado.
+     * @return Un vector que contiene las especialidades del médico
+     * seleccionado.
+     */
+    public Vector<String> mostrarEspecilidades(JComboBox cb, JList esp) {
+        String[] datos;
         Vector<String> lista = new Vector<>();
-        try(Scanner sc = new Scanner(new File("./estudios.csv"))) {
-            while(sc.hasNextLine())
-            {
+        try (Scanner sc = new Scanner(new File("./estudios.csv"))) {
+            while (sc.hasNextLine()) {
                 datos = sc.nextLine().split(",");
-                if(cb.getSelectedItem().toString().equals(datos[0]))
-                {
-                    lista.add(datos[1]);  
+                if (cb.getSelectedItem().toString().equals(datos[0])) {
+                    lista.add(datos[1]);
                 }
 
             }
-            
+
             esp.setListData(lista);
-            
+
         } catch (Exception e) {
         }
-       return lista;
+        return lista;
     }
-    
-    private void leer()
-    {
+
+    /**
+     * Lee los datos de los estudios médicos desde el archivo "estudios.csv" y
+     * los carga en la lista.
+     */
+    private void leer() {
         String[] datos;
         Estudios est;
-        try (Scanner sc  = new Scanner(new File("estudios.csv"))){
-            while(sc.hasNextLine())
-            {
-                datos=sc.nextLine().split(",");
-                est = new Estudios(datos[0],datos[1],datos[2],datos[3]);
+        try (Scanner sc = new Scanner(new File("estudios.csv"))) {
+            while (sc.hasNextLine()) {
+                datos = sc.nextLine().split(",");
+                est = new Estudios(datos[0], datos[1], datos[2], datos[3]);
                 estudios.add(est);
             }
-            
+
         } catch (Exception e) {
         }
     }
-    
-    private void escribir()
-    {
-        try (FileWriter fw = new FileWriter(new File("estudios.csv"))){
+
+    /**
+     * Escribe los datos de los estudios médicos de la lista al archivo
+     * "estudios.csv".
+     */
+    private void escribir() {
+        try (FileWriter fw = new FileWriter(new File("estudios.csv"))) {
             String linea;
-            for(Estudios e: estudios)
-            {
+            for (Estudios e : estudios) {
                 linea = e.getDniMedico() + ",";
-                linea+= e.getEspecialidad() + ",";
-                linea+= e.getUniversidad() + ",";
-                linea+= e.getFechaTitulo() + "\n" ;
+                linea += e.getEspecialidad() + ",";
+                linea += e.getUniversidad() + ",";
+                linea += e.getFechaTitulo() + "\n";
                 fw.write(linea);
             }
-            
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
-    
-    public Estudios obtenerEstudio(String id) throws IOException{
-        for(Estudios est: estudios){
-            if(est.getDniMedico().equals(id)){
+
+    /**
+     * Obtiene el estudio médico según el ID del médico proporcionado.
+     *
+     * @param id El ID del médico.
+     * @return Un objeto de Estudios que coincide con el ID del médico.
+     * @throws IOException Si no se encuentra un estudio médico para el ID
+     * proporcionado.
+     */
+    public Estudios obtenerEstudio(String id) throws IOException {
+        for (Estudios est : estudios) {
+            if (est.getDniMedico().equals(id)) {
                 return est;
             }
         }
         throw new IOException("No existe Medico con dni = " + id);
     }
-    
-    public void eliminar(String dni) throws IOException
-    {
+
+    /**
+     * Elimina el estudio médico para un ID de médico específico del archivo
+     * "estudios.csv".
+     *
+     * @param dni El ID del médico.
+     * @throws IOException Si no se encuentra un estudio médico para el ID
+     * proporcionado.
+     */
+    public void eliminar(String dni) throws IOException {
         try {
             Estudios e = obtenerEstudio(dni);
             estudios.remove(e);
             escribir();
-            
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        
+
     }
- }
+}

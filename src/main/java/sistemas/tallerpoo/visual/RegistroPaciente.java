@@ -26,16 +26,20 @@ import sistemas.tallerpoo.clasesLogicas.ControlRoles;
 import sistemas.tallerpoo.clasesLogicas.Rol;
 
 /**
- *
- * @author Thiago
+ * Interfaz de usuario que gestiona el registro de pacientes. Muestra, agrega,
+ * edita y elimina información de los pacientes en la tabla.
  */
 public class RegistroPaciente extends javax.swing.JFrame {
 
     DefaultTableModel modelo;
     ArrayList<Paciente> lista;
-    TableRowSorter <DefaultTableModel> sorter;
+    TableRowSorter<DefaultTableModel> sorter;
     PacienteDatos datos = new PacienteDatos();
-   
+
+    /**
+     * Constructor de la clase que inicializa la interfaz y establece la
+     * localización, el modelo de la tabla, y los avisos.
+     */
     public RegistroPaciente() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -51,57 +55,64 @@ public class RegistroPaciente extends javax.swing.JFrame {
         avisoESTADOCIVIL.setVisible(false);
     }
 
-    public void listar()
-    {   
+    /**
+     * Método para listar y mostrar los datos de los pacientes en la tabla.
+     */
+    public void listar() {
         lista = datos.obtenerPacientes();
         limpiarTabla();
         modelo = (DefaultTableModel) jtPacientes.getModel();
         Object[] ob = new Object[10];
-        
-        for(int i = 0; i < lista.size(); i++)
-        {
-            ob[0]=lista.get(i).getDni();
-            ob[1]=lista.get(i).getNombre();
-            ob[2]=lista.get(i).getApellido();
-            ob[3]=lista.get(i).getFechaNacimiento();
-            ob[4]=lista.get(i).getDomicilio();
-            ob[5]=lista.get(i).getTelFijo();
-            ob[6]=lista.get(i).getTelCelular();
-            ob[7]=lista.get(i).getEstadoCivil();
-            ob[8]=lista.get(i).getCorreoElect();
-            ob[9]=lista.get(i).getContacto();
+
+        for (int i = 0; i < lista.size(); i++) {
+            ob[0] = lista.get(i).getDni();
+            ob[1] = lista.get(i).getNombre();
+            ob[2] = lista.get(i).getApellido();
+            ob[3] = lista.get(i).getFechaNacimiento();
+            ob[4] = lista.get(i).getDomicilio();
+            ob[5] = lista.get(i).getTelFijo();
+            ob[6] = lista.get(i).getTelCelular();
+            ob[7] = lista.get(i).getEstadoCivil();
+            ob[8] = lista.get(i).getCorreoElect();
+            ob[9] = lista.get(i).getContacto();
             modelo.addRow(ob);
         }
-        jtPacientes.setModel(modelo); 
-        
+        jtPacientes.setModel(modelo);
+
         jtPacientes.setAutoCreateRowSorter(true);
         sorter = new TableRowSorter<>(modelo);
         jtPacientes.setRowSorter(sorter);
     }
-  
-    public void limpiarTabla()
-    {
-        for(int i = 0; i < modelo.getRowCount(); i++)
-        {
+
+    /**
+     * Método para limpiar los datos de la tabla de pacientes.
+     */
+    public void limpiarTabla() {
+        for (int i = 0; i < modelo.getRowCount(); i++) {
             modelo.removeRow(i);
             i -= 1;
         }
     }
-    
-    public void mostrarTodo(Paciente p)
-    {
+
+    /**
+     * Muestra los datos del paciente recibido en los campos de la interfaz.
+     *
+     * @param p El objeto Paciente del cual se obtienen los datos a mostrar.
+     */
+    public void mostrarTodo(Paciente p) {
         String dni = Integer.toString(p.getDni());
         String telefono = Integer.toString(p.getTelFijo());
         txtDni.setText(dni);
         txtNombre.setText(p.getNombre());
         txtApellido.setText(p.getApellido());
-       
+
         try {
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                Date pruebita = dateFormat.parse(p.getFechaNacimiento());
-                txtFechaNacimiento.setDate(pruebita);
-            } catch (ParseException ex) {}
-        
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date pruebita = dateFormat.parse(p.getFechaNacimiento());
+            txtFechaNacimiento.setDate(pruebita);
+        } catch (ParseException ex) {
+        }
+
         txtDomicilio.setText(p.getDomicilio());
         txtTelefono.setText(telefono);
         txtCelular.setText(p.getTelCelular());
@@ -109,28 +120,36 @@ public class RegistroPaciente extends javax.swing.JFrame {
         txtCorreo.setText(p.getCorreoElect());
         txtContacto.setText(p.getContacto());
     }
-    
-    public void limpiarTexto()
-    {
-       txtDni.setText("");
-       txtNombre.setText("");
-       txtApellido.setText("");
-       txtFechaNacimiento.setCalendar(null);
-       txtDomicilio .setText("");
-       txtTelefono.setText("");
-       txtCelular.setText("");
-       cbEstadoCivil.setSelectedIndex(0);
-       txtCorreo.setText("");   
-       txtContacto.setText("");
-       lblMensaje.setText("");
+
+    /**
+     * Limpia los campos de entrada de datos del paciente en la interfaz.
+     */
+    public void limpiarTexto() {
+        txtDni.setText("");
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtFechaNacimiento.setCalendar(null);
+        txtDomicilio.setText("");
+        txtTelefono.setText("");
+        txtCelular.setText("");
+        cbEstadoCivil.setSelectedIndex(0);
+        txtCorreo.setText("");
+        txtContacto.setText("");
+        lblMensaje.setText("");
     }
-    
-    private boolean validarCorreoElectronico(String correoElectronico){
+
+    /**
+     * Valida un correo electrónico con un patrón específico.
+     *
+     * @param correoElectronico El correo electrónico a validar.
+     * @return true si el correo es válido, de lo contrario, false.
+     */
+    private boolean validarCorreoElectronico(String correoElectronico) {
         Pattern pat = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
         Matcher mat = pat.matcher(correoElectronico);
         return mat.find();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -499,12 +518,21 @@ public class RegistroPaciente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Realiza el registro de un nuevo paciente. Verifica si el usuario tiene
+     * los roles adecuados para ejecutar la acción. Comprueba la integridad de
+     * los campos y muestra advertencias en caso de campos incompletos. Crea una
+     * nueva admisión, valida la información del paciente y, si no existe,
+     * registra al paciente. Agrega una admisión asociada al nuevo paciente,
+     * incluyendo el motivo, fecha y hora actuales, box de atención y nivel de
+     * triaje. Actualiza la interfaz tras el registro exitoso.
+     */
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        if(!ControlRoles.usuarioTieneRol(new Rol("Medico", 0)) && !ControlRoles.usuarioTieneRol(new Rol("Admision de Pacientes", 0))){
+        if (!ControlRoles.usuarioTieneRol(new Rol("Medico", 0)) && !ControlRoles.usuarioTieneRol(new Rol("Admision de Pacientes", 0))) {
             JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
             return;
         }
-        
+
         avisoDNI.setVisible(false);
         avisoNOMBRE.setVisible(false);
         avisoAPELLIDO.setVisible(false);
@@ -512,54 +540,52 @@ public class RegistroPaciente extends javax.swing.JFrame {
         avisoCONTACTO.setVisible(false);
         avisoTELEFONO.setVisible(false);
         avisoESTADOCIVIL.setVisible(false);
-        if(txtDni.getText().trim().isEmpty()||txtNombre.getText().trim().isEmpty()||
-                txtApellido.getText().trim().isEmpty()||txtContacto.getText().trim().isEmpty()||
-                txtNombre.getText().trim().isEmpty()||txtTelefono.getText().trim().isEmpty()||
-                cbEstadoCivil.getSelectedIndex() == 0)
-        {
+        if (txtDni.getText().trim().isEmpty() || txtNombre.getText().trim().isEmpty()
+                || txtApellido.getText().trim().isEmpty() || txtContacto.getText().trim().isEmpty()
+                || txtNombre.getText().trim().isEmpty() || txtTelefono.getText().trim().isEmpty()
+                || cbEstadoCivil.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Hay campos incompletos, por favor complételos", "Error", JOptionPane.WARNING_MESSAGE);
-            if(txtDni.getText().trim().isEmpty()){
+            if (txtDni.getText().trim().isEmpty()) {
                 avisoDNI.setVisible(true);
             }
-            if(txtNombre.getText().trim().isEmpty()){
+            if (txtNombre.getText().trim().isEmpty()) {
                 avisoNOMBRE.setVisible(true);
             }
-            if(txtApellido.getText().trim().isEmpty()){
+            if (txtApellido.getText().trim().isEmpty()) {
                 avisoAPELLIDO.setVisible(true);
             }
-            if(txtDomicilio.getText().trim().isEmpty()){
+            if (txtDomicilio.getText().trim().isEmpty()) {
                 avisoDOMICILIO1.setVisible(true);
             }
-            if(txtContacto.getText().trim().isEmpty()){
+            if (txtContacto.getText().trim().isEmpty()) {
                 avisoCONTACTO.setVisible(true);
             }
-            if(txtTelefono.getText().trim().isEmpty()){
+            if (txtTelefono.getText().trim().isEmpty()) {
                 avisoTELEFONO.setVisible(true);
             }
-            if(cbEstadoCivil.getSelectedIndex() == 0){
+            if (cbEstadoCivil.getSelectedIndex() == 0) {
                 avisoESTADOCIVIL.setVisible(true);
             }
             return;
         }
-      
-        if ((Integer.parseInt(txtDni.getText()) <= 0)){
-            JOptionPane.showMessageDialog(null,"Ingrese un DNI válido", "Error",JOptionPane.ERROR_MESSAGE);
+
+        if ((Integer.parseInt(txtDni.getText()) <= 0)) {
+            JOptionPane.showMessageDialog(null, "Ingrese un DNI válido", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if (!validarCorreoElectronico(txtCorreo.getText())){
-              JOptionPane.showMessageDialog(null, "Correo electrónico incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+        if (!validarCorreoElectronico(txtCorreo.getText())) {
+            JOptionPane.showMessageDialog(null, "Correo electrónico incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-      
+
         Admision a = new Admision();
         Paciente p = datos.capturar(txtDni, txtNombre, txtApellido, txtFechaNacimiento, txtDomicilio, txtTelefono, txtCelular, cbEstadoCivil, txtCorreo, txtContacto);
-        if (datos.agregarPaciente(p)){
-            String motivo= JOptionPane.showInputDialog(null, "Ingrese el motivo"); 
-            while(motivo==null || motivo.isEmpty())     
-            {
-             JOptionPane.showMessageDialog(null, "Por favor ingrese un motivo");   
-             motivo = JOptionPane.showInputDialog(null, "Ingrese el motivo");   
-            }  
+        if (datos.agregarPaciente(p)) {
+            String motivo = JOptionPane.showInputDialog(null, "Ingrese el motivo");
+            while (motivo == null || motivo.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Por favor ingrese un motivo");
+                motivo = JOptionPane.showInputDialog(null, "Ingrese el motivo");
+            }
             String fechaA;
             String horaA;
             //Se crean dos objetos de fecha para poder sacar hora y fecha actuales.
@@ -577,7 +603,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
             a.setPaciente(p);
             new AdmisionDatos().agregarAdmision(a);
             JOptionPane.showMessageDialog(null, "Se registró con exito");
-            
+
             avisoDNI.setVisible(false);
             avisoNOMBRE.setVisible(false);
             avisoAPELLIDO.setVisible(false);
@@ -586,125 +612,191 @@ public class RegistroPaciente extends javax.swing.JFrame {
             avisoTELEFONO.setVisible(false);
             avisoESTADOCIVIL.setVisible(false);
             avisoESTADOCIVIL.setVisible(false);
-           
+
             listar();
             this.limpiarTexto();
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(null, "Ya existe paciente con ese DNI", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
+    /**
+     * Muestra la lista de pacientes.
+     */
     private void btnMostrarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarTodoActionPerformed
-        listar();  
+        listar();
     }//GEN-LAST:event_btnMostrarTodoActionPerformed
 
+    /**
+     * Realiza la acción de edición de un paciente si el usuario tiene roles de
+     * "Medico" o "Admisión de Pacientes".
+     *
+     * @param evt El evento desencadenante de la acción.
+     */
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        if(!ControlRoles.usuarioTieneRol(new Rol("Medico", 0)) && !ControlRoles.usuarioTieneRol(new Rol("Admision de Pacientes", 0))){
+        if (!ControlRoles.usuarioTieneRol(new Rol("Medico", 0)) && !ControlRoles.usuarioTieneRol(new Rol("Admision de Pacientes", 0))) {
             JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
             return;
         }
-        
+
         Paciente pac;
         int fila = jtPacientes.getSelectedRow();
         pac = lista.get(fila);
         this.mostrarTodo(pac);
     }//GEN-LAST:event_btnEditarActionPerformed
 
+    /**
+     * Realiza la acción de eliminación de un paciente si el usuario tiene roles
+     * de "Medico" o "Admision de Pacientes".
+     *
+     * @param evt El evento desencadenante de la acción.
+     */
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        if(!ControlRoles.usuarioTieneRol(new Rol("Medico", 0)) && !ControlRoles.usuarioTieneRol(new Rol("Admision de Pacientes", 0))){
+        if (!ControlRoles.usuarioTieneRol(new Rol("Medico", 0)) && !ControlRoles.usuarioTieneRol(new Rol("Admision de Pacientes", 0))) {
             JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
             return;
         }
-        
+
         int fila = jtPacientes.getSelectedRow();
         String s = jtPacientes.getModel().getValueAt(fila, 0).toString();
         datos.eliminarPaciente(Integer.parseInt(s));
         listar();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    /**
+     * Método que se activa cuando se libera una tecla en el campo de búsqueda
+     * de DNI, desencadenando el filtrado.
+     *
+     * @param evt Evento desencadenante de la acción.
+     */
     private void txtBuscarDniKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarDniKeyReleased
         // TODO add your handling code here:
         filtrar(txtBuscarDni);
     }//GEN-LAST:event_txtBuscarDniKeyReleased
 
+    /**
+     * Confirma la edición de un paciente si el usuario tiene roles de "Medico"
+     * o "Admision de Pacientes".
+     *
+     * @param evt Evento desencadenante de la acción.
+     */
     private void btnConfirmarEdicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarEdicionActionPerformed
-        if(!ControlRoles.usuarioTieneRol(new Rol("Medico", 0)) && !ControlRoles.usuarioTieneRol(new Rol("Admision de Pacientes", 0))){
+        if (!ControlRoles.usuarioTieneRol(new Rol("Medico", 0)) && !ControlRoles.usuarioTieneRol(new Rol("Admision de Pacientes", 0))) {
             JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
             return;
         }
-        
+
         Paciente p = new Paciente();
-        p=datos.capturar(txtDni, txtNombre, txtApellido, txtFechaNacimiento, txtDomicilio, txtDni, txtCelular, cbEstadoCivil, txtCorreo, txtContacto);
+        p = datos.capturar(txtDni, txtNombre, txtApellido, txtFechaNacimiento, txtDomicilio, txtDni, txtCelular, cbEstadoCivil, txtCorreo, txtContacto);
 
         try {
-            if(datos.editarPaciente(p))
-            {
-              JOptionPane.showMessageDialog(null, "Se editó con exito");
-              limpiarTexto();
-              listar();
-            }     
+            if (datos.editarPaciente(p)) {
+                JOptionPane.showMessageDialog(null, "Se editó con exito");
+                limpiarTexto();
+                listar();
+            }
         } catch (IOException ex) {
             Logger.getLogger(RegistroPaciente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnConfirmarEdicionActionPerformed
 
+    /**
+     * Método activado cuando se realiza una acción en el campo de correo
+     * electrónico.
+     *
+     * @param evt Evento desencadenante de la acción.
+     */
     private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
-     
+
     }//GEN-LAST:event_txtCorreoActionPerformed
 
+    /**
+     * Método que se activa cuando se libera una tecla en el campo de correo
+     * electrónico para validar la entrada.
+     *
+     * @param evt Evento desencadenante de la acción.
+     */
     private void txtCorreoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyReleased
         if (validarCorreoElectronico(txtCorreo.getText())) {
             lblMensaje.setText("Correcto");
-            lblMensaje.setForeground(Color.GREEN); 
-        }else{
+            lblMensaje.setForeground(Color.GREEN);
+        } else {
             lblMensaje.setText("Incorrecto");
             lblMensaje.setForeground(Color.RED);
         }
     }//GEN-LAST:event_txtCorreoKeyReleased
 
+    /**
+     * Método activado cuando se realiza una acción en el campo de texto del
+     * DNI.
+     *
+     * @param evt Evento desencadenante de la acción.
+     */
     private void txtDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDniActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtDniActionPerformed
 
+    /**
+     * Método activado cuando se libera una tecla en el campo de texto del DNI.
+     * Realiza un filtrado con el valor del campo de texto.
+     *
+     * @param evt Evento desencadenante de la acción.
+     */
     private void txtDniKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDniKeyReleased
-        // TODO add your handling code here:
+
         filtrar(txtDni);
     }//GEN-LAST:event_txtDniKeyReleased
 
+    /**
+     * Método activado cuando el campo de texto del DNI recibe el foco.
+     *
+     * @param evt Evento desencadenante de la acción.
+     */
     private void txtDniFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDniFocusGained
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtDniFocusGained
 
+    /**
+     * Método activado cuando el campo de texto de la fecha de nacimiento recibe
+     * el foco.
+     *
+     * @param evt Evento desencadenante de la acción.
+     */
     private void txtFechaNacimientoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFechaNacimientoFocusGained
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtFechaNacimientoFocusGained
 
+    /**
+     * Método activado al presionar el botón de Admisión. Realiza la admisión de
+     * un paciente, solicitando un motivo y almacenando la información de
+     * admisión.
+     *
+     * @param evt Evento desencadenante de la acción.
+     */
     private void btnAdmisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmisionActionPerformed
-        if(!ControlRoles.usuarioTieneRol(new Rol("Medico", 0)) && !ControlRoles.usuarioTieneRol(new Rol("Admision de Pacientes", 0))){
+        if (!ControlRoles.usuarioTieneRol(new Rol("Medico", 0)) && !ControlRoles.usuarioTieneRol(new Rol("Admision de Pacientes", 0))) {
             JOptionPane.showMessageDialog(null, "Usted no tiene acceso a esta función");
             return;
         }
-        
+
         int fila = jtPacientes.getSelectedRow();
-        if(fila == -1){
+        if (fila == -1) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un paciente", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         Paciente p = lista.get(fila);
-        
-        String motivo = JOptionPane.showInputDialog(null, "Ingrese el motivo"); 
-        while(motivo == null || motivo.isEmpty())     
-        {  
-            motivo = JOptionPane.showInputDialog(null, "Ingrese el motivo");   
-        }  
-        
+
+        String motivo = JOptionPane.showInputDialog(null, "Ingrese el motivo");
+        while (motivo == null || motivo.isEmpty()) {
+            motivo = JOptionPane.showInputDialog(null, "Ingrese el motivo");
+        }
+
         Date date = new Date();
         SimpleDateFormat formatofecha = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat formatohora = new SimpleDateFormat("HH:mm:ss");
         String fecha = formatofecha.format(date);
         String hora = formatohora.format(date);
-        
+
         Admision a = new Admision();
         a.setFecha(fecha);
         a.setHora(hora);
@@ -713,49 +805,32 @@ public class RegistroPaciente extends javax.swing.JFrame {
         a.setTriage(new Triage());
         a.setPaciente(p);
         new AdmisionDatos().agregarAdmision(a);
-        
+
         JOptionPane.showMessageDialog(null, "Se registró con exito");
         listar();
         this.limpiarTexto();
     }//GEN-LAST:event_btnAdmisionActionPerformed
- 
-    private void filtrar(JTextField a)
-    {
+
+    /**
+     * Método utilizado para filtrar la tabla de pacientes.
+     *
+     * @param a Campo de texto que se utiliza para realizar el filtrado.
+     */
+    private void filtrar(JTextField a) {
         try {
             sorter.setRowFilter(RowFilter.regexFilter(a.getText()));
         } catch (Exception e) {
         }
     }
-    
+
     /**
-     * @param args the command line arguments
+     * El método main es el punto de entrada del programa. Inicializa la ventana
+     * de RegistroPaciente.
+     *
+     * @param args Los argumentos de la línea de comandos.
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegistroPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegistroPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegistroPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegistroPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new RegistroPaciente().setVisible(true);

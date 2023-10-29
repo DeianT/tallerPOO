@@ -14,8 +14,6 @@ import sistemas.tallerpoo.clasesLogicas.SectorTrabajo;
 
 /**
  * Declaracion de la clase FuncionarioDatos
- *
- * @author Deian
  */
 public class FuncionarioDatos {
 

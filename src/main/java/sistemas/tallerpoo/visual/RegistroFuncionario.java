@@ -17,16 +17,23 @@ import sistemas.tallerpoo.clasesLogicas.SectorTrabajo;
 import sistemas.tallerpoo.datos.FuncionarioDatos;
 
 /**
- *
- * @author Thiago
+ * Interfaz para el registro y gestión de información de funcionarios. Permite
+ * agregar, listar y gestionar los datos de los funcionarios en un entorno
+ * gráfico.
  */
 public class RegistroFuncionario extends javax.swing.JFrame {
 
     DefaultTableModel modelo;
     ArrayList<Funcionario> lista;
-    TableRowSorter <DefaultTableModel> sorter;
+    TableRowSorter<DefaultTableModel> sorter;
     FuncionarioDatos datos = new FuncionarioDatos();
-   
+
+    /**
+     * Constructor de la clase RegistroFuncionario. Inicializa la interfaz y
+     * obtiene los funcionarios existentes. Establece la visualización de
+     * componentes gráficos y su ubicación relativa. Inicializa el modelo de
+     * tabla, la lista de funcionarios y avisa la ausencia de ciertos campos.
+     */
     public RegistroFuncionario() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -43,45 +50,54 @@ public class RegistroFuncionario extends javax.swing.JFrame {
         avisoSECTORTRABAJO.setVisible(false);
     }
 
-    public void listar()
-    {   
+    /**
+     * Actualiza la tabla mostrando los funcionarios registrados. Limpia la
+     * tabla y los rellena con los datos de los funcionarios obtenidos.
+     */
+    public void listar() {
         lista = datos.obtenerFuncionarios();
         limpiarTabla();
         modelo = (DefaultTableModel) jtFuncionarios.getModel();
         Object[] ob = new Object[10];
-        
-        for(int i = 0; i < lista.size(); i++)
-        {
-            ob[0]=lista.get(i).getDni();
-            ob[1]=lista.get(i).getNombre();
-            ob[2]=lista.get(i).getApellido();
-            ob[3]=lista.get(i).getFechaNacimiento();
-            ob[4]=lista.get(i).getDomicilio();
-            ob[5]=lista.get(i).getTelFijo();
-            ob[6]=lista.get(i).getTelCelular();
-            ob[7]=lista.get(i).getEstadoCivil();
-            ob[8]=lista.get(i).getCorreoElect();
-            ob[9]=lista.get(i).getTrabajaEn().getNombre();
+
+        for (int i = 0; i < lista.size(); i++) {
+            ob[0] = lista.get(i).getDni();
+            ob[1] = lista.get(i).getNombre();
+            ob[2] = lista.get(i).getApellido();
+            ob[3] = lista.get(i).getFechaNacimiento();
+            ob[4] = lista.get(i).getDomicilio();
+            ob[5] = lista.get(i).getTelFijo();
+            ob[6] = lista.get(i).getTelCelular();
+            ob[7] = lista.get(i).getEstadoCivil();
+            ob[8] = lista.get(i).getCorreoElect();
+            ob[9] = lista.get(i).getTrabajaEn().getNombre();
             modelo.addRow(ob);
         }
-        jtFuncionarios.setModel(modelo); 
-        
+        jtFuncionarios.setModel(modelo);
+
         jtFuncionarios.setAutoCreateRowSorter(true);
         sorter = new TableRowSorter<>(modelo);
         jtFuncionarios.setRowSorter(sorter);
     }
 
-    public void limpiarTabla()
-    {
-        for(int i = 0; i < modelo.getRowCount(); i++)
-        {
+    /**
+     * Limpia por completo la tabla de funcionarios.
+     */
+    public void limpiarTabla() {
+        for (int i = 0; i < modelo.getRowCount(); i++) {
             modelo.removeRow(i);
             i -= 1;
         }
     }
-    
-    public void mostrarTodo(Funcionario p)
-    {
+
+    /**
+     * Muestra la información del funcionario pasado por parámetro en los campos
+     * correspondientes.
+     *
+     * @param p Funcionario cuyos detalles se mostrarán en los campos de texto y
+     * selección.
+     */
+    public void mostrarTodo(Funcionario p) {
         String dni = Integer.toString(p.getDni());
         String telefono = Integer.toString(p.getTelFijo());
         txtDni.setText(dni);
@@ -91,8 +107,9 @@ public class RegistroFuncionario extends javax.swing.JFrame {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             Date fecha = dateFormat.parse(p.getFechaNacimiento());
             txtFechaNacimiento.setDate(fecha);
-        } catch (ParseException ex) {}
-        
+        } catch (ParseException ex) {
+        }
+
         txtDomicilio.setText(p.getDomicilio());
         txtTelefono.setText(telefono);
         txtCelular.setText(p.getTelCelular());
@@ -100,24 +117,33 @@ public class RegistroFuncionario extends javax.swing.JFrame {
         txtCorreo.setText(p.getCorreoElect());
         txtSectorTrabajo.setText(p.getTrabajaEn().getNombre());
     }
-    
-    public void limpiarTexto()
-    {
-       txtDni.setText("");
-       txtNombre.setText("");
-       txtApellido.setText("");
-       txtFechaNacimiento.setCalendar(null);
-       txtDomicilio .setText("");
-       txtTelefono.setText("");
-       txtCelular.setText("");
-       cbEstadoCivil.setSelectedIndex(0);
-       txtCorreo.setText("");   
-       txtSectorTrabajo.setText("");
-       lblMensaje.setText("");
+
+    /**
+     * Limpia los campos de texto y selección en la interfaz gráfica del
+     * Registro de Funcionarios.
+     */
+    public void limpiarTexto() {
+        txtDni.setText("");
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtFechaNacimiento.setCalendar(null);
+        txtDomicilio.setText("");
+        txtTelefono.setText("");
+        txtCelular.setText("");
+        cbEstadoCivil.setSelectedIndex(0);
+        txtCorreo.setText("");
+        txtSectorTrabajo.setText("");
+        lblMensaje.setText("");
     }
-    
-    Funcionario captar()
-    {
+
+    /**
+     * Captura los datos de los campos de texto y combobox en la interfaz
+     * gráfica para crear un objeto Funcionario.
+     *
+     * @return Objeto Funcionario que encapsula los datos ingresados en la
+     * interfaz gráfica.
+     */
+    Funcionario captar() {
         Funcionario m = new Funcionario();
         int dni = Integer.parseInt(txtDni.getText());
         int telefono = Integer.parseInt(txtTelefono.getText());
@@ -127,7 +153,7 @@ public class RegistroFuncionario extends javax.swing.JFrame {
         m.setDni(dni);
         m.setNombre(txtNombre.getText());
         m.setApellido(txtApellido.getText());
-        String Fecha = ((JTextField)txtFechaNacimiento.getDateEditor().getUiComponent()).getText();
+        String Fecha = ((JTextField) txtFechaNacimiento.getDateEditor().getUiComponent()).getText();
         m.setFechaNacimiento(Fecha);
         m.setDomicilio(txtDomicilio.getText());
         m.setTelFijo(telefono);
@@ -135,16 +161,24 @@ public class RegistroFuncionario extends javax.swing.JFrame {
         m.setEstadoCivil(estado);
         m.setCorreoElect(txtCorreo.getText());
         m.setTrabajaEn(sec);
-        
+
         return m;
     }
-    
-    private boolean validarCorreoElectronico(String correoElectronico){
+
+    /**
+     * Valida la estructura de una dirección de correo electrónico utilizando
+     * una expresión regular.
+     *
+     * @param correoElectronico - La dirección de correo electrónico a validar.
+     * @return Valor booleano que indica si el formato del correo electrónico es
+     * válido.
+     */
+    private boolean validarCorreoElectronico(String correoElectronico) {
         Pattern pat = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
         Matcher mat = pat.matcher(correoElectronico);
         return mat.find();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -468,6 +502,13 @@ public class RegistroFuncionario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Realiza la acción de registrar un nuevo funcionario a partir de los datos
+     * ingresados. También valida si los campos están completos y si los datos
+     * ingresados son válidos. Si la operación de registro es exitosa, se
+     * actualiza la tabla con los funcionarios registrados. En caso contrario,
+     * muestra un mensaje de error.
+     */
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         avisoDNI.setVisible(false);
         avisoNOMBRE.setVisible(false);
@@ -477,51 +518,48 @@ public class RegistroFuncionario extends javax.swing.JFrame {
         avisoCELULAR.setVisible(false);
         avisoESTADOCIVIL.setVisible(false);
         avisoSECTORTRABAJO.setVisible(false);
-        if(txtDni.getText().trim().isEmpty()||txtNombre.getText().trim().isEmpty()||
-                txtApellido.getText().trim().isEmpty()||txtNombre.getText().trim().isEmpty()||
-                txtTelefono.getText().trim().isEmpty()||txtCelular.getText().trim().isEmpty()||
-                txtDomicilio.getText().trim().isEmpty()||txtSectorTrabajo.getText().trim().isEmpty()||
-                cbEstadoCivil.getSelectedIndex() == 0)
-        {
+        if (txtDni.getText().trim().isEmpty() || txtNombre.getText().trim().isEmpty()
+                || txtApellido.getText().trim().isEmpty() || txtNombre.getText().trim().isEmpty()
+                || txtTelefono.getText().trim().isEmpty() || txtCelular.getText().trim().isEmpty()
+                || txtDomicilio.getText().trim().isEmpty() || txtSectorTrabajo.getText().trim().isEmpty()
+                || cbEstadoCivil.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Hay campos incompletos, por favor complételos", "Error", JOptionPane.WARNING_MESSAGE);
-            if(txtDni.getText().trim().isEmpty()){
+            if (txtDni.getText().trim().isEmpty()) {
                 avisoDNI.setVisible(true);
             }
-            if(txtNombre.getText().trim().isEmpty()){
+            if (txtNombre.getText().trim().isEmpty()) {
                 avisoNOMBRE.setVisible(true);
             }
-            if(txtApellido.getText().trim().isEmpty()){
+            if (txtApellido.getText().trim().isEmpty()) {
                 avisoAPELLIDO.setVisible(true);
             }
-            if(txtDomicilio.getText().trim().isEmpty()){
+            if (txtDomicilio.getText().trim().isEmpty()) {
                 avisoDOMICILIO.setVisible(true);
             }
-            if(txtTelefono.getText().trim().isEmpty()){
+            if (txtTelefono.getText().trim().isEmpty()) {
                 avisoTELEFONO.setVisible(true);
             }
-            if(txtCelular.getText().trim().isEmpty()){
+            if (txtCelular.getText().trim().isEmpty()) {
                 avisoCELULAR.setVisible(true);
             }
-            if(cbEstadoCivil.getSelectedIndex() == 0){
+            if (cbEstadoCivil.getSelectedIndex() == 0) {
                 avisoESTADOCIVIL.setVisible(true);
             }
-            if(txtSectorTrabajo.getText().trim().isEmpty()){
+            if (txtSectorTrabajo.getText().trim().isEmpty()) {
                 avisoSECTORTRABAJO.setVisible(true);
             }
             return;
         }
-        
-        
-        
-        if ((Integer.parseInt(txtDni.getText()) <= 0)){
-            JOptionPane.showMessageDialog(null,"Ingrese un DNI válido", "Error",JOptionPane.ERROR_MESSAGE);
+
+        if ((Integer.parseInt(txtDni.getText()) <= 0)) {
+            JOptionPane.showMessageDialog(null, "Ingrese un DNI válido", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if (!validarCorreoElectronico(txtCorreo.getText())){
+        if (!validarCorreoElectronico(txtCorreo.getText())) {
             JOptionPane.showMessageDialog(null, "Correo electrónico incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if (datos.agregarFuncionario(captar())){
+        if (datos.agregarFuncionario(captar())) {
             JOptionPane.showMessageDialog(null, "Se registró con exito");
             avisoDNI.setVisible(false);
             avisoNOMBRE.setVisible(false);
@@ -533,16 +571,22 @@ public class RegistroFuncionario extends javax.swing.JFrame {
             avisoSECTORTRABAJO.setVisible(false);
             listar();
             this.limpiarTexto();
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(null, "Ya existe paciente con ese DNI", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
+    /**
+     * Actualiza y muestra la lista de funcionarios en la tabla.
+     */
     private void btnMostrarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarTodoActionPerformed
-        listar();  
+        listar();
     }//GEN-LAST:event_btnMostrarTodoActionPerformed
 
+    /**
+     * Muestra en los campos de edición los datos del funcionario seleccionado
+     * para su edición.
+     */
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         Funcionario pac;
         int fila = jtFuncionarios.getSelectedRow();
@@ -550,6 +594,10 @@ public class RegistroFuncionario extends javax.swing.JFrame {
         this.mostrarTodo(pac);
     }//GEN-LAST:event_btnEditarActionPerformed
 
+    /**
+     * Elimina de la base de datos al funcionario seleccionado y actualiza la
+     * tabla.
+     */
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int fila = jtFuncionarios.getSelectedRow();
         String s = jtFuncionarios.getModel().getValueAt(fila, 0).toString();
@@ -557,70 +605,60 @@ public class RegistroFuncionario extends javax.swing.JFrame {
         listar();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    /**
+     * Filtra la tabla de funcionarios por DNI a medida que se escribe en el
+     * campo de búsqueda.
+     */
     private void txtBuscarDniKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarDniKeyReleased
         filtrar();
     }//GEN-LAST:event_txtBuscarDniKeyReleased
 
+    /**
+     * Confirma y guarda la edición de un funcionario en la base de datos.
+     */
     private void btnConfirmarEdicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarEdicionActionPerformed
         Funcionario p = new Funcionario();
-        p=datos.capturar(txtDni, txtNombre, txtApellido, txtFechaNacimiento, txtDomicilio, txtDni, txtCelular, cbEstadoCivil, txtCorreo, txtSectorTrabajo);
-        if(datos.editarFuncionario(p))
-        {
+        p = datos.capturar(txtDni, txtNombre, txtApellido, txtFechaNacimiento, txtDomicilio, txtDni, txtCelular, cbEstadoCivil, txtCorreo, txtSectorTrabajo);
+        if (datos.editarFuncionario(p)) {
             JOptionPane.showMessageDialog(null, "Se editó con exito");
             limpiarTexto();
             listar();
         }
     }//GEN-LAST:event_btnConfirmarEdicionActionPerformed
 
+    /**
+     * Verifica si el correo electrónico ingresado es válido al soltar una
+     * tecla. Muestra un mensaje de estado según la validez del correo.
+     */
     private void txtCorreoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyReleased
         if (validarCorreoElectronico(txtCorreo.getText())) {
             lblMensaje.setText("Correcto");
-            lblMensaje.setForeground(Color.GREEN); 
-        }else{
+            lblMensaje.setForeground(Color.GREEN);
+        } else {
             lblMensaje.setText("Incorrecto");
-            lblMensaje.setForeground(Color.RED);      
+            lblMensaje.setForeground(Color.RED);
         }
     }//GEN-LAST:event_txtCorreoKeyReleased
-                                   
-    private void filtrar()
-    {
+
+    /**
+     * Filtra la tabla de funcionarios por DNI a medida que se escribe en el
+     * campo de búsqueda.
+     */
+    private void filtrar() {
         try {
             sorter.setRowFilter(RowFilter.regexFilter(txtBuscarDni.getText()));
         } catch (Exception e) {
         }
     }
-    
+
     /**
-     * @param args the command line arguments
+     * El método main es el punto de entrada del programa. Inicializa la ventana
+     * de RegistroFuncionario.
+     *
+     * @param args Los argumentos de la línea de comandos.
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegistroFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegistroFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegistroFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegistroFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new RegistroFuncionario().setVisible(true);

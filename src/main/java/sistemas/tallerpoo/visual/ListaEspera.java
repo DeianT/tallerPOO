@@ -9,10 +9,11 @@ import sistemas.tallerpoo.datos.AdmisionDatos;
 import sistemas.tallerpoo.datos.BoxDatos;
 
 /**
- *
- * @author Thiago
+ * Ventana de gestión para la lista de espera de admisiones en boxes del
+ * sistema.
  */
 public class ListaEspera extends javax.swing.JFrame {
+
     private DefaultTableModel modeloAd;
     private DefaultTableModel modeloBox;
     private ArrayList<Admision> listaAdmision;
@@ -22,7 +23,8 @@ public class ListaEspera extends javax.swing.JFrame {
     private Box box = null;
 
     /**
-     * Creates new form Triage
+     * Inicializa la ventana de gestión de la lista de espera de admisiones.
+     * Carga la interfaz gráfica y muestra las listas de admisiones y boxes.
      */
     public ListaEspera() {
         initComponents();
@@ -31,16 +33,19 @@ public class ListaEspera extends javax.swing.JFrame {
         modeloBox = new DefaultTableModel();
         listar();
     }
-    
-    public void listar()
-    {   
+
+    /**
+     * Actualiza la visualización de las listas de admisiones y boxes en las
+     * tablas correspondientes. Muestra las admisiones sin box asignado en una
+     * tabla y los boxes en otra, actualizando la interfaz.
+     */
+    public void listar() {
         listaAdmision = datos.admisionesSinBoxAsignado();
         limpiarTabla();
         modeloAd = (DefaultTableModel) jtAdmisiones.getModel();
         Object[] ob = new Object[7];
-        
-        for(int i = 0; i < listaAdmision.size(); i++)
-        {
+
+        for (int i = 0; i < listaAdmision.size(); i++) {
             ob[0] = listaAdmision.get(i).getTriage().getColorModificado();
             ob[1] = listaAdmision.get(i).getMotivo();
             ob[2] = listaAdmision.get(i).getFecha() + " " + listaAdmision.get(i).getHora();
@@ -50,35 +55,35 @@ public class ListaEspera extends javax.swing.JFrame {
             ob[6] = listaAdmision.get(i).getPaciente().getFechaNacimiento();
             modeloAd.addRow(ob);
         }
-        jtAdmisiones.setModel(modeloAd); 
-        
+        jtAdmisiones.setModel(modeloAd);
+
 //        jtAdmisiones.setAutoCreateRowSorter(true);
 //        sorter = new TableRowSorter<>(modelo);
 //        jtAdmisiones.setRowSorter(sorter);
-        
         modeloBox = (DefaultTableModel) jtBoxes.getModel();
         ob = new Object[2];
-        
-        for(int i = 1; i <= listaBox.cantidad(); i++)
-        {
+
+        for (int i = 1; i <= listaBox.cantidad(); i++) {
             ob[0] = listaBox.obtenerBox(i).getNumero();
             ob[1] = listaBox.obtenerBox(i).isOcupado();
             modeloBox.addRow(ob);
         }
         jtBoxes.setModel(modeloBox);
     }
-    
-    public void limpiarTabla()
-    {
-        for(int i = 0; i < modeloAd.getRowCount(); i++)
-        {
+
+    /**
+     * Limpia las filas de las tablas de admisiones y boxes. Elimina las filas
+     * existentes en los modelos de las tablas para su posterior actualización.
+     */
+    public void limpiarTabla() {
+        for (int i = 0; i < modeloAd.getRowCount(); i++) {
             modeloAd.removeRow(i--);
         }
-        for(int i = 0; i < modeloBox.getRowCount(); i++){
+        for (int i = 0; i < modeloBox.getRowCount(); i++) {
             modeloBox.removeRow(i--);
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -163,66 +168,53 @@ public class ListaEspera extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Maneja el evento de confirmar la asignación de un paciente a un box.
+     * Obtiene la fila seleccionada en la tabla de admisiones y la fila
+     * seleccionada en la tabla de boxes. Asigna al paciente seleccionado el box
+     * elegido y actualiza la información en las listas y tablas. Muestra
+     * mensajes de error si no se selecciona un paciente o si el box está
+     * ocupado. Notifica al usuario sobre la asignación del paciente al box.
+     * Actualiza la lista de admisiones y boxes.
+     *
+     * @param evt Evento del botón Confirmar.
+     */
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         int fila1 = jtAdmisiones.getSelectedRow();
         int fila2 = jtBoxes.getSelectedRow();
-        try{
+        try {
             admision = listaAdmision.get(fila1);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un paciente", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         box = listaBox.obtenerBox(fila2 + 1);
-        if(box == null){
+        if (box == null) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un box", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if(box.isOcupado()){
+        if (box.isOcupado()) {
             JOptionPane.showMessageDialog(null, "El box está ocupado");
             return;
         }
-        
+
         admision.setBox(box);
         datos.editarAdmision(admision);
         listaBox.ocuparDesocupar(box.getNumero(), true);
-        
+
         listar();
         JOptionPane.showMessageDialog(null, "El paciente " + admision.getPaciente().getDni() + " fue asignado al box " + box.getNumero());
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     /**
-     * @param args the command line arguments
+     * El método main es el punto de entrada del programa. Inicializa la ventana
+     * de ListaEspera.
+     *
+     * @param args Los argumentos de la línea de comandos.
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ListaEspera.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ListaEspera.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ListaEspera.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ListaEspera.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ListaEspera().setVisible(true);

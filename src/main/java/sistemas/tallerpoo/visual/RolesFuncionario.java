@@ -11,14 +11,24 @@ import sistemas.tallerpoo.datos.FuncionarioDatos;
 import sistemas.tallerpoo.datos.RolDatos;
 
 /**
+ * Clase que gestiona los roles asignados a los funcionarios en la interfaz de
+ * usuario. Permite asignar roles a los funcionarios y mostrar sus detalles.
  *
- * @author Thiago
+ * Esta clase proporciona métodos para interactuar con los roles de los
+ * funcionarios. Inicializa y configura la interfaz gráfica y los datos
+ * relacionados con los roles y funcionarios.
+ *
  */
 public class RolesFuncionario extends javax.swing.JFrame {
+
     FuncionarioDatos fDatos = new FuncionarioDatos();
     RolDatos rolDatos = new RolDatos();
     String[] confirmar = {"SI", "NO"};
-   
+
+    /**
+     * Constructor de la clase RolesFuncionario. Inicializa la interfaz gráfica
+     * y carga los datos relacionados con los roles y funcionarios.
+     */
     public RolesFuncionario() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -140,105 +150,109 @@ public class RolesFuncionario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Realiza la adición de un rol a un funcionario seleccionado. Obtiene el
+     * rol y el número de identificación del funcionario, y realiza la adición
+     * del rol si no ha sido previamente asignado al funcionario. Muestra una
+     * confirmación para agregar el rol al funcionario. Si se confirma la
+     * adición, se agrega el rol y se actualiza la lista de roles.
+     *
+     * @param evt Evento asociado al botón 'Agregar'
+     */
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         int dni = Integer.parseInt((String) cbDnis.getSelectedItem());
         Rol rol = new Rol(jlTodosLosRoles.getSelectedValue(), dni);
-        
-        if(rol.getNombre() == null){//controla que haya un rol seleccionado
+
+        if (rol.getNombre() == null) {//controla que haya un rol seleccionado
             JOptionPane.showMessageDialog(null, "Ningún rol seleccionado");
             return;
         }
-        if(rolDatos.existeRol(rol)){
+        if (rolDatos.existeRol(rol)) {
             JOptionPane.showMessageDialog(null, "El funcionario ya tiene ese rol asignado");
             return;
         }
 
         int opcion = JOptionPane.showOptionDialog(null, "¿Está seguro que desea agregar el rol " + jlTodosLosRoles.getSelectedValue().toUpperCase() + " al funcionario con dni " + cbDnis.getSelectedItem().toString() + "?", "confirmacion", 0, JOptionPane.QUESTION_MESSAGE, null, confirmar, "SI");
-        
-        if(opcion == 0)
-        {
+
+        if (opcion == 0) {
             rolDatos.agregarRol(rol);
             listarRoles();
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
+    /**
+     * Maneja el evento de selección en el menú desplegable de identificación
+     * del funcionario. Limpia la lista de roles previamente mostrados y vuelve
+     * a mostrar el nombre del funcionario asociado al número de identificación
+     * seleccionado. Luego actualiza la lista de roles del funcionario.
+     *
+     * @param evt Evento asociado al menú desplegable de identificación del
+     * funcionario
+     */
     private void cbDnisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDnisActionPerformed
         jlRolesFuncionario.removeAll();
         mostrarNombre(cbDnis, txtNombreApellido, fDatos.obtenerFuncionarios());
         listarRoles();
     }//GEN-LAST:event_cbDnisActionPerformed
 
+    /**
+     * Maneja la eliminación de un rol de un funcionario seleccionado. Obtiene
+     * el número de identificación del funcionario y el rol seleccionado, y
+     * procede a eliminar el rol asociado al funcionario, si está seleccionado.
+     * Muestra una confirmación para eliminar el rol del funcionario. Si se
+     * confirma la eliminación, se elimina el rol y se actualiza la lista de
+     * roles.
+     *
+     * @param evt Evento asociado al botón 'Eliminar'
+     */
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int dni = Integer.parseInt((String) cbDnis.getSelectedItem());
         Rol rol = new Rol(jlRolesFuncionario.getSelectedValue(), dni);
-        if(rol.getNombre() == null){
+        if (rol.getNombre() == null) {
             JOptionPane.showMessageDialog(null, "Ningún rol seleccionado");
             return;
         }
-        
+
         int opcion = JOptionPane.showOptionDialog(null, "¿Está seguro que desea eliminar el rol " + jlTodosLosRoles.getSelectedValue().toUpperCase() + " al funcionario con dni " + cbDnis.getSelectedItem().toString() + "?", "confirmacion", 0, JOptionPane.QUESTION_MESSAGE, null, confirmar, "SI");
-        
-        if(opcion == 0)
-        {
+
+        if (opcion == 0) {
             rolDatos.eliminarRol(rol);
             listarRoles();
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
-     * @param args the command line arguments
+     * El método main es el punto de entrada del programa. Inicializa la ventana
+     * de RegistroFuncionario.
+     *
+     * @param args Los argumentos de la línea de comandos.
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RolesFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RolesFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RolesFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RolesFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new RolesFuncionario().setVisible(true);
             }
         });
     }
-    
-    private void mostrarNombre(JComboBox cb, JLabel txt, ArrayList<Funcionario> lista)
-    {
+
+    private void mostrarNombre(JComboBox cb, JLabel txt, ArrayList<Funcionario> lista) {
         Funcionario m = lista.get(cb.getSelectedIndex());
         txt.setText(m.getNombre() + " " + m.getApellido());
     }
-    
-    private void llenarCombo(){
-        for(Funcionario f: fDatos.obtenerFuncionarios()){
+
+    private void llenarCombo() {
+        for (Funcionario f : fDatos.obtenerFuncionarios()) {
             cbDnis.addItem(Integer.toString(f.getDni()));
         }
     }
-    
-    private void listarRoles(){
+
+    private void listarRoles() {
         int dni = Integer.parseInt((String) cbDnis.getSelectedItem());
         ArrayList<Rol> roles = rolDatos.obtenerRolesFuncionario(dni);
         String[] arr = new String[roles.size()];
-        
-        for(int i = 0; i < roles.size(); i++){
+
+        for (int i = 0; i < roles.size(); i++) {
             arr[i] = roles.get(i).getNombre();
         }
         Arrays.sort(arr);

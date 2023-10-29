@@ -13,10 +13,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 /**
- * La clase `Persona` representa a un individuo en el sistema y almacena información básica sobre esa persona
- * 
+ * La clase `Persona` representa a un individuo en el sistema y almacena
+ * información básica sobre esa persona
+ *
  */
 public class Persona {
+
     private int dni;// El número de documento de la persona.
     private String nombre;// El nombre de la persona.
     private String apellido; // El apellido de la persona.
