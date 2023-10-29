@@ -5,13 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * La clase `Rol` representa un rol en el sistema que se asigna a un funcionario
+ */
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-/**
- * La clase `Rol` representa un rol en el sistema que se asigna a un funcionario
- */
 public class Rol {
 
     private String nombre;// El nombre del rol

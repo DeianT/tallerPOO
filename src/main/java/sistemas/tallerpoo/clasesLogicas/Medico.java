@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
 /**
  * Clase Medico que extiende de CapacitadoTriage
  *
  */
+@Getter
+@Setter
 public class Medico extends CapacitadoTriage {
 
     private int nMatricula;// El número de matrícula del médico.

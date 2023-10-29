@@ -5,14 +5,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 /**
  * La clase Triage representa la evaluación de triage realizada a un paciente en
  * una situación de emergencia.
  */
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Triage {
 
     private int id; // Identificador único del triage.

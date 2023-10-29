@@ -6,17 +6,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * Clase que representa a una persona y contiene información relevante
+ * La clase `Persona` representa a un individuo en el sistema y almacena
+ * información básica sobre esa persona
+ *
  */
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-/**
- * La clase `Persona` representa a un individuo en el sistema y almacena
- * información básica sobre esa persona
- *
- */
 public class Persona {
 
     private int dni;// El número de documento de la persona.

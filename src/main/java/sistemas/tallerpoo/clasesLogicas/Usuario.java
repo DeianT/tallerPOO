@@ -6,7 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * Representa los usuarios que los funcionarios utilizan para acceder al sistema
+ * La clase `Usuario` representa a un usuario del sistema de salud, con acceso a
+ * funcionalidades específicas
  * Contiene el nombre de usuario, la contraseña y el dni de quien usa ese
  * usuario
  */
@@ -14,10 +15,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-/**
- * La clase `Usuario` representa a un usuario del sistema de salud, con acceso a
- * funcionalidades específicas
- */
 public class Usuario {
 
     private int dniFuncionario; // Número de documento del funcionario asociado al usuario.
