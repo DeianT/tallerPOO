@@ -4,12 +4,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
-@NoArgsConstructor
 /**
  * Clase Paciente que extiende de Persona
  */
+@Getter
+@Setter
+@NoArgsConstructor
 public class Paciente extends Persona {
 
     private String contacto; // Información de contacto de emergencia del paciente.

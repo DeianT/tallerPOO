@@ -5,14 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 /**
  * Clase Estudios almacena información relacionada con los estudios y la
  * formación académica de un profesional
  */
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Estudios {
 
     private String dniMedico;    // El DNI del médico
