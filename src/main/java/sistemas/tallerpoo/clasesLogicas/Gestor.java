@@ -5,12 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
-@NoArgsConstructor
 /**
  * Clase Gestor que extiende de Funcionario
  */
+@Getter
+@Setter
+@NoArgsConstructor
 public class Gestor extends Funcionario {
 
     /**

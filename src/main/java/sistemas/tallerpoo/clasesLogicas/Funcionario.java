@@ -6,14 +6,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@ToString
 /**
  * Clase Funcionario que extiende de la clase Persona Representa a cada
  * trabajador
  */
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
 public class Funcionario extends Persona {
 
     private SectorTrabajo trabajaEn; // El sector en el que trabaja

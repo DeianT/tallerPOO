@@ -5,13 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
-@NoArgsConstructor
 /**
  * Clase CapacitadoTriage es una subclase de la clase Funcionario Representa a
  * una persona capacitada para llevar a cabo el triage.
  */
+@Getter
+@Setter
+@NoArgsConstructor
 public class CapacitadoTriage extends Funcionario {
 
     private boolean esMedico;

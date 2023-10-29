@@ -5,13 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
-@NoArgsConstructor
 /**
  * La clase AdministradorDelSistema es una subclase de la clase Funcionario y
  * representa a un administrador dentro del sistema.
  */
+@Getter
+@Setter
+@NoArgsConstructor
 public class AdministradorDelSistema extends Funcionario {
 
     /**
