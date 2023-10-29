@@ -6,14 +6,14 @@ import lombok.Setter;
 import java.util.Date;
 import lombok.AllArgsConstructor;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 /**
  * La clase `ResultadosEstudios` representa los resultados de un estudio médico
  *
  */
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ResultadosEstudios {
 
     private String tipoEstudios;// El tipo de estudio médico realizado.

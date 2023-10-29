@@ -6,17 +6,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
 
-@EqualsAndHashCode
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 /**
  * Clase HistoriaClinica representa un registro médico que contiene información
  * sobre la historia clínica de un paciente
  *
  * Clase HistoriaClinica contiene los datos de cada atención de un paciente
  */
+@EqualsAndHashCode
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class HistoriaClinica {
 
     private int dniPaciente; // El DNI del paciente

@@ -5,15 +5,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 /**
  * Clase Admision representa el registro de admisión de un paciente contiene la
  * información relevante cuando ingresa el paciente a atenderse
  *
  */
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Admision {
 
     /**

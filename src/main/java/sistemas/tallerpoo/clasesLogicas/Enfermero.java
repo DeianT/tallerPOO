@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
 /**
  * Clase Enfermero que extiende a CapacitadoTriage
  */
+@Getter
+@Setter
 public class Enfermero extends CapacitadoTriage {
 
     /**
