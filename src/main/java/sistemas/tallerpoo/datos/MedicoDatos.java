@@ -32,8 +32,8 @@ public class MedicoDatos {
     }
 
     /**
-     * Agrega un paciente a un ArrayList de Medico y luego escribe la lista en el
-     * archivo "medicos.csv"
+     * Agrega un paciente a un ArrayList de Medico y luego escribe la lista en
+     * el archivo "medicos.csv"
      *
      * @param medico Objeto Medico
      * @return Devuelve true cuando el medico se agrega con exito y devuelve

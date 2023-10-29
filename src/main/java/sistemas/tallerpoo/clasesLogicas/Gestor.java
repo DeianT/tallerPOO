@@ -11,10 +11,11 @@ import lombok.Setter;
 /**
  * Clase Gestor que extiende de Funcionario
  */
-public class Gestor extends Funcionario{
+public class Gestor extends Funcionario {
 
     /**
      * Constructor de la clase Gestor
+     *
      * @param dni El número de documento del gestor.
      * @param Nombre El nombre del gestor.
      * @param Apellido El apellido del gestor.
@@ -27,7 +28,7 @@ public class Gestor extends Funcionario{
      * @param trabajaEn El sector en el que trabaja el gestor.
      * @param rolesSistema Los roles asignados al gestor en el sistema.
      */
-    public Gestor(int dni, String Nombre, String Apellido, String fechaNacimiento, String domicilio, int telFijo, String telCelular, String estadoCivil, String correoElect, SectorTrabajo trabajaEn, ArrayList<Rol> rolesSistema){
-        super(dni,Nombre,Apellido,fechaNacimiento,domicilio,telFijo,telCelular,estadoCivil,correoElect,trabajaEn,rolesSistema);
+    public Gestor(int dni, String Nombre, String Apellido, String fechaNacimiento, String domicilio, int telFijo, String telCelular, String estadoCivil, String correoElect, SectorTrabajo trabajaEn, ArrayList<Rol> rolesSistema) {
+        super(dni, Nombre, Apellido, fechaNacimiento, domicilio, telFijo, telCelular, estadoCivil, correoElect, trabajaEn, rolesSistema);
     }
 }

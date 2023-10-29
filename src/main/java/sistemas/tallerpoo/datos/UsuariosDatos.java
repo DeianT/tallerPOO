@@ -13,7 +13,6 @@ import sistemas.tallerpoo.clasesLogicas.ControlRoles;
 /**
  * Declaracion de la clase UsuarioDatos
  *
- * @author Thiago
  * @version 28/10/2023
  */
 public class UsuariosDatos {

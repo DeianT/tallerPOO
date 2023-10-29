@@ -14,8 +14,10 @@ import sistemas.tallerpoo.datos.GestorDatos;
 import sistemas.tallerpoo.datos.TriageDatos;
 
 /**
- *
- * @author Thiago
+ * Ventana de interfaz gráfica 'AnalisisGestor' para gestionar análisis y datos
+ * médicos. Permite acceder a información y funcionalidades proporcionadas por
+ * GestorDatos. Esta ventana carga un formulario con diferentes elementos de
+ * entrada y visualización de datos.
  */
 public class AnalisisGestor extends javax.swing.JFrame {
 
@@ -23,7 +25,10 @@ public class AnalisisGestor extends javax.swing.JFrame {
     DefaultComboBoxModel modelo = new DefaultComboBoxModel();
 
     /**
-     * Creates new form AnalisisGestor
+     * Constructor de la clase AnalisisGestor. Inicializa la interfaz gráfica y
+     * los componentes. Carga un modelo predeterminado para un JComboBox y llena
+     * los datos del JComboBox. Muestra nombres de médicos y establece la
+     * visibilidad de los campos de texto en 'false'.
      */
     public AnalisisGestor() {
         initComponents();
@@ -711,6 +716,15 @@ public class AnalisisGestor extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Realiza una acción al presionar un botón para consultar la atención
+     * médica por fechas. Obtiene las fechas desde y hasta de dos componentes de
+     * selección de fechas (JDateChooser). Utiliza estos rangos de fechas para
+     * obtener datos de atención médica y mostrarlos en un JComboBox y un campo
+     * de texto.
+     *
+     * @param evt Evento de acción del botón de consulta
+     */
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         // TODO add your handling code here:
         String Fecha1 = ((JTextField) jdDesde.getDateEditor().getUiComponent()).getText();
@@ -721,11 +735,31 @@ public class AnalisisGestor extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnConsultarActionPerformed
 
+    /**
+     * Realiza una acción al seleccionar un DNI desde un componente de lista
+     * desplegable (JComboBox). Invoca un método para mostrar los nombres de los
+     * médicos asociados al DNI seleccionado en el JComboBox. Actualiza un campo
+     * de texto con el nombre del médico y realiza la visualización en el
+     * JComboBox.
+     *
+     * @param evt Evento de acción del JComboBox de DNIs
+     */
     private void jcDnisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcDnisActionPerformed
         // TODO add your handling code here:
         datos.mostrarNombresMedicos(txtNombre, jcDnis);
     }//GEN-LAST:event_jcDnisActionPerformed
 
+    /**
+     * Realiza una acción al hacer clic en el botón de consulta según rangos de
+     * fechas y edades. Extrae las fechas de inicio y fin seleccionadas desde
+     * componentes de selección de fechas y obtiene los valores de dos campos de
+     * selección de números (edad1 y edad2) para realizar una consulta de
+     * atención médica entre dos rangos de edades y fechas. Actualiza un campo
+     * de texto con la cantidad de atenciones encontradas y lo hace visible para
+     * mostrar el resultado.
+     *
+     * @param evt Evento de acción del botón
+     */
     private void btnConsultar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultar2ActionPerformed
         // TODO add your handling code here:
         String Fecha1 = ((JTextField) jdDesde1.getDateEditor().getUiComponent()).getText();
@@ -739,10 +773,20 @@ public class AnalisisGestor extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnConsultar2ActionPerformed
 
+    /**
+     * Realiza una acción al hacer clic en el botón de consulta de triajes por
+     * un rango de fechas. Extrae las fechas de inicio y fin seleccionadas desde
+     * dos componentes de selección de fecha para realizar una consulta de
+     * triajes en ese rango. Luego, actualiza múltiples campos de texto con la
+     * información obtenida, mostrando el conteo de triajes por nivel de
+     * gravedad en esas fechas.
+     *
+     * @param evt Evento de acción del botón
+     */
     private void btnConsultar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultar5ActionPerformed
         // TODO add your handling code here:
         String Fecha1 = ((JTextField) jdDesde5.getDateEditor().getUiComponent()).getText();
-        String Fecha2 = ((JTextField) jdHasta5.getDateEditor().getUiComponent()).getText();       
+        String Fecha2 = ((JTextField) jdHasta5.getDateEditor().getUiComponent()).getText();
 
         datos.triagesPorFechas(Fecha1, Fecha2, txtAzul, txtVerde, txtNaranja, txtAmarillo, txtRojo);
         txtRojo.setVisible(true);
@@ -752,6 +796,15 @@ public class AnalisisGestor extends javax.swing.JFrame {
         txtAzul.setVisible(true);
     }//GEN-LAST:event_btnConsultar5ActionPerformed
 
+    /**
+     * Realiza una acción al hacer clic en el botón de consulta de médicos por
+     * atención en un rango de fechas. Obtiene las fechas de inicio y fin
+     * seleccionadas desde dos componentes de selección de fecha para consultar
+     * la atención de médicos en un rango de fechas. Luego, muestra en un área
+     * de texto el recuento de atención por médico en el rango especificado.
+     *
+     * @param evt Evento de acción del botón
+     */
     private void btnConsultar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultar4ActionPerformed
         // TODO add your handling code here:
         String Fecha1 = ((JTextField) jdDesde4.getDateEditor().getUiComponent()).getText();
@@ -766,6 +819,15 @@ public class AnalisisGestor extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnConsultar4ActionPerformed
 
+    /**
+     * Realiza una acción al hacer clic en el botón de consulta. Obtiene la
+     * fecha inicial y la fecha final desde dos componentes de selección de
+     * fecha para consultar las consultas de pacientes en un rango de fechas.
+     * Luego, muestra en un área de texto el recuento de consultas por paciente
+     * en el rango dado.
+     *
+     * @param evt Evento de acción del botón
+     */
     private void btnConsultar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultar3ActionPerformed
         // TODO add your handling code here:
         String Fecha1 = ((JTextField) jdDesde3.getDateEditor().getUiComponent()).getText();
@@ -782,15 +844,22 @@ public class AnalisisGestor extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnConsultar3ActionPerformed
 
+    /**
+     * Realiza la acción al presionar el botón "Consultar" para mostrar triages
+     * modificados en una tabla. Obtiene y muestra en una tabla los triages con
+     * modificaciones, limpiando la tabla previa. Muestra la cantidad de triages
+     * modificados en un campo de texto.
+     *
+     * @param evt Evento del botón "Consultar"
+     */
     private void btnConsultar6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultar6ActionPerformed
         DefaultTableModel modeloTabla = (DefaultTableModel) jtaTriagesCambiados.getModel();
-        for(int i = 0; i < modeloTabla.getRowCount(); i++){
+        for (int i = 0; i < modeloTabla.getRowCount(); i++) {
             modeloTabla.removeRow(i--);
         }
         ArrayList<Triage> lista = new TriageDatos().obtenerTriagesModificados();
         Object[] ob = new Object[5];
-        for(int i = 0; i < lista.size(); i++)
-        {
+        for (int i = 0; i < lista.size(); i++) {
             ob[0] = lista.get(i).getColor();
             ob[1] = lista.get(i).getColorModificado();
             ob[2] = lista.get(i).getFecha();
@@ -803,33 +872,13 @@ public class AnalisisGestor extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConsultar6ActionPerformed
 
     /**
-     * @param args the command line arguments
+     * El método main es el punto de entrada del programa. Inicializa la ventana
+     * de AnalisisGestor.
+     *
+     * @param args Los argumentos de la línea de comandos.
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AnalisisGestor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AnalisisGestor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AnalisisGestor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AnalisisGestor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new AnalisisGestor().setVisible(true);

@@ -13,19 +13,23 @@ import sistemas.tallerpoo.datos.AdmisionDatos;
 import sistemas.tallerpoo.datos.TriageDatos;
 
 /**
- *
- * @author Thiago
+ * Ventana para realizar el proceso de triage. Contiene métodos para listar las
+ * admisiones sin triage asignado y limpiar la tabla de datos. Se encarga de
+ * mostrar la información de las admisiones para realizar el triage.
  */
 public class RealizarTriage extends javax.swing.JFrame {
+
     private DefaultTableModel modelo;
     private ArrayList<Admision> lista;
     private AdmisionDatos datos = new AdmisionDatos();
     private Admision admision = null;
-    private String[] editar = {"Editar","Terminar"};
-    private String[] colores = {"Azul","Verde","Amarillo","Naranja","Rojo"};
+    private String[] editar = {"Editar", "Terminar"};
+    private String[] colores = {"Azul", "Verde", "Amarillo", "Naranja", "Rojo"};
     private String[] op = {"ok"};
+
     /**
-     * Creates new form Triage
+     * Inicializa la ventana, configurando la ubicación relativa y el modelo de
+     * la tabla.
      */
     public RealizarTriage() {
         initComponents();
@@ -33,16 +37,18 @@ public class RealizarTriage extends javax.swing.JFrame {
         modelo = new DefaultTableModel();
         listar();
     }
-    
-    public void listar()
-    {   
+
+    /**
+     * Lista las admisiones sin triage. Limpia la tabla existente y agrega
+     * información de admisiones sin triage al modelo de la tabla.
+     */
+    public void listar() {
         lista = datos.admisionesSinTriage();
         limpiarTabla();
         modelo = (DefaultTableModel) jtAdmisiones.getModel();
         Object[] ob = new Object[6];
-        
-        for(int i = 0; i < lista.size(); i++)
-        {
+
+        for (int i = 0; i < lista.size(); i++) {
             ob[0] = lista.get(i).getMotivo();
             ob[1] = lista.get(i).getFecha() + " " + lista.get(i).getHora();
             ob[2] = lista.get(i).getPaciente().getDni();
@@ -51,22 +57,30 @@ public class RealizarTriage extends javax.swing.JFrame {
             ob[5] = lista.get(i).getPaciente().getFechaNacimiento();
             modelo.addRow(ob);
         }
-        jtAdmisiones.setModel(modelo); 
-        
+        jtAdmisiones.setModel(modelo);
+
 //        jtAdmisiones.setAutoCreateRowSorter(true);
 //        sorter = new TableRowSorter<>(modelo);
 //        jtAdmisiones.setRowSorter(sorter);
     }
-    
-    public void limpiarTabla()
-    {
-        for(int i = 0; i < modelo.getRowCount(); i++)
-        {
+
+    /**
+     * Limpia la tabla de datos.
+     */
+    public void limpiarTabla() {
+        for (int i = 0; i < modelo.getRowCount(); i++) {
             modelo.removeRow(i--);
         }
     }
-    
-    public void capturar(Triage triage){
+
+    /**
+     * Captura y actualiza los valores de triage con las selecciones realizadas
+     * en los combos desplegables.
+     *
+     * @param triage Objeto de tipo Triage para almacenar los valores
+     * seleccionados en los combos.
+     */
+    public void capturar(Triage triage) {
         triage.setRespiracion(cboRespiracion.getSelectedItem().toString());
         triage.setPulso(cboPulso.getSelectedItem().toString());
         triage.setEstadoMental(cboEstadoMental.getSelectedItem().toString());
@@ -81,109 +95,126 @@ public class RealizarTriage extends javax.swing.JFrame {
         triage.setLesionesLeves(cboLesionesLeves.getSelectedItem().toString());
         triage.setSangrado(cboSangrado.getSelectedItem().toString());
     }
-    
-    public int sumar (Triage a ){
+
+    /**
+     * Calcula y devuelve un puntaje de gravedad basado en las selecciones de
+     * triage realizadas en los combos desplegables.
+     *
+     * @param a Objeto de tipo Triage del cual se evalúan las selecciones de
+     * gravedad.
+     * @return Un entero que representa el nivel de gravedad basado en las
+     * selecciones realizadas en los combos.
+     */
+    public int sumar(Triage a) {
         int contador = 0;
-        switch (cboRespiracion.getSelectedItem().toString()){
+        switch (cboRespiracion.getSelectedItem().toString()) {
             case "Normal":
                 break;
             case "Dificultad respiratoria moderada":
-                contador+=1;
+                contador += 1;
                 break;
             case "Dificultad respiratoria grave":
-                contador+=2;
-                break;      
+                contador += 2;
+                break;
         }
-        
-        if(cboPulso.getSelectedItem().toString() == "Anormal"){
-            contador+=1;
+
+        if (cboPulso.getSelectedItem().toString() == "Anormal") {
+            contador += 1;
         }
-        
-        switch (cboEstadoMental.getSelectedItem().toString()){
+
+        switch (cboEstadoMental.getSelectedItem().toString()) {
             case "Normal":
                 break;
             case "Confusion Leve":
-                contador+=1;
+                contador += 1;
                 break;
             case "Confusion Grave":
-                contador+=2;
-                break;      
+                contador += 2;
+                break;
         }
-        
-        if(cboConciencia.getSelectedItem().toString() == "Perdida de conciencia"){
-            contador+=3;
+
+        if (cboConciencia.getSelectedItem().toString() == "Perdida de conciencia") {
+            contador += 3;
         }
-        
-        if(cboDolorPecho.getSelectedItem().toString() == "Presente"){
-            contador+=1;
+
+        if (cboDolorPecho.getSelectedItem().toString() == "Presente") {
+            contador += 1;
         }
-        
-        if(cboLesionesGraves.getSelectedItem().toString() == "Presentes"){
-            contador+=2;
+
+        if (cboLesionesGraves.getSelectedItem().toString() == "Presentes") {
+            contador += 2;
         }
-        
-        if(cboEdad.getSelectedItem().toString() == "Niño o Anciano"){
-            contador+=1;
+
+        if (cboEdad.getSelectedItem().toString() == "Niño o Anciano") {
+            contador += 1;
         }
-        
-        switch (cboFiebre.getSelectedItem().toString()){
+
+        switch (cboFiebre.getSelectedItem().toString()) {
             case "Sin Fiebre":
                 break;
             case "Fiebre moderada":
-                contador+=1;
+                contador += 1;
                 break;
             case "Fiebre alta":
-                contador+=2;
-                break;      
+                contador += 2;
+                break;
         }
-        
-        switch (cboVomitos.getSelectedItem().toString()){
+
+        switch (cboVomitos.getSelectedItem().toString()) {
             case "Sin vomitos":
                 break;
             case "Vomitos moderados":
-                contador+=1;
+                contador += 1;
                 break;
             case "Vomitos intesos":
-                contador+=2;
-                break;      
+                contador += 2;
+                break;
         }
-        
-        switch (cboDolorAbominal.getSelectedItem().toString()){
+
+        switch (cboDolorAbominal.getSelectedItem().toString()) {
             case "No presente":
                 break;
             case "Dolor abdominal moderado":
-                contador+=1;
+                contador += 1;
                 break;
             case "Dolor abdominal severo":
-                contador+=2;
-                break;      
+                contador += 2;
+                break;
         }
-        
-        if(cboSignosShock.getSelectedItem().toString() == "Presentes"){
-            contador+=3;
+
+        if (cboSignosShock.getSelectedItem().toString() == "Presentes") {
+            contador += 3;
         }
-        
-        if(cboLesionesLeves.getSelectedItem().toString() == "Presentes"){
-            contador+=1;
+
+        if (cboLesionesLeves.getSelectedItem().toString() == "Presentes") {
+            contador += 1;
         }
-        
-        switch (cboSangrado.getSelectedItem().toString()){
+
+        switch (cboSangrado.getSelectedItem().toString()) {
             case "No presente":
                 break;
             case "Sangrado moderado":
-                contador+=1;
+                contador += 1;
                 break;
             case "Sangrado intenso":
-                contador+=2;
-                break;      
+                contador += 2;
+                break;
         }
         return contador;
     }
-    
-    private int colorModificado(){
-        return JOptionPane.showOptionDialog(null,"Seleccione el nuevo color", "Confirmacion", 0, JOptionPane.QUESTION_MESSAGE, null , colores, "Terminar");
+
+    /**
+     * Muestra un cuadro de diálogo para que el usuario seleccione un nuevo
+     * color de triage.
+     *
+     * @return Un entero que representa la elección del nuevo color de triage: -
+     * 0 para "Azul". - 1 para "Verde". - 2 para "Amarillo". - 3 para "Naranja".
+     * - 4 para "Rojo".
+     */
+    private int colorModificado() {
+        return JOptionPane.showOptionDialog(null, "Seleccione el nuevo color", "Confirmacion", 0, JOptionPane.QUESTION_MESSAGE, null, colores, "Terminar");
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -424,16 +455,24 @@ public class RealizarTriage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Realiza la confirmación y actualización del triage de un paciente. Se
+     * capturan los datos del triage, se calcula su nivel de atención según un
+     * contador, se establece un nuevo color de triage y se almacenan los datos
+     * correspondientes en la base de datos. Además, muestra mensajes de
+     * confirmación al usuario y verifica la completitud de los campos.
+     *
+     * @param evt El evento del botón "Confirmar".
+     */
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         int fila = jtAdmisiones.getSelectedRow();
-        try{
+        try {
             admision = lista.get(fila);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un paciente", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         Triage t = new Triage();
         int contador = 0;
         String color = "";
@@ -442,59 +481,53 @@ public class RealizarTriage extends javax.swing.JFrame {
 
         contador = this.sumar(t);
 
-        if(contador >= 0 && contador <= 4 ){
+        if (contador >= 0 && contador <= 4) {
             color = "Verde";
-        }
-        else if (contador >= 5 && contador <= 9  ){
+        } else if (contador >= 5 && contador <= 9) {
             color = "Amarillo";
-        }
-        else if (contador >=10 && contador <= 14){
+        } else if (contador >= 10 && contador <= 14) {
             color = "Naranja";
-        }
-        else if (contador >= 15){
+        } else if (contador >= 15) {
             color = "Rojo";
         }
-        
-        if(cboRespiracion.getSelectedIndex()!=0 && cboPulso.getSelectedIndex()!=0 && cboEstadoMental.getSelectedIndex()!=0 && cboConciencia.getSelectedIndex()!=0 && cboDolorPecho.getSelectedIndex()!=0 && cboLesionesGraves.getSelectedIndex()!=0 && cboEdad.getSelectedIndex()!=0 && cboFiebre.getSelectedIndex()!=0 && cboVomitos.getSelectedIndex()!=0 && cboDolorAbominal.getSelectedIndex()!=0 && cboSignosShock.getSelectedIndex()!=0 && cboLesionesLeves.getSelectedIndex()!=0 && cboSangrado.getSelectedIndex()!=0 )
-        {
-            JOptionPane.showMessageDialog(this," El nivel de atención es de " + color.toUpperCase());
-            int opcion = JOptionPane.showOptionDialog(null,"Desea editar el color?", "Confirmación", 0, JOptionPane.QUESTION_MESSAGE, null , editar, "Terminar");
-            if(opcion != 0)//si no aprieta el botón Editar
+
+        if (cboRespiracion.getSelectedIndex() != 0 && cboPulso.getSelectedIndex() != 0 && cboEstadoMental.getSelectedIndex() != 0 && cboConciencia.getSelectedIndex() != 0 && cboDolorPecho.getSelectedIndex() != 0 && cboLesionesGraves.getSelectedIndex() != 0 && cboEdad.getSelectedIndex() != 0 && cboFiebre.getSelectedIndex() != 0 && cboVomitos.getSelectedIndex() != 0 && cboDolorAbominal.getSelectedIndex() != 0 && cboSignosShock.getSelectedIndex() != 0 && cboLesionesLeves.getSelectedIndex() != 0 && cboSangrado.getSelectedIndex() != 0) {
+            JOptionPane.showMessageDialog(this, " El nivel de atención es de " + color.toUpperCase());
+            int opcion = JOptionPane.showOptionDialog(null, "Desea editar el color?", "Confirmación", 0, JOptionPane.QUESTION_MESSAGE, null, editar, "Terminar");
+            if (opcion != 0)//si no aprieta el botón Editar
             {
                 t.setColor(NivelTriage.valueOf(color));
                 t.setColorModificado(NivelTriage.valueOf(color));
-            }else
-            {             
+            } else {
                 TriageDatos d = new TriageDatos();
-                
+
                 int nuevo = -1;
                 boolean cambioValido = false;
-                
-                while(nuevo == -1 || !cambioValido){//controla que haya alguna opción seleccionada
+
+                while (nuevo == -1 || !cambioValido) {//controla que haya alguna opción seleccionada
                     nuevo = colorModificado();
-                    
+
                     cambioValido = nuevo == -1 || d.cambioColor(colores, color, colores[nuevo]);
-                    if(!cambioValido){
+                    if (!cambioValido) {
                         System.out.println(nuevo);
                         JOptionPane.showMessageDialog(null, "No se puede cambiar mas de dos niveles de color");
                     }
                 }
-                
+
                 NivelTriage n = NivelTriage.valueOf(colores[nuevo]);
-                
-                String motivo = JOptionPane.showInputDialog(null,"Ingrese el motivo del cambio ");
-                while(motivo == null || motivo.isEmpty()==true)   
-                {
+
+                String motivo = JOptionPane.showInputDialog(null, "Ingrese el motivo del cambio ");
+                while (motivo == null || motivo.isEmpty() == true) {
                     JOptionPane.showMessageDialog(null, "Debe ingresar un motivo para continuar");
-                    motivo = JOptionPane.showInputDialog(null,"Ingrese el motivo del cambio ");
+                    motivo = JOptionPane.showInputDialog(null, "Ingrese el motivo del cambio ");
                 }
-                
+
                 t.setColor(NivelTriage.valueOf(color));
                 t.setColorModificado(n);
                 t.setMotivoModificacion(motivo);
             }
             JOptionPane.showMessageDialog(this, "Se ha guardado con éxito ");
-            
+
             String fechaA;
             String horaA;
             Date fechita = new Date();
@@ -506,22 +539,28 @@ public class RealizarTriage extends javax.swing.JFrame {
 
             t.setFecha(fechaA);
             t.setHora(horaA);
-            
+
             TriageDatos td = new TriageDatos();
             t.setDniEncargado(ControlRoles.getUsuarioActual().getDniFuncionario());
             td.agregarTriage(t);
             t.setId(td.cantidadTriage());
-            
+
             admision.setTriage(t);
             datos.editarAdmision(admision);
-            
+
             listar();
-        }else
-        {
+        } else {
             JOptionPane.showMessageDialog(null, "Faltan completar casillas");
         }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
+    /**
+     * Limpia y restablece los campos de selección de los síntomas y signos
+     * vitales en la interfaz gráfica. Restaura los valores de las casillas de
+     * selección a su estado por defecto.
+     *
+     * @param evt El evento del botón "Limpiar".
+     */
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         cboRespiracion.setSelectedIndex(0);
         cboPulso.setSelectedIndex(0);
@@ -539,34 +578,13 @@ public class RealizarTriage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     /**
-     * @param args the command line arguments
+     * El método main es el punto de entrada del programa. Inicializa la ventana
+     * de RealizarTriage.
+     *
+     * @param args Los argumentos de la línea de comandos.
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RealizarTriage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RealizarTriage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RealizarTriage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RealizarTriage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new RealizarTriage().setVisible(true);

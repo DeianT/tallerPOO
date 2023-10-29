@@ -9,13 +9,15 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 /**
- *  La clase AdministradorDelSistema es una subclase de la clase Funcionario y representa a un administrador
- * dentro del sistema. 
+ * La clase AdministradorDelSistema es una subclase de la clase Funcionario y
+ * representa a un administrador dentro del sistema.
  */
-public class AdministradorDelSistema extends Funcionario{
+public class AdministradorDelSistema extends Funcionario {
+
     /**
-     *  Constructor de AministradorDelSistema
-     * @param dni  Dni del administrador.
+     * Constructor de AministradorDelSistema
+     *
+     * @param dni Dni del administrador.
      * @param Nombre Nombre del administrador.
      * @param Apellido Apellido del administrador.
      * @param fechaNacimiento Fecha de Nacimiento del administrador.
@@ -25,9 +27,9 @@ public class AdministradorDelSistema extends Funcionario{
      * @param estadoCivil Estado Civil del administrador.
      * @param correoElect Correo Electronico del administrador.
      * @param trabajaEn Sector de Trabajo del administrador.
-     * @param rolesSistema  Rol dentro del Sistema del administrador.
+     * @param rolesSistema Rol dentro del Sistema del administrador.
      */
-    public AdministradorDelSistema(int dni, String Nombre, String Apellido, String fechaNacimiento, String domicilio, int telFijo, String telCelular, String estadoCivil, String correoElect, SectorTrabajo trabajaEn, ArrayList<Rol> rolesSistema){
-        super(dni,Nombre,Apellido,fechaNacimiento,domicilio,telFijo,telCelular,estadoCivil,correoElect,trabajaEn,rolesSistema);
+    public AdministradorDelSistema(int dni, String Nombre, String Apellido, String fechaNacimiento, String domicilio, int telFijo, String telCelular, String estadoCivil, String correoElect, SectorTrabajo trabajaEn, ArrayList<Rol> rolesSistema) {
+        super(dni, Nombre, Apellido, fechaNacimiento, domicilio, telFijo, telCelular, estadoCivil, correoElect, trabajaEn, rolesSistema);
     }
 }

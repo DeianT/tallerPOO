@@ -166,9 +166,9 @@ public class PacienteDatos {
     }
 
     /**
-     * Itera todos los elemento del ArrayList de Paciente, concatena cada atributo
-     * del objeto paciente en un String separado por "," y luego lo escribe en
-     * el archivo "Pacientes.csv"
+     * Itera todos los elemento del ArrayList de Paciente, concatena cada
+     * atributo del objeto paciente en un String separado por "," y luego lo
+     * escribe en el archivo "Pacientes.csv"
      */
     private void escribirArchivo() {
         FileWriter nuevo = null;

@@ -16,8 +16,6 @@ import sistemas.tallerpoo.clasesLogicas.Triage;
 /**
  * Declaracion de la clase GestorDatos
  *
- * @author Thiago
- * @version 28/10/2023
  */
 public class GestorDatos {
 

@@ -15,6 +15,7 @@ import lombok.AllArgsConstructor;
  *
  */
 public class ResultadosEstudios {
+
     private String tipoEstudios;// El tipo de estudio médico realizado.
     private Date fecha;// La fecha en que se realizó el estudio.
     private Date hora;// La hora en que se realizó el estudio.

@@ -10,9 +10,11 @@ import lombok.AllArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 /**
- * La clase Triage representa la evaluación de triage realizada a un paciente en una situación de emergencia.
+ * La clase Triage representa la evaluación de triage realizada a un paciente en
+ * una situación de emergencia.
  */
 public class Triage {
+
     private int id; // Identificador único del triage.
     private NivelTriage color;// El nivel de triage asignado al paciente.
     private String respiracion; // Estado de la respiración del paciente.
