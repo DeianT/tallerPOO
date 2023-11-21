@@ -667,6 +667,9 @@ public class RegistroMedico extends javax.swing.JFrame {
             limpiarTexto();
             listar();
         }
+        else{
+            JOptionPane.showMessageDialog(null, "No existe paciente con ese DNI");
+        }
     }//GEN-LAST:event_btnConfirmarEdicionActionPerformed
 
     /**

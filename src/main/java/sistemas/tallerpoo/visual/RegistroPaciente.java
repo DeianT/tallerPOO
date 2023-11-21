@@ -689,14 +689,13 @@ public class RegistroPaciente extends javax.swing.JFrame {
         Paciente p = new Paciente();
         p = datos.capturar(txtDni, txtNombre, txtApellido, txtFechaNacimiento, txtDomicilio, txtDni, txtCelular, cbEstadoCivil, txtCorreo, txtContacto);
 
-        try {
-            if (datos.editarPaciente(p)) {
-                JOptionPane.showMessageDialog(null, "Se editó con exito");
-                limpiarTexto();
-                listar();
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(RegistroPaciente.class.getName()).log(Level.SEVERE, null, ex);
+        if (datos.editarPaciente(p)) {
+            JOptionPane.showMessageDialog(null, "Se editó con exito");
+            limpiarTexto();
+            listar();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "No existe paciente con ese DNI");
         }
     }//GEN-LAST:event_btnConfirmarEdicionActionPerformed
 

@@ -141,9 +141,8 @@ public class PacienteDatos {
      * @param paciente Objeto paciente
      * @return Devuelve true en caso de que se haya podido editar y escribir con
      * exito y devuelve false si no existe el paciente ingresado
-     * @throws IOException
      */
-    public boolean editarPaciente(Paciente paciente) throws IOException {
+    public boolean editarPaciente(Paciente paciente){
         try {
             Paciente p = obtenerPaciente(paciente.getDni());
             p.setNombre(paciente.getNombre());
