@@ -70,5 +70,20 @@ Usuarios creados y sus roles:
   Recursos Humanos
   Registros Medicos
 
+-Nombre: VaBe16
+-Contraseña: narnia
+  Administrador de Sistema
+
+-Nombre: 11
+-Contraseña: 11
+  Administrador de Sistema
+  Gestion
+
+-Nombre: 1
+-Contraseña: 1
+  Medico
+  Compras
+
+
 Si ocurre algún error, puede deberse a los datos de los .csv
 Si se los vacía, el programa funciona correctamente (no borrar los archivos usuarios.csv ni roles.csv)

@@ -245,6 +245,11 @@ public class RegistroFuncionario extends javax.swing.JFrame {
         jLabel10.setText("Sector de Trabajo");
 
         txtDni.setNextFocusableComponent(txtNombre);
+        txtDni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDniKeyReleased(evt);
+            }
+        });
 
         cbEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Soltero/a", "Casado/a", "Viudo/a", "Divorciado/a" }));
 
@@ -551,7 +556,7 @@ public class RegistroFuncionario extends javax.swing.JFrame {
             return;
         }
 
-        if ((Integer.parseInt(txtDni.getText()) <= 0)) {
+        if (!txtDni.getText().matches("\\d+") || Integer.parseInt(txtDni.getText()) <= 0) {
             JOptionPane.showMessageDialog(null, "Ingrese un DNI válido", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -572,7 +577,7 @@ public class RegistroFuncionario extends javax.swing.JFrame {
             listar();
             this.limpiarTexto();
         } else {
-            JOptionPane.showMessageDialog(null, "Ya existe paciente con ese DNI", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ya existe funcionario con ese DNI", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
@@ -610,7 +615,7 @@ public class RegistroFuncionario extends javax.swing.JFrame {
      * campo de búsqueda.
      */
     private void txtBuscarDniKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarDniKeyReleased
-        filtrar();
+        filtrar(txtBuscarDni);
     }//GEN-LAST:event_txtBuscarDniKeyReleased
 
     /**
@@ -618,7 +623,7 @@ public class RegistroFuncionario extends javax.swing.JFrame {
      */
     private void btnConfirmarEdicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarEdicionActionPerformed
         Funcionario p = new Funcionario();
-        p = datos.capturar(txtDni, txtNombre, txtApellido, txtFechaNacimiento, txtDomicilio, txtDni, txtCelular, cbEstadoCivil, txtCorreo, txtSectorTrabajo);
+        p = datos.capturar(txtDni, txtNombre, txtApellido, txtFechaNacimiento, txtDomicilio, txtTelefono, txtCelular, cbEstadoCivil, txtCorreo, txtSectorTrabajo);
         if (datos.editarFuncionario(p)) {
             JOptionPane.showMessageDialog(null, "Se editó con exito");
             limpiarTexto();
@@ -640,13 +645,19 @@ public class RegistroFuncionario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtCorreoKeyReleased
 
+    private void txtDniKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDniKeyReleased
+        filtrar(txtDni);
+    }//GEN-LAST:event_txtDniKeyReleased
+
     /**
      * Filtra la tabla de funcionarios por DNI a medida que se escribe en el
      * campo de búsqueda.
+     * 
+     * @param a Campo de texto que se utiliza para realizar el filtrado.
      */
-    private void filtrar() {
+    private void filtrar(JTextField a) {
         try {
-            sorter.setRowFilter(RowFilter.regexFilter(txtBuscarDni.getText()));
+            sorter.setRowFilter(RowFilter.regexFilter(a.getText()));
         } catch (Exception e) {
         }
     }
