@@ -258,6 +258,11 @@ public class RegistroMedico extends javax.swing.JFrame {
         jLabel10.setText("Matricula");
 
         txtDni.setNextFocusableComponent(txtNombre);
+        txtDni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDniKeyReleased(evt);
+            }
+        });
 
         cbEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Soltero/a", "Casado/a", "Viudo/a", "Divorciado/a" }));
 
@@ -646,7 +651,7 @@ public class RegistroMedico extends javax.swing.JFrame {
      * @param evt Objeto que contiene la información del evento desencadenante.
      */
     private void txtBuscarDniKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarDniKeyReleased
-        filtrar();
+        filtrar(txtBuscarDni);
     }//GEN-LAST:event_txtBuscarDniKeyReleased
 
     /**
@@ -681,13 +686,17 @@ public class RegistroMedico extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtCorreoKeyReleased
 
+    private void txtDniKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDniKeyReleased
+        filtrar(txtDni);
+    }//GEN-LAST:event_txtDniKeyReleased
+
     /**
      * Realiza el filtrado de la tabla de médicos basado en el valor del campo
      * de búsqueda por DNI.
      */
-    private void filtrar() {
+    private void filtrar(JTextField a) {
         try {
-            sorter.setRowFilter(RowFilter.regexFilter(txtBuscarDni.getText()));
+            sorter.setRowFilter(RowFilter.regexFilter(a.getText()));
         } catch (Exception e) {
         }
     }

@@ -245,6 +245,11 @@ public class RegistroFuncionario extends javax.swing.JFrame {
         jLabel10.setText("Sector de Trabajo");
 
         txtDni.setNextFocusableComponent(txtNombre);
+        txtDni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDniKeyReleased(evt);
+            }
+        });
 
         cbEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Soltero/a", "Casado/a", "Viudo/a", "Divorciado/a" }));
 
@@ -610,7 +615,7 @@ public class RegistroFuncionario extends javax.swing.JFrame {
      * campo de búsqueda.
      */
     private void txtBuscarDniKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarDniKeyReleased
-        filtrar();
+        filtrar(txtBuscarDni);
     }//GEN-LAST:event_txtBuscarDniKeyReleased
 
     /**
@@ -640,13 +645,17 @@ public class RegistroFuncionario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtCorreoKeyReleased
 
+    private void txtDniKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDniKeyReleased
+        filtrar(txtDni);
+    }//GEN-LAST:event_txtDniKeyReleased
+
     /**
      * Filtra la tabla de funcionarios por DNI a medida que se escribe en el
      * campo de búsqueda.
      */
-    private void filtrar() {
+    private void filtrar(JTextField a) {
         try {
-            sorter.setRowFilter(RowFilter.regexFilter(txtBuscarDni.getText()));
+            sorter.setRowFilter(RowFilter.regexFilter(a.getText()));
         } catch (Exception e) {
         }
     }
