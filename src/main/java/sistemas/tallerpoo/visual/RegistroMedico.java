@@ -693,6 +693,8 @@ public class RegistroMedico extends javax.swing.JFrame {
     /**
      * Realiza el filtrado de la tabla de médicos basado en el valor del campo
      * de búsqueda por DNI.
+     * 
+     * @param a Campo de texto que se utiliza para realizar el filtrado.
      */
     private void filtrar(JTextField a) {
         try {

@@ -652,6 +652,8 @@ public class RegistroFuncionario extends javax.swing.JFrame {
     /**
      * Filtra la tabla de funcionarios por DNI a medida que se escribe en el
      * campo de búsqueda.
+     * 
+     * @param a Campo de texto que se utiliza para realizar el filtrado.
      */
     private void filtrar(JTextField a) {
         try {
