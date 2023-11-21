@@ -139,6 +139,7 @@ public class RegistroMedico extends javax.swing.JFrame {
         txtCelular.setText("");
         cbEstadoCivil.setSelectedIndex(0);
         txtCorreo.setText("");
+        txtSectorTrabajo.setText("");
         txtMatricula.setText("");
         lblMensaje.setText("");
     }
