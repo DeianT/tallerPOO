@@ -551,7 +551,7 @@ public class RegistroFuncionario extends javax.swing.JFrame {
             return;
         }
 
-        if ((Integer.parseInt(txtDni.getText()) <= 0)) {
+        if (!txtDni.getText().matches("\\d+") || Integer.parseInt(txtDni.getText()) <= 0) {
             JOptionPane.showMessageDialog(null, "Ingrese un DNI válido", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
