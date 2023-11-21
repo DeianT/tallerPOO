@@ -572,7 +572,7 @@ public class RegistroFuncionario extends javax.swing.JFrame {
             listar();
             this.limpiarTexto();
         } else {
-            JOptionPane.showMessageDialog(null, "Ya existe paciente con ese DNI", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ya existe funcionario con ese DNI", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
@@ -618,7 +618,7 @@ public class RegistroFuncionario extends javax.swing.JFrame {
      */
     private void btnConfirmarEdicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarEdicionActionPerformed
         Funcionario p = new Funcionario();
-        p = datos.capturar(txtDni, txtNombre, txtApellido, txtFechaNacimiento, txtDomicilio, txtDni, txtCelular, cbEstadoCivil, txtCorreo, txtSectorTrabajo);
+        p = datos.capturar(txtDni, txtNombre, txtApellido, txtFechaNacimiento, txtDomicilio, txtTelefono, txtCelular, cbEstadoCivil, txtCorreo, txtSectorTrabajo);
         if (datos.editarFuncionario(p)) {
             JOptionPane.showMessageDialog(null, "Se editó con exito");
             limpiarTexto();
