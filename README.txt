@@ -83,3 +83,7 @@ Usuarios creados y sus roles:
 -Contraseña: 1
   Medico
   Compras
+
+
+Si ocurre algún error, puede deberse a los datos de los .csv
+Si se los vacía, el programa funciona correctamente (no borrar los archivos usuarios.csv ni roles.csv)
