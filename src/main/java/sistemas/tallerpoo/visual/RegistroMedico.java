@@ -640,7 +640,11 @@ public class RegistroMedico extends javax.swing.JFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int fila = jtMedicos.getSelectedRow();
         String s = jtMedicos.getModel().getValueAt(fila, 0).toString();
-        datos.eliminarMedico(Integer.parseInt(s));
+        
+        int opcion = JOptionPane.showOptionDialog(null, "¿Está seguro que desea eliminar al médico con dni " + s + "?", "Confirmación", 0, JOptionPane.QUESTION_MESSAGE, null, new String[] {"SI", "NO"}, "SI");
+        if(opcion == 0)
+            datos.eliminarMedico(Integer.parseInt(s));
+        
         listar();
     }//GEN-LAST:event_btnEliminarActionPerformed
 

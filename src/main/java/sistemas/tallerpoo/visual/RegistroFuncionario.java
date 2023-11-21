@@ -606,7 +606,11 @@ public class RegistroFuncionario extends javax.swing.JFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int fila = jtFuncionarios.getSelectedRow();
         String s = jtFuncionarios.getModel().getValueAt(fila, 0).toString();
-        datos.eliminarFuncionario(Integer.parseInt(s));
+        
+        int opcion = JOptionPane.showOptionDialog(null, "¿Está seguro que desea eliminar al funcionario con dni " + s + "?", "Confirmación", 0, JOptionPane.QUESTION_MESSAGE, null, new String[] {"SI", "NO"}, "SI");
+        if(opcion == 0)
+            datos.eliminarFuncionario(Integer.parseInt(s));
+        
         listar();
     }//GEN-LAST:event_btnEliminarActionPerformed
 

@@ -660,7 +660,11 @@ public class RegistroPaciente extends javax.swing.JFrame {
 
         int fila = jtPacientes.getSelectedRow();
         String s = jtPacientes.getModel().getValueAt(fila, 0).toString();
-        datos.eliminarPaciente(Integer.parseInt(s));
+        
+        int opcion = JOptionPane.showOptionDialog(null, "¿Está seguro que desea eliminar al paciente con dni " + s + "?", "Confirmación", 0, JOptionPane.QUESTION_MESSAGE, null, new String[] {"SI", "NO"}, "SI");
+        if(opcion == 0)
+            datos.eliminarPaciente(Integer.parseInt(s));
+        
         listar();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
