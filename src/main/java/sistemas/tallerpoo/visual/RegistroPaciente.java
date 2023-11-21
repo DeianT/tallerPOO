@@ -818,7 +818,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
      */
     private void filtrar(JTextField a) {
         try {
-            sorter.setRowFilter(RowFilter.regexFilter(a.getText()));
+            sorter.setRowFilter(RowFilter.regexFilter(a.getText(), 0));
         } catch (Exception e) {
         }
     }
