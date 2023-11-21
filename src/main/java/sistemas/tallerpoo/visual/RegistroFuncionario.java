@@ -560,7 +560,11 @@ public class RegistroFuncionario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ingrese un DNI válido", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if (!validarCorreoElectronico(txtCorreo.getText())) {
+        if (!txtTelefono.getText().matches("\\d+") || (Integer.parseInt(txtTelefono.getText()) < 0)) {
+            JOptionPane.showMessageDialog(null, "El teléfono no es válido", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!txtCorreo.getText().trim().isEmpty() && !validarCorreoElectronico(txtCorreo.getText())) {
             JOptionPane.showMessageDialog(null, "Correo electrónico incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -606,7 +610,11 @@ public class RegistroFuncionario extends javax.swing.JFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int fila = jtFuncionarios.getSelectedRow();
         String s = jtFuncionarios.getModel().getValueAt(fila, 0).toString();
-        datos.eliminarFuncionario(Integer.parseInt(s));
+        
+        int opcion = JOptionPane.showOptionDialog(null, "¿Está seguro que desea eliminar al funcionario con dni " + s + "?", "Confirmación", 0, JOptionPane.QUESTION_MESSAGE, null, new String[] {"SI", "NO"}, "SI");
+        if(opcion == 0)
+            datos.eliminarFuncionario(Integer.parseInt(s));
+        
         listar();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
