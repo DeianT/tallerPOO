@@ -121,6 +121,7 @@ public class RegistroMedico extends javax.swing.JFrame {
         txtCelular.setText(m.getTelCelular());
         cbEstadoCivil.setSelectedItem(m.getEstadoCivil());
         txtCorreo.setText(m.getCorreoElect());
+        txtSectorTrabajo.setText(m.getTrabajaEn().getNombre());
         txtMatricula.setText(matricula);
     }
 
