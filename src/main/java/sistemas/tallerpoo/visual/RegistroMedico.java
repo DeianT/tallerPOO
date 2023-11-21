@@ -588,10 +588,19 @@ public class RegistroMedico extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ingrese un DNI válido", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if (!validarCorreoElectronico(txtCorreo.getText())) {
+        if (!txtTelefono.getText().matches("\\d+") || (Integer.parseInt(txtTelefono.getText()) < 0)) {
+            JOptionPane.showMessageDialog(null, "El teléfono no es válido", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!txtCorreo.getText().trim().isEmpty() && !validarCorreoElectronico(txtCorreo.getText())) {
             JOptionPane.showMessageDialog(null, "Correo electrónico incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if (!txtMatricula.getText().matches("\\d+") || (Integer.parseInt(txtMatricula.getText()) <= 0)) {
+            JOptionPane.showMessageDialog(null, "La matrícula no es válida", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         if (datos.agregarMedico(captar())) {
             JOptionPane.showMessageDialog(null, "Se registró con exito");
             avisoDNI.setVisible(false);
