@@ -390,15 +390,16 @@ public class RegistroPaciente extends javax.swing.JFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(avisoESTADOCIVIL)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(avisoTELEFONO)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(jLabel5)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(avisoDOMICILIO1)))
                                                 .addGroup(layout.createSequentialGroup()
-                                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGap(18, 18, 18)
+                                                    .addComponent(jLabel5)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                                                    .addComponent(avisoDOMICILIO1))
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addGap(0, 0, Short.MAX_VALUE)
+                                                    .addComponent(avisoTELEFONO))
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                     .addComponent(avisoCONTACTO))))
                                         .addGap(18, 18, 18))
                                     .addGroup(layout.createSequentialGroup()
@@ -689,14 +690,13 @@ public class RegistroPaciente extends javax.swing.JFrame {
         Paciente p = new Paciente();
         p = datos.capturar(txtDni, txtNombre, txtApellido, txtFechaNacimiento, txtDomicilio, txtDni, txtCelular, cbEstadoCivil, txtCorreo, txtContacto);
 
-        try {
-            if (datos.editarPaciente(p)) {
-                JOptionPane.showMessageDialog(null, "Se editó con exito");
-                limpiarTexto();
-                listar();
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(RegistroPaciente.class.getName()).log(Level.SEVERE, null, ex);
+        if (datos.editarPaciente(p)) {
+            JOptionPane.showMessageDialog(null, "Se editó con exito");
+            limpiarTexto();
+            listar();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "No existe paciente con ese DNI");
         }
     }//GEN-LAST:event_btnConfirmarEdicionActionPerformed
 
@@ -818,7 +818,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
      */
     private void filtrar(JTextField a) {
         try {
-            sorter.setRowFilter(RowFilter.regexFilter(a.getText()));
+            sorter.setRowFilter(RowFilter.regexFilter(a.getText(), 0));
         } catch (Exception e) {
         }
     }

@@ -172,7 +172,7 @@ public class RolesFuncionario extends javax.swing.JFrame {
             return;
         }
 
-        int opcion = JOptionPane.showOptionDialog(null, "¿Está seguro que desea agregar el rol " + jlTodosLosRoles.getSelectedValue().toUpperCase() + " al funcionario con dni " + cbDnis.getSelectedItem().toString() + "?", "confirmacion", 0, JOptionPane.QUESTION_MESSAGE, null, confirmar, "SI");
+        int opcion = JOptionPane.showOptionDialog(null, "¿Está seguro que desea agregar el rol " + jlTodosLosRoles.getSelectedValue().toUpperCase() + " al funcionario con dni " + cbDnis.getSelectedItem().toString() + "?", "Confirmación", 0, JOptionPane.QUESTION_MESSAGE, null, confirmar, "SI");
 
         if (opcion == 0) {
             rolDatos.agregarRol(rol);
@@ -213,7 +213,7 @@ public class RolesFuncionario extends javax.swing.JFrame {
             return;
         }
 
-        int opcion = JOptionPane.showOptionDialog(null, "¿Está seguro que desea eliminar el rol " + jlTodosLosRoles.getSelectedValue().toUpperCase() + " al funcionario con dni " + cbDnis.getSelectedItem().toString() + "?", "confirmacion", 0, JOptionPane.QUESTION_MESSAGE, null, confirmar, "SI");
+        int opcion = JOptionPane.showOptionDialog(null, "¿Está seguro que desea eliminar el rol " + jlTodosLosRoles.getSelectedValue().toUpperCase() + " al funcionario con dni " + cbDnis.getSelectedItem().toString() + "?", "Confirmación", 0, JOptionPane.QUESTION_MESSAGE, null, confirmar, "SI");
 
         if (opcion == 0) {
             rolDatos.eliminarRol(rol);

@@ -667,6 +667,9 @@ public class RegistroMedico extends javax.swing.JFrame {
             limpiarTexto();
             listar();
         }
+        else{
+            JOptionPane.showMessageDialog(null, "No existe paciente con ese DNI");
+        }
     }//GEN-LAST:event_btnConfirmarEdicionActionPerformed
 
     /**
@@ -698,7 +701,7 @@ public class RegistroMedico extends javax.swing.JFrame {
      */
     private void filtrar(JTextField a) {
         try {
-            sorter.setRowFilter(RowFilter.regexFilter(a.getText()));
+            sorter.setRowFilter(RowFilter.regexFilter(a.getText(), 0));
         } catch (Exception e) {
         }
     }

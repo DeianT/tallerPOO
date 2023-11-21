@@ -295,12 +295,12 @@ public class EspecialidadesMedico extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         if (allEspecialidades.contains(txtEspecialidad.getText())) {
-            int opcion = JOptionPane.showOptionDialog(null, "esta seguro que desea agregar la especialidad " + txtEspecialidad.getText() + " al medico con dni " + cbDnis.getSelectedItem().toString(), "confirmacion", 0, JOptionPane.QUESTION_MESSAGE, null, confirmar, "SI");
+            int opcion = JOptionPane.showOptionDialog(null, "¿Está seguro que desea agregar la especialidad " + txtEspecialidad.getText() + " al médico con dni " + cbDnis.getSelectedItem().toString() + "?", "Confirmación", 0, JOptionPane.QUESTION_MESSAGE, null, confirmar, "SI");
 
             if (opcion == 0) {
-                String uni = JOptionPane.showInputDialog(null, "ingrese el nombre de la universiad donde obtuvo la especialidad");
+                String uni = JOptionPane.showInputDialog(null, "Ingrese el nombre de la universiad donde obtuvo la especialidad");
                 if (uni != null) {
-                    String fecha = JOptionPane.showInputDialog(null, "ingrese la fecha en que lo obtuvo");
+                    String fecha = JOptionPane.showInputDialog(null, "Ingrese la fecha en que lo obtuvo");
                     if (fecha != null) {
                         lista = esp.mostrarEspecilidades(cbDnis, jlEspecialidadesMedico);
                         if (!lista.contains(txtEspecialidad.getText())) {
@@ -308,18 +308,18 @@ public class EspecialidadesMedico extends javax.swing.JFrame {
                             jlEspecialidadesMedico.setListData(lista);
                             esp.agregarEspecilidades(cbDnis, txtEspecialidad, uni, fecha);
                         } else {
-                            JOptionPane.showMessageDialog(null, "el medico ya cuenta con esa especialidad");
+                            JOptionPane.showMessageDialog(null, "El medico ya cuenta con esa especialidad");
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "tiene que ingresar una fecha");
+                        JOptionPane.showMessageDialog(null, "Tiene que ingresar una fecha");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "tiene que ingresar una universidad");
+                    JOptionPane.showMessageDialog(null, "Tiene que ingresar una universidad");
                 }
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "esa especialidad no existe");
+            JOptionPane.showMessageDialog(null, "Esa especialidad no existe");
         }
 
 
