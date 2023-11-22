@@ -391,13 +391,11 @@ public class GestorDatos {
                 
             }
         }
-
+            resultado = Integer.toString(contador);
         }else
         {
             JOptionPane.showMessageDialog(null,"La fecha mínima supera a la fecha mayor o alguna de las edades es negativa o cero");
-            return "";
         }
-        resultado = Integer.toString(contador);
         return resultado; 
     }
 
@@ -623,7 +621,7 @@ public class GestorDatos {
 
     private boolean controlarEdad(int edad1, int edad2)
     {
-        if(edad1 > 0 && edad2 >0 )
+        if(edad1 > 0 && edad2 > 0)
         {
            return true;
         }
