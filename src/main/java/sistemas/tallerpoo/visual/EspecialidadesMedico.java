@@ -292,7 +292,10 @@ public class EspecialidadesMedico extends javax.swing.JFrame {
      * @param evt El evento de acción que desencadena este método.
      */
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        // TODO add your handling code here:
+        if(txtEspecialidad.getText() == null){
+            JOptionPane.showMessageDialog(null, "Por favor ingrese una especialidad");
+            return;
+        }
 
         if (allEspecialidades.contains(txtEspecialidad.getText())) {
             int opcion = JOptionPane.showOptionDialog(null, "¿Está seguro que desea agregar la especialidad " + txtEspecialidad.getText() + " al médico con dni " + cbDnis.getSelectedItem().toString() + "?", "Confirmación", 0, JOptionPane.QUESTION_MESSAGE, null, confirmar, "SI");
@@ -308,7 +311,7 @@ public class EspecialidadesMedico extends javax.swing.JFrame {
                             jlEspecialidadesMedico.setListData(lista);
                             esp.agregarEspecilidades(cbDnis, txtEspecialidad, uni, fecha);
                         } else {
-                            JOptionPane.showMessageDialog(null, "El medico ya cuenta con esa especialidad");
+                            JOptionPane.showMessageDialog(null, "El médico ya cuenta con esa especialidad");
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Tiene que ingresar una fecha");
@@ -319,7 +322,7 @@ public class EspecialidadesMedico extends javax.swing.JFrame {
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "Esa especialidad no existe");
+            JOptionPane.showMessageDialog(null, "Esa especialidad no existe o está mal escrita");
         }
 
 
