@@ -130,7 +130,21 @@ public class EspacialidadDatos {
                 }
             }
         }
-
+    }
+    
+    /**
+     *  Elimina todas las especialidades asociadas a un médico
+     * @param dni el dni del médico cuyas especialidades se desea eliminar
+     */
+    public void eliminarEspecialidadesMedico(int dni){
+        ArrayList<Estudios> lista = new ArrayList<>();
+        for(Estudios e: estudios){
+            if(e.getDniMedico().equals(Integer.toString(dni))){
+                lista.add(e);
+            }
+        }
+        estudios.removeAll(lista);
+        escribir();
     }
 
     /**
