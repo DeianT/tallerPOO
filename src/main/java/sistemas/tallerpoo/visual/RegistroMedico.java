@@ -43,15 +43,7 @@ public class RegistroMedico extends javax.swing.JFrame {
         modelo = new DefaultTableModel();
         lista = datos.obtenerMedicos();
         listar();
-        avisoDNI.setVisible(false);
-        avisoNOMBRE.setVisible(false);
-        avisoAPELLIDO.setVisible(false);
-        avisoDOMICILIO.setVisible(false);
-        avisoTELEFONO.setVisible(false);
-        avisoCELULAR.setVisible(false);
-        avisoESTADOCIVIL.setVisible(false);
-        avisoSECTORTRABAJO.setVisible(false);
-        avisoMATRICULA.setVisible(false);
+        ocultarAvisos();
     }
 
     /**
@@ -539,70 +531,12 @@ public class RegistroMedico extends javax.swing.JFrame {
      * @param evt Objeto que contiene la información del evento desencadenante.
      */
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        avisoDNI.setVisible(false);
-        avisoNOMBRE.setVisible(false);
-        avisoAPELLIDO.setVisible(false);
-        avisoDOMICILIO.setVisible(false);
-        avisoTELEFONO.setVisible(false);
-        avisoCELULAR.setVisible(false);
-        avisoESTADOCIVIL.setVisible(false);
-        avisoSECTORTRABAJO.setVisible(false);
-        avisoMATRICULA.setVisible(false);
-        if (txtDni.getText().trim().isEmpty() || txtNombre.getText().trim().isEmpty()
-                || txtApellido.getText().trim().isEmpty() || txtNombre.getText().trim().isEmpty()
-                || txtTelefono.getText().trim().isEmpty() || txtCelular.getText().trim().isEmpty()
-                || txtDomicilio.getText().trim().isEmpty() || txtSectorTrabajo.getText().trim().isEmpty()
-                || cbEstadoCivil.getSelectedIndex() == 0 || txtMatricula.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Hay campos incompletos, por favor complételos", "Error", JOptionPane.WARNING_MESSAGE);
-            if (txtDni.getText().trim().isEmpty()) {
-                avisoDNI.setVisible(true);
-            }
-            if (txtNombre.getText().trim().isEmpty()) {
-                avisoNOMBRE.setVisible(true);
-            }
-            if (txtApellido.getText().trim().isEmpty()) {
-                avisoAPELLIDO.setVisible(true);
-            }
-            if (txtDomicilio.getText().trim().isEmpty()) {
-                avisoDOMICILIO.setVisible(true);
-            }
-            if (txtTelefono.getText().trim().isEmpty()) {
-                avisoTELEFONO.setVisible(true);
-            }
-            if (txtCelular.getText().trim().isEmpty()) {
-                avisoCELULAR.setVisible(true);
-            }
-            if (cbEstadoCivil.getSelectedIndex() == 0) {
-                avisoESTADOCIVIL.setVisible(true);
-            }
-            if (txtSectorTrabajo.getText().trim().isEmpty()) {
-                avisoSECTORTRABAJO.setVisible(true);
-            }
-            if (txtMatricula.getText().trim().isEmpty()) {
-                avisoMATRICULA.setVisible(true);
-            }
+        if(!controlCampos())
             return;
-        }
-
-        if (!txtDni.getText().matches("\\d+") || Integer.parseInt(txtDni.getText()) <= 0) {
-            JOptionPane.showMessageDialog(null, "Ingrese un DNI válido", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (!validarCorreoElectronico(txtCorreo.getText())) {
-            JOptionPane.showMessageDialog(null, "Correo electrónico incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+        
         if (datos.agregarMedico(captar())) {
             JOptionPane.showMessageDialog(null, "Se registró con exito");
-            avisoDNI.setVisible(false);
-            avisoNOMBRE.setVisible(false);
-            avisoAPELLIDO.setVisible(false);
-            avisoDOMICILIO.setVisible(false);
-            avisoTELEFONO.setVisible(false);
-            avisoCELULAR.setVisible(false);
-            avisoESTADOCIVIL.setVisible(false);
-            avisoSECTORTRABAJO.setVisible(false);
-            avisoMATRICULA.setVisible(false);
+            ocultarAvisos();
             listar();
             this.limpiarTexto();
         } else {
@@ -630,6 +564,7 @@ public class RegistroMedico extends javax.swing.JFrame {
         int fila = jtMedicos.getSelectedRow();
         med = lista.get(fila);
         this.mostrarTodo(med);
+        ocultarAvisos();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     /**
@@ -640,7 +575,13 @@ public class RegistroMedico extends javax.swing.JFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int fila = jtMedicos.getSelectedRow();
         String s = jtMedicos.getModel().getValueAt(fila, 0).toString();
-        datos.eliminarMedico(Integer.parseInt(s));
+        
+        int opcion = JOptionPane.showOptionDialog(null, "¿Está seguro que desea eliminar al médico con dni " + s + "?", "Confirmación", 0, JOptionPane.QUESTION_MESSAGE, null, new String[] {"SI", "NO"}, "SI");
+        if(opcion == 0){
+            datos.eliminarMedico(Integer.parseInt(s));
+            ocultarAvisos();
+        }
+        
         listar();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -660,15 +601,19 @@ public class RegistroMedico extends javax.swing.JFrame {
      * @param evt Objeto que contiene la información del evento desencadenante.
      */
     private void btnConfirmarEdicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarEdicionActionPerformed
+        if(!controlCampos())
+            return;
+        
         Medico m = new Medico();
         m = this.captar();
         if (datos.editarMedico(m)) {
             JOptionPane.showMessageDialog(null, "Se editó con exito");
             limpiarTexto();
+            ocultarAvisos();
             listar();
         }
         else{
-            JOptionPane.showMessageDialog(null, "No existe paciente con ese DNI");
+            JOptionPane.showMessageDialog(null, "No existe médico con ese DNI");
         }
     }//GEN-LAST:event_btnConfirmarEdicionActionPerformed
 
@@ -765,4 +710,81 @@ public class RegistroMedico extends javax.swing.JFrame {
     private javax.swing.JTextField txtSectorTrabajo;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * Controla que todos los campos obligatorios estén completos y que cumplan
+     * con el formato requerido
+     * @return true si los campos están completos y cumplen con el formato, false
+     * en caso contrario
+     */
+    private boolean controlCampos() {
+        if (txtDni.getText().trim().isEmpty() || txtNombre.getText().trim().isEmpty()
+                || txtApellido.getText().trim().isEmpty() || txtNombre.getText().trim().isEmpty()
+                || txtTelefono.getText().trim().isEmpty() || txtCelular.getText().trim().isEmpty()
+                || txtDomicilio.getText().trim().isEmpty() || txtSectorTrabajo.getText().trim().isEmpty()
+                || cbEstadoCivil.getSelectedIndex() == 0 || txtMatricula.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Hay campos incompletos, por favor complételos", "Error", JOptionPane.WARNING_MESSAGE);
+            if (txtDni.getText().trim().isEmpty()) {
+                avisoDNI.setVisible(true);
+            }
+            if (txtNombre.getText().trim().isEmpty()) {
+                avisoNOMBRE.setVisible(true);
+            }
+            if (txtApellido.getText().trim().isEmpty()) {
+                avisoAPELLIDO.setVisible(true);
+            }
+            if (txtDomicilio.getText().trim().isEmpty()) {
+                avisoDOMICILIO.setVisible(true);
+            }
+            if (txtTelefono.getText().trim().isEmpty()) {
+                avisoTELEFONO.setVisible(true);
+            }
+            if (txtCelular.getText().trim().isEmpty()) {
+                avisoCELULAR.setVisible(true);
+            }
+            if (cbEstadoCivil.getSelectedIndex() == 0) {
+                avisoESTADOCIVIL.setVisible(true);
+            }
+            if (txtSectorTrabajo.getText().trim().isEmpty()) {
+                avisoSECTORTRABAJO.setVisible(true);
+            }
+            if (txtMatricula.getText().trim().isEmpty()) {
+                avisoMATRICULA.setVisible(true);
+            }
+            return false;
+        }
+
+        if (!txtDni.getText().matches("\\d+") || Integer.parseInt(txtDni.getText()) <= 0) {
+            JOptionPane.showMessageDialog(null, "Ingrese un DNI válido", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (!txtTelefono.getText().matches("\\d+") || (Integer.parseInt(txtTelefono.getText()) < 0)) {
+            JOptionPane.showMessageDialog(null, "El teléfono no es válido", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (!txtCorreo.getText().trim().isEmpty() && !validarCorreoElectronico(txtCorreo.getText())) {
+            JOptionPane.showMessageDialog(null, "Correo electrónico incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (!txtMatricula.getText().matches("\\d+") || (Integer.parseInt(txtMatricula.getText()) <= 0)) {
+            JOptionPane.showMessageDialog(null, "La matrícula no es válida", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+    
+    /**
+     * Oculta los avisos de campos obligatorios
+     */
+    private void ocultarAvisos(){
+        avisoDNI.setVisible(false);
+        avisoNOMBRE.setVisible(false);
+        avisoAPELLIDO.setVisible(false);
+        avisoDOMICILIO.setVisible(false);
+        avisoTELEFONO.setVisible(false);
+        avisoCELULAR.setVisible(false);
+        avisoESTADOCIVIL.setVisible(false);
+        avisoSECTORTRABAJO.setVisible(false);
+        avisoMATRICULA.setVisible(false);
+    }
 }

@@ -91,6 +91,7 @@ public class MedicoDatos {
             lista.remove(f);
             escribirArchivo();
             new FuncionarioDatos().eliminarFuncionario(dni);
+            new EspacialidadDatos().eliminarEspecialidadesMedico(dni);
             return true;
         } catch (Exception e) {
             return false;

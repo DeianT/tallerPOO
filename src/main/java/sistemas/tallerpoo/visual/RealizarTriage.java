@@ -509,7 +509,6 @@ public class RealizarTriage extends javax.swing.JFrame {
 
                     cambioValido = nuevo == -1 || d.cambioColor(colores, color, colores[nuevo]);
                     if (!cambioValido) {
-                        System.out.println(nuevo);
                         JOptionPane.showMessageDialog(null, "No se puede cambiar mas de dos niveles de color");
                     }
                 }
