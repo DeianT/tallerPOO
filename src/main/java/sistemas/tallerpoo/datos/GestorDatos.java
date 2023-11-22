@@ -25,33 +25,27 @@ public class GestorDatos {
      * de fechas recibiendo como parametro las dos fechas, f1 y f2, y los jlabel
      * donde se van a mostrar la cantidad de cada uno
      *
-     * @param f1 String que contiene la primer fecha del rango de fechas
-     * @param f2 String que contiene la segunda fecha del rango de fechas
+     * @param desde int[] que contiene la primer fecha del rango de fechas
+     * @param hasta int[] que contiene la seguda fecha del rango de fechas
      * @param Azul JLabel donde se va a settear la cantidad de ese color
      * @param Verde JLabel donde se va a settear la cantidad de ese color
      * @param Naranja JLabel donde se va a settear la cantidad de ese color
      * @param Amarillo JLabel donde se va a settear la cantidad de ese color
      * @param Rojo JLabel donde se va a settear la cantidad de ese color
      */
-    public void triagesPorFechas(String f1, String f2, JLabel Azul, JLabel Verde, JLabel Naranja, JLabel Amarillo, JLabel Rojo) {
+    public void triagesPorFechas(int[] desde, int[] hasta, JLabel Azul, JLabel Verde, JLabel Naranja, JLabel Amarillo, JLabel Rojo) {
 
         int rojo = 0, naranja = 0, amarillo = 0, verde = 0, azul = 0;
 
-        String[] desde = f1.split("/");
-        String[] hasta = f2.split("/");
-        int[] Desde = this.pasarArrayAInt(desde);
-        int[] Hasta = this.pasarArrayAInt(hasta);
-        
-        if(this.controlarRangoFechas(Desde, Hasta))
-        {
+     
            for (Triage t : new TriageDatos().obtenerTriages()) {
 
             String[] fechaH = t.getFecha().split("/");
             int[] fechaHist = this.pasarArrayAInt(fechaH);
 
-            if (fechaHist[2] == Desde[2] && fechaHist[2] == Hasta[2]) {
-                if (fechaHist[1] == Desde[1] && fechaHist[1] == Hasta[1]) {
-                    if (fechaHist[0] == Desde[0] && fechaHist[0] == Hasta[0]) {
+            if (fechaHist[2] == desde[2] && fechaHist[2] == hasta[2]) {
+                if (fechaHist[1] == desde[1] && fechaHist[1] == hasta[1]) {
+                    if (fechaHist[0] == desde[0] && fechaHist[0] == hasta[0]) {
                         switch (t.getColor().toString()) {
                             case "Rojo":
                                 rojo++;
@@ -69,7 +63,7 @@ public class GestorDatos {
                                 azul++;
                                 break;
                         }
-                    } else if (fechaHist[0] >= Desde[0] && fechaHist[0] <= Hasta[0]) {
+                    } else if (fechaHist[0] >= desde[0] && fechaHist[0] <= hasta[0]) {
                         switch (t.getColor().toString()) {
                             case "Rojo":
                                 rojo++;
@@ -88,7 +82,7 @@ public class GestorDatos {
                                 break;
                         }
                     }
-                } else if (fechaHist[1] >= Desde[1] && fechaHist[1] <= Hasta[1]) {
+                } else if (fechaHist[1] >= desde[1] && fechaHist[1] <= hasta[1]) {
                     switch (t.getColor().toString()) {
                         case "Rojo":
                             rojo++;
@@ -108,11 +102,11 @@ public class GestorDatos {
                     }
 
                 }
-            } else if (fechaHist[2] >= Desde[2] && fechaHist[2] <= Hasta[2]) {
-                if (Desde[2] < Hasta[2] && fechaHist[2] == Desde[2]) {
-                    if (fechaHist[1] == Desde[1]) {
+            } else if (fechaHist[2] >= desde[2] && fechaHist[2] <= hasta[2]) {
+                if (desde[2] < hasta[2] && fechaHist[2] == desde[2]) {
+                    if (fechaHist[1] == desde[1]) {
 
-                        if (fechaHist[0] == Desde[0]) {
+                        if (fechaHist[0] == desde[0]) {
                             switch (t.getColor().toString()) {
                                 case "Rojo":
                                     rojo++;
@@ -130,7 +124,7 @@ public class GestorDatos {
                                     azul++;
                                     break;
                             }
-                        } else if (fechaHist[0] > Desde[0]) {
+                        } else if (fechaHist[0] > desde[0]) {
                             switch (t.getColor().toString()) {
                                 case "Rojo":
                                     rojo++;
@@ -149,7 +143,7 @@ public class GestorDatos {
                                     break;
                             }
                         }
-                    } else if (fechaHist[1] > Desde[1]) {
+                    } else if (fechaHist[1] > desde[1]) {
                         switch (t.getColor().toString()) {
                             case "Rojo":
                                 rojo++;
@@ -188,18 +182,14 @@ public class GestorDatos {
                             break;
                     }
                 }
-            }
-        } 
+            }   
+    }
         Rojo.setText(Integer.toString(rojo));
         Naranja.setText(Integer.toString(naranja));
         Amarillo.setText(Integer.toString(amarillo));
         Verde.setText(Integer.toString(verde));
-        Azul.setText(Integer.toString(azul));  
-        }else
-        {
-           JOptionPane.showMessageDialog(null,"La fecha mínima supera a la fecha mayor"); 
-        }
-    }
+        Azul.setText(Integer.toString(azul));   
+   }
 
     /**
      * agrega a un JComboBox todos los DNI de los medicos registrados
@@ -231,20 +221,14 @@ public class GestorDatos {
      * Cuenta la cantidad de atenciones que se dieron en un rango de fechas
      * desde f1 hasta f2 y por un medico en particular
      *
-     * @param f1 String que contiene la primer fecha del rango de fechas
-     * @param f2 String que contiene la seguda fecha del rango de fechas
+     * @param desde int[] que contiene la primer fecha del rango de fechas
+     * @param hasta int[] que contiene la seguda fecha del rango de fechas
      * @param med JComboBox del que se obtiene el dni del medico
      * @param cantidad Jlabel donde se settean la cantidad de personas que
      * atendio
      */
-    public void atencionPorFechas(String f1, String f2, JComboBox med, JLabel cantidad) {
-        String[] desde = f1.split("/");
-        String[] hasta = f2.split("/");
-        int[] Desde = this.pasarArrayAInt(desde);
-        int[] Hasta = this.pasarArrayAInt(hasta);
-        
-        if(this.controlarRangoFechas(Desde, Hasta))
-        {
+    public void atencionPorFechas(int[] desde, int[] hasta, JComboBox med, JLabel cantidad) {
+ 
         int contador = 0;
         for (HistoriaClinica h : new HistoriaClinicaDatos().obtenerHistoriaClinica()) {
 
@@ -254,27 +238,27 @@ public class GestorDatos {
             String dniMedico = Integer.toString(h.getDniMedico());
 
             if (med.getSelectedItem().toString().equals(dniMedico)) {
-                if (fechaHist[2] == Desde[2] && fechaHist[2] == Hasta[2]) {
-                    if (fechaHist[1] == Desde[1] && fechaHist[1] == Hasta[1]) {
-                        if (fechaHist[0] == Desde[0] && fechaHist[0] == Hasta[0]) {
+                if (fechaHist[2] == desde[2] && fechaHist[2] == hasta[2]) {
+                    if (fechaHist[1] == desde[1] && fechaHist[1] == hasta[1]) {
+                        if (fechaHist[0] == desde[0] && fechaHist[0] == hasta[0]) {
                             contador++;
-                        } else if (fechaHist[0] >= Desde[0] && fechaHist[0] <= Hasta[0]) {
+                        } else if (fechaHist[0] >= desde[0] && fechaHist[0] <= hasta[0]) {
                             contador++;
                         }
-                    } else if (fechaHist[1] >= Desde[1] && fechaHist[1] <= Hasta[1]) {
+                    } else if (fechaHist[1] >= desde[1] && fechaHist[1] <= hasta[1]) {
                         contador++;
 
                     }
-                } else if (fechaHist[2] >= Desde[2] && fechaHist[2] <= Hasta[2]) {
+                } else if (fechaHist[2] >= desde[2] && fechaHist[2] <= hasta[2]) {
                     
-                    if (fechaHist[2] == Desde[2]) {
-                        if (fechaHist[1] == Desde[1]) {
-                            if (fechaHist[0] == Desde[0]) {
+                    if (fechaHist[2] == desde[2]) {
+                        if (fechaHist[1] == desde[1]) {
+                            if (fechaHist[0] == desde[0]) {
                                 contador++;
-                            } else if (fechaHist[0] > Desde[0]) {
+                            } else if (fechaHist[0] > desde[0]) {
                                 contador++;
                             }
-                        } else if (fechaHist[1] > Desde[1]) {
+                        } else if (fechaHist[1] > desde[1]) {
                             contador++;
                         }
 
@@ -286,10 +270,7 @@ public class GestorDatos {
         }
         String resultado = Integer.toString(contador);
         cantidad.setText(resultado);
-        }else
-        {
-            JOptionPane.showMessageDialog(null,"La fecha mínima supera a la fecha mayor");
-        }
+        
     }
 
     /**
@@ -333,24 +314,17 @@ public class GestorDatos {
      *
      * @param edadDesde primer edad del rango de edades
      * @param edadHasta segunda edad del rango de edades
-     * @param f1 primer fecha del rango de fechas
-     * @param f2 segunda fecha del rango de fechas
+     * @param desde int[] que contiene la primer fecha del rango de fechas
+     * @param hasta int[] que contiene la seguda fecha del rango de fechas
      * @return cantidad de atenciones dadas, o "" si f1 es mayor que f2 o si
      * alguna de las edades no es positiva
      */
-    public String atencionPorFechasYEdades(int edadDesde, int edadHasta, String f1, String f2) {
+    public String atencionPorFechasYEdades(int edadDesde, int edadHasta, int[] desde, int[] hasta) {
         String resultado = "";
         int contador = 0;
         String[] fechasNac = obtenerFechaNacimientoPacientes();
 
-        String[] desde = f1.split("/");
-        String[] hasta = f2.split("/");
-        int[] Desde = this.pasarArrayAInt(desde);
-        int[] Hasta = this.pasarArrayAInt(hasta);
-        
-        if(this.controlarRangoFechas(Desde, Hasta) && this.controlarEdad(edadDesde, edadHasta))
-        {
-           int i = 0;
+        int i = 0;
         for (HistoriaClinica h : new HistoriaClinicaDatos().obtenerHistoriaClinica()) {
 
             int edad = this.obtenerEdad(fechasNac[i]);
@@ -361,27 +335,27 @@ public class GestorDatos {
                 String[] fechaH = h.getFecha().split("/");
                 int[] fechaHist = this.pasarArrayAInt(fechaH);
 
-                if (fechaHist[2] == Desde[2] && fechaHist[2] == Hasta[2]) {
-                    if (fechaHist[1] == Desde[1] && fechaHist[1] == Hasta[1]) {
-                        if (fechaHist[0] == Desde[0] && fechaHist[0] == Hasta[0]) {
+                if (fechaHist[2] == desde[2] && fechaHist[2] == hasta[2]) {
+                    if (fechaHist[1] == desde[1] && fechaHist[1] == hasta[1]) {
+                        if (fechaHist[0] == desde[0] && fechaHist[0] == hasta[0]) {
                             contador++;
-                        } else if (fechaHist[0] >= Desde[0] && fechaHist[0] <= Hasta[0]) {
+                        } else if (fechaHist[0] >= desde[0] && fechaHist[0] <= hasta[0]) {
                             contador++;
                         }
-                    } else if (fechaHist[1] >= Desde[1] && fechaHist[1] <= Hasta[1]) {
+                    } else if (fechaHist[1] >= desde[1] && fechaHist[1] <= hasta[1]) {
                         contador++;
 
                     }
-                } else if (fechaHist[2] >= Desde[2] && fechaHist[2] <= Hasta[2]) {
-                    if (Desde[2] < Hasta[2] && fechaHist[2] == Desde[2]) {
-                        if (fechaHist[1] == Desde[1]) {
+                } else if (fechaHist[2] >= desde[2] && fechaHist[2] <= hasta[2]) {
+                    if (desde[2] < hasta[2] && fechaHist[2] == desde[2]) {
+                        if (fechaHist[1] == desde[1]) {
 
-                            if (fechaHist[0] == Desde[0]) {
+                            if (fechaHist[0] == desde[0]) {
                                 contador++;
-                            } else if (fechaHist[0] > Desde[0]) {
+                            } else if (fechaHist[0] > desde[0]) {
                                 contador++;
                             }
-                        } else if (fechaHist[1] > Desde[1]) {
+                        } else if (fechaHist[1] > desde[1]) {
                             contador++;
                         }
                     } else {
@@ -391,11 +365,7 @@ public class GestorDatos {
                 
             }
         }
-            resultado = Integer.toString(contador);
-        }else
-        {
-            JOptionPane.showMessageDialog(null,"La fecha mínima supera a la fecha mayor o alguna de las edades es negativa o cero");
-        }
+        resultado = Integer.toString(contador);       
         return resultado; 
     }
 
@@ -442,22 +412,16 @@ public class GestorDatos {
      * desde f1 hasta f2 Utiliza la clave del Map para encontrar al paciente y
      * el valor para contar la cantidad de consultas realizadas
      *
-     * @param f1 primer fecha del rango de fechas
-     * @param f2 segunda fecha del rango de fechas
+     * @param desde int[] que contiene la primer fecha del rango de fechas
+     * @param hasta int[] que contiene la seguda fecha del rango de fechas
      * @return Map que contiene en el Valor la cantidad de consultas de cada
      * paciente, o null si f1 es mayor que f2
      */
-    public Map<String, Integer> pacienteConsultasRangoDeFechas(String f1, String f2) {
+    public Map<String, Integer> pacienteConsultasRangoDeFechas(int[] desde, int[] hasta) {
         Map<String, Integer> map = MapConDnisPacientes();
         
-        String[] desde = f1.split("/");
-        String[] hasta = f2.split("/");
-        int[] Desde = this.pasarArrayAInt(desde);
-        int[] Hasta = this.pasarArrayAInt(hasta);
-
-        if(this.controlarRangoFechas(Desde, Hasta))
-        {
-             for (HistoriaClinica h : new HistoriaClinicaDatos().obtenerHistoriaClinica()) {
+        for (HistoriaClinica h : new HistoriaClinicaDatos().obtenerHistoriaClinica()) {
+                
             String clave = Integer.toString(h.getDniPaciente());//clave a la q le quiero sumar 1
             int valorActual = map.get(clave);// valor asociado a la clave
             int nuevoValor = 0;
@@ -465,27 +429,27 @@ public class GestorDatos {
             String[] fechaH = h.getFecha().split("/");
             int[] fechaHist = this.pasarArrayAInt(fechaH);
 
-            if (fechaHist[2] == Desde[2] && fechaHist[2] == Hasta[2]) {
-                if (fechaHist[1] == Desde[1] && fechaHist[1] == Hasta[1]) {
-                    if (fechaHist[0] == Desde[0] && fechaHist[0] == Hasta[0]) {
+            if (fechaHist[2] == desde[2] && fechaHist[2] == hasta[2]) {
+                if (fechaHist[1] == desde[1] && fechaHist[1] == hasta[1]) {
+                    if (fechaHist[0] == desde[0] && fechaHist[0] == hasta[0]) {
                         nuevoValor = valorActual + 1;
-                    } else if (fechaHist[0] >= Desde[0] && fechaHist[0] <= Hasta[0]) {
+                    } else if (fechaHist[0] >= desde[0] && fechaHist[0] <= hasta[0]) {
                         nuevoValor = valorActual + 1;
                     }
-                } else if (fechaHist[1] >= Desde[1] && fechaHist[1] <= Hasta[1]) {
+                } else if (fechaHist[1] >= desde[1] && fechaHist[1] <= hasta[1]) {
                     nuevoValor = valorActual + 1;
 
                 }
-            } else if (fechaHist[2] >= Desde[2] && fechaHist[2] <= Hasta[2]) {
-                if (Desde[2] < Hasta[2] && fechaHist[2] == Desde[2]) {
-                    if (fechaHist[1] == Desde[1]) {
+            } else if (fechaHist[2] >= desde[2] && fechaHist[2] <= hasta[2]) {
+                if (desde[2] < hasta[2] && fechaHist[2] == desde[2]) {
+                    if (fechaHist[1] == desde[1]) {
 
-                        if (fechaHist[0] == Desde[0]) {
+                        if (fechaHist[0] == desde[0]) {
                             nuevoValor = valorActual + 1;
-                        } else if (fechaHist[0] > Desde[0]) {
+                        } else if (fechaHist[0] > desde[0]) {
                             nuevoValor = valorActual + 1;
                         }
-                    } else if (fechaHist[1] > Desde[1]) {
+                    } else if (fechaHist[1] > desde[1]) {
                         nuevoValor = valorActual + 1;
                     }
                 } else {
@@ -495,11 +459,6 @@ public class GestorDatos {
             map.put(clave, nuevoValor);
         }
            
-        }else
-        {
-            JOptionPane.showMessageDialog(null,"La fecha mínima supera a la fecha mayor");                     return null;
-        }
-        
         return map;
     }
 
@@ -525,22 +484,16 @@ public class GestorDatos {
      * desde f1 hasta f2 Utiliza la clave del Map para encontrar al medico y el
      * valor para contar la cantidad de atenciones realizadas
      *
-     * @param f1 primer fecha del rango de fechas
-     * @param f2 segunda fecha del rango de fechas
+     * @param desde int[] que contiene la primer fecha del rango de fechas
+     * @param hasta int[] que contiene la seguda fecha del rango de fechas
      * @return Map que contiene en el Valor la cantidad de atenciones realizadas
      * por cada medico, o null si f1 es mayor que f2
      */
-    public Map<String, Integer> medicosAtencionPorFechas(String f1, String f2) {
+    public Map<String, Integer> medicosAtencionPorFechas(int[] desde, int[] hasta) {
         Map<String, Integer> map = MapConDnisMedicos();
         
-        String[] desde = f1.split("/");
-        String[] hasta = f2.split("/");
-        int[] Desde = this.pasarArrayAInt(desde);
-        int[] Hasta = this.pasarArrayAInt(hasta);
-        
-        if(this.controlarRangoFechas(Desde, Hasta))
-        {
-         for (HistoriaClinica h : new HistoriaClinicaDatos().obtenerHistoriaClinica()) {
+        for (HistoriaClinica h : new HistoriaClinicaDatos().obtenerHistoriaClinica()) {
+             
             String clave = Integer.toString(h.getDniMedico());//clave a la q le quiero sumar 1
             int valorActual = map.get(clave);// valor asociado a la clave
             int nuevoValor = 0;
@@ -548,27 +501,27 @@ public class GestorDatos {
             String[] fechaH = h.getFecha().split("/");
             int[] fechaHist = this.pasarArrayAInt(fechaH);
 
-            if (fechaHist[2] == Desde[2] && fechaHist[2] == Hasta[2]) {
-                if (fechaHist[1] == Desde[1] && fechaHist[1] == Hasta[1]) {
-                    if (fechaHist[0] == Desde[0] && fechaHist[0] == Hasta[0]) {
+            if (fechaHist[2] == desde[2] && fechaHist[2] == hasta[2]) {
+                if (fechaHist[1] == desde[1] && fechaHist[1] == hasta[1]) {
+                    if (fechaHist[0] == desde[0] && fechaHist[0] == hasta[0]) {
                         nuevoValor = valorActual + 1;
-                    } else if (fechaHist[0] >= Desde[0] && fechaHist[0] <= Hasta[0]) {
+                    } else if (fechaHist[0] >= desde[0] && fechaHist[0] <= hasta[0]) {
                         nuevoValor = valorActual + 1;
                     }
-                } else if (fechaHist[1] >= Desde[1] && fechaHist[1] <= Hasta[1]) {
+                } else if (fechaHist[1] >= desde[1] && fechaHist[1] <= hasta[1]) {
                     nuevoValor = valorActual + 1;
 
                 }
-            } else if (fechaHist[2] >= Desde[2] && fechaHist[2] <= Hasta[2]) {
-                if (Desde[2] < Hasta[2] && fechaHist[2] == Desde[2]) {
-                    if (fechaHist[1] == Desde[1]) {
+            } else if (fechaHist[2] >= desde[2] && fechaHist[2] <= hasta[2]) {
+                if (desde[2] < hasta[2] && fechaHist[2] == desde[2]) {
+                    if (fechaHist[1] == desde[1]) {
 
-                        if (fechaHist[0] == Desde[0]) {
+                        if (fechaHist[0] == desde[0]) {
                             nuevoValor = valorActual + 1;
-                        } else if (fechaHist[0] > Desde[0]) {
+                        } else if (fechaHist[0] > desde[0]) {
                             nuevoValor = valorActual + 1;
                         }
-                    } else if (fechaHist[1] > Desde[1]) {
+                    } else if (fechaHist[1] > desde[1]) {
                         nuevoValor = valorActual + 1;
                     }
                 } else {
@@ -578,13 +531,7 @@ public class GestorDatos {
             map.put(clave, nuevoValor);
         }
         System.out.println(map);
-           
-        }else
-        {
-          JOptionPane.showMessageDialog(null,"La fecha mínima supera a la fecha mayor");
-          return null;
-        }
-
+            
         return map; 
     }
 
@@ -604,27 +551,56 @@ public class GestorDatos {
         return map;
     }
     
-    private boolean controlarRangoFechas(int[] f1, int[] f2)
+    /**
+     * Controla si la primer fecha ingresada no supera a la segunda
+     * @param f1 primer fecha del rango de fechas
+     * @param f2 segunda fecha del rango de fechas
+     * @return retorna "false" en caso que la primer fecha supere la segunda
+     * y retorna "true" si el rango de fecha es ingresado correctamente
+     */
+    public boolean controlarRangoFechas(int[] f1, int[] f2)
     {
-      if(f1[2]>f2[2])
-      {
-          return false;        
-      }else if(f1[1]>f2[1] && f1[2]==f2[2])
-      {
-          return false; 
-      }else if(f1[0]>f2[0] && f1[1]==f2[1] && f1[2]==f2[2] )
-      {
-          return false; 
-      }
-      return true;
+        if(f1[2]>f2[2])
+        {
+            return false;        
+        }else if(f1[1]>f2[1] && f1[2]==f2[2])
+        {
+            return false; 
+        }else if(f1[0]>f2[0] && f1[1]==f2[1] && f1[2]==f2[2] )
+        {
+            return false; 
+        }
+        return true;
     }
 
-    private boolean controlarEdad(int edad1, int edad2)
+    /**
+     * Controla que ninguna de las dos edades ingresadas sea 0 o negativo
+     * @param edad1 primer edad del rango de edades
+     * @param edad2 segunda edad del rango de edades
+     * @return retorna "true" si las dos edades son positivas y mayor que cero,
+     * retorna "false" si algunas o las dos son negativas o cero
+     */
+    public boolean controlarEdad(int edad1, int edad2)
     {
         if(edad1 > 0 && edad2 > 0)
         {
            return true;
         }
         return false;
+    }
+    
+    /**
+     * convierte un String con el formato "dd/MM/yy" y lo convierte en un arreglo de enteros
+     * de 3 posiciones donde 0 representa el dia, 1 el mes y 2 el año
+     * @param fecha fecha
+     * @return retorna un arreglo de enteros
+     */
+    public int[] convertirFechaAInt(String fecha)
+    {
+       String[] fechaString = fecha.split("/");
+     
+       int[] Fecha = this.pasarArrayAInt(fechaString);
+       
+       return Fecha;
     }
 }
