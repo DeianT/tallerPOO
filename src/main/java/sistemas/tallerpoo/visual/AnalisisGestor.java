@@ -7,6 +7,7 @@ package sistemas.tallerpoo.visual;
 import java.util.ArrayList;
 import java.util.Map;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import sistemas.tallerpoo.clasesLogicas.Triage;
@@ -728,13 +729,25 @@ public class AnalisisGestor extends javax.swing.JFrame {
      * @param evt Evento de acción del botón de consulta
      */
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        // TODO add your handling code here:
-        String Fecha1 = ((JTextField) jdDesde.getDateEditor().getUiComponent()).getText();
-        String Fecha2 = ((JTextField) jdHasta.getDateEditor().getUiComponent()).getText();
-
-        datos.atencionPorFechas(Fecha1, Fecha2, jcDnis, txtCantidad);
-        txtCantidad.setVisible(true);
-
+        if(jdDesde.getDate()!=null || jdHasta.getDate()!=null)
+        {
+            int[] fecha1 = datos.convertirFechaAInt(((JTextField) jdDesde.getDateEditor().getUiComponent()).getText());
+            int[] fecha2 = datos.convertirFechaAInt(((JTextField) jdHasta.getDateEditor().getUiComponent()).getText());
+            //obtiene las fechas de JDateChooser en String y las almacena en un array de int
+            
+            if(datos.controlarRangoFechas(fecha1, fecha2))
+            {
+                datos.atencionPorFechas(fecha1, fecha2, jcDnis, txtCantidad);
+                txtCantidad.setVisible(true);
+            }else
+            {
+                JOptionPane.showMessageDialog(null,"La fecha mínima supera a la fecha mayor");
+                txtCantidad.setVisible(false);
+            }  
+        }else
+        {
+            JOptionPane.showMessageDialog(null,"Por favor ingrese un rango de fechas"); 
+        }
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     /**
@@ -763,16 +776,37 @@ public class AnalisisGestor extends javax.swing.JFrame {
      * @param evt Evento de acción del botón
      */
     private void btnConsultar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultar2ActionPerformed
-        // TODO add your handling code here:
-        String Fecha1 = ((JTextField) jdDesde1.getDateEditor().getUiComponent()).getText();
-        String Fecha2 = ((JTextField) jdHasta1.getDateEditor().getUiComponent()).getText();
-
-        int edad1 = (Integer) jsEdad1.getValue();
-        int edad2 = (Integer) jsEdad2.getValue();
-
-        txtCantidad2.setText(datos.atencionPorFechasYEdades(edad1, edad2, Fecha1, Fecha2));
-        txtCantidad2.setVisible(true);
-
+        if(jdDesde1.getDate()!=null || jdHasta1.getDate()!=null)
+        {
+            int[] fecha1 = datos.convertirFechaAInt(((JTextField) jdDesde1.getDateEditor().getUiComponent()).getText());
+            int[] fecha2 = datos.convertirFechaAInt(((JTextField) jdHasta1.getDateEditor().getUiComponent()).getText());
+            //obtiene las fechas de JDateChooser en String y las almacena en un array de int
+        
+            int edad1 = (Integer) jsEdad1.getValue();
+            int edad2 = (Integer) jsEdad2.getValue();
+            
+            if(datos.controlarRangoFechas(fecha1, fecha2))
+            {
+              if(datos.controlarEdad(edad1, edad2))
+                {
+                    txtCantidad2.setText(datos.atencionPorFechasYEdades(edad1, edad2, fecha1, fecha2));
+                    txtCantidad2.setVisible(true); 
+                }else
+                {
+                    JOptionPane.showMessageDialog(null,"Rango de edades incorrecta");
+                    txtCantidad2.setVisible(false); 
+                }  
+            }else
+            {
+              JOptionPane.showMessageDialog(null,"Error de ingreso de Fechas"); 
+              txtCantidad2.setVisible(false); 
+            }
+            
+        }else
+        {
+            JOptionPane.showMessageDialog(null,"Por favor ingrese un rango de fechas");
+        }
+        
     }//GEN-LAST:event_btnConsultar2ActionPerformed
 
     /**
@@ -786,16 +820,34 @@ public class AnalisisGestor extends javax.swing.JFrame {
      * @param evt Evento de acción del botón
      */
     private void btnConsultar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultar5ActionPerformed
-        // TODO add your handling code here:
-        String Fecha1 = ((JTextField) jdDesde5.getDateEditor().getUiComponent()).getText();
-        String Fecha2 = ((JTextField) jdHasta5.getDateEditor().getUiComponent()).getText();
-
-        datos.triagesPorFechas(Fecha1, Fecha2, txtAzul, txtVerde, txtNaranja, txtAmarillo, txtRojo);
-        txtRojo.setVisible(true);
-        txtNaranja.setVisible(true);
-        txtAmarillo.setVisible(true);
-        txtVerde.setVisible(true);
-        txtAzul.setVisible(true);
+        if(jdDesde5.getDate()!=null || jdHasta5.getDate()!=null)
+        {
+            int[] fecha1 = datos.convertirFechaAInt(((JTextField) jdDesde5.getDateEditor().getUiComponent()).getText());
+            int[] fecha2 = datos.convertirFechaAInt(((JTextField) jdHasta5.getDateEditor().getUiComponent()).getText());
+            //obtiene las fechas de JDateChooser en String y las almacena en un array de int 
+            
+            if(datos.controlarRangoFechas(fecha1, fecha2))
+            {
+                datos.triagesPorFechas(fecha1, fecha2, txtAzul, txtVerde, txtNaranja, txtAmarillo, txtRojo);
+                txtRojo.setVisible(true);
+                txtNaranja.setVisible(true);
+                txtAmarillo.setVisible(true);
+                txtVerde.setVisible(true);
+                txtAzul.setVisible(true); 
+            }else
+            {
+            JOptionPane.showMessageDialog(null,"La fecha mínima supera a la fecha mayor");
+            txtRojo.setVisible(false);
+            txtNaranja.setVisible(false);
+            txtAmarillo.setVisible(false);
+            txtVerde.setVisible(false);
+            txtAzul.setVisible(false); 
+            }
+            
+        }else
+        {
+           JOptionPane.showMessageDialog(null,"Por favor ingrese un rango de fechas"); 
+        }
     }//GEN-LAST:event_btnConsultar5ActionPerformed
 
     /**
@@ -808,17 +860,29 @@ public class AnalisisGestor extends javax.swing.JFrame {
      * @param evt Evento de acción del botón
      */
     private void btnConsultar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultar4ActionPerformed
-        // TODO add your handling code here:
-        String Fecha1 = ((JTextField) jdDesde4.getDateEditor().getUiComponent()).getText();
-        String Fecha2 = ((JTextField) jdHasta4.getDateEditor().getUiComponent()).getText();
-
-        Map<String, Integer> map = datos.medicosAtencionPorFechas(Fecha1, Fecha2);
-        String linea = "";
-        for (String key : map.keySet()) {
-            linea += (key + " = " + map.get(key) + "\n");
+        if(jdDesde5.getDate()!=null || jdHasta5.getDate()!=null)
+        {
+           int[] fecha1 = datos.convertirFechaAInt(((JTextField) jdDesde4.getDateEditor().getUiComponent()).getText());
+           int[] fecha2 = datos.convertirFechaAInt(((JTextField) jdHasta4.getDateEditor().getUiComponent()).getText());
+            //obtiene las fechas de JDateChooser en String y las almacena en un array de int 
+            if(datos.controlarRangoFechas(fecha1, fecha2))
+            {
+                Map<String, Integer> map = datos.medicosAtencionPorFechas(fecha1, fecha2);
+                String linea = "";
+                for (String key : map.keySet())
+                {
+                    linea += (key + " = " + map.get(key) + "\n");
+                }
+                txtaMedicos.setText(linea); 
+            }else
+            {
+                JOptionPane.showMessageDialog(null,"La fecha mínima supera a la fecha mayor");
+                txtaMedicos.setText("");
+            }   
+        }else
+        {
+            JOptionPane.showMessageDialog(null,"Por favor ingrese un rango de fechas");   
         }
-        txtaMedicos.setText(linea);
-
     }//GEN-LAST:event_btnConsultar4ActionPerformed
 
     /**
@@ -831,19 +895,31 @@ public class AnalisisGestor extends javax.swing.JFrame {
      * @param evt Evento de acción del botón
      */
     private void btnConsultar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultar3ActionPerformed
-        // TODO add your handling code here:
-        String Fecha1 = ((JTextField) jdDesde3.getDateEditor().getUiComponent()).getText();
-        String Fecha2 = ((JTextField) jdHasta3.getDateEditor().getUiComponent()).getText();
+        if(jdDesde3.getDate()!=null || jdHasta3.getDate()!=null)
+        {
+           int[] fecha1 = datos.convertirFechaAInt(((JTextField) jdDesde3.getDateEditor().getUiComponent()).getText());
+           int[] fecha2 = datos.convertirFechaAInt(((JTextField) jdHasta3.getDateEditor().getUiComponent()).getText());
+           //obtiene las fechas de JDateChooser en String y las almacena en un array de int  
+           if(datos.controlarRangoFechas(fecha1, fecha2))
+           {
+                Map<String, Integer> map = datos.pacienteConsultasRangoDeFechas(fecha1, fecha2);
+                String linea = "";
+                for (String key : map.keySet())
+                {
+                    linea += (key + " = " + map.get(key) + "\n");
+                }
+                txtaPacientes.setText(linea);
 
-        Map<String, Integer> map = datos.pacienteConsultasRangoDeFechas(Fecha1, Fecha2);
-        String linea = "";
-        for (String key : map.keySet()) {
-            linea += (key + " = " + map.get(key) + "\n");
+           }else
+           {
+                JOptionPane.showMessageDialog(null,"La fecha mínima supera a la fecha mayor");
+                txtaPacientes.setText(""); 
+           }
+   
+        }else
+        {
+            JOptionPane.showMessageDialog(null,"Por favor ingrese un rango de fechas");  
         }
-
-        txtaPacientes.setText(linea);
-
-
     }//GEN-LAST:event_btnConsultar3ActionPerformed
 
     /**
