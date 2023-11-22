@@ -130,7 +130,12 @@ public class RegistroUsuario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Hay campos vacíos", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
+        
+        if (!txtDni.getText().matches("\\d+") || Integer.parseInt(txtDni.getText()) <= 0) {
+            JOptionPane.showMessageDialog(null, "Ingrese un DNI válido", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         UsuariosDatos user = new UsuariosDatos();
         if (user.Registrar(Integer.parseInt(txtDni.getText()), txtUsuario, txtContraseña, txtRepContra)) {
             this.dispose();
