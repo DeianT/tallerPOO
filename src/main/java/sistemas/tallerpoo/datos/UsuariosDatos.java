@@ -56,7 +56,7 @@ public class UsuariosDatos {
                 bandera = true;
                 try (FileWriter fw = new FileWriter(f, true)) {
                     fw.write(user.toCSV());
-                    JOptionPane.showMessageDialog(null, "se ha registrado con exito");
+                    JOptionPane.showMessageDialog(null, "Se ha registrado con éxito");
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
                 }
@@ -84,7 +84,7 @@ public class UsuariosDatos {
                 datos = sc.nextLine().split(",");
                 usuario = new Usuario(Integer.parseInt(datos[0]), datos[1], datos[2]);
                 if (user.equals(usuario.getNombreUsuario())) {
-                    JOptionPane.showMessageDialog(null, "el usuario ingresado ya existe");
+                    JOptionPane.showMessageDialog(null, "El usuario ingresado ya existe");
                     bandera = false;
                     break;
                 }
@@ -150,7 +150,7 @@ public class UsuariosDatos {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-        JOptionPane.showMessageDialog(null, "usuario o contraseña incorrectas");
+        JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectas");
         return bandera;
     }
 }
