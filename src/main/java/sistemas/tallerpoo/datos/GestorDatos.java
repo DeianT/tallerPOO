@@ -25,15 +25,15 @@ public class GestorDatos {
      * de fechas recibiendo como parametro las dos fechas, f1 y f2, y los jlabel
      * donde se van a mostrar la cantidad de cada uno
      *
-     * @param f1 String que contiene la primer fecha del rango de fechas
-     * @param f2 String que contiene la segunda fecha del rango de fechas
+     * @param desde int[] que contiene la primer fecha del rango de fechas
+     * @param hasta int[] que contiene la seguda fecha del rango de fechas
      * @param Azul JLabel donde se va a settear la cantidad de ese color
      * @param Verde JLabel donde se va a settear la cantidad de ese color
      * @param Naranja JLabel donde se va a settear la cantidad de ese color
      * @param Amarillo JLabel donde se va a settear la cantidad de ese color
      * @param Rojo JLabel donde se va a settear la cantidad de ese color
      */
-    public void triagesPorFechas(int[] Desde, int[] Hasta, JLabel Azul, JLabel Verde, JLabel Naranja, JLabel Amarillo, JLabel Rojo) {
+    public void triagesPorFechas(int[] desde, int[] hasta, JLabel Azul, JLabel Verde, JLabel Naranja, JLabel Amarillo, JLabel Rojo) {
 
         int rojo = 0, naranja = 0, amarillo = 0, verde = 0, azul = 0;
 
@@ -43,9 +43,9 @@ public class GestorDatos {
             String[] fechaH = t.getFecha().split("/");
             int[] fechaHist = this.pasarArrayAInt(fechaH);
 
-            if (fechaHist[2] == Desde[2] && fechaHist[2] == Hasta[2]) {
-                if (fechaHist[1] == Desde[1] && fechaHist[1] == Hasta[1]) {
-                    if (fechaHist[0] == Desde[0] && fechaHist[0] == Hasta[0]) {
+            if (fechaHist[2] == desde[2] && fechaHist[2] == hasta[2]) {
+                if (fechaHist[1] == desde[1] && fechaHist[1] == hasta[1]) {
+                    if (fechaHist[0] == desde[0] && fechaHist[0] == hasta[0]) {
                         switch (t.getColor().toString()) {
                             case "Rojo":
                                 rojo++;
@@ -63,7 +63,7 @@ public class GestorDatos {
                                 azul++;
                                 break;
                         }
-                    } else if (fechaHist[0] >= Desde[0] && fechaHist[0] <= Hasta[0]) {
+                    } else if (fechaHist[0] >= desde[0] && fechaHist[0] <= hasta[0]) {
                         switch (t.getColor().toString()) {
                             case "Rojo":
                                 rojo++;
@@ -82,7 +82,7 @@ public class GestorDatos {
                                 break;
                         }
                     }
-                } else if (fechaHist[1] >= Desde[1] && fechaHist[1] <= Hasta[1]) {
+                } else if (fechaHist[1] >= desde[1] && fechaHist[1] <= hasta[1]) {
                     switch (t.getColor().toString()) {
                         case "Rojo":
                             rojo++;
@@ -102,11 +102,11 @@ public class GestorDatos {
                     }
 
                 }
-            } else if (fechaHist[2] >= Desde[2] && fechaHist[2] <= Hasta[2]) {
-                if (Desde[2] < Hasta[2] && fechaHist[2] == Desde[2]) {
-                    if (fechaHist[1] == Desde[1]) {
+            } else if (fechaHist[2] >= desde[2] && fechaHist[2] <= hasta[2]) {
+                if (desde[2] < hasta[2] && fechaHist[2] == desde[2]) {
+                    if (fechaHist[1] == desde[1]) {
 
-                        if (fechaHist[0] == Desde[0]) {
+                        if (fechaHist[0] == desde[0]) {
                             switch (t.getColor().toString()) {
                                 case "Rojo":
                                     rojo++;
@@ -124,7 +124,7 @@ public class GestorDatos {
                                     azul++;
                                     break;
                             }
-                        } else if (fechaHist[0] > Desde[0]) {
+                        } else if (fechaHist[0] > desde[0]) {
                             switch (t.getColor().toString()) {
                                 case "Rojo":
                                     rojo++;
@@ -143,7 +143,7 @@ public class GestorDatos {
                                     break;
                             }
                         }
-                    } else if (fechaHist[1] > Desde[1]) {
+                    } else if (fechaHist[1] > desde[1]) {
                         switch (t.getColor().toString()) {
                             case "Rojo":
                                 rojo++;
@@ -551,6 +551,13 @@ public class GestorDatos {
         return map;
     }
     
+    /**
+     * Controla si la primer fecha ingresada no supera a la segunda
+     * @param f1 primer fecha del rango de fechas
+     * @param f2 segunda fecha del rango de fechas
+     * @return retorna "false" en caso que la primer fecha supere la segunda
+     * y retorna "true" si el rango de fecha es ingresado correctamente
+     */
     public boolean controlarRangoFechas(int[] f1, int[] f2)
     {
         if(f1[2]>f2[2])
@@ -566,6 +573,13 @@ public class GestorDatos {
         return true;
     }
 
+    /**
+     * Controla que ninguna de las dos edades ingresadas sea 0 o negativo
+     * @param edad1 primer edad del rango de edades
+     * @param edad2 segunda edad del rango de edades
+     * @return retorna "true" si las dos edades son positivas y mayor que cero,
+     * retorna "false" si algunas o las dos son negativas o cero
+     */
     public boolean controlarEdad(int edad1, int edad2)
     {
         if(edad1 > 0 && edad2 > 0)
@@ -575,6 +589,12 @@ public class GestorDatos {
         return false;
     }
     
+    /**
+     * convierte un String con el formato "dd/MM/yy" y lo convierte en un arreglo de enteros
+     * de 3 posiciones donde 0 representa el dia, 1 el mes y 2 el año
+     * @param fecha fecha
+     * @return retorna un arreglo de enteros
+     */
     public int[] convertirFechaAInt(String fecha)
     {
        String[] fechaString = fecha.split("/");

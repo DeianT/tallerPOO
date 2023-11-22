@@ -836,12 +836,12 @@ public class AnalisisGestor extends javax.swing.JFrame {
                 txtAzul.setVisible(true); 
             }else
             {
-            JOptionPane.showMessageDialog(null,"La fecha mínima supera a la fecha mayor");
-            txtRojo.setVisible(false);
-            txtNaranja.setVisible(false);
-            txtAmarillo.setVisible(false);
-            txtVerde.setVisible(false);
-            txtAzul.setVisible(false); 
+                JOptionPane.showMessageDialog(null,"La fecha mínima supera a la fecha mayor");
+                txtRojo.setVisible(false);
+                txtNaranja.setVisible(false);
+                txtAmarillo.setVisible(false);
+                txtVerde.setVisible(false);
+                txtAzul.setVisible(false); 
             }
             
         }else
